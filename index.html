@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Prompteur de lecture pour la classe : texte codé (syllabes, sons, liaisons, lettres muettes), réglages d'affichage, chronométrage et suivi de fluence.">
-<title>Pupitre de lecture</title>
+<title>PL-lect'</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'><circle cx='80' cy='80' r='76' fill='%232F6F63'/><g fill='none' stroke='%23FFFFFF' stroke-width='11' stroke-linecap='round' stroke-linejoin='round'><path d='M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76'/><path d='M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111'/></g></svg>">
 <!--
-  Pupitre de lecture — prompteur de lecture avec codage phonologique.
+  PL-lect' — prompteur de lecture avec codage phonologique.
   Moteur de décodage : LireCouleur (Marie-Pierre et Luc Brungard), GNU GPL v3.
   Cette page intègre ce moteur et est donc diffusée sous la même licence (GNU GPL v3).
   Polices intégrées : Luciole (CC BY 4.0, L. Bourcellier & J. Perez) ; OpenDyslexic (SIL OFL 1.1).
@@ -273,8 +274,8 @@ footer.about a{color:var(--ink-2)}
 <div class="app">
   <header class="top">
     <div class="brand">
-      <p class="eyebrow" id="hEyebrow">Pupitre de lecture</p>
-      <h1 id="hTitle">Pupitre de lecture</h1>
+      <p class="eyebrow" id="hEyebrow">PL-lect'</p>
+      <h1 id="hTitle">PL-lect'</h1>
     </div>
     <nav class="icons" role="tablist" aria-label="Sections">
       <button class="ib" id="bHelp" title="Aide" aria-label="Aide" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 015.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg></button>
@@ -501,7 +502,7 @@ footer.about a{color:var(--ink-2)}
   <div class="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
     <div class="guide-top">
       <div>
-        <h2 id="guideTitle">Découvrir le Pupitre de lecture</h2>
+        <h2 id="guideTitle">Découvrir PL-lect'</h2>
         <p>Un prompteur pour faire lire vos élèves à voix haute, avec un texte adapté (couleurs, espacement, sons) projeté au beamer ou affiché sur une tablette.</p>
       </div>
       <button class="guide-close" id="guideClose" aria-label="Fermer le guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -596,7 +597,7 @@ footer.about a{color:var(--ink-2)}
 </div>
 
 <!-- ================= PUPITRE ================= -->
-<div class="stage" id="stage" hidden aria-label="Pupitre de lecture">
+<div class="stage" id="stage" hidden aria-label="PL-lect'">
   <div class="st-col" id="stCol">
     <div class="st-move" id="stMove">
       <div class="band" id="band"></div>
@@ -1722,11 +1723,11 @@ class LireCouleur {
 </script>
 <script>
 /* ==========================================================================
-   Application "Pupitre de lecture" — interface, réglages, pupitre, séances.
+   Application "PL-lect'" — interface, réglages, pupitre, séances.
    Écrit pour ce dépôt ; s'appuie sur le moteur LireCouleur ci-dessus.
    ========================================================================== */
 
-/* ===================== Pupitre de lecture — application ===================== */
+/* ===================== PL-lect' — application ===================== */
 (function(){
 "use strict";
 const $ = id => document.getElementById(id);
@@ -1982,7 +1983,7 @@ function renderLib(){
   const list = $('libList');
   const ct = curText();
   $('hTitle').textContent = ct.title || 'Sans titre';
-  $('hEyebrow').textContent = 'Pupitre de lecture' + (ct.level ? ' · niveau ' + ct.level : '') + ' · ' + ((ct.text||'').match(TOKEN) || []).length + ' mots';
+  $('hEyebrow').textContent = "PL-lect'" + (ct.level ? ' · niveau ' + ct.level : '') + ' · ' + ((ct.text||'').match(TOKEN) || []).length + ' mots';
   const sorted = DB.texts.slice().sort((a,b) => (a.level||'9').localeCompare(b.level||'9') || a.title.localeCompare(b.title,'fr'));
   list.innerHTML = sorted.map(t => {
     const n = (t.text.match(TOKEN) || []).length;
