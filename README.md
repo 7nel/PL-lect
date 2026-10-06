@@ -10,7 +10,7 @@ Un prompteur de lecture pour la classe : on y prépare un texte, on le règle (t
 - **Barre de lancement toujours visible** (choix du lecteur et bouton « Lancer »), y compris sur tablette et téléphone.
 - **Pupitre en plein écran** : trois façons d'avancer (ligne par ligne, défilement continu, mot à mot), nombre de lignes en évidence, décompte de départ, commandes tactiles (dont « Annuler » et « Dernier mot lu ») et raccourcis clavier. Le texte hors des lignes lues est atténué en gris. Un coin chrono/erreurs est disponible en option ; par défaut, ils restent invisibles à l'écran projeté.
 - **Synthèse vocale** pour faire entendre un mot, une ligne ou un texte.
-- **Chronométrage et suivi** : mots correctement lus par minute (MCM), historique par élève, export CSV. À l'arrêt du chrono, une carte confirme l'enregistrement ; le résultat n'apparaît que sur clic.
+- **Chronométrage et suivi** : mots correctement lus par minute (MCM), historique par élève, export CSV. À l'arrêt du chrono, une carte confirme l'enregistrement ; le résultat n'apparaît que sur clic, et une lecture de moins de 10 secondes demande confirmation avant d'être enregistrée.
 - **Guide d'utilisation intégré**, pensé pour une prise en main sans avoir vu l'outil avant.
 
 Toutes les données (textes, réglages, élèves, séances) restent dans le navigateur de l'ordinateur utilisé ; rien n'est envoyé vers un serveur.

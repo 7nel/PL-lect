@@ -37,6 +37,7 @@
   --shadow:0 1px 2px rgba(37,52,51,.06), 0 10px 24px rgba(37,52,51,.08);
   --ui:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --display:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --num:"Lexend", "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -60,7 +61,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--ui);}
 button,input,select,textarea{font:inherit;color:inherit;max-width:100%}
 h1,h2,h3,p{overflow-wrap:break-word}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.nb.go:focus-visible,.btn.pri:focus-visible{outline-color:var(--ink);outline-offset:3px}
+.btn.pri:focus-visible{outline-color:var(--ink);outline-offset:3px}
 ::selection{background:var(--accent-soft);color:var(--ink)}
 
 /* ---------- En-tête ---------- */
@@ -75,9 +76,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .nb:hover{border-color:var(--accent)}
 .nb svg{width:22px;height:22px;flex:none}
 .nb[aria-selected="true"],.nb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
-.nb.go{background:var(--accent);color:var(--accent-ink);border-color:transparent}
-.nb.go:hover{filter:brightness(1.08)}
-@media (max-width:860px){.nb.go{display:none}.nav-tools{padding-right:0;border-right:0}.nb{padding:0 12px 0 10px}}
+@media (max-width:860px){.nav-tools{padding-right:0;border-right:0}.nb{padding:0 12px 0 10px}}
 /* ---------- Guide d'utilisation ---------- */
 .guide-backdrop{position:fixed;inset:0;background:rgba(20,26,25,.5);z-index:120;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
 :root[data-theme="dark"] .guide-backdrop,:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}
@@ -94,7 +93,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px}
 .guide-step b{display:flex;align-items:center;gap:8px;font:700 .95rem var(--display);margin-bottom:4px}
 .guide-step .gnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.8rem}
-.guide-step p{margin:0;font-size:.85rem;color:var(--ink-2);line-height:1.4}
+.guide-step p{margin:0;font-size:.95rem;color:var(--ink-2);line-height:1.4}
 .guide-body h3{margin:0 0 8px;font:700 1.05rem var(--display);display:flex;align-items:center;gap:8px}
 .guide-body h3 .gi{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .guide-body h3 .gi svg{width:16px;height:16px}
@@ -102,7 +101,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-body ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
 .guide-body li{font-size:.92rem;line-height:1.55;color:var(--ink-2);max-width:68ch}
 .guide-body li b{color:var(--ink)}
-.guide-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:2px}
+.guide-table{width:100%;border-collapse:collapse;font-size:.95rem;margin-top:2px}
 .guide-table th,.guide-table td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
 .guide-table th{background:var(--bg);font-weight:700;color:var(--ink-2);width:1%;white-space:nowrap}
 .guide-foot{flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
@@ -123,15 +122,15 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lib-list button{width:100%;text-align:left;border:1px solid transparent;background:none;padding:10px 12px;border-radius:var(--r-ctl);cursor:pointer;display:flex;gap:10px;align-items:center;font-size:16px}
 .lib-list button:hover{background:var(--surface-2)}
 .lib-list button[aria-current="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
-.lvl{flex:none;display:inline-grid;place-items:center;min-width:26px;height:22px;padding-inline:7px;border-radius:999px;font-size:.75rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
+.lvl{flex:none;display:inline-grid;place-items:center;min-width:28px;height:24px;padding-inline:7px;border-radius:999px;font-size:.875rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
-.lib-m{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.tag-ex{font-size:.78rem;color:var(--ink-2);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
+.lib-m{font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tag-ex{font-size:.875rem;color:var(--ink-2);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
-.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.95rem;white-space:nowrap}
 .btn:hover{border-color:var(--accent)}
-.btn.sm{padding:5px 12px;font-size:.82rem}
+.btn.sm{padding:5px 12px;min-height:36px;font-size:.9rem}
 .btn.pri{background:var(--accent);border-color:transparent;color:var(--surface)}
 .btn.pri:hover{filter:brightness(1.08)}
 .btn.danger{color:color-mix(in srgb, var(--danger) 65%, var(--ink));background:var(--danger-soft);border-color:color-mix(in srgb, var(--danger) 45%, var(--line))}
@@ -145,28 +144,27 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .meta-row input[type=text]{flex:1 1 220px;min-width:0;font:700 1.15rem var(--display);border:1px dashed transparent;border-radius:10px;padding:8px 12px;background:var(--bg)}
 .meta-row input[type=text]:hover,.meta-row input[type=text]:focus{border-color:var(--line-strong);outline:none}
 .seg{display:inline-flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px}
-.seg button{border:1px solid transparent;background:none;padding:5px 12px;cursor:pointer;font-weight:700;font-size:.82rem;color:var(--ink-2);border-radius:999px}
+.seg button{border:1px solid transparent;background:none;padding:5px 12px;min-height:36px;cursor:pointer;font-weight:700;font-size:.9rem;color:var(--ink-2);border-radius:999px}
 .seg button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .inner{margin:0 22px 22px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);overflow:hidden}
 textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;padding:16px 18px;background:var(--surface);font:1.05rem/1.6 var(--ui)}
-.preview-wrap{overflow:auto;max-height:62vh}
-.preview-note{display:flex;gap:16px;flex-wrap:wrap;padding:10px 22px 16px;font-size:14px;color:var(--ink-3);margin-top:-10px}
+.preview-wrap{overflow:auto;max-height:max(260px, calc(100vh - 380px))}
+.preview-note{display:flex;gap:16px;flex-wrap:wrap;padding:10px 22px 16px;font-size:15px;color:var(--ink-3);margin-top:-10px}
 .preview-note b{color:var(--ink-2);font-variant-numeric:tabular-nums}
 
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
 .launch label{display:flex;align-items:center;gap:10px;font:700 1rem var(--display)}
-.launch select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font:700 .95rem var(--ui)}
+.launch select{padding:8px 10px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font:700 .95rem var(--ui)}
 .launch .sp{margin-left:auto}
 .launch{position:sticky;bottom:16px;z-index:5}
 .launch .go-set{display:none}
 @media (max-width:860px){
   .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
-  .launch .hint{display:none}
   .launch .go-set{display:inline-flex}
   .app{padding-bottom:140px}
 }
-.hint{font-size:14px;color:var(--ink-3)}
-kbd{font:600 12px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:2px 6px;background:var(--surface);color:var(--ink-2)}
+.hint{font-size:15px;color:var(--ink-3)}
+kbd{font:600 14px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:2px 6px;background:var(--surface);color:var(--ink-2)}
 
 /* Réglages */
 .settings{max-height:calc(100vh - 40px);overflow:auto;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);padding-bottom:10px}
@@ -174,43 +172,46 @@ kbd{font:600 12px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-
 details.sec{margin:8px 14px 0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
 details.sec>summary{list-style:none;cursor:pointer;padding:13px 16px;font:700 1rem var(--display);display:flex;align-items:center;gap:8px}
 details.sec>summary::-webkit-details-marker{display:none}
-details.sec>summary .sum-hint{margin-left:auto;font:400 .82rem var(--ui);color:var(--ink-2);text-align:right}
+details.sec>summary .sum-hint{margin-left:auto;font:400 .9rem var(--ui);color:var(--ink-2);text-align:right}
 .profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.profiles button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:8px 6px;min-height:44px;cursor:pointer;font:700 .85rem/1.2 var(--ui)}
+.profiles button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:8px 6px;min-height:44px;cursor:pointer;font:700 .95rem/1.2 var(--ui)}
 .profiles button:hover{border-color:var(--accent)}
 .profiles button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 details.sec>summary::after{content:"";margin-left:0;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
 details.sec[open]>summary::after{transform:rotate(-135deg)}
 .sec-b{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
-.fld{display:grid;grid-template-columns:118px minmax(0,1fr) 60px;align-items:center;gap:8px;font-size:15px}
-.fld>label,.fld>span.l{color:var(--ink-2);font-weight:700;font-size:.85rem}
-.fld output{font-variant-numeric:tabular-nums;text-align:right;font-size:13px;color:var(--ink-2)}
-.fld select,.fld input[type=text]{grid-column:2/4;padding:7px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);min-width:0;font-weight:700}
+.fld{display:grid;grid-template-columns:118px minmax(0,1fr) 60px;align-items:center;gap:8px;font-size:16px}
+.fld>label,.fld>span.l{color:var(--ink-2);font-weight:700;font-size:.95rem}
+.fld output{font-variant-numeric:tabular-nums;text-align:right;font-size:14px;color:var(--ink-2)}
+.fld select,.fld input[type=text]{grid-column:2/4;padding:7px 10px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);min-width:0;font-weight:700}
 .fld .seg{grid-column:2/4;justify-self:start}
 .fld.stack{grid-template-columns:1fr}
 .fld.stack .seg{grid-column:1/-1;justify-self:stretch;display:flex}
 .fld.stack .seg button{flex:1}
-input[type=range]{width:100%;accent-color:var(--accent)}
-.chk{display:flex;align-items:center;gap:8px;font-size:15px;cursor:pointer}
-.chk input{accent-color:var(--accent);width:18px;height:18px}
+input[type=range]{width:100%;height:28px;accent-color:var(--accent)}
+.chk{display:flex;align-items:center;gap:8px;font-size:16px;cursor:pointer}
+.chk input[type=checkbox]{accent-color:var(--accent);width:24px;height:24px}
+.chk .swatch{width:40px;height:32px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .swatch{width:40px;height:32px;border:1px solid var(--line);border-radius:10px;padding:0;background:var(--surface);cursor:pointer}
 input[type=color].swatch{padding:3px}
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.presets button{border:1px solid var(--line);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .82rem var(--ui)}
-.sub{font-size:13px;color:var(--ink-3);line-height:1.45;margin:0}
-.sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:15px}
-.sons .hd{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-.sons .ex{color:var(--ink-3);font-size:13px}
-.sons select{padding:3px 5px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-size:13px}
-.sons .grp{grid-column:1/-1;margin-top:6px;font:700 14px var(--display);color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
+.presets button{border:1px solid var(--line);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .9rem var(--ui)}
+.sub{font-size:14px;color:var(--ink-3);line-height:1.45;margin:0}
+.sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:16px}
+.sons .hd{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.sons .ex{color:var(--ink-3);font-size:14px}
+.sons select{padding:3px 5px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-size:14px}
+.sons .grp{grid-column:1/-1;margin-top:6px;font:700 15px var(--display);color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
 
 /* Tactile : cibles de 44 px et indices adaptés */
 @media (pointer:coarse){
   .btn.sm,.seg button,.presets button,.lib-list button,.launch select,.fld select,.fld input[type=text]{min-height:44px}
   .swatch{width:48px;height:44px}
   .chk{min-height:44px}
-  .chk input,.sons input[type=checkbox]{width:24px;height:24px}
+  .chk input[type=checkbox],.sons input[type=checkbox]{width:24px;height:24px}
+  .chk .swatch,input[type=range]{height:44px}
+  .chk .swatch{width:48px}
   .sons{grid-template-columns:30px 1fr 52px 112px}
   .sons select{min-height:44px;font-size:15px}
 }
@@ -220,22 +221,22 @@ input[type=color].swatch{padding:3px}
 /* Séances */
 .sessions{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;align-items:start}
 @media (max-width:860px){.sessions{grid-template-columns:1fr}}
-.notice{padding:12px 18px;background:var(--accent-soft);border:1px solid color-mix(in srgb, var(--accent) 35%, var(--line));border-radius:var(--r-panel);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:18px}
+.notice{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 16px;border:1px solid var(--line);border-radius:var(--r-panel);font-size:15px;color:var(--ink-2);margin-bottom:18px}
 .tbl-wrap{overflow-x:auto;margin:0 22px 22px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
-table.t{width:100%;border-collapse:collapse;font-size:15px}
+table.t{width:100%;border-collapse:collapse;font-size:16px}
 table.t th,table.t td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
 table.t tr:last-child td{border-bottom:0}
-table.t th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-table.t td.n{text-align:right;font-variant-numeric:tabular-nums}
+table.t th{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+table.t td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--num)}
 table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
-.mcm{font:700 18px var(--display)}
+.mcm{font:700 18px var(--num)}
 .prog{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding:8px 22px 18px}
 .card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
 .card h3{margin:0;font:700 16px var(--display)}
-.card .big{font:700 34px/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.card .big{font:700 34px/1 var(--num);color:var(--accent);font-variant-numeric:tabular-nums}
 .card svg{width:100%;height:56px}
 .empty{padding:28px 14px;color:var(--ink-3);text-align:center}
-.confirm{display:inline-flex;gap:6px;align-items:center;font-size:14px;flex-wrap:wrap}
+.confirm{display:inline-flex;gap:6px;align-items:center;font-size:15px;flex-wrap:wrap}
 
 /* Toast */
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:var(--shadow);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -283,34 +284,40 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .band.surligneur{background:var(--c-band)}
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
 .st-black{position:absolute;inset:0;background:#000;z-index:50}
-.countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--display);color:var(--st-fg);opacity:.85;pointer-events:none}
+.countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--num);color:var(--st-fg);opacity:.85;pointer-events:none}
 .st-bar{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
 .st-bar.off{opacity:0;pointer-events:none}
 .st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
+.st-bar button.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.st-bar button.main:hover{filter:brightness(1.08);background:var(--accent)}
+.st-bar #xNext,.st-bar #xPrev,.st-bar #xPlay{min-width:52px;min-height:52px}
 .st-bar button.rec{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
-.st-bar .v{font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:14px;color:var(--ink-2)}
+.st-bar .cnt{font-size:.8em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
+.st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:15px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
-.st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 15px var(--ui);font-variant-numeric:tabular-nums}
+.st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 16px var(--num);font-variant-numeric:tabular-nums}
 .st-bar:not(.off)~.st-hud{opacity:0}
+@media (max-width:860px){.st-bar{left:8px;right:8px;transform:none;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
 .st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
-.st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:28px 32px;max-width:min(460px,100%);text-align:center;font:16px/1.45 var(--ui)}
-.st-done h3{margin:0 0 6px;font:700 1.5rem/1.2 var(--display)}
-.st-done p{margin:0 0 16px;color:var(--ink-2)}
-.st-done .res{margin:0 0 16px;font:700 1.2rem var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px) clamp(24px,5vw,56px);max-width:min(760px,100%);text-align:center;font:16px/1.45 var(--ui)}
+.st-done h3{margin:0 0 8px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
+.st-done p{margin:0 0 20px;color:var(--ink-2);font:400 clamp(1.15rem,2vw,1.5rem)/1.4 var(--num)}
+.st-done .btn{font-size:1.1rem;padding:12px 22px;min-height:52px}
+.st-done .res{margin:0 0 16px;font:700 1.6rem var(--num);color:var(--ink);font-variant-numeric:tabular-nums}
 .st-done .row{justify-content:center}
 .st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
 .st-help h3{margin:0 0 10px;font:700 19px var(--display)}
 .st-help dl{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}
 .st-help dt{white-space:nowrap}
 .st-help kbd{background:var(--surface-2);color:var(--ink);border-color:var(--line-strong)}
-.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:12px;font:600 14px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
+.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:12px;font:600 15px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
 .st-toast.on{opacity:1}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-footer.about{margin-top:4px;font-size:13px;color:var(--ink-3);line-height:1.5}
+footer.about{margin-top:4px;font-size:14px;color:var(--ink-3);line-height:1.5}
 footer.about a{color:var(--ink-2)}
 </style>
 <style id="dyn"></style>
@@ -331,7 +338,6 @@ footer.about a{color:var(--ink-2)}
       <button class="nb" id="tabPrep" role="tab" aria-selected="true" aria-controls="viewPrep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg>Préparer</button>
       <button class="nb" id="tabSess" role="tab" aria-selected="false" aria-controls="viewSess" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></svg>Séances</button>
     </nav>
-    <button class="nb go" id="bLaunchTop" title="Lancer le texte au pupitre (plein écran)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg>Lancer</button>
   </header>
 
   <!-- ================= PRÉPARER ================= -->
@@ -381,7 +387,6 @@ footer.about a{color:var(--ink-2)}
         <label for="selStudent">Lecteur·rice
           <select id="selStudent"></select>
         </label>
-        <span class="hint">Chrono : <kbd>C</kbd> · erreur : <kbd>E</kbd> ou clic sur le mot</span>
         <button class="btn go-set" id="bGoSet" type="button">Réglages</button>
         <button class="btn pri big sp" id="bLaunch">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -405,7 +410,8 @@ footer.about a{color:var(--ink-2)}
         <summary>Réglages rapides <span class="sum-hint"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l" id="lProf">Point de départ</span>
-            <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div></div>
+            <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div>
+            <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sFont">Police</label>
             <select id="sFont">
               <option value="Luciole">Luciole</option>
@@ -446,7 +452,7 @@ footer.about a{color:var(--ink-2)}
         </div>
       </details>
 
-      <details class="sec" open>
+      <details class="sec">
         <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l">Syllabes</span>
@@ -532,7 +538,7 @@ footer.about a{color:var(--ink-2)}
 
   <!-- ================= SÉANCES ================= -->
   <section id="viewSess" role="tabpanel" aria-labelledby="tabSess" hidden>
-    <div class="notice">Les séances sont enregistrées dans ce navigateur, sur cet ordinateur. Utilisez des pseudonymes ou des initiales. Pensez à exporter régulièrement.</div>
+    <div class="notice" id="sessNotice"><span>Les séances sont enregistrées dans ce navigateur, sur cet ordinateur. Utilisez des pseudonymes ou des initiales. Pensez à exporter régulièrement.</span><button class="btn sm" id="noticeOk" type="button">Compris</button></div>
     <div class="sessions">
       <aside class="panel">
         <div class="panel-h"><h2>Élèves</h2></div>
@@ -570,8 +576,8 @@ footer.about a{color:var(--ink-2)}
       <div class="guide-steps">
         <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes » à gauche, ou « + Nouveau » pour en écrire un.</p></div>
         <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Trois points de départ (dyslexie, allophonie, décrochage), puis police, taille, couleurs : l’aperçu se met à jour tout de suite.</p></div>
-        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Dans le menu « Lecteur·rice », à côté du bouton « Lancer ». Cette barre reste visible quand vous faites défiler la page.</p></div>
-        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert « Lancer », en bas de la page ou en haut à droite.</p></div>
+        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Dans le menu « Lecteur·rice », à côté du bouton « Lancer ». Cette barre reste en bas de l’écran : le bouton est toujours à portée.</p></div>
+        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert « Lancer au pupitre », dans la barre du bas.</p></div>
       </div>
 
       <div>
@@ -606,7 +612,7 @@ footer.about a{color:var(--ink-2)}
         <ul>
           <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, aide, plein écran, quitter : tout est dans cette barre, et fonctionne aussi au clavier.</li>
           <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
-          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. Le résultat (MCM, erreurs) ne s’affiche que si vous cliquez sur « Voir le résultat ».</li>
+          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. Le résultat (MCM, erreurs) ne s’affiche que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez.</li>
           <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
@@ -704,7 +710,7 @@ footer.about a{color:var(--ink-2)}
     <button id="xFast" title="Plus vite (+)" aria-label="Plus vite">+</button>
     <span class="sep"></span>
     <button id="xChrono" title="Chrono (C)"></button>
-    <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN">0</span></button>
+    <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN" class="cnt">0</span></button>
     <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
     <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot lu</button>
     <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
@@ -720,6 +726,8 @@ footer.about a{color:var(--ink-2)}
       <p id="doneSub"></p>
       <p class="res" id="doneRes" hidden></p>
       <div class="row">
+        <button class="btn" id="doneKeep" type="button" hidden>Enregistrer quand même</button>
+        <button class="btn pri" id="doneDrop" type="button" hidden>Ne pas enregistrer</button>
         <button class="btn" id="doneShow" type="button">Voir le résultat</button>
         <button class="btn" id="doneSess" type="button">Ouvrir les séances</button>
         <button class="btn pri" id="doneClose" type="button">Continuer</button>
@@ -2217,6 +2225,8 @@ const MODE_SHORT = {ligne:'ligne par ligne', continu:'continu', mot:'mot à mot'
 function updateHints(){
   const s = S();
   PROFILES.forEach(pr => { const b = document.querySelector(`[data-prof="${pr.id}"]`); if (b) b.setAttribute('aria-pressed', Object.keys(pr.s).every(k => s[k] === pr.s[k])); });
+  const act = PROFILES.find(pr => Object.keys(pr.s).every(k => s[k] === pr.s[k]));
+  $('profState').textContent = act ? 'Actif : ' + act.name + ' (point de départ)' : 'Réglages personnalisés';
   $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
   $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
 }
@@ -2325,6 +2335,7 @@ function launch(){
   try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); } catch(e){}
   $('stHelp').hidden = true; $('stBlack').hidden = true;
   updateBar(); showBar();
+  stToast('↓ ligne suivante · C chrono · E erreur · H aide', 4500);
   const go = () => requestAnimationFrame(() => { relayout(); });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
   stage.focus && stage.setAttribute('tabindex','-1'); stage.focus();
@@ -2454,26 +2465,35 @@ function wordsRead(){
   const k = S().mode === 'continu' ? ST.line : Math.min(L.length - 1, ST.line + S().win - 1);
   return L[k].last + 1;
 }
-function stopChrono(record){
+function stopChrono(record, fromExit){
   if (!ST.chrono) return;
   const dur = (performance.now() - ST.chrono) / 1000;
   ST.chrono = null; updateBar();
   if (!record || dur < 2) return;
+  if (dur < SHORT_SEC && fromExit) return;
   const t = curText(), stu = DB.students.find(x => x.id === DB.curStudent);
   const sess = {id: uid(), ts: Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
     dur: Math.round(dur), words: wordsRead(), err: ST.errors.length, errWords: ST.errors.filter(i => i !== null).map(i => WORDS[i] ? WORDS[i].t : ''), total: WORDS.length};
+  if (dur < SHORT_SEC) { pendingShort = sess; showDone(sess, true); return; }
   DB.sessions.push(sess); save();
   showDone(sess);
   renderSessions();
 }
-function showDone(sess){
-  $('doneSub').textContent = 'Durée : ' + fmt(sess.dur);
+const SHORT_SEC = 10;
+let pendingShort = null;
+function showDone(sess, short){
+  $('doneT').textContent = short ? 'Lecture très courte' : 'Lecture enregistrée';
+  ['doneKeep','doneDrop'].forEach(id => $(id).hidden = !short);
+  $('doneSess').hidden = $('doneClose').hidden = !!short;
+  $('doneSub').textContent = 'Durée : ' + fmt(sess.dur) + (short ? '. L’enregistrer quand même ?' : '');
   const m = Math.round(mcmOf(sess));
   $('doneRes').textContent = m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
-  $('doneRes').hidden = true; $('doneShow').hidden = false;
-  $('stDone').hidden = false; $('doneClose').focus();
+  $('doneRes').hidden = true; $('doneShow').hidden = !!short;
+  $('stDone').hidden = false; (short ? $('doneDrop') : $('doneClose')).focus();
 }
-function closeDone(){ $('stDone').hidden = true; if (ST.open) stage.focus(); }
+function closeDone(){ pendingShort = null; $('stDone').hidden = true; if (ST.open) stage.focus(); }
+$('doneKeep').addEventListener('click', () => { const sess = pendingShort; if (!sess) return; DB.sessions.push(sess); save(); renderSessions(); closeDone(); stToast('Séance enregistrée'); });
+$('doneDrop').addEventListener('click', closeDone);
 $('doneShow').addEventListener('click', () => { $('doneRes').hidden = false; $('doneShow').hidden = true; });
 $('doneClose').addEventListener('click', closeDone);
 $('doneSess').addEventListener('click', () => { $('stDone').hidden = true; exitStage(); setTab('sess'); });
@@ -2496,6 +2516,7 @@ const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4
 function updateBar(){
   const s = S();
   $('xPlay').hidden = s.mode === 'ligne';
+  $('xNext').classList.toggle('main', s.mode === 'ligne'); $('xPlay').classList.toggle('main', s.mode !== 'ligne');
   $('xSlow').hidden = $('xFast').hidden = s.mode === 'ligne';
   $('xPlay').innerHTML = (ST.playing ? ICON_PAUSE + 'Pause' : ICON_PLAY + 'Démarrer');
   $('xSpeed').textContent = speedLabel();
@@ -2516,7 +2537,7 @@ setInterval(() => { if (ST.open && ST.chrono && (S().hud || !$('stBar').classLis
 function showBar(){ $('stBar').classList.remove('off'); stage.classList.remove('hide-cursor'); hideBarSoon(); }
 function hideBarSoon(){ clearTimeout(ST.barT); ST.barT = setTimeout(() => { if ($('stBar').matches(':hover')) return hideBarSoon(); $('stBar').classList.add('off'); stage.classList.add('hide-cursor'); }, 2600); }
 let stToastT = 0;
-function stToast(m){ const t = $('stToast'); t.textContent = m; t.classList.add('on'); clearTimeout(stToastT); stToastT = setTimeout(() => t.classList.remove('on'), 1500); }
+function stToast(m, ms){ const t = $('stToast'); t.textContent = m; t.classList.add('on'); clearTimeout(stToastT); stToastT = setTimeout(() => t.classList.remove('on'), ms || 1500); }
 
 function toggleSons(){
   const s = S(); s.sons = !s.sons; save(); applyStyle();
@@ -2538,7 +2559,8 @@ function cycleModeStage(){
 }
 function exitStage(){
   if (!ST.open) return;
-  if (ST.chrono) stopChrono(true);
+  if (ST.chrono) stopChrono(true, true);
+  pendingShort = null;
   pause(); ST.open = false; stage.hidden = true;
   if (synth) synth.cancel();
   try { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch(e){}
@@ -2558,7 +2580,6 @@ function speakLine(){
 
 $('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
 $('bLaunch').addEventListener('click', launch);
-$('bLaunchTop').addEventListener('click', launch);
 /* Guide d'utilisation */
 const GUIDE_KEY = 'pupitre.guideAuto';
 function guideAutoPref(){ try { const v = localStorage.getItem(GUIDE_KEY); return v === null ? true : v === '1'; } catch(e){ return true; } }
@@ -2777,6 +2798,9 @@ $('restoreConfirm').addEventListener('click', e => {
   }
   $('restoreConfirm').innerHTML = '';
 });
+/* Notice des séances : masquée une fois comprise */
+try { if (localStorage.getItem('pupitre.noticeSess') === '1') $('sessNotice').hidden = true; } catch(e){}
+$('noticeOk').addEventListener('click', () => { $('sessNotice').hidden = true; try { localStorage.setItem('pupitre.noticeSess', '1'); } catch(e){} });
 /* ---------- Onglets ---------- */
 function setTab(t){
   $('tabPrep').setAttribute('aria-selected', t === 'prep'); $('tabSess').setAttribute('aria-selected', t === 'sess');
