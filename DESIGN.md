@@ -155,7 +155,7 @@ Un vert sauge posé sur des gris tirant sur le vert. L'ensemble est calme et tam
 - **Sauge doux** (#dee8e6, mélange de 16 % de sauge sur la carte) : fond d'un choix actif ou sélectionné. Le texte et le contour restent en sauge.
 
 ### Secondary
-- **Jaune repère** (#FFD83D) : la bande de lecture sur le pupitre et le marqueur de mots dans le texte codé. Il n'est jamais utilisé comme couleur d'interface.
+- **Jaune repère** (#FFD83D) : la bande de lecture sur le pupitre et le marqueur de mots dans le texte codé. Il est appliqué en transparence (45 % en clair, 30 % en sombre) sur le fond du pupitre, d'où un jaune pâle à l'écran. Il n'est jamais utilisé comme couleur d'interface.
 
 ### Tertiary
 - **Brique d'alerte** (#a8402f ; #d98070 en sombre) : actions destructrices (« Supprimer », « Retirer ») et lecture en cours d'enregistrement. Jamais pour décorer.
