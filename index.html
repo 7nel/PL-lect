@@ -319,6 +319,12 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:16px/1.2 var(--ui)}
 .st-quick .q-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .st-quick .q-l{font-weight:700;color:var(--ink-2)}
+.st-quick .q-ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.st-quick .q-ctl button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
+.st-quick .q-ctl button:hover{background:var(--surface-2);border-color:var(--line-strong)}
+.st-quick .q-ctl button:disabled{opacity:.45;cursor:default}
+.st-quick .q-ctl svg{width:20px;height:20px}
+.st-quick .q-ctl .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:16px;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
 .st-q:hover{background:var(--surface)}
 @media (max-width:1320px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}}
@@ -964,24 +970,15 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <button id="xPlay" class="go" type="button" title="Départ, puis ligne suivante ou pause (Espace)"></button>
         <button id="xPrev" type="button" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
         <button id="xNext" type="button" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-        <button id="xSlow" type="button" title="Moins vite (N)" aria-label="Moins vite">−</button>
-        <span class="v" id="xSpeed"></span>
-        <button id="xFast" type="button" title="Plus vite (M)" aria-label="Plus vite">+</button>
       </div>
       <span class="sep" id="sepMeasure"></span>
       <div class="grp" id="grpMeasure">
         <button id="xErr" type="button" title="Marquer une erreur (E)" aria-label="Marquer une erreur (E)">Erreur <kbd>E</kbd></button>
         <button id="xUndo" type="button" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg>Annuler</button>
-        <button id="xMark" type="button" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
       </div>
       <span class="sep"></span>
       <div class="grp">
-        <button id="xSpeak" type="button" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg>Lire la ligne</button>
-        <button id="xQuick" type="button" title="Façon d’avancer et nombre de lignes" aria-expanded="false" aria-controls="stQuick">Mode</button>
-        <button id="xFull" type="button" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-      </div>
-      <span class="sep"></span>
-      <div class="grp">
+        <button id="xQuick" type="button" title="Vitesse, façon d’avancer et autres outils" aria-expanded="false" aria-controls="stQuick">Plus</button>
         <button id="xEnd" type="button" title="Terminer la lecture (T)" aria-label="Terminer la lecture (T)">Terminer <kbd>T</kbd></button>
         <button id="xExit" type="button" title="Quitter (Échap)">Quitter</button>
       </div>
@@ -991,6 +988,16 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button><button type="button" data-qmode="ecoute">Écoute</button></div></div>
       <div class="q-row"><span class="q-l">Lignes en évidence</span><div class="seg" role="group" aria-label="Lignes en évidence">
         <button type="button" data-qwin="1">1</button><button type="button" data-qwin="2">2</button><button type="button" data-qwin="3">3</button></div></div>
+      <div class="q-row" id="qSpeed"><span class="q-l">Vitesse</span><div class="q-ctl">
+        <button id="xSlow" type="button" title="Moins vite (N)" aria-label="Moins vite">−</button>
+        <span class="v" id="xSpeed"></span>
+        <button id="xFast" type="button" title="Plus vite (M)" aria-label="Plus vite">+</button>
+      </div></div>
+      <div class="q-row"><span class="q-l">Outils</span><div class="q-ctl">
+        <button id="xMark" type="button" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
+        <button id="xSpeak" type="button" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg>Lire la ligne</button>
+        <button id="xFull" type="button" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      </div></div>
       <div class="q-row"><span></span><button class="btn sm" id="xQuickClose" type="button">Fermer</button></div>
     </div>
     <button class="st-q" id="xHelp" type="button" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
@@ -3322,9 +3329,10 @@ function updateBar(){
   $('xPlay').innerHTML = lab[0] + '<span>' + lab[1] + '</span>';
   $('xPlay').disabled = ST.phase === 'done';
   $('xSlow').hidden = $('xFast').hidden = $('xSpeed').hidden = s.mode === 'ligne';
+  $('qSpeed').hidden = s.mode === 'ligne';
   $('xSpeed').textContent = speedLabel();
   ['xErr','xMark','xEnd'].forEach(id => $(id).disabled = !run || ST.listen);
-  ['grpMeasure','sepMeasure','xSpeak'].forEach(id => $(id).hidden = !!ST.listen);
+  ['grpMeasure','sepMeasure','xMark','xSpeak'].forEach(id => $(id).hidden = !!ST.listen);
   $('xPrev').title = ST.listen ? 'Phrase précédente (↑)' : 'Ligne précédente (↑)'; $('xNext').title = ST.listen ? 'Phrase suivante (↓)' : 'Ligne suivante (↓)';
   $('xUndo').disabled = !run || !ST.errors.length;
   $('xMark').classList.toggle('armed', !!ST.armMark);
