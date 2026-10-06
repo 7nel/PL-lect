@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="Prompteur de lecture pour la classe : texte codé (syllabes, sons, liaisons, lettres muettes), réglages d'affichage, chronométrage et suivi de fluence.">
+<meta name="description" content="Prompteur de lecture pour la classe : texte codé (syllabes, sons, liaisons, lettres muettes), réglages d'affichage, mesure discrète de la durée et suivi de fluence.">
 <title>PL-lect'</title>
 <meta name="theme-color" content="#2f6f63">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -160,9 +160,6 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .preview-note b{color:var(--ink-2);font-variant-numeric:tabular-nums}
 
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
-.launch label{display:flex;align-items:center;gap:10px;font:700 1rem var(--display)}
-.launch select{padding:8px 10px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font:700 .95rem var(--ui)}
-.launch .sp{margin-left:auto}
 .launch{position:sticky;bottom:16px;z-index:5}
 .launch .go-set{display:none}
 @media (max-width:860px){
@@ -204,6 +201,7 @@ input[type=range]{width:100%;height:28px;accent-color:var(--accent)}
 input[type=color].swatch{padding:3px}
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .presets button{border:1px solid var(--line-strong);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .9rem var(--ui)}
+.presets button[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:2px}
 .sub{font-size:15px;color:var(--ink-3);line-height:1.45;margin:0}
 .son-det>summary{cursor:pointer;font:700 .95rem var(--ui);color:var(--accent);padding:8px 0;min-height:36px;display:flex;align-items:center}
 .son-det[open]>summary{margin-bottom:8px}
@@ -216,7 +214,7 @@ input[type=color].swatch{padding:3px}
 
 /* Tactile : cibles de 44 px et indices adaptés */
 @media (pointer:coarse){
-  .btn.sm,.seg button,.presets button,.lib-list button,.launch select,.fld select,.fld input[type=text]{min-height:44px}
+  .btn.sm,.seg button,.presets button,.lib-list button,.fld select,.fld input[type=text]{min-height:44px}
   .swatch{width:48px;height:44px}
   .chk{min-height:44px}
   .chk input[type=checkbox],.sons input[type=checkbox]{width:24px;height:24px}
@@ -240,11 +238,6 @@ table.t th{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:
 table.t td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--num)}
 table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
 .mcm{font:700 18px var(--num)}
-.prog{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;padding:8px 22px 18px}
-.card{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
-.card h3{margin:0;font:700 16px var(--display)}
-.card .big{font:700 34px/1 var(--num);color:var(--accent);font-variant-numeric:tabular-nums}
-.card svg{width:100%;height:56px}
 .empty{padding:28px 14px;color:var(--ink-3);text-align:center}
 .confirm{display:inline-flex;gap:6px;align-items:center;font-size:15px;flex-wrap:wrap}
 
@@ -298,18 +291,14 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar.off{opacity:0;pointer-events:none}
 .st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
-.st-bar button.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.st-bar button.main:hover{filter:brightness(1.08);background:var(--accent)}
+.st-bar button.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.st-bar button.go:hover{filter:brightness(1.08);background:var(--accent)}
 .st-bar #xNext,.st-bar #xPrev,.st-bar #xPlay{min-width:52px;min-height:52px}
-.st-bar button.rec{background:var(--danger);border-color:var(--danger);color:var(--accent-ink)}
 .st-bar kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.85}
-.st-bar #xChrono:not(.rec){background:var(--surface-2)}
 .st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
-.st-bar #xChrono{min-width:112px}
 .st-bar #xErr{min-width:104px}
-.st-bar .cnt{font-size:.9em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
 .st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:16px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
 .st-bar .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
@@ -318,16 +307,13 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-quick .q-l{font-weight:700;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
 .st-q:hover{background:var(--surface)}
-.st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 16px var(--num);font-variant-numeric:tabular-nums}
-.st-bar:not(.off)~.st-hud{opacity:0}
-@media (max-width:860px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}.st-bar{left:8px;right:8px;width:auto;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
+@media (max-width:1320px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}}
+@media (max-width:860px){.st-bar{left:8px;right:8px;width:auto;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
 .st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
 .st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px) clamp(24px,5vw,56px);max-width:min(760px,100%);text-align:center;font:16px/1.45 var(--ui)}
-.st-done h3{margin:0 0 8px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
+.st-done h3{margin:0 0 22px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
 .st-done p{margin:0 0 20px;color:var(--ink-2);font:400 clamp(1.15rem,2vw,1.5rem)/1.4 var(--num)}
 .st-done .btn{font-size:1.1rem;padding:12px 22px;min-height:52px}
-.st-done #doneCtx{font-weight:700;color:var(--ink);margin-bottom:6px}
-.st-done .res{margin:0 0 16px;font:700 1.6rem var(--num);color:var(--ink);font-variant-numeric:tabular-nums}
 .st-done .row{justify-content:center}
 .st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
 .st-help h3{margin:0 0 10px;font:700 19px var(--display)}
@@ -339,6 +325,149 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 footer.about{margin-top:4px;font-size:15px;color:var(--ink-3);line-height:1.5}
 footer.about a{color:var(--ink-2)}
+
+/* ---------- Séances : évolution d'un élève ---------- */
+.evo{padding:4px 22px 18px;display:flex;flex-direction:column;gap:14px}
+.evo-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 .95rem var(--ui);color:var(--ink-2)}
+.evo-filter select{padding:8px 10px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);max-width:100%}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tl{font-size:.95rem;color:var(--ink-2);font-weight:700}
+.tv{font:700 2.1rem/1.15 var(--num);color:var(--ink)}
+.tv small{font:400 1rem var(--ui);color:var(--ink-2)}
+.td{font-size:15px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evo-fig{margin:0;position:relative;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:12px 8px 6px}
+.evo-plot{display:block;width:100%;border-radius:10px;touch-action:pan-y}
+.evo-plot svg{display:block;max-width:100%}
+.evo-plot .eg{stroke:var(--line);stroke-width:1}
+.evo-plot .et{fill:var(--ink-2);font:13px var(--num);font-variant-numeric:tabular-nums}
+.evo-plot .eh{fill:var(--ink-2);font:700 13px var(--ui)}
+.evo-plot .ev{fill:var(--ink);font:700 14px var(--num)}
+.evo-plot .el{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.evo-plot .ea{fill:var(--accent);opacity:.1}
+.evo-plot .ed{fill:var(--accent);stroke:var(--bg);stroke-width:2}
+.evo-plot .ed.hollow{fill:var(--bg);stroke:var(--accent)}
+.evo-plot .ed.on{fill:var(--ink);stroke:var(--bg)}
+.evo-plot .eb{fill:var(--accent)}
+.evo-plot .ex{stroke:var(--ink-2);stroke-width:1}
+.evo-tip{position:absolute;z-index:2;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);border-radius:12px;box-shadow:var(--shadow);padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-size:15px;max-width:min(320px,90%)}
+.evo-tip b{font:700 1.15rem var(--num)}
+.evo-tip .tc{color:var(--ink-2);font-size:14px}
+table.t tr.pend td{color:var(--ink-2);background:color-mix(in srgb, var(--accent) 6%, transparent)}
+
+/* ---------- Aujourd'hui : élève → texte → réglage ---------- */
+.today{padding-bottom:16px}
+.pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:2px 22px 0}
+@media (max-width:620px){.pick{grid-template-columns:1fr}}
+.pk{display:flex;flex-direction:column;gap:5px;font:700 .95rem var(--ui);color:var(--ink-2)}
+.pk select{width:100%;padding:9px 10px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);text-overflow:ellipsis}
+.pk select:hover{border-color:var(--accent)}
+.after{margin:14px 22px 0;padding:12px 16px;border:1px solid var(--accent);background:var(--accent-soft);border-radius:var(--r-panel);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.af-t{margin:0;flex:1 1 240px;font-size:1rem}
+.af-res{margin:0;flex:1 1 100%;font:400 1.1rem/1.2 var(--num);font-variant-numeric:tabular-nums}
+.af-res .num{font-size:1.7rem;color:var(--accent)}
+.af-n{margin:0;flex:1 1 100%;font-size:15px;color:var(--ink-2)}
+.af-a{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.recent{margin:14px 22px 0;border-top:1px solid var(--line)}
+.recent>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:44px;font:700 1rem var(--display)}
+.recent>summary::-webkit-details-marker{display:none}
+.recent>summary .sum-hint{margin-left:auto;font:400 .9rem var(--ui);color:var(--ink-2)}
+.recent>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
+.recent[open]>summary::after{transform:rotate(-135deg)}
+.rc{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
+.rc li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 14px;align-items:baseline;font-size:1rem}
+.rc-d{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.rc-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rc-r{font-family:var(--num);font-variant-numeric:tabular-nums;white-space:nowrap}
+.rc-r .num{color:var(--accent);font-size:1.15rem}
+@media (max-width:620px){.rc li{grid-template-columns:auto minmax(0,1fr)}.rc-r{grid-column:1/-1}}
+.launch-sum{flex:1 1 180px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 1rem var(--display);color:var(--ink-2)}
+.proj-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.proj-btn{min-height:44px}
+@media (hover:none),(max-width:860px){.proj-btn{display:none}}
+
+/* ---------- Pupitre : pilotage sur écran unique ---------- */
+.st-ctl{display:contents}
+.st-bar #xPlay{min-width:164px;justify-content:flex-start;padding-inline:16px}
+.st-bar button:disabled{opacity:.45;cursor:default}
+.st-bar button:disabled:hover{background:var(--surface);border-color:var(--line)}
+.st-bar button.go:disabled:hover{background:var(--accent);border-color:var(--accent);filter:none}
+.stage[data-phase="done"] .st-bar,.stage[data-phase="done"] .st-q{display:none}
+@media (hover:none){.st-bar kbd{display:none}}
+@media (max-width:620px){
+  .st-bar{flex-direction:column;align-items:stretch;flex-wrap:nowrap}
+  .st-bar .grp{flex-wrap:nowrap;justify-content:stretch}
+  .st-bar .grp>button{flex:1 1 auto;padding:6px 8px}
+  .st-bar #xPlay{flex:3 1 auto;min-width:0}
+  .st-bar .v{min-width:0;flex:0 1 auto;font-size:15px}
+}
+.st-help .help-note{margin:12px 0 0;color:var(--ink-2)}
+.st-done .box:focus{outline:none}
+.st-done .btn kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.8}
+
+/* ---------- Fenêtre de projection (second écran) : l'écran élève seul ---------- */
+html.proj .app,html.proj .guide-backdrop,html.proj .toast,html.proj .st-ctl,html.proj .ctl{display:none!important}
+html:not(.proj) .proj-wait{display:none}
+.proj-wait{position:fixed;inset:0;z-index:90;background:var(--bg);color:var(--ink);display:grid;place-items:center;padding:24px;text-align:center}
+.pw-box{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:580px}
+.pw-box svg{width:104px;height:104px}
+.pw-t{margin:0;font:700 clamp(1.6rem,3vw,2.2rem)/1.2 var(--display)}
+.pw-s{margin:0;color:var(--ink-2);font-size:1.15rem;line-height:1.5}
+html.is-full .pw-box p,html.is-full .pw-box button{display:none}
+
+/* ---------- Pilotage : l'écran de l'enseignante quand un 2e écran projette ---------- */
+.ctl{position:fixed;inset:0;z-index:110;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;gap:16px;padding:clamp(14px,2.4vw,32px);overflow:auto;font:16px/1.4 var(--ui)}
+.ctl:focus{outline:none}
+.ctl-top{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap}
+.ctl-id{margin-right:auto;min-width:0}
+.ctl-id h2{margin:0;font:700 1.5rem/1.2 var(--display)}
+.ctl-id p{margin:2px 0 0;color:var(--ink-2);font-weight:700}
+.ctl-state{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);font-weight:700}
+.ctl-state::before{content:"";width:10px;height:10px;border-radius:50%;border:2px solid var(--ink-2)}
+.ctl-state[data-s="run"]{border-color:var(--accent);color:var(--accent)}
+.ctl-state[data-s="run"]::before{background:var(--accent);border-color:var(--accent)}
+.ctl-state[data-s="cd"]::before,.ctl-state[data-s="pause"]::before{border-style:dashed}
+.ctl-state[data-s="done"]::before{background:var(--ink-2)}
+.ctl-follow{flex:1 1 auto;min-height:220px;padding:22px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+.ctl-lines{display:flex;flex-direction:column;gap:6px}
+.cl{display:flex;flex-wrap:wrap;gap:4px;padding:6px 8px;border-radius:16px;border:1px solid transparent}
+.cl.cur{background:var(--accent-soft);border-color:var(--accent)}
+.cw{border:1px solid transparent;background:none;border-radius:10px;padding:4px 8px;min-height:44px;font:400 1.25rem var(--ui);color:var(--ink-2);cursor:pointer}
+.cl.cur .cw{font-weight:700;font-size:1.5rem;color:var(--ink);background:var(--surface);border-color:var(--line)}
+.cw:hover{border-color:var(--accent)}
+.cw.on{box-shadow:inset 0 0 0 3px var(--mark)}
+.cw.err,.cl.cur .cw.err{background:var(--danger-soft);border-color:var(--danger);color:var(--ink)}
+.cw.err::after{content:"✕";font-size:.7em;font-weight:700;margin-left:6px;color:color-mix(in srgb, var(--danger) 65%, var(--ink))}
+.cw.end{box-shadow:inset 0 -5px 0 var(--accent)}
+.ctl-lines.armed .cw{cursor:crosshair}
+.ctl-pos,.ctl-wait{margin:0;color:var(--ink-2)}
+.ctl-confirm{padding:14px 18px;display:flex;gap:10px 18px;align-items:center;flex-wrap:wrap;border-color:var(--accent);font-size:1.15rem}
+.ctl-result{flex:1 1 auto;padding:clamp(22px,4vw,44px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:16px}
+.ctl-res-body .af-a{flex:1 1 100%}
+.ctl-result h3{margin:0;font:700 clamp(1.6rem,3vw,2.2rem)/1.15 var(--display)}
+.ctl-res-body{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;width:100%}
+.ctl-res-body .af-t{flex:1 1 100%;font-size:1.15rem}
+.ctl-res-body .af-res{font-size:1.4rem}
+.ctl-res-body .af-res .num{font-size:3rem}
+.ctl-result .btn kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.8}
+.ctl-pad{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.ctl-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.cbtn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:14px;min-height:52px;min-width:52px;padding:8px 16px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:1rem}
+.cbtn:hover{background:var(--surface-2);border-color:var(--line-strong)}
+.cbtn:disabled{opacity:.45;cursor:default}
+.cbtn svg{width:22px;height:22px;flex:none}
+.cbtn kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.8}
+.cbtn.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);min-width:230px;min-height:60px;font-size:1.15rem;justify-content:flex-start;padding-inline:20px}
+.cbtn.go:hover{filter:brightness(1.08);background:var(--accent)}
+.cbtn.go kbd{margin-left:auto}
+.cbtn.go:focus-visible{outline-color:var(--ink);outline-offset:3px}
+.cbtn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.cbtn.end{margin-left:auto}
+.ctl-speed{display:inline-flex;align-items:center;gap:8px}
+.ctl-speed .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:9em;text-align:center;color:var(--ink-2)}
+.ctl-count{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.ctl-row.opts{gap:10px 14px;padding-top:12px;border-top:1px solid var(--line)}
+.ctl-row.opts .q-l{font-weight:700;color:var(--ink-2)}
 </style>
 <style id="dyn"></style>
 
@@ -370,6 +499,21 @@ footer.about a{color:var(--ink-2)}
     </aside>
 
     <div class="center">
+      <!-- Aujourd'hui : qui lit, quel texte, quel réglage -->
+      <div class="panel today" id="today" aria-labelledby="todayT">
+        <div class="panel-h"><h2 id="todayT">Aujourd’hui</h2></div>
+        <div class="pick">
+          <label class="pk" for="selStudent"><span>Élève</span><select id="selStudent"></select></label>
+          <label class="pk" for="selText"><span>Texte</span><select id="selText"></select></label>
+          <label class="pk" for="selReg"><span>Réglage</span><select id="selReg"></select></label>
+        </div>
+        <div class="after" id="after" hidden role="status"></div>
+        <details class="recent" id="recent">
+          <summary><span id="recentT">Dernières lectures</span><span class="sum-hint" id="recentN"></span></summary>
+          <div id="recentBody"></div>
+        </details>
+      </div>
+
       <div class="panel">
         <div class="meta-row">
           <input type="text" id="tTitle" aria-label="Titre du texte" placeholder="Titre du texte">
@@ -404,13 +548,15 @@ footer.about a{color:var(--ink-2)}
       </div>
 
       <div class="panel launch">
-        <label for="selStudent">Lecteur·rice
-          <select id="selStudent"></select>
-        </label>
+        <span class="launch-sum" id="launchSum"></span>
         <button class="btn go-set" id="bGoSet" type="button">Réglages</button>
-        <button class="btn pri big sp" id="bLaunch">
+        <button class="btn proj-btn" id="bProj" type="button" aria-pressed="false" title="Ouvre une fenêtre à glisser sur l’écran projeté : les élèves n’y voient que le texte, vous pilotez depuis celui-ci.">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6" fill="var(--surface-2)"/></svg>
+          <span id="bProjT">Ouvrir un 2ᵉ écran</span>
+        </button>
+        <button class="btn pri big" id="bLaunch" type="button">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          Lancer au pupitre
+          <span id="bLaunchT">Lancer au pupitre</span>
         </button>
       </div>
       <footer class="about">
@@ -423,23 +569,63 @@ footer.about a{color:var(--ink-2)}
     <aside class="panel settings" id="settings" aria-label="Réglages">
       <div class="panel-h"><h2>Réglages</h2></div>
 
+      <!-- 1. Réglage rapide : un point de départ, puis les trois ajustements les plus fréquents -->
       <details class="sec" open>
-        <summary>Réglages rapides <span class="sum-hint"></span></summary>
+        <summary>Réglage rapide <span class="sum-hint"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l" id="lProf">Réglages enregistrés</span>
             <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div>
-            <div class="row" id="presetWrap"></div>
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
           <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
-          <div class="fld stack"><span class="l" id="lBg">Fond et texte</span>
+          <div class="fld stack"><span class="l" id="lBg">Fond</span>
             <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
-          <span class="sub" id="contrast"></span>
+          <div class="row" id="presetWrap"></div>
         </div>
       </details>
 
+      <!-- 2. Typographie -->
       <details class="sec">
-        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
+        <summary>Typographie <span class="sum-hint" id="hTypo"></span></summary>
+        <div class="sec-b">
+          <div class="fld"><label for="sFont">Police</label>
+            <select id="sFont">
+              <optgroup label="Conçues pour la lisibilité">
+                <option value="Luciole">Luciole</option>
+                <option value="Atkinson Hyperlegible">Atkinson Hyperlegible</option>
+                <option value="Andika">Andika</option>
+                <option value="Lexend">Lexend</option>
+              </optgroup>
+              <optgroup label="Autres">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="OpenDyslexic">OpenDyslexic</option>
+              </optgroup>
+            </select></div>
+          <div class="fld"><label for="sWord">Entre les mots</label><input type="range" id="sWord" min="0" max="1.2" step="0.05"><output id="oWord"></output></div>
+          <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
+          <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
+          <label class="chk"><input type="checkbox" id="sBold"> Texte en gras</label>
+          <p class="sub">La taille et l’espacement entre les lettres sont dans « Réglage rapide ». L’espacement élargi entre les lettres est le réglage le mieux étayé pour les lecteurs dyslexiques (Zorzi et al., 2012). Les polices « dyslexie » n’ont pas montré d’effet (Kuster et al., 2018).</p>
+        </div>
+      </details>
+
+      <!-- 3. Couleurs -->
+      <details class="sec">
+        <summary>Couleurs <span class="sum-hint" id="hCol"></span></summary>
+        <div class="sec-b">
+          <div class="row">
+            <label class="row hint" for="sBg">Fond <input type="color" id="sBg" class="swatch"></label>
+            <label class="row hint" for="sFg">Texte <input type="color" id="sFg" class="swatch"></label>
+          </div>
+          <span class="sub" id="contrast"></span>
+          <p class="sub">Pour aller vite, les quatre fonds de « Réglage rapide » suffisent. Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
+        </div>
+      </details>
+
+      <!-- 4. Codage -->
+      <details class="sec">
+        <summary>Codage <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l">Syllabes</span>
             <div class="seg" role="group" aria-label="Syllabes">
@@ -471,10 +657,10 @@ footer.about a{color:var(--ink-2)}
         </div>
       </details>
 
+      <!-- 5. Lecture : comment le texte avance au pupitre -->
       <details class="sec">
-        <summary>Pupitre <span class="sum-hint" id="hStage"></span></summary>
+        <summary>Lecture <span class="sum-hint" id="hStage"></span></summary>
         <div class="sec-b">
-          <h3>Avancer</h3>
           <div class="fld stack"><span class="l">Façon d’avancer</span>
             <div class="seg" role="group" aria-label="Mode d'avance">
               <button data-mode="ligne">Ligne par ligne</button><button data-mode="continu">Continu</button><button data-mode="mot">Mot à mot</button>
@@ -485,61 +671,23 @@ footer.about a{color:var(--ink-2)}
             <div class="seg" role="group" aria-label="Lignes en évidence">
               <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
             </div></div>
-          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
-          <h3>Apparence</h3>
           <div class="fld"><label for="sDim">Texte autour</label>
             <select id="sDim">
               <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
             </select></div>
           <div class="fld"><label for="sPos">Position de la ligne</label>
             <select id="sPos"><option value="0.2">en haut</option><option value="0.33">au tiers</option><option value="0.45">au milieu</option></select></div>
-          <div class="fld"><label for="sBand">Marque de la ligne</label>
+          <div class="fld"><label for="sBand">Repère de ligne</label>
             <select id="sBand"><option value="surligneur">surligneur</option><option value="cadre">cadre</option><option value="aucun">aucun</option></select>
           </div>
-          <div class="row"><span class="hint">Couleur de la marque</span><input type="color" id="cBand" class="swatch" aria-label="Couleur de la marque de la ligne"></div>
-          <h3>Chrono et erreurs</h3>
-          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées pendant la lecture</label>
-          <label class="chk"><input type="checkbox" id="sHud"> Garder chrono et erreurs visibles dans un coin</label>
-          <p class="sub">Par défaut, chrono et erreurs restent invisibles à l’écran projeté : seule l’enseignante les retrouve dans « Séances ». Cochez ces options seulement si vous lisez sur votre propre écran.</p>
+          <div class="row"><span class="hint">Couleur du repère</span><input type="color" id="cBand" class="swatch" aria-label="Couleur du repère de ligne"></div>
+          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
+          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer sur le texte les erreurs marquées</label>
+          <p class="sub">La durée de lecture est mesurée toute seule, du départ à « Terminer », sans rien afficher. Une erreur marquée ne laisse aucune trace à l’écran, sauf si vous cochez la case ci-dessus (à réserver à un écran que les élèves ne voient pas).</p>
         </div>
       </details>
 
-      <details class="sec">
-        <summary>Typographie détaillée <span class="sum-hint" id="hTypo"></span></summary>
-        <div class="sec-b">
-          <div class="fld"><label for="sFont">Police</label>
-            <select id="sFont">
-              <optgroup label="Conçues pour la lisibilité">
-                <option value="Luciole">Luciole</option>
-                <option value="Atkinson Hyperlegible">Atkinson Hyperlegible</option>
-                <option value="Andika">Andika</option>
-                <option value="Lexend">Lexend</option>
-              </optgroup>
-              <optgroup label="Autres">
-                <option value="Arial">Arial</option>
-                <option value="Verdana">Verdana</option>
-                <option value="OpenDyslexic">OpenDyslexic</option>
-              </optgroup>
-            </select></div>
-          <div class="fld"><label for="sWord">Entre les mots</label><input type="range" id="sWord" min="0" max="1.2" step="0.05"><output id="oWord"></output></div>
-          <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
-          <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
-          <label class="chk"><input type="checkbox" id="sBold"> Texte en gras</label>
-          <p class="sub">L’espacement élargi entre les lettres est le réglage le mieux étayé pour les lecteurs dyslexiques (Zorzi et al., 2012). Les polices « dyslexie » n’ont pas montré d’effet (Kuster et al., 2018).</p>
-        </div>
-      </details>
-
-      <details class="sec">
-        <summary>Couleurs au choix <span class="sum-hint"></span></summary>
-        <div class="sec-b">
-          <div class="row">
-            <label class="row hint" for="sBg">Fond <input type="color" id="sBg" class="swatch"></label>
-            <label class="row hint" for="sFg">Texte <input type="color" id="sFg" class="swatch"></label>
-          </div>
-          <p class="sub">Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
-        </div>
-      </details>
-
+      <!-- 6. Voix et sauvegarde -->
       <details class="sec">
         <summary>Voix et sauvegarde <span class="sum-hint"></span></summary>
         <div class="sec-b">
@@ -547,7 +695,7 @@ footer.about a{color:var(--ink-2)}
           <div class="fld"><label for="sVoice">Voix</label><select id="sVoice"></select></div>
           <div class="fld"><label for="sRate">Débit</label><input type="range" id="sRate" min="0.5" max="1.3" step="0.05"><output id="oRate"></output></div>
           <div class="row"><button class="btn sm" id="bTestVoice">Tester</button><span class="sub" id="voiceNote"></span></div>
-                  <h3>Sauvegarde</h3>
+          <h3>Sauvegarde</h3>
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
             <label class="btn sm" for="fRestore" style="cursor:pointer">Restaurer…</label>
@@ -580,7 +728,7 @@ footer.about a{color:var(--ink-2)}
           <div id="progBox"></div>
           <div class="tbl-wrap" id="sessTbl"></div>
         </div>
-        <p class="sub">MCM = mots correctement lus par minute = (mots lus − erreurs) ÷ minutes. Les mots lus sont comptés jusqu'à la ligne atteinte, ou jusqu'au mot marqué d'un <kbd>Maj</kbd>+clic. Corrigez les valeurs directement dans le tableau si besoin. <b>Essai</b> = numéro de la lecture de ce texte par cet élève.</p>
+        <p class="sub">MCM = mots correctement lus par minute = (mots lus − erreurs) ÷ minutes. La durée va du signal de départ à « Terminer ». Les mots lus sont comptés depuis la ligne de départ jusqu’à la ligne atteinte, ou jusqu’au mot marqué d’un <kbd>Maj</kbd>+clic. Sous 30 secondes, le MCM est précédé de « ≈ » : il est indicatif. Corrigez les valeurs directement dans le tableau si besoin. <b>Essai</b> = numéro de la lecture de ce texte par cet élève.</p>
       </div>
     </div>
   </section>
@@ -602,29 +750,29 @@ footer.about a{color:var(--ink-2)}
     </div>
     <div class="guide-body" id="gpStart" role="tabpanel" aria-labelledby="gtStart">
       <div class="guide-steps">
-        <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes », ou « + Nouveau ».</p></div>
-        <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Un point de départ, puis taille et couleurs.</p></div>
-        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Menu « Lecteur·rice », en bas de la page.</p></div>
-        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Bouton vert « Lancer au pupitre ».</p></div>
+        <div class="guide-step"><b><span class="gnum">1</span>Choisir</b><p>Dans « Aujourd’hui » : l’élève, le texte, le réglage.</p></div>
+        <div class="guide-step"><b><span class="gnum">2</span>Lancer</b><p>Bouton vert « Lancer au pupitre ».</p></div>
+        <div class="guide-step"><b><span class="gnum">3</span>Donner le départ</b><p>Touche Espace. Puis Espace ou ↓ à chaque ligne.</p></div>
+        <div class="guide-step"><b><span class="gnum">4</span>Terminer</b><p>Touche T. Le résultat vous attend en quittant.</p></div>
       </div>
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 9h18M8 4v4"/></svg></span>Les touches utiles au pupitre</h3>
         <table class="guide-table">
-          <tr><th>Espace ou ↓</th><td>Ligne suivante</td></tr>
-          <tr><th>C</th><td>Démarrer / arrêter le chrono</td></tr>
-          <tr><th>E ou clic</th><td>Compter une erreur</td></tr>
+          <tr><th>Espace</th><td>Donner le départ, puis ligne suivante</td></tr>
+          <tr><th>T</th><td>Terminer la lecture</td></tr>
+          <tr><th>E ou clic</th><td>Marquer une erreur</td></tr>
           <tr><th>Z</th><td>Annuler la dernière erreur</td></tr>
           <tr><th>H ou ?</th><td>Toutes les commandes</td></tr>
           <tr><th>Échap</th><td>Quitter le pupitre</td></tr>
         </table>
-        <p>Tout le reste (réglages, séances, sauvegarde) est détaillé dans l’onglet « Référence ».</p>
+        <p>Il n’y a plus de chrono à lancer : la durée se mesure toute seule, du départ à « Terminer », sans rien afficher. Tout le reste (réglages, second écran, séances, sauvegarde) est détaillé dans l’onglet « Référence ».</p>
       </div>
     </div>
     <div class="guide-body" id="gpRef" role="tabpanel" aria-labelledby="gtRef" hidden>
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Préparer un texte</h3>
-        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
+        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. Le bloc <b>Aujourd’hui</b> réunit les trois choix d’une séance : l’élève, le texte et le réglage ; la barre du bas les rappelle à côté du bouton « Lancer ». À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
         <ul>
           <li><b>+ Nouveau</b> crée un texte vide ; <b>Modifier le texte</b> permet de le taper ou de le coller, une ligne vide séparant les paragraphes.</li>
           <li><b>Importer .txt / .docx</b>, en haut de la zone de texte, récupère un fichier existant.</li>
@@ -638,38 +786,50 @@ footer.about a{color:var(--ink-2)}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglages rapides</b> : la liste des réglages enregistrés (trois points de départ, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille, espacement entre les lettres et fond. Les points de départ sont des suggestions : modifiez-les selon l’élève.</li>
-          <li><b>Typographie détaillée</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
-          <li><b>Fond et texte</b> : quatre fonds rapides, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
+          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille, espacement entre les lettres et fond. Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Aujourd’hui propose la même liste.</li>
+          <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
+          <li><b>Couleurs</b> : une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
-          <li><b>Pupitre</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché, en gris), décompte avant le départ, coin chrono et erreurs (facultatif).</li>
+          <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
           <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données.</li>
         </ul>
-        <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (dans « Réglages rapides ») le garde sous un nom : il rejoint les trois points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
+        <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg></span>Au pupitre</h3>
         <p>« Lancer au pupitre » passe en plein écran. Une barre de commandes apparaît en bas ; elle se masque après quelques secondes et revient au moindre mouvement de souris ou toucher d'écran.</p>
         <ul>
-          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
-          <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot » (utile chrono lancé) demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
-          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. La durée et le résultat (MCM, erreurs) ne s’affichent que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez ; sous 2 secondes, rien n’est enregistré. « Quitter et enregistrer » enregistre la lecture même si elle est courte (de 2 à 10 secondes). Si aucun élève n’est choisi, un message le propose au lancement.</li>
-          <li>Le bouton « Chrono » de la barre est gris à l’arrêt (○) et rouge quand il tourne (■), avec sa touche C ; « Erreur » ne montre que sa touche E. Ni les secondes ni le nombre d’erreurs ne s’affichent. <b>Échap</b> pendant le chrono demande quoi faire (quitter et enregistrer, quitter sans enregistrer, ou continuer à lire).</li>
-          <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
+          <li><b>Le départ.</b> Le texte s’affiche, rien n’est encore mesuré. <b>Espace</b> (ou le bouton vert « Démarrer ») donne le départ, après le décompte 3-2-1 s’il est activé ; la première avance (↓, glissement, télécommande) le donne aussi. Avant le départ, cliquez une ligne pour commencer à cet endroit.</li>
+          <li><b>Pendant la lecture.</b> Le bouton vert suit la touche Espace : « Suivante » en ligne par ligne, « Pause » / « Reprendre » en défilement. Un clic sur un mot (ou <b>E</b>) marque une erreur, sans aucune trace à l’écran ; « Dernier mot » puis un mot marque l’endroit où l’élève s’est arrêté.</li>
+          <li><b>La fin.</b> <b>T</b> (ou « Terminer ») arrête la mesure. L’écran n’affiche qu’une carte neutre, « Lecture terminée » : ni durée, ni résultat, ni nom. <b>Échap</b> pendant une lecture demande seulement s’il faut la terminer.</li>
+          <li><b>Le résultat.</b> En quittant le pupitre, le bloc Aujourd’hui indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
+          <li>Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
+          <li>Si le nombre de lignes en évidence ne tient pas à l’écran (très grande taille), il est réduit et un message le signale : la zone lue ne passe jamais sous la barre.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
       </div>
 
       <div>
+        <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6"/></svg></span>Avec un second écran</h3>
+        <p>Si le beamer est branché en <b>écran étendu</b> (et non en copie de votre écran), « Ouvrir un 2ᵉ écran » ouvre une fenêtre à glisser sur l’écran projeté, puis à passer en plein écran. Les élèves n’y voient que le texte.</p>
+        <ul>
+          <li>« Lancer sur le 2ᵉ écran » ouvre alors sur le vôtre le <b>pilotage</b> : les mêmes commandes et les mêmes touches, le texte suivi ligne par ligne, les mots à cliquer pour marquer une erreur et le nombre d’erreurs marquées.</li>
+          <li>À « Terminer », le résultat s’affiche tout de suite sur votre écran ; l’écran projeté garde le texte, puis revient à un écran d’attente quand vous quittez.</li>
+          <li>Avec un écran dupliqué ou sur une tablette seule, le second écran n’apporte rien : lancez simplement au pupitre.</li>
+        </ul>
+      </div>
+
+      <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 9h18M8 4v4"/></svg></span>Raccourcis clavier (au pupitre seulement)</h3>
-        <p>Ils ne font rien tant que le pupitre n'est pas lancé.</p>
+        <p>Ils ne font rien tant que le pupitre n'est pas lancé. Avec un second écran, ils s’utilisent dans la fenêtre de pilotage.</p>
         <table class="guide-table">
-          <tr><th>Espace</th><td>Démarrer / pause (ligne suivante en mode ligne par ligne)</td></tr>
-          <tr><th>↓ → Page↓</th><td>Ligne suivante</td></tr>
+          <tr><th>Espace</th><td>Donner le départ, puis ligne suivante (pause / reprise en défilement)</td></tr>
+          <tr><th>↓ → Page↓</th><td>Ligne suivante (la première avance donne aussi le départ)</td></tr>
           <tr><th>↑ ← Page↑</th><td>Ligne précédente</td></tr>
-          <tr><th>C</th><td>Démarrer / arrêter le chrono</td></tr>
-          <tr><th>E ou clic</th><td>Compter une erreur sur le mot cliqué</td></tr>
+          <tr><th>T</th><td>Terminer la lecture (l’ancienne touche C fait encore départ puis fin)</td></tr>
+          <tr><th>R</th><td>Relire le même texte, une fois la lecture terminée</td></tr>
+          <tr><th>E ou clic</th><td>Marquer une erreur sur le mot cliqué</td></tr>
           <tr><th>Z</th><td>Annuler la dernière erreur</td></tr>
           <tr><th>Maj + clic</th><td>Marquer le dernier mot lu</td></tr>
           <tr><th>S</th><td>Activer / désactiver les sons en couleur</td></tr>
@@ -686,9 +846,11 @@ footer.about a{color:var(--ink-2)}
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></svg></span>Séances et suivi</h3>
-        <p>L’onglet <b>Séances</b> enregistre chaque lecture chronométrée. À gauche, la liste des élèves (pseudonymes conseillés) ; à droite, le tableau des séances et, si un élève est sélectionné, une carte de progression par texte.</p>
+        <p>L’onglet <b>Séances</b> garde chaque lecture, du départ à « Terminer », avec ou sans élève. À gauche, la liste des élèves (pseudonymes conseillés) ; à droite, le tableau des séances. Dans le bloc Aujourd’hui, « Dernières lectures » rappelle les trois dernières de l’élève choisi.</p>
         <ul>
-          <li><b>MCM</b> (mots correctement lus par minute) = (mots lus − erreurs) ÷ minutes. Les mots lus comptent jusqu'à la ligne atteinte, ou jusqu'au mot marqué au pupitre avec <b>Maj</b>+clic.</li>
+          <li><b>Évolution.</b> En choisissant un élève : sa dernière lecture, le graphique de ses MCM et de ses erreurs séance après séance, et un menu « Texte » pour ne voir que les essais d’un même texte. Les textes n’ayant pas la même difficulté, ce sont ces essais-là qui se comparent le mieux.</li>
+          <li><b>MCM</b> (mots correctement lus par minute) = (mots lus − erreurs) ÷ minutes. Les mots lus comptent depuis la ligne de départ jusqu'à la ligne atteinte, ou jusqu'au mot marqué au pupitre avec <b>Maj</b>+clic. Sous 30 secondes, le MCM est précédé de « ≈ » : une ligne de plus ou de moins y pèse trop pour s’y fier.</li>
+          <li>Une lecture de 2 à 10 secondes reste « pas encore enregistrée » jusqu’à votre décision (Enregistrer ou Écarter).</li>
           <li>Les valeurs du tableau se corrigent directement, si besoin.</li>
           <li><b>Exporter CSV</b> télécharge les séances affichées, pour les garder ou les analyser ailleurs.</li>
         </ul>
@@ -709,6 +871,7 @@ footer.about a{color:var(--ink-2)}
 
 <!-- ================= PUPITRE ================= -->
 <div class="stage" id="stage" hidden role="dialog" aria-modal="true" aria-label="Pupitre de lecture">
+  <!-- ÉCRAN ÉLÈVE : le texte et sa ligne en évidence, le décompte, l'écran noir. Rien d'autre. -->
   <div class="sr" id="stLive" aria-live="polite" aria-atomic="true"></div>
   <div class="st-col" id="stCol">
     <div class="st-move" id="stMove">
@@ -720,85 +883,144 @@ footer.about a{color:var(--ink-2)}
   <div class="mask bot" id="mBot"></div>
   <div class="countdown" id="countdown" hidden></div>
   <div class="st-black" id="stBlack" hidden></div>
-  <div class="st-toast" id="stToast"></div>
-  <div class="st-help" id="stHelp" hidden>
-    <h3>Commandes</h3>
-    <dl>
-      <dt><kbd>Espace</kbd></dt><dd>Démarrer / mettre en pause (ligne suivante en mode ligne par ligne)</dd>
-      <dt><kbd>↓</kbd> <kbd>→</kbd> <kbd>Page↓</kbd></dt><dd>Ligne suivante</dd>
-      <dt><kbd>↑</kbd> <kbd>←</kbd> <kbd>Page↑</kbd></dt><dd>Ligne précédente</dd>
-      <dt><kbd>C</kbd></dt><dd>Démarrer / arrêter le chrono</dd>
-      <dt><kbd>E</kbd> ou clic</dt><dd>Compter une erreur (sur le mot cliqué)</dd>
-      <dt><kbd>Z</kbd></dt><dd>Annuler la dernière erreur</dd>
-      <dt><kbd>Maj</kbd>+clic</dt><dd>Marquer le dernier mot lu</dd>
-      <dt><kbd>S</kbd></dt><dd>Activer / désactiver les sons en couleur</dd>
-      <dt><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></dt><dd>1, 2 ou 3 lignes en évidence</dd>
-      <dt><kbd>L</kbd></dt><dd>Changer d'avance : ligne par ligne → continu → mot à mot</dd>
-      <dt><kbd>N</kbd> <kbd>M</kbd></dt><dd>Ralentir / accélérer</dd>
-      <dt><kbd>V</kbd></dt><dd>Lire la ligne à voix haute</dd>
-      <dt><kbd>B</kbd></dt><dd>Écran noir</dd>
-      <dt><kbd>F</kbd></dt><dd>Plein écran</dd>
-      <dt><kbd>H</kbd></dt><dd>Afficher / masquer cette aide</dd>
-      <dt><kbd>Échap</kbd></dt><dd>Quitter le pupitre</dd>
-    </dl>
-    <button class="btn sm" id="xHelpClose" type="button" style="margin-top:12px">Fermer</button>
-  </div>
-  <div class="st-bar" id="stBar">
-    <div class="grp">
-      <button id="xPlay" title="Démarrer / pause (Espace)"></button>
-      <button id="xPrev" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
-      <button id="xNext" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
-      <button id="xSlow" title="Moins vite (−)" aria-label="Moins vite">−</button>
-      <span class="v" id="xSpeed"></span>
-      <button id="xFast" title="Plus vite (+)" aria-label="Plus vite">+</button>
+  <!-- PILOTAGE sur écran unique : commandes de l'enseignante. Aucune durée, aucun résultat, aucun nom d'élève ici.
+       Avec une fenêtre de projection, ce bloc n'est pas affiché : le panneau #ctl le remplace sur l'écran de l'enseignante. -->
+  <div class="st-ctl" id="stCtl">
+    <div class="st-toast" id="stToast"></div>
+    <div class="st-help" id="stHelp" hidden>
+      <h3>Commandes</h3>
+      <dl>
+        <dt><kbd>Espace</kbd></dt><dd>Donner le départ, puis ligne suivante (ou pause / reprise en défilement)</dd>
+        <dt><kbd>↓</kbd> <kbd>→</kbd> <kbd>Page↓</kbd></dt><dd>Ligne suivante (la première avance donne aussi le départ)</dd>
+        <dt><kbd>↑</kbd> <kbd>←</kbd> <kbd>Page↑</kbd></dt><dd>Ligne précédente</dd>
+        <dt><kbd>T</kbd></dt><dd>Terminer la lecture</dd>
+        <dt><kbd>E</kbd> ou clic</dt><dd>Marquer une erreur (sur le mot cliqué)</dd>
+        <dt><kbd>Z</kbd></dt><dd>Annuler la dernière erreur</dd>
+        <dt><kbd>Maj</kbd>+clic</dt><dd>Marquer le dernier mot lu</dd>
+        <dt><kbd>S</kbd></dt><dd>Activer / désactiver les sons en couleur</dd>
+        <dt><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></dt><dd>1, 2 ou 3 lignes en évidence</dd>
+        <dt><kbd>L</kbd></dt><dd>Changer d'avance : ligne par ligne → continu → mot à mot</dd>
+        <dt><kbd>N</kbd> <kbd>M</kbd></dt><dd>Ralentir / accélérer</dd>
+        <dt><kbd>V</kbd></dt><dd>Lire la ligne à voix haute</dd>
+        <dt><kbd>B</kbd></dt><dd>Écran noir</dd>
+        <dt><kbd>F</kbd></dt><dd>Plein écran</dd>
+        <dt><kbd>H</kbd></dt><dd>Afficher / masquer cette aide</dd>
+        <dt><kbd>Échap</kbd></dt><dd>Quitter le pupitre</dd>
+      </dl>
+      <p class="help-note">Avant le départ, cliquez une ligne pour commencer à cet endroit. La durée est mesurée du départ à « Terminer », sans rien afficher.</p>
+      <button class="btn sm" id="xHelpClose" type="button" style="margin-top:12px">Fermer</button>
     </div>
-    <span class="sep"></span>
-    <div class="grp">
-      <button id="xChrono" title="Chrono (C)"></button>
-      <button id="xErr" title="Erreur (E)" aria-label="Marquer une erreur (E)">Erreur <kbd>E</kbd></button>
-      <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
-      <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
+    <div class="st-bar" id="stBar" role="toolbar" aria-label="Commandes du pupitre">
+      <div class="grp">
+        <button id="xPlay" class="go" type="button" title="Départ, puis ligne suivante ou pause (Espace)"></button>
+        <button id="xPrev" type="button" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+        <button id="xNext" type="button" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <button id="xSlow" type="button" title="Moins vite (N)" aria-label="Moins vite">−</button>
+        <span class="v" id="xSpeed"></span>
+        <button id="xFast" type="button" title="Plus vite (M)" aria-label="Plus vite">+</button>
+      </div>
+      <span class="sep"></span>
+      <div class="grp">
+        <button id="xErr" type="button" title="Marquer une erreur (E)" aria-label="Marquer une erreur (E)">Erreur <kbd>E</kbd></button>
+        <button id="xUndo" type="button" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
+        <button id="xMark" type="button" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
+        <button id="xEnd" type="button" title="Terminer la lecture (T)" aria-label="Terminer la lecture (T)">Terminer <kbd>T</kbd></button>
+      </div>
+      <span class="sep"></span>
+      <div class="grp">
+        <button id="xSpeak" type="button" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
+        <button id="xQuick" type="button" title="Façon d’avancer et nombre de lignes" aria-expanded="false" aria-controls="stQuick">Mode</button>
+        <button id="xFull" type="button" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <button id="xExit" type="button" title="Quitter (Échap)">Quitter</button>
+      </div>
     </div>
-    <span class="sep"></span>
-    <div class="grp">
-      <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
-      <button id="xQuick" title="Mode d’avance et nombre de lignes" aria-expanded="false" aria-controls="stQuick">Mode</button>
-    <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-      <button id="xExit" title="Quitter (Échap)">Quitter</button>
+    <div class="st-quick" id="stQuick" hidden role="group" aria-label="Réglages rapides du pupitre">
+      <div class="q-row"><span class="q-l">Avancer</span><div class="seg" role="group" aria-label="Façon d’avancer">
+        <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button></div></div>
+      <div class="q-row"><span class="q-l">Lignes en évidence</span><div class="seg" role="group" aria-label="Lignes en évidence">
+        <button type="button" data-qwin="1">1</button><button type="button" data-qwin="2">2</button><button type="button" data-qwin="3">3</button></div></div>
+      <div class="q-row"><span></span><button class="btn sm" id="xQuickClose" type="button">Fermer</button></div>
     </div>
-  </div>
-  <div class="st-quick" id="stQuick" hidden role="group" aria-label="Réglages rapides du pupitre">
-    <div class="q-row"><span class="q-l">Avancer</span><div class="seg" role="group" aria-label="Façon d’avancer">
-      <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button></div></div>
-    <div class="q-row"><span class="q-l">Lignes en évidence</span><div class="seg" role="group" aria-label="Lignes en évidence">
-      <button type="button" data-qwin="1">1</button><button type="button" data-qwin="2">2</button><button type="button" data-qwin="3">3</button></div></div>
-  </div>
-  <button class="st-q" id="xHelp" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
-  <div class="st-hud" id="stHud" hidden><span id="hudChrono">00:00</span><span id="hudErr"></span></div>
-  <div class="st-done" id="stExit" hidden>
-    <div class="box" role="alertdialog" aria-labelledby="exitT">
-      <h3 id="exitT">Quitter pendant le chrono ?</h3>
-      <p>La lecture n’est pas encore enregistrée.</p>
-      <div class="row">
-        <button class="btn pri" id="exitSave" type="button">Quitter et enregistrer</button>
-        <button class="btn" id="exitDrop" type="button">Quitter sans enregistrer</button>
-        <button class="btn" id="exitStay" type="button">Continuer à lire</button>
+    <button class="st-q" id="xHelp" type="button" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
+    <div class="st-done" id="stExit" hidden>
+      <div class="box" role="alertdialog" aria-labelledby="exitT">
+        <h3 id="exitT">Terminer la lecture ?</h3>
+        <div class="row">
+          <button class="btn pri" id="exitEnd" type="button">Terminer et quitter</button>
+          <button class="btn" id="exitStay" type="button">Continuer à lire</button>
+        </div>
+      </div>
+    </div>
+    <div class="st-done" id="stDone" hidden>
+      <div class="box" id="doneBox" role="group" aria-labelledby="doneT" tabindex="-1">
+        <h3 id="doneT">Lecture terminée</h3>
+        <div class="row">
+          <button class="btn pri" id="doneQuit" type="button">Quitter le pupitre <kbd>Échap</kbd></button>
+          <button class="btn" id="doneAgain" type="button">Relire ce texte <kbd>R</kbd></button>
+        </div>
       </div>
     </div>
   </div>
-  <div class="st-done" id="stDone" hidden>
-    <div class="box" role="group" aria-labelledby="doneT">
-      <h3 id="doneT">Lecture enregistrée</h3>
-      <p id="doneCtx"></p>
-      <p id="doneSub"></p>
-      <p class="res" id="doneRes" hidden></p>
-      <div class="row">
-        <button class="btn pri" id="doneKeep" type="button" hidden>Enregistrer cette lecture</button>
-        <button class="btn" id="doneDrop" type="button" hidden>Ne pas l’enregistrer</button>
-        <button class="btn" id="doneShow" type="button">Voir le résultat</button>
-        <button class="btn" id="doneSess" type="button">Ouvrir les séances</button>
-        <button class="btn pri" id="doneClose" type="button">Continuer</button>
-      </div>
+</div>
+
+<!-- ================= ÉCRAN PROJETÉ EN ATTENTE (fenêtre de projection seulement) ================= -->
+<div class="proj-wait" id="projWait" hidden>
+  <div class="pw-box">
+    <svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="76" fill="var(--accent)"/><g fill="none" stroke="var(--accent-ink)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76"/><path d="M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111"/></g></svg>
+    <p class="pw-t">Écran projeté</p>
+    <p class="pw-s">Glissez cette fenêtre sur l’écran que voient les élèves, puis passez en plein écran. Vous pilotez la lecture depuis l’autre fenêtre.</p>
+    <button class="btn pri big" id="pwFull" type="button">Plein écran</button>
+  </div>
+</div>
+
+<!-- ================= PILOTAGE (écran de l'enseignante quand un 2e écran projette le texte) ================= -->
+<div class="ctl" id="ctl" hidden role="dialog" aria-modal="true" aria-labelledby="ctlT" tabindex="-1">
+  <header class="ctl-top">
+    <div class="ctl-id">
+      <h2 id="ctlT">Pilotage de la lecture</h2>
+      <p id="ctlCtx"></p>
+    </div>
+    <span class="ctl-state" id="ctlState" role="status" aria-live="polite"></span>
+    <button class="cbtn" id="cBlack" type="button" data-c="black" aria-pressed="false">Écran noir <kbd>B</kbd></button>
+    <button class="cbtn" id="cExit" type="button" data-c="exit">Quitter <kbd>Échap</kbd></button>
+  </header>
+  <section class="panel ctl-confirm" id="ctlConfirm" hidden role="alertdialog" aria-labelledby="cConfT">
+    <b id="cConfT">Terminer la lecture ?</b>
+    <span class="af-a"><button class="btn pri" id="cEndQuit" type="button">Terminer et quitter</button><button class="btn" id="cStay" type="button">Continuer à lire</button></span>
+  </section>
+  <section class="panel ctl-follow" id="ctlFollow" aria-label="Texte affiché sur l’écran projeté">
+    <div class="ctl-lines" id="ctlLines"></div>
+    <p class="ctl-pos" id="ctlPos"></p>
+  </section>
+  <section class="panel ctl-result" id="ctlResult" hidden aria-labelledby="cResT">
+    <h3 id="cResT">Lecture terminée</h3>
+    <div class="ctl-res-body" id="ctlResBody"></div>
+    <div class="af-a">
+      <button class="btn pri big" id="cQuit" type="button">Quitter <kbd>Échap</kbd></button>
+      <button class="btn big" type="button" data-c="again">Relire ce texte <kbd>R</kbd></button>
+    </div>
+    <div class="af-a" id="ctlDel"></div>
+  </section>
+  <div class="panel ctl-pad">
+    <div class="ctl-row">
+      <button class="cbtn go" id="cMain" type="button" data-c="main"></button>
+      <button class="cbtn sq" id="cPrev" type="button" data-c="back" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+      <button class="cbtn sq" id="cNext" type="button" data-c="fwd" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+      <span class="ctl-speed" id="cSpeedBox"><button class="cbtn sq" type="button" data-c="slow" title="Moins vite (N)" aria-label="Moins vite">−</button><span class="v" id="cSpeed"></span><button class="cbtn sq" type="button" data-c="fast" title="Plus vite (M)" aria-label="Plus vite">+</button></span>
+      <button class="cbtn" id="cSpeak" type="button" data-c="speak">Lire la ligne <kbd>V</kbd></button>
+    </div>
+    <div class="ctl-row">
+      <button class="cbtn" id="cErr" type="button" data-c="err">Erreur <kbd>E</kbd></button>
+      <button class="cbtn" id="cUndo" type="button" data-c="undo">Annuler <kbd>Z</kbd></button>
+      <button class="cbtn" id="cMark" type="button" data-c="arm" aria-pressed="false">Dernier mot lu</button>
+      <span class="ctl-count" id="cCount" aria-live="polite"></span>
+      <button class="cbtn end" id="cEnd" type="button" data-c="end">Terminer <kbd>T</kbd></button>
+    </div>
+    <div class="ctl-row opts">
+      <span class="q-l" id="cmL">Avancer</span>
+      <div class="seg" role="group" aria-labelledby="cmL"><button type="button" data-cmode="ligne">Ligne par ligne</button><button type="button" data-cmode="continu">Continu</button><button type="button" data-cmode="mot">Mot à mot</button></div>
+      <span class="q-l" id="cwL">Lignes en évidence</span>
+      <div class="seg" role="group" aria-labelledby="cwL"><button type="button" data-cwin="1">1</button><button type="button" data-cwin="2">2</button><button type="button" data-cwin="3">3</button></div>
     </div>
   </div>
 </div>
@@ -806,7 +1028,7 @@ footer.about a{color:var(--ink-2)}
   <div class="guide-modal ask-modal" role="dialog" aria-modal="true" aria-labelledby="askT">
     <h2 id="askT" style="margin:0;font:700 1.5rem var(--display)">Quel élève lit ?</h2>
     <p id="askP" style="margin:0;color:var(--ink-2);font-size:1rem"></p>
-    <div class="fld stack" id="askSel"><label for="askStudent">Lecteur·rice</label><select id="askStudent"></select></div>
+    <div class="fld stack" id="askSel"><label for="askStudent">Élève</label><select id="askStudent"></select></div>
     <div class="row">
       <button class="btn pri" id="askGo" type="button">Lancer avec cet élève</button>
       <button class="btn" id="askAdd" type="button">Ajouter un élève</button>
@@ -1898,6 +2120,9 @@ class LireCouleur {
 const $ = id => document.getElementById(id);
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const uid = () => Math.random().toString(36).slice(2,10) + Date.now().toString(36).slice(-4);
+/* Cette page sert deux fois : fenêtre normale (préparation, pilotage) ou fenêtre de projection (#projection). */
+const PROJ = /(^|[#&])projection\b/.test(location.hash);
+if (PROJ) document.documentElement.classList.add('proj');
 
 /* ---------- Groupes de sons (codes LireCouleur) ---------- */
 const GROUPS = [
@@ -1932,7 +2157,7 @@ function defaults(){
     syl:'couleurs', sylOral:false, muet:true, liaison:true, mots:false, lignes:false, sons:false,
     sonsSel: defaultSons(),
     pal:{light:JSON.parse(JSON.stringify(PAL_L)), dark:JSON.parse(JSON.stringify(PAL_D))},
-    mode:'ligne', lpm:12, wpm:70, win:1, dim:0.5, pos:0.33, band:'surligneur', countdown:true, showErr:false, hud:false,
+    mode:'ligne', lpm:12, wpm:70, win:1, dim:0.5, pos:0.33, band:'surligneur', countdown:true, showErr:false,
     voice:'', rate:0.9
   };
 }
@@ -1971,6 +2196,7 @@ function load(src){
 }
 let saveT = 0, storageOK = true;
 function save(){
+  if (PROJ) return;   /* la fenêtre de projection n'écrit jamais dans le stockage */
   clearTimeout(saveT);
   saveT = setTimeout(() => {
     try { localStorage.setItem(KEY, JSON.stringify(DB)); storageOK = true; }
@@ -1979,6 +2205,29 @@ function save(){
 }
 DB = load();
 const S = () => DB.settings;
+/* ---------- Deux fenêtres : pilotage (celle-ci) et projection (second écran) ---------- */
+/* La fenêtre de projection est cette même page ouverte avec #projection : elle n'affiche que l'écran élève,
+   n'écrit jamais dans le stockage, et reçoit texte, réglages et commandes de la fenêtre de pilotage. */
+/* En http(s), les messages ne partent que vers cette même origine ; ouverte par double-clic (file://), la page n'a pas d'origine utilisable. */
+const TAG = 'pl-lect', ORI = /^https?:$/.test(location.protocol) ? location.origin : '*';
+let PW = null;   /* côté pilotage : la fenêtre de projection, si elle est ouverte */
+const CTL = { on:false, ready:false, confirm:false, quitAfter:false, helloT:0 };
+const RS = { phase:'ready', playing:false, cd:false, line:0, word:-1, win:1, errors:[], endMark:null, armMark:false, black:false, lines:[] };
+function post(m){
+  const w = PROJ ? window.opener : PW;
+  if (!w || w.closed) return false;
+  m.pl = TAG;
+  try { w.postMessage(m, ORI); return true; } catch(e){ return false; }
+}
+let repSig = '';
+function report(force){
+  if (!PROJ) return;
+  const m = {t:'state', open: ST.open, phase: ST.phase, playing: ST.playing, cd: ST.cdOn, line: ST.line, word: ST.word, win: win(),
+    errors: ST.errors, endMark: ST.endMark, armMark: !!ST.armMark, black: !$('stBlack').hidden};
+  const sig = JSON.stringify(m);
+  if (!force && sig === repSig) return;
+  repSig = sig; post(m);
+}
 const curText = () => DB.texts.find(t => t.id === DB.cur) || DB.texts[0];
 
 /* ---------- Utilitaires couleur ---------- */
@@ -2155,7 +2404,7 @@ function renderLib(){
 }
 $('libList').addEventListener('click', e => {
   const b = e.target.closest('button[data-id]'); if (!b) return;
-  DB.cur = b.dataset.id; save(); loadTextUI(); renderLib(); refreshAll(true);
+  DB.cur = b.dataset.id; save(); loadTextUI(); renderLib(); refreshAll(true); renderHome();
 });
 function loadTextUI(){
   const t = curText();
@@ -2169,15 +2418,15 @@ $('txt').addEventListener('input', () => {
   const t = curText(); t.text = $('txt').value; delete t.ex; save();
   clearTimeout(editT); editT = setTimeout(() => { renderLib(); refreshAll(true); }, 400);
 });
-$('tTitle').addEventListener('input', () => { curText().title = $('tTitle').value; delete curText().ex; save(); renderLib(); });
-$('tLevel').addEventListener('change', () => { curText().level = $('tLevel').value; save(); renderLib(); });
+$('tTitle').addEventListener('input', () => { curText().title = $('tTitle').value; delete curText().ex; save(); renderLib(); renderHome(); });
+$('tLevel').addEventListener('change', () => { curText().level = $('tLevel').value; save(); renderLib(); renderHome(); });
 function newText(title, text){
   const t = {id: uid(), title: title || 'Nouveau texte', level:'', text: text || ''};
-  DB.texts.push(t); DB.cur = t.id; save(); loadTextUI(); renderLib(); refreshAll(true);
+  DB.texts.push(t); DB.cur = t.id; save(); loadTextUI(); renderLib(); refreshAll(true); renderHome();
   return t;
 }
 $('bNew').addEventListener('click', () => { newText(); setView('edit'); $('tTitle').select(); });
-$('bDup').addEventListener('click', () => { const t = curText(); const n = newText(t.title + ' (copie)', t.text); n.level = t.level; save(); loadTextUI(); renderLib(); });
+$('bDup').addEventListener('click', () => { const t = curText(); const n = newText(t.title + ' (copie)', t.text); n.level = t.level; save(); loadTextUI(); renderLib(); renderHome(); });
 $('delWrap').addEventListener('click', e => {
   const w = $('delWrap');
   if (e.target.id === 'bDel') {
@@ -2185,7 +2434,7 @@ $('delWrap').addEventListener('click', e => {
   } else if (e.target.id === 'bDelYes') {
     DB.texts = DB.texts.filter(t => t.id !== DB.cur);
     if (!DB.texts.length) DB.texts = SAMPLES.map(t => Object.assign({}, t));
-    DB.cur = DB.texts[0].id; save(); loadTextUI(); renderLib(); refreshAll(true); toast('Texte supprimé');
+    DB.cur = DB.texts[0].id; save(); loadTextUI(); renderLib(); refreshAll(true); renderHome(); toast('Texte supprimé');
   } else if (e.target.id === 'bDelNo') {
     w.innerHTML = '<button class="btn sm danger" id="bDel">Supprimer</button>';
   }
@@ -2233,19 +2482,20 @@ RANGES.forEach(([id,key,out,fmt]) => {
   $(id).addEventListener('input', () => {
     S()[key] = +$(id).value; $(out).textContent = fmt($(id).value); save();
     if (['size','letter','word','line','width'].includes(key)) { applyStyle(); schedulePreviewLines(); }
+    updateHints();   /* le réglage actif, son menu et le rappel de lancement suivent chaque ajustement */
   });
 });
 let pvT = 0;
 function schedulePreviewLines(){ clearTimeout(pvT); pvT = setTimeout(() => computeLines($('pv')), 120); }
 const COLORS = [['cSyl0','syl0'],['cSyl1','syl1'],['cArc','arc'],['cMuet','muet'],['cLiaison','liaison'],['cMot0','mot0'],['cMot1','mot1'],['cLig0','lig0'],['cLig1','lig1'],['cBand','band']];
-COLORS.forEach(([id,key]) => $(id).addEventListener('input', () => { P()[key] = $(id).value; save(); applyStyle(); }));
-const CHECKS = [['sBold','bold'],['sMuet','muet'],['sLiaison','liaison'],['sMots','mots'],['sLignes','lignes'],['sSons','sons'],['sCount','countdown'],['sShowErr','showErr'],['sHud','hud']];
+COLORS.forEach(([id,key]) => $(id).addEventListener('input', () => { P()[key] = $(id).value; save(); applyStyle(); updateHints(); }));
+const CHECKS = [['sBold','bold'],['sMuet','muet'],['sLiaison','liaison'],['sMots','mots'],['sLignes','lignes'],['sSons','sons'],['sCount','countdown'],['sShowErr','showErr']];
 CHECKS.forEach(([id,key]) => $(id).addEventListener('change', () => { S()[key] = $(id).checked; save(); syncUI(); applyStyle(); if (key==='bold') schedulePreviewLines(); }));
 $('sSylOral').addEventListener('change', () => { S().sylOral = $('sSylOral').checked; save(); refreshAll(true); });
-$('sFont').addEventListener('change', () => { S().font = $('sFont').value; save(); applyStyle(); (document.fonts ? document.fonts.ready : Promise.resolve()).then(schedulePreviewLines); });
-$('sDim').addEventListener('change', () => { S().dim = +$('sDim').value; save(); });
-$('sPos').addEventListener('change', () => { S().pos = +$('sPos').value; save(); });
-$('sBand').addEventListener('change', () => { S().band = $('sBand').value; save(); });
+$('sFont').addEventListener('change', () => { S().font = $('sFont').value; save(); applyStyle(); updateHints(); (document.fonts ? document.fonts.ready : Promise.resolve()).then(schedulePreviewLines); });
+$('sDim').addEventListener('change', () => { S().dim = +$('sDim').value; save(); updateHints(); });
+$('sPos').addEventListener('change', () => { S().pos = +$('sPos').value; save(); updateHints(); });
+$('sBand').addEventListener('change', () => { S().band = $('sBand').value; save(); updateHints(); });
 $('sVoice').addEventListener('change', () => { S().voice = $('sVoice').value; save(); });
 document.querySelectorAll('[data-syl]').forEach(b => b.addEventListener('click', () => { S().syl = b.dataset.syl; save(); syncUI(); applyStyle(); }));
 document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { S().mode = b.dataset.mode; save(); syncUI(); }));
@@ -2289,12 +2539,13 @@ $('bSonsNone').addEventListener('click', () => setSons(() => false));
 
 /* Points de départ (suggestions à ajuster selon l'élève) */
 const PROFILES = [
+  {id:'std', name:'Standard', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:false, muet:true, liaison:true, mots:false, lignes:false, win:1}},
   {id:'dys', name:'Dyslexie', s:{font:'Luciole', size:64, letter:0.14, word:0.4, line:2.0, syl:'couleurs', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:1}},
   {id:'allo', name:'Allophonie', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:true, muet:true, liaison:true, mots:false, lignes:false, win:1}},
   {id:'decro', name:'Décrochage', s:{font:'Atkinson Hyperlegible', size:56, letter:0.06, word:0.3, line:1.7, syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:2}}
 ];
 const canon = o => (o && typeof o === 'object') ? '{' + Object.keys(o).sort().map(k => JSON.stringify(k) + ':' + canon(o[k])).join(',') + '}' : JSON.stringify(o);
-const settingsKey = o => { const c = Object.assign({}, o); delete c.voice; return canon(c); };
+const settingsKey = o => { const c = Object.assign({}, o); delete c.voice; delete c.hud; return canon(c); };
 function activeEntry(){
   const s = S();
   const pr = PROFILES.find(x => Object.keys(x.s).every(k => s[k] === x.s[k]));
@@ -2305,18 +2556,21 @@ function renderProfiles(){
   $('profiles').innerHTML = PROFILES.map(p => `<button type="button" data-prof="${p.id}" aria-pressed="false">${p.name}</button>`).join('') +
     DB.presets.map((p,i) => `<button type="button" data-preset="${i}" aria-pressed="false">${esc(p.name)}</button>`).join('');
 }
-$('profiles').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.prof) {
-    const pr = PROFILES.find(x => x.id === b.dataset.prof);
+function applyEntry(kind, key){
+  if (kind === 'prof') {
+    const pr = PROFILES.find(x => x.id === key); if (!pr) return;
     Object.assign(S(), pr.s); save(); syncUI(); refreshAll(true);
     toast('« ' + pr.name + ' » appliqué : ajustez-le selon l’élève');
-  } else if (b.dataset.preset) {
-    const pst = DB.presets[+b.dataset.preset];
+  } else if (kind === 'preset') {
+    const pst = DB.presets[+key]; if (!pst) return;
     DB.settings = Object.assign(defaults(), JSON.parse(JSON.stringify(pst.s)), {voice:S().voice});
     save(); syncUI(); refreshAll(true);
     toast('Réglages « ' + pst.name + ' » appliqués');
   }
+}
+$('profiles').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.prof) applyEntry('prof', b.dataset.prof); else if (b.dataset.preset) applyEntry('preset', b.dataset.preset);
 });
 const MODE_SHORT = {ligne:'ligne par ligne', continu:'continu', mot:'mot à mot'};
 function updateHints(){
@@ -2327,7 +2581,11 @@ function updateHints(){
   $('hTypo').textContent = s.font;
   if (!$('presetName')) $('presetWrap').innerHTML = '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
   $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
+  const bgp = BG_PRESETS.find(p => p[1].toLowerCase() === s.bg.toLowerCase() && p[2].toLowerCase() === s.fg.toLowerCase());
+  $('hCol').textContent = (bgp ? bgp[0].toLowerCase() : 'au choix') + (contrast(s.bg, s.fg) < 7 ? ' · contraste faible' : '');
+  document.querySelectorAll('[data-bgp]').forEach(b => b.setAttribute('aria-pressed', BG_PRESETS[+b.dataset.bgp] === bgp));
   $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
+  renderReg(act); renderLaunch();
 }
 
 function syncUI(){
@@ -2398,11 +2656,17 @@ function renderStudentSelect(){
   $('selStudent').innerHTML = '<option value="">— sans élève —</option>' + DB.students.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
   $('selStudent').value = DB.students.some(s => s.id === DB.curStudent) ? DB.curStudent : '';
 }
-$('selStudent').addEventListener('change', () => { DB.curStudent = $('selStudent').value; save(); });
+$('selStudent').addEventListener('change', () => { DB.curStudent = $('selStudent').value; save(); $('recent').open = false; renderHome(); });
 
 /* ===================== PUPITRE ===================== */
+/* Un seul moteur de lecture, deux responsabilités :
+   - ÉCRAN ÉLÈVE : le texte, la ligne en évidence, le décompte, l'écran noir (#stCol, masques, #countdown, #stBlack) ;
+   - PILOTAGE (enseignante) : les commandes, dans #stCtl quand tout est sur un seul écran,
+     ou dans le panneau #ctl quand une fenêtre de projection est ouverte sur un second écran.
+   Durée, MCM, erreurs comptées et enregistrement n'apparaissent sur aucun écran de lecture :
+   la durée est mesurée en silence du départ à « Terminer » et tout se retrouve après la séance. */
 const ST = { open:false, lines:[], line:0, word:0, playing:false, scrollY:0, raf:0, last:0, fs:0,
-  chrono:null, errors:[], endMark:null, barT:0, wake:null, cdT:0, speed:0, lastWheel:0 };
+  phase:'ready', run:null, errors:[], endMark:null, armMark:false, cdOn:false, barT:0, wake:null, cdT:0, speed:0, lastWheel:0 };
 const stage = $('stage'), stMove = $('stMove'), stText = $('stText'), band = $('band');
 const vh = () => stage.clientHeight;
 const y0 = () => Math.round(vh() * S().pos);
@@ -2411,23 +2675,29 @@ function lineStep(){
   return S().size * S().line;
 }
 function lineOfWord(i){ const L = ST.lines; for (let k = 0; k < L.length; k++) if (i <= L[k].last) return k; return L.length - 1; }
+const fsEl = () => PROJ ? document.documentElement : stage;
+function setAppInert(on){ const a = document.querySelector('.app'); if (a && !PROJ) a.inert = on; }
+function clearMarks(){ stText.querySelectorAll('.err-show,.endmark').forEach(w => w.classList.remove('err-show','endmark')); }
+function resetReadingState(){
+  ST.playing = false; ST.line = 0; ST.word = -1; ST.scrollY = 0; ST.acc = 0;
+  ST.phase = 'ready'; ST.run = null; ST.errors = []; ST.endMark = null; ST.armMark = false; ST.cdOn = false;
+}
 
 function launch(){
   if (ST.open) return;
-  ST.open = true; ST.playing = false; ST.line = 0; ST.word = -1; ST.scrollY = 0;
-  ST.errors = []; ST.endMark = null; ST.chrono = null; ST.armMark = false;
+  ST.open = true; resetReadingState(); ST.winTold = '';
   $('stDone').hidden = true; $('stExit').hidden = true;
   clearTimeout(toastT); $('toast').classList.remove('on');
   applyStyle();
   stText.innerHTML = HTML;
-  stage.hidden = false;
-  try { if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {}); } catch(e){}
+  stage.hidden = false; setAppInert(true);
+  if (!PROJ) { try { if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {}); } catch(e){} }
   try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); } catch(e){}
-  $('stHelp').hidden = true; $('stBlack').hidden = true;
+  $('stHelp').hidden = true; $('stBlack').hidden = true; toggleQuick(false);
   updateBar(); showBar();
   const go = () => requestAnimationFrame(() => { relayout(); });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
-  stage.focus && stage.setAttribute('tabindex','-1'); stage.focus();
+  stage.setAttribute('tabindex','-1'); stage.focus();
 }
 function relayout(keepWord){
   stMove.classList.remove('anim');
@@ -2436,26 +2706,49 @@ function relayout(keepWord){
   if (typeof keepWord === 'number') ST.line = lineOfWord(keepWord);
   ST.line = Math.min(ST.line, Math.max(0, ST.lines.length - 1));
   if (S().mode === 'continu') ST.scrollY = ST.lines.length ? ST.lines[ST.line].top : 0;
+  fitWin();
+  if (PROJ) post({t:'layout', lines: ST.lines.map(l => [l.first, l.last])});
   render(false);
   requestAnimationFrame(() => stMove.classList.add('anim'));
 }
+/* Place réservée à la barre de commandes : la zone lue ne passe jamais dessous. */
+function barReserve(){
+  const h = $('stBar').offsetHeight;
+  return h ? Math.min(vh() * 0.45, h + 18 + 28) : Math.round(S().size * 0.35);
+}
+/* Hauteur de la zone lue pour w lignes à partir de la ligne k (toutes les lignes en défilement continu). */
+function zoneH(k, w){
+  const L = ST.lines, s = S(), fs = s.size, pad = fs * 0.14;
+  if (s.mode === 'continu') return Math.max(lineStep() * w - (lineStep() - fs * s.line) + 2 * pad, fs * s.line);
+  return L[Math.min(L.length - 1, k + w - 1)].bottom - L[k].top + 2 * pad;
+}
+/* Nombre de lignes réellement mises en évidence : celui demandé, réduit s'il ne tient pas au-dessus de la barre
+   (très grande taille, petit écran). Calculé une fois par mise en page pour rester stable d'une ligne à l'autre. */
+function fitWin(){
+  const L = ST.lines, want = S().win, avail = vh() - barReserve();
+  let w = want;
+  if (L.length) while (w > 1 && L.some((l, k) => zoneH(k, w) > avail)) w--;
+  if (ST.open && w < want && ST.winTold !== want + ':' + w) stToast((w > 1 ? w + ' lignes' : 'Une seule ligne') + ' en évidence : ' + want + ' ne tiennent pas à cette taille', 3200);
+  ST.winTold = want + ':' + w;
+  ST.winEff = w;
+}
+const win = () => Math.min(S().win, ST.winEff || S().win);
 function render(animate){
-  const L = ST.lines; if (!L.length) return;
-  const s = S(), fs = s.size, pad = fs * 0.14, Y = y0();
+  const L = ST.lines; if (!L.length) { report(); return; }
+  const s = S(), fs = s.size, pad = fs * 0.14, Y = y0(), W = win();
   let tr, bTop, bH;
   if (s.mode === 'continu') {
     stMove.classList.remove('anim');
     tr = Y - ST.scrollY;
-    bTop = ST.scrollY - pad; bH = lineStep() * s.win - (lineStep() - fs * s.line) + 2 * pad;
-    bH = Math.max(bH, fs * s.line);
+    bTop = ST.scrollY - pad; bH = zoneH(0, W);
   } else {
-    const a = L[ST.line], b = L[Math.min(L.length - 1, ST.line + s.win - 1)];
+    const a = L[ST.line];
     tr = Y - a.top;
-    bTop = a.top - pad; bH = (b.bottom - a.top) + 2 * pad;
+    bTop = a.top - pad; bH = zoneH(ST.line, W);
   }
   if (animate === false) stMove.classList.remove('anim');
-  { /* la bande ne passe jamais sous la barre de commandes */
-    const reserve = Math.min(vh() * 0.4, $('stBar').offsetHeight + 28), over = bTop + tr + bH - (vh() - reserve);
+  { /* la zone lue reste entière au-dessus de la barre ; si elle est plus haute que l'écran, son début prime */
+    const over = bTop + tr + bH - (vh() - barReserve());
     if (over > 0) tr = Math.max(tr - over, -bTop);
   }
   stMove.style.transform = `translateY(${tr}px)`;
@@ -2472,29 +2765,31 @@ function render(animate){
   if (s.mode === 'mot' && ST.word >= 0) ST.hadCur = true;
   if (s.mode === 'mot' && ST.word >= 0) { const w = stText.querySelector(`.w[data-i="${ST.word}"]`); if (w) w.classList.add('cur'); }
   if (s.mode === 'ligne' && !ST.playing) {
-    const a = L[ST.line], b = L[Math.min(L.length - 1, ST.line + s.win - 1)], t = [];
+    const a = L[ST.line], b = L[Math.min(L.length - 1, ST.line + W - 1)], t = [];
     for (let i = a.first; i <= b.last; i++) t.push(WORDS[i].t);
     $('stLive').textContent = t.join(' ');
   }
+  report();
 }
 function gotoLine(k){
-  const L = ST.lines; if (!L.length) return;
+  const L = ST.lines; if (!L.length || ST.phase === 'done') return;
   ST.line = Math.max(0, Math.min(L.length - 1, k));
   if (S().mode === 'continu') ST.scrollY = L[ST.line].top;
   if (S().mode === 'mot') ST.word = L[ST.line].first;
   render();
 }
 function step(d){
+  if (ST.phase === 'done') return;
   if (S().mode === 'mot') {
     ST.word = Math.max(0, Math.min(WORDS.length - 1, (ST.word < 0 ? 0 : ST.word + d)));
     const nl = lineOfWord(ST.word);
     ST.line = nl; render();
   } else gotoLine(ST.line + d);
 }
-/* Lecture automatique */
+/* Lecture automatique (défilement continu, mot à mot) */
 function tick(now){
   if (!ST.playing) return;
-  const dt = Math.min(0.1, (now - ST.last) / 1000); ST.last = now;
+  const dt = Math.max(0, Math.min(0.1, (now - ST.last) / 1000)); ST.last = now;
   const s = S(), L = ST.lines;
   if (s.mode === 'continu') {
     ST.scrollY += lineStep() * s.lpm / 60 * dt;
@@ -2507,92 +2802,96 @@ function tick(now){
     if (ST.acc >= 1) {
       ST.acc -= 1;
       if (ST.word >= WORDS.length - 1) { pause(); return; }
-      ST.word++; const nl = lineOfWord(ST.word);
-      if (nl !== ST.line) { ST.line = nl; render(); } else render();
+      ST.word++; ST.line = lineOfWord(ST.word); render();
     }
   }
   ST.raf = requestAnimationFrame(tick);
 }
-function play(){
-  if (S().mode === 'ligne') { step(1); return; }
-  if (ST.playing) return;
-  const start = () => { ST.playing = true; ST.last = performance.now(); ST.acc = 0; if (S().mode === 'mot' && ST.word < 0) { ST.word = ST.lines.length ? ST.lines[ST.line].first : 0; render(); } ST.raf = requestAnimationFrame(tick); updateBar(); hideBarSoon(); };
-  if (S().countdown) {
-    let n = 3; const cd = $('countdown'); cd.hidden = false; cd.textContent = n;
-    clearInterval(ST.cdT);
-    ST.cdT = setInterval(() => { n--; if (n <= 0) { clearInterval(ST.cdT); cd.hidden = true; start(); } else cd.textContent = n; }, 800);
-  } else start();
+function countdownThen(fn){
+  if (!S().countdown) return fn();
+  let n = 3; const cd = $('countdown'); cd.hidden = false; cd.textContent = n; ST.cdOn = true;
+  clearInterval(ST.cdT);
+  ST.cdT = setInterval(() => { n--; if (n <= 0) { cancelCountdown(); fn(); } else cd.textContent = n; }, 800);
   updateBar();
 }
-function pause(){ ST.playing = false; cancelAnimationFrame(ST.raf); clearInterval(ST.cdT); $('countdown').hidden = true; updateBar(); showBar(); }
-function togglePlay(){ if (S().mode === 'ligne') return step(1); ST.playing ? pause() : play(); }
-function speedDelta(d){
+function cancelCountdown(){ clearInterval(ST.cdT); ST.cdOn = false; $('countdown').hidden = true; }
+function startAuto(){
+  if (S().mode === 'ligne' || ST.phase !== 'run') return;
+  ST.playing = true; ST.last = performance.now(); ST.acc = 0;
+  if (S().mode === 'mot' && ST.word < 0) { ST.word = ST.lines.length ? ST.lines[ST.line].first : 0; render(); }
+  ST.raf = requestAnimationFrame(tick); updateBar(); hideBarSoon();
+}
+function play(){ if (S().mode === 'ligne' || ST.playing || ST.cdOn || ST.phase !== 'run') return; countdownThen(startAuto); }
+function pause(){ ST.playing = false; cancelAnimationFrame(ST.raf); cancelCountdown(); updateBar(); showBar(); }
+function bumpSpeed(d){
   const s = S();
   if (s.mode === 'continu') s.lpm = Math.max(2, Math.min(40, s.lpm + d));
   else if (s.mode === 'mot') s.wpm = Math.max(20, Math.min(220, s.wpm + d * 5));
-  save(); updateBar(); stToast(speedLabel());
 }
+function speedDelta(d){ bumpSpeed(d); save(); updateBar(); stToast(speedLabel()); }
 function speedLabel(){
   const s = S();
   if (s.mode === 'continu') {
-    const L = ST.lines, wpl = L.length ? WORDS.length / L.length : 0;
+    const L = CTL.on ? RS.lines : ST.lines, wpl = L.length ? WORDS.length / L.length : 0;
     return s.lpm + ' l/min' + (wpl ? ' ≈ ' + Math.round(s.lpm * wpl) + ' m/min' : '');
   }
   if (s.mode === 'mot') return s.wpm + ' m/min';
   return 'à la main';
 }
 
-/* Chrono et erreurs */
+/* ---------- La séance : du départ à « Terminer » ---------- */
+/* Le temps n'est jamais affiché. Il part au signal de départ (Espace, « Démarrer » ou première avance),
+   après le décompte s'il est activé, et s'arrête à « Terminer ». */
+const MIN_SEC = 2, SHORT_SEC = 10, INDIC_SEC = 30;
 const fmt = sec => { sec = Math.max(0, Math.round(sec)); return String(Math.floor(sec/60)).padStart(2,'0') + ':' + String(sec%60).padStart(2,'0'); };
-function toggleChrono(){
-  if (!ST.chrono) {
-    ST.chrono = performance.now(); ST.errors = []; ST.endMark = null;
-    stText.querySelectorAll('.err-show,.endmark').forEach(w => w.classList.remove('err-show','endmark'));
-    updateBar();
-  } else stopChrono(true);
+const fmtDur = sec => { sec = Math.max(0, Math.round(sec)); const m = Math.floor(sec/60); return m ? m + ' min ' + String(sec%60).padStart(2,'0') : sec + ' s'; };
+function depart(){
+  if (ST.phase !== 'ready') return;
+  const L = ST.lines;
+  ST.phase = 'run'; ST.errors = []; ST.endMark = null; ST.armMark = false; clearMarks();
+  ST.run = {t0: performance.now(), ts: Date.now(), start: S().mode === 'mot' && ST.word >= 0 ? ST.word : (L.length ? L[ST.line].first : 0)};
+  updateBar(); hideBarSoon();
 }
-function wordsRead(){
-  if (ST.endMark !== null) return ST.endMark + 1;
-  const L = ST.lines; if (!L.length) return WORDS.length;
-  if (S().mode === 'mot' && ST.word >= 0) return ST.word + 1;
-  const k = S().mode === 'continu' ? ST.line : Math.min(L.length - 1, ST.line + S().win - 1);
-  return L[k].last + 1;
+function beginReading(auto){
+  if (ST.phase !== 'ready' || ST.cdOn) return;
+  countdownThen(() => { depart(); if (auto) startAuto(); });
 }
-function stopChrono(record, fromExit){
-  if (!ST.chrono) return;
-  const dur = (performance.now() - ST.chrono) / 1000;
-  ST.chrono = null; updateBar();
-  if (!record) return;
-  if (dur < 2) { if (!fromExit) stToast('Moins de 2 s : rien n’est enregistré', 2800); return; }
-  const t = curText(), stu = DB.students.find(x => x.id === DB.curStudent);
-  const sess = {id: uid(), ts: Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
-    dur: Math.round(dur), words: wordsRead(), err: ST.errors.length, errWords: ST.errors.filter(i => i !== null).map(i => WORDS[i] ? WORDS[i].t : ''), total: WORDS.length};
-  if (dur < SHORT_SEC && !fromExit) { pendingShort = sess; showDone(sess, true); return; }
-  DB.sessions.push(sess); save();
-  showDone(sess);
-  renderSessions();
+/* Espace et le bouton principal : départ, puis ligne suivante (à la main) ou pause / reprise (défilement). */
+function mainKey(){
+  if (ST.phase === 'done') return;
+  if (ST.cdOn) { cancelCountdown(); updateBar(); showBar(); return; }   /* faux départ : Espace pendant le décompte l'annule */
+  if (ST.phase === 'ready') return beginReading(true);
+  if (S().mode === 'ligne') return step(1);
+  ST.playing ? pause() : play();
 }
-const SHORT_SEC = 10;
-let pendingShort = null;
-function showDone(sess, short){
-  $('doneT').textContent = short ? 'Enregistrer cette lecture ?' : 'Lecture enregistrée';
-  ['doneKeep','doneDrop'].forEach(id => $(id).hidden = !short);
-  $('doneSess').hidden = $('doneClose').hidden = !!short;
-  $('doneSub').textContent = short ? 'Elle dure moins de 10 secondes.' : ''; $('doneSub').hidden = !short;
-  const m = Math.round(mcmOf(sess));
-  $('doneCtx').textContent = sess.title || 'Sans titre';
-  $('doneRes').textContent = (short ? '' : 'Essai ' + trialNo(sess) + ' · ') + 'Durée ' + fmt(sess.dur) + ' · ' + m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
-  $('doneRes').hidden = true; $('doneShow').hidden = !!short;
-  $('stDone').hidden = false; (short ? $('doneKeep') : $('doneClose')).focus();
+/* Flèche, glissement ou télécommande : la première avance donne aussi le départ, pour qu'aucune lecture ne passe sans être mesurée. */
+function forward(){ if (ST.phase === 'ready') beginReading(false); else step(1); }
+function lastWordRead(){
+  if (ST.endMark !== null) return ST.endMark;
+  const L = ST.lines; if (!L.length) return WORDS.length - 1;
+  if (S().mode === 'mot' && ST.word >= 0) return ST.word;
+  const k = S().mode === 'continu' ? ST.line : Math.min(L.length - 1, ST.line + win() - 1);
+  return L[k].last;
 }
-function closeDone(){ pendingShort = null; $('stDone').hidden = true; if (ST.open) stage.focus(); }
-$('doneKeep').addEventListener('click', () => { const sess = pendingShort; if (!sess) return; DB.sessions.push(sess); save(); renderSessions(); closeDone(); stToast('Séance enregistrée'); });
-$('doneDrop').addEventListener('click', closeDone);
-$('doneShow').addEventListener('click', () => { $('doneRes').hidden = false; $('doneShow').hidden = true; });
-$('doneClose').addEventListener('click', closeDone);
-$('doneSess').addEventListener('click', () => { $('stDone').hidden = true; exitStage(); setTab('sess'); });
+function finish(){
+  if (ST.phase !== 'run' || !ST.run) return null;
+  const res = {ts: ST.run.ts, dur: (performance.now() - ST.run.t0) / 1000, words: Math.max(0, lastWordRead() + 1 - ST.run.start), err: ST.errors.length,
+    errWords: ST.errors.filter(i => i !== null).map(i => WORDS[i] ? WORDS[i].t : ''), total: WORDS.length, end: ST.endMark !== null ? 'mot' : 'ligne', mode: S().mode};
+  ST.phase = 'done'; ST.run = null; ST.armMark = false; toggleQuick(false); $('stHelp').hidden = true;
+  pause();
+  if (PROJ) post({t:'done', res});
+  else { recordResult(res); $('stDone').hidden = false; $('doneBox').focus(); }
+  return res;
+}
+function resetReading(){
+  if (!ST.open) return;
+  pause(); resetReadingState(); clearMarks();
+  stText.querySelectorAll('.w.cur').forEach(w => w.classList.remove('cur'));
+  $('stDone').hidden = true; $('stExit').hidden = true; $('stBlack').hidden = true;
+  relayout(); updateBar(); showBar(); stage.focus();
+}
 function addError(i){
-  if (!ST.chrono) return;
+  if (ST.phase !== 'run') { showBar(); return; }
   if (i !== null && i !== undefined) {
     const k = ST.errors.indexOf(i);
     const w = stText.querySelector(`.w[data-i="${i}"]`);
@@ -2601,42 +2900,61 @@ function addError(i){
   }
   ST.errors.push(i === undefined ? null : i); updateBar();
 }
-function undoError(){ if (!ST.errors.length) return; const i = ST.errors.pop(); if (i !== null) { const w = stText.querySelector(`.w[data-i="${i}"]`); if (w) w.classList.remove('err-show'); } updateBar(); }
-
-/* Barre de commandes */
-const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
-function updateBar(){
-  const s = S();
-  $('xPlay').hidden = s.mode === 'ligne';
-  $('xNext').classList.toggle('main', s.mode === 'ligne'); $('xPlay').classList.toggle('main', s.mode !== 'ligne');
-  $('xSlow').hidden = $('xFast').hidden = s.mode === 'ligne';
-  $('xPlay').innerHTML = (ST.playing ? ICON_PAUSE + 'Pause' : ICON_PLAY + 'Démarrer');
-  $('xSpeed').textContent = speedLabel();
-  const c = $('xChrono');
-  c.classList.toggle('rec', !!ST.chrono);
-  c.innerHTML = (ST.chrono ? '■' : '○') + ' Chrono <kbd>C</kbd>';
-  c.setAttribute('aria-label', 'Chrono ' + (ST.chrono ? 'en cours (C pour arrêter)' : 'arrêté (C pour démarrer)'));
-  $('xMark').classList.toggle('armed', !!ST.armMark);
-  const hud = $('stHud'); hud.hidden = !(s.hud && ST.open);
-  if (!hud.hidden) {
-    $('hudChrono').textContent = ST.chrono ? '● ' + fmt((performance.now() - ST.chrono)/1000) : 'Chrono arrêté';
-    $('hudErr').textContent = ST.errors.length + ' erreur' + (ST.errors.length > 1 ? 's' : '');
+function undoError(){ if (ST.phase !== 'run' || !ST.errors.length) return; const i = ST.errors.pop(); if (i !== null) { const w = stText.querySelector(`.w[data-i="${i}"]`); if (w) w.classList.remove('err-show'); } updateBar(); }
+function toggleArm(){ if (ST.phase !== 'run') { showBar(); return; } ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); }
+/* Un mot touché : avant le départ, on s'y place ; pendant la lecture, on y marque une erreur (ou le dernier mot lu). */
+function wordAction(i, shift){
+  if (ST.phase === 'run') {
+    if (shift || ST.armMark) {
+      ST.armMark = false;
+      stText.querySelectorAll('.endmark').forEach(x => x.classList.remove('endmark'));
+      ST.endMark = (ST.endMark === i) ? null : i;
+      if (ST.endMark !== null) { const w = stText.querySelector(`.w[data-i="${i}"]`); if (w) w.classList.add('endmark'); }
+      updateBar();
+    } else addError(i);
+  } else if (ST.phase === 'ready') {
+    if (S().mode === 'mot') { ST.word = i; ST.line = lineOfWord(i); render(); }
+    else gotoLine(lineOfWord(i));
   }
 }
-setInterval(() => { if (ST.open && ST.chrono && (S().hud || !$('stBar').classList.contains('off'))) updateBar(); }, 500);
+
+/* ---------- Barre de commandes (pilotage sur écran unique) ---------- */
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+const ICON_NEXT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+/* Le bouton principal suit la touche Espace : même place, même geste, du début à la fin. */
+function mainLabel(phase, mode, playing){
+  if (phase !== 'run') return [ICON_PLAY, 'Démarrer'];
+  if (mode === 'ligne') return [ICON_NEXT, 'Suivante'];
+  return playing ? [ICON_PAUSE, 'Pause'] : [ICON_PLAY, 'Reprendre'];
+}
+function updateBar(){
+  const s = S(), run = ST.phase === 'run';
+  const lab = mainLabel(ST.phase, s.mode, ST.playing);
+  $('xPlay').innerHTML = lab[0] + '<span>' + lab[1] + '</span>';
+  $('xPlay').disabled = ST.phase === 'done';
+  $('xSlow').hidden = $('xFast').hidden = $('xSpeed').hidden = s.mode === 'ligne';
+  $('xSpeed').textContent = speedLabel();
+  ['xErr','xMark','xEnd'].forEach(id => $(id).disabled = !run);
+  $('xUndo').disabled = !run || !ST.errors.length;
+  $('xMark').classList.toggle('armed', !!ST.armMark);
+  stage.dataset.phase = ST.phase;
+  report();
+}
+function barBusy(){ return ST.phase === 'ready' || $('stBar').matches(':hover') || !$('stQuick').hidden || !$('stHelp').hidden; }
 function showBar(){ $('stBar').classList.remove('off'); stage.classList.remove('hide-cursor'); hideBarSoon(); }
-function hideBarSoon(){ clearTimeout(ST.barT); ST.barT = setTimeout(() => { if ($('stBar').matches(':hover')) return hideBarSoon(); $('stBar').classList.add('off'); stage.classList.add('hide-cursor'); }, 2600); }
+/* La barre s'efface pendant la lecture, jamais avant le départ ni tant qu'un panneau ouvert par l'enseignante est affiché. */
+function hideBarSoon(){ clearTimeout(ST.barT); ST.barT = setTimeout(() => { if (!ST.open) return; if (barBusy()) return hideBarSoon(); $('stBar').classList.add('off'); stage.classList.add('hide-cursor'); }, 2600); }
 let stToastT = 0;
-function stToast(m, ms){ const t = $('stToast'); t.textContent = m; t.classList.add('on'); clearTimeout(stToastT); stToastT = setTimeout(() => t.classList.remove('on'), ms || 1500); }
+function stToast(m, ms){ if (CTL.on) return; const t = $('stToast'); t.textContent = m; t.classList.add('on'); clearTimeout(stToastT); stToastT = setTimeout(() => t.classList.remove('on'), ms || 1500); }
 
 function toggleSons(){
   const s = S(); s.sons = !s.sons; save(); applyStyle();
   stToast('Sons en couleur : ' + (s.sons ? 'activés' : 'désactivés'));
 }
 function setWin(n){
-  S().win = n; save(); render();
-  stToast(n + ' ligne' + (n > 1 ? 's' : '') + ' en évidence');
+  S().win = n; save(); fitWin(); render();
+  if (win() === n) stToast(n + ' ligne' + (n > 1 ? 's' : '') + ' en évidence');
 }
 const MODE_LABEL = {ligne:'Ligne par ligne', continu:'Défilement continu', mot:'Mot à mot'};
 function cycleModeStage(){ const order = ['ligne','continu','mot']; setModeStage(order[(order.indexOf(S().mode) + 1) % order.length]); }
@@ -2648,26 +2966,122 @@ function setModeStage(mode){
   updateBar(); relayout(first);
   stToast(MODE_LABEL[s.mode]);
 }
+function toggleBlack(){ $('stBlack').hidden = !$('stBlack').hidden; report(); }
+function toggleHelp(force){ const h = $('stHelp'); h.hidden = typeof force === 'boolean' ? !force : !h.hidden; if (!h.hidden) { toggleQuick(false); showBar(); } }
+function requestExit(){
+  if (!ST.open) return;
+  if (PROJ) { post({t:'askExit'}); return; }
+  if (ST.phase === 'run') { $('stExit').hidden = false; $('exitStay').focus(); return; }
+  exitStage();
+}
 function exitStage(){
   if (!ST.open) return;
-  if (ST.chrono) stopChrono(true, true);
-  pendingShort = null;
+  if (ST.phase === 'run') finish();   /* filet : une lecture en cours n'est jamais perdue en quittant */
   pause(); ST.open = false; stage.hidden = true;
   if (synth) synth.cancel();
-  try { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch(e){}
   try { if (ST.wake) ST.wake.release(); } catch(e){}
   ST.wake = null;
-  renderSessions(); syncUI(); refreshAll(false);
+  if (PROJ) { $('projWait').hidden = false; report(true); return; }
+  try { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); } catch(e){}
+  setAppInert(false); $('recent').open = false;
+  renderSessions(); syncUI(); refreshAll(false); renderHome();
+  /* retour du focus sur « Lancer » ; la sortie du plein écran, asynchrone, peut le reprendre : on le redonne après elle */
+  const back = () => { if (!ST.open && !CTL.on && $('askBackdrop').hidden && (document.activeElement === document.body || !document.activeElement)) $('bLaunch').focus(); };
+  back(); document.addEventListener('fullscreenchange', back, {once:true}); setTimeout(back, 250);
 }
 function toggleFull(){
-  try { if (document.fullscreenElement) document.exitFullscreen(); else stage.requestFullscreen().catch(() => stToast('Plein écran indisponible ici')); } catch(e){ stToast('Plein écran indisponible ici'); }
+  try { if (document.fullscreenElement) document.exitFullscreen(); else fsEl().requestFullscreen().catch(() => stToast('Plein écran indisponible ici')); } catch(e){ stToast('Plein écran indisponible ici'); }
 }
 function speakLine(){
   const L = ST.lines; if (!L.length) return;
-  const a = L[ST.line], b = L[Math.min(L.length-1, ST.line + S().win - 1)];
+  const a = L[ST.line], b = L[Math.min(L.length-1, ST.line + win() - 1)];
   const parts = []; for (let i = a.first; i <= b.last; i++) parts.push(WORDS[i].t);
   speak(parts.join(' '));
 }
+
+/* ---------- Enregistrement de la séance (toujours côté enseignante) ---------- */
+let LAST = null;   /* dernière lecture terminée : {kind:'ok'|'short'|'none', id, shown} */
+function recordResult(r){
+  if (!r || !(r.dur >= MIN_SEC)) { LAST = {kind:'none'}; return null; }
+  const t = curText(), stu = DB.students.find(x => x.id === DB.curStudent), act = activeEntry();
+  const sess = {id: uid(), ts: r.ts || Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
+    dur: Math.round(r.dur), words: r.words, err: r.err, errWords: r.errWords || [], total: r.total, end: r.end, mode: r.mode, reg: act ? act.name : 'Personnalisés'};
+  if (r.dur < SHORT_SEC) sess.pending = true;   /* lecture très courte : gardée de côté, à confirmer par l'enseignante */
+  DB.sessions.push(sess); save();
+  LAST = {kind: sess.pending ? 'short' : 'ok', id: sess.id, shown: false};
+  return sess;
+}
+
+/* ===================== ACCUEIL : élève → texte → réglage → lancer ===================== */
+const stuLabel = s => s.stuName || 'Sans élève';
+const curStu = () => DB.students.find(x => x.id === DB.curStudent) || null;
+const sessOf = id => DB.sessions.find(x => x.id === id);
+const plural = (n, w) => n + ' ' + w + (n > 1 ? 's' : '');
+function resLine(s){ return `<b class="num">${mcmTxt(s)}</b> MCM · ${plural(s.err, 'erreur')} · ${fmtDur(s.dur)}`; }
+const DEL_ASK = '<span class="confirm">Supprimer cette lecture ? <button class="btn sm danger" type="button" data-af="delYes">Supprimer</button><button class="btn sm" type="button" data-af="delNo">Annuler</button></span>';
+const INDIC_NOTE = `Lecture de moins de ${INDIC_SEC} secondes : le MCM est indicatif.`;
+function renderPick(){
+  const sorted = DB.texts.slice().sort((a,b) => (a.level||'9').localeCompare(b.level||'9') || a.title.localeCompare(b.title,'fr'));
+  $('selText').innerHTML = sorted.map(t => `<option value="${t.id}">${t.level ? 'N' + esc(t.level) + ' · ' : ''}${esc(t.title || 'Sans titre')}</option>`).join('');
+  $('selText').value = DB.cur;
+}
+function renderReg(act){
+  $('selReg').innerHTML = (act ? '' : '<option value="">Personnalisés</option>') +
+    PROFILES.map(p => `<option value="prof:${p.id}">${p.name}</option>`).join('') +
+    DB.presets.map((p,i) => `<option value="preset:${i}">${esc(p.name)}</option>`).join('');
+  $('selReg').value = act ? (act.kind === 'prof' ? 'prof:' + act.id : 'preset:' + act.i) : '';
+}
+function renderLaunch(){
+  const stu = curStu(), act = activeEntry(), open = projOpen();
+  $('launchSum').textContent = [stu ? stu.name : 'Sans élève', curText().title || 'Sans titre', act ? act.name : 'Réglages personnalisés'].join(' · ');
+  $('bLaunchT').textContent = open ? 'Lancer sur le 2ᵉ écran' : 'Lancer au pupitre';
+  $('bProj').setAttribute('aria-pressed', open);
+  $('bProjT').textContent = open ? 'Fermer le 2ᵉ écran' : 'Ouvrir un 2ᵉ écran';
+}
+/* Après la séance : le résultat se retrouve ici, sur demande — jamais sur l'écran de lecture. */
+function afterHTML(s, where){
+  const ctl = where === 'ctl';
+  if (LAST.kind === 'none') return `<p class="af-t">Lecture de moins de ${MIN_SEC} secondes : rien n’a été enregistré.</p>` + (ctl ? '' : '<div class="af-a"><button class="btn sm" type="button" data-af="close">Fermer</button></div>');
+  if (s.pending) return `<p class="af-t"><b>Lecture très courte</b> (moins de ${SHORT_SEC} secondes) : elle n’est pas encore enregistrée.</p>` +
+    '<div class="af-a"><button class="btn sm pri" type="button" data-af="keep">L’enregistrer</button><button class="btn sm" type="button" data-af="drop">Ne pas l’enregistrer</button></div>';
+  if (!LAST.shown) return '<p class="af-t"><b>Lecture enregistrée.</b></p><div class="af-a"><button class="btn sm pri" type="button" data-af="show">Voir le résultat</button><button class="btn sm" type="button" data-af="close">Fermer</button></div>';
+  return `<p class="af-t"><b>${esc(stuLabel(s))}</b> · ${esc(s.title || 'Sans titre')} · essai ${trialNo(s)}</p><p class="af-res">${resLine(s)}</p>` +
+    (mcmIndic(s) ? `<p class="af-n">${INDIC_NOTE}</p>` : '') +
+    (ctl ? '' : '<div class="af-a">' + (LAST.del ? DEL_ASK
+      : '<button class="btn sm" type="button" data-af="evo">Voir l’évolution</button><button class="btn sm" type="button" data-af="del">Supprimer</button><button class="btn sm" type="button" data-af="close">Fermer</button>') + '</div>');
+}
+function renderAfter(){
+  const box = $('after'), s = LAST && LAST.id ? sessOf(LAST.id) : null;
+  if (!LAST || (LAST.kind !== 'none' && !s)) { LAST = null; box.hidden = true; box.innerHTML = ''; return; }
+  box.innerHTML = afterHTML(s, 'home'); box.hidden = false;
+}
+function afterAct(a){
+  if (!LAST) return;
+  const s = LAST.id ? sessOf(LAST.id) : null;
+  if (a === 'show') LAST.shown = true;
+  else if (a === 'close') LAST = null;
+  else if (a === 'keep' && s) { delete s.pending; save(); LAST.kind = 'ok'; LAST.shown = CTL.on; }
+  else if ((a === 'drop' || a === 'delYes') && s) { DB.sessions = DB.sessions.filter(x => x.id !== s.id); save(); LAST = CTL.on ? {kind:'gone'} : null; toast(a === 'drop' ? 'Lecture non enregistrée' : 'Lecture supprimée'); }
+  else if (a === 'del') LAST.del = true;
+  else if (a === 'delNo') LAST.del = false;
+  else if (a === 'evo' && s) { sessFilter = s.stu; LAST = null; setTab('sess'); }
+  renderAfter(); renderRecent(); renderSessions(); if (CTL.on) renderCtl();
+}
+$('after').addEventListener('click', e => { const b = e.target.closest('[data-af]'); if (b) afterAct(b.dataset.af); });
+function renderRecent(){
+  const stu = curStu(), df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit'});
+  const list = DB.sessions.filter(s => !s.pending && s.stu === (stu ? stu.id : '')).sort((a,b) => b.ts - a.ts);
+  $('recentT').textContent = stu ? 'Dernières lectures de ' + stu.name : 'Dernières lectures sans élève';
+  $('recentN').textContent = list.length ? plural(list.length, 'séance') : 'aucune';
+  $('recentBody').innerHTML = list.length
+    ? '<ul class="rc">' + list.slice(0, 3).map(s => `<li><span class="rc-d">${df.format(new Date(s.ts))}</span><span class="rc-t">${esc(s.title || 'Sans titre')} · essai ${trialNo(s)}</span><span class="rc-r">${resLine(s)}</span></li>`).join('') + '</ul>' +
+      '<div class="af-a"><button class="btn sm" type="button" id="bEvo">Voir l’évolution</button></div>'
+    : '<p class="sub">Aucune lecture enregistrée pour le moment. Lancez une lecture : elle s’ajoutera ici.</p>';
+}
+$('recentBody').addEventListener('click', e => { if (e.target.id === 'bEvo') { sessFilter = DB.curStudent || ''; setTab('sess'); } });
+function renderHome(){ renderPick(); renderAfter(); renderRecent(); renderLaunch(); }
+$('selText').addEventListener('change', () => { DB.cur = $('selText').value; save(); loadTextUI(); renderLib(); refreshAll(true); renderHome(); });
+$('selReg').addEventListener('change', () => { const v = $('selReg').value; if (v) applyEntry(v.split(':')[0], v.split(':')[1]); });
 
 $('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
 /* Choix de l'élève avant le pupitre (une seule fois par session si on continue sans) */
@@ -2677,13 +3091,17 @@ function openAsk(){
   const list = DB.students;
   $('askStudent').innerHTML = list.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('');
   $('askSel').hidden = $('askGo').hidden = !list.length;
-  $('askP').textContent = list.length ? 'Les lectures chronométrées seront enregistrées à son nom.' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
+  $('askP').textContent = list.length ? 'La lecture sera enregistrée à son nom.' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
   $('askBackdrop').hidden = false; (list.length ? $('askGo') : $('askAdd')).focus();
 }
 function closeAsk(){ $('askBackdrop').hidden = true; }
-function tryLaunch(){ if (hasStudent() || askedNoStudent) launch(); else openAsk(); }
-$('askGo').addEventListener('click', () => { DB.curStudent = $('askStudent').value; save(); renderStudentSelect(); closeAsk(); launch(); });
-$('askNone').addEventListener('click', () => { askedNoStudent = true; closeAsk(); launch(); });
+function go(){
+  if (projOpen()) { if (CTL.ready) launchRemote(); else toast('Le 2ᵉ écran se prépare : réessayez dans un instant'); return; }
+  LAST = null; renderAfter(); launch();
+}
+function tryLaunch(){ if (hasStudent() || askedNoStudent) go(); else openAsk(); }
+$('askGo').addEventListener('click', () => { DB.curStudent = $('askStudent').value; save(); renderStudentSelect(); renderHome(); closeAsk(); go(); });
+$('askNone').addEventListener('click', () => { askedNoStudent = true; closeAsk(); go(); });
 $('askAdd').addEventListener('click', () => { closeAsk(); setTab('sess'); $('newStudent').focus(); });
 $('askBackdrop').addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeAsk(); return; }
@@ -2694,6 +3112,186 @@ $('askBackdrop').addEventListener('keydown', e => {
   else if (!e.shiftKey && document.activeElement === f[f.length-1]) { e.preventDefault(); f[0].focus(); }
 });
 $('bLaunch').addEventListener('click', tryLaunch);
+
+/* ===================== SECOND ÉCRAN : projection + pilotage ===================== */
+function projOpen(){ return !!(PW && !PW.closed); }
+function openProjection(){
+  if (projOpen()) return;
+  CTL.ready = false;
+  PW = window.open(location.href.split('#')[0] + '#projection', 'pllect-projection', 'popup=yes,width=1100,height=700');
+  if (!PW) { toast('Le navigateur a bloqué la fenêtre : autorisez les fenêtres pour cette page'); renderLaunch(); return; }
+  let n = 0; clearInterval(CTL.helloT);
+  CTL.helloT = setInterval(() => { if (CTL.ready || !projOpen() || ++n > 60) return clearInterval(CTL.helloT); post({t:'hello'}); }, 250);
+  renderLaunch();
+}
+function closeProjection(){
+  if (CTL.on) closeCtl();
+  post({t:'close'}); try { if (PW) PW.close(); } catch(e){}
+  PW = null; CTL.ready = false; renderLaunch();
+}
+function endCtl(msg){
+  CTL.on = false; CTL.confirm = false; CTL.quitAfter = false; $('ctl').hidden = true; setAppInert(false);
+  if (LAST) { LAST.shown = false; LAST.del = false; if (LAST.kind === 'gone') LAST = null; }
+  $('recent').open = false;
+  renderSessions(); syncUI(); renderHome(); if (msg) toast(msg);
+  $('bLaunch').focus();
+}
+function closeCtl(){ if (!CTL.on) return; post({t:'quit'}); endCtl(); }
+$('bProj').addEventListener('click', () => projOpen() ? closeProjection() : openProjection());
+if (!PROJ) setInterval(() => { if (PW && PW.closed) { PW = null; CTL.ready = false; if (CTL.on) endCtl('Le 2ᵉ écran a été fermé'); else renderLaunch(); } }, 1000);
+function launchRemote(){
+  Object.assign(RS, {phase:'ready', playing:false, cd:false, line:0, word:-1, win:S().win, errors:[], endMark:null, armMark:false, black:false, lines:[]});
+  CTL.on = true; CTL.confirm = false; CTL.quitAfter = false; LAST = null;
+  post({t:'load', html: HTML, words: WORDS, settings: S(), title: curText().title || ''});
+  $('ctl').hidden = false; setAppInert(true); renderCtl(); $('ctl').focus();
+}
+/* --- messages --- */
+window.addEventListener('message', e => {
+  const m = e.data; if (!m || m.pl !== TAG) return;
+  if (PROJ) { if (e.source === window.opener) fromControl(m); }
+  else if (PW && e.source === PW) fromProjection(m);
+});
+function applyPatch(p){
+  const s = S(), modeCh = p.mode !== s.mode, sonsCh = p.sons !== s.sons;
+  s.win = p.win; s.lpm = p.lpm; s.wpm = p.wpm; s.sons = p.sons;
+  if (modeCh) return setModeStage(p.mode);
+  if (sonsCh) { applyStyle(); const L = ST.lines; relayout(L.length ? L[ST.line].first : 0); }
+  fitWin(); updateBar(); render();
+}
+function fromControl(m){   /* reçu par la fenêtre de projection */
+  if (m.t === 'hello') { post({t:'ready'}); if (ST.open) { post({t:'layout', lines: ST.lines.map(l => [l.first, l.last])}); report(true); } }
+  else if (m.t === 'load') {
+    if (ST.open) { ST.phase = 'ready'; exitStage(); }
+    HTML = m.html; WORDS = m.words; DB.settings = m.settings;
+    $('projWait').hidden = true; launch();
+  }
+  else if (m.t === 'cmd') { if (ST.open && CMDS[m.c]) CMDS[m.c](m.a); }
+  else if (m.t === 'patch') { if (ST.open) applyPatch(m.s); }
+  else if (m.t === 'quit') exitStage();
+  else if (m.t === 'close') window.close();
+}
+function fromProjection(m){   /* reçu par la fenêtre de pilotage */
+  if (m.t === 'ready') { CTL.ready = true; clearInterval(CTL.helloT); renderLaunch(); }
+  else if (m.t === 'layout') { RS.lines = m.lines; if (CTL.on) renderCtl(); }
+  else if (m.t === 'state') { Object.assign(RS, m); if (CTL.on) renderCtl(); }
+  else if (m.t === 'done') {
+    if (!CTL.on) return;
+    CTL.confirm = false; RS.phase = 'done';
+    recordResult(m.res); if (LAST && LAST.kind === 'ok') LAST.shown = true;
+    if (CTL.quitAfter) closeCtl(); else renderCtl();
+  }
+  else if (m.t === 'askExit') { if (CTL.on) ctlExit(); }
+  else if (m.t === 'bye') { CTL.ready = false; if (CTL.on) endCtl('Le 2ᵉ écran a été fermé'); else renderLaunch(); }
+}
+if (PROJ) {
+  window.addEventListener('pagehide', () => { if (ST.open && ST.phase === 'run') finish(); post({t:'bye'}); });
+  setInterval(() => { if (!window.opener || window.opener.closed) window.close(); }, 1500);
+  const fsSync = () => document.documentElement.classList.toggle('is-full', !!document.fullscreenElement);
+  document.addEventListener('fullscreenchange', fsSync);
+  $('pwFull').addEventListener('click', toggleFull);
+  $('projWait').hidden = false; document.title = 'PL-lect’ · écran projeté';
+  post({t:'ready'});
+}
+/* --- panneau de pilotage --- */
+function ctlCmd(c, a){
+  if (c === 'exit') return ctlExit();
+  if (c === 'speak') return ctlSpeak();
+  if (c === 'full' || c === 'help' || c === 'legacy' && RS.phase === 'done') return;
+  if (RS.phase === 'done' && c !== 'again') return;
+  if (['slow','fast','sons','cycle','win','mode'].includes(c)) {
+    const s = S(), order = ['ligne','continu','mot'];
+    if (c === 'slow' || c === 'fast') { if (s.mode === 'ligne') return; bumpSpeed(c === 'fast' ? 1 : -1); }
+    else if (c === 'sons') s.sons = !s.sons;
+    else if (c === 'win') s.win = a;
+    else s.mode = c === 'mode' ? a : order[(order.indexOf(s.mode) + 1) % order.length];
+    save(); syncUI();
+    post({t:'patch', s:{mode:s.mode, win:s.win, lpm:s.lpm, wpm:s.wpm, sons:s.sons}});
+    return renderCtl();
+  }
+  post({t:'cmd', c, a});
+}
+function ctlSpeak(){
+  const L = RS.lines; if (!L.length) return;
+  const a = L[RS.line], b = L[Math.min(L.length - 1, RS.line + RS.win - 1)], parts = [];
+  for (let i = a[0]; i <= b[1]; i++) parts.push(WORDS[i].t);
+  speak(parts.join(' '));
+}
+function ctlExit(){
+  if (RS.phase === 'run') { CTL.confirm = true; renderCtl(); $('cStay').focus(); return; }
+  closeCtl();
+}
+function ctlKey(e){
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const onBtn = !!(e.target.closest && e.target.closest('button'));
+  if (CTL.confirm) { if (e.key === 'Escape') { e.preventDefault(); CTL.confirm = false; renderCtl(); $('ctl').focus(); } return; }
+  if (RS.phase === 'done') {
+    if (e.key === 'Escape') { e.preventDefault(); closeCtl(); }
+    else if (e.key.toLowerCase() === 'r') { e.preventDefault(); ctlCmd('again'); }
+    else if (e.key === ' ' && !onBtn) e.preventDefault();
+    return;
+  }
+  if ((e.key === ' ' || e.key === 'Enter') && onBtn) return;   /* un bouton qui a le focus garde son propre geste */
+  const k = keyCmd(e);
+  if (k) { e.preventDefault(); ctlCmd(k[0], k[1]); }
+}
+function ctlLinesHTML(){
+  const L = RS.lines, s = S();
+  if (!L.length) return '<p class="ctl-wait">Mise en page sur l’écran projeté…</p>';
+  const a = Math.max(0, RS.line - 1), b = Math.min(L.length - 1, RS.line + RS.win + 1);
+  let h = '';
+  for (let k = a; k <= b; k++) {
+    const cur = k >= RS.line && k < RS.line + RS.win;
+    h += `<div class="cl${cur ? ' cur' : ''}">`;
+    for (let i = L[k][0]; i <= L[k][1]; i++) {
+      const err = RS.errors.includes(i), end = RS.endMark === i, on = s.mode === 'mot' && RS.word === i;
+      h += `<button type="button" class="cw${err ? ' err' : ''}${end ? ' end' : ''}${on ? ' on' : ''}" data-i="${i}"${err ? ' aria-pressed="true"' : ''}>${esc(WORDS[i] ? WORDS[i].t : '')}</button>`;
+    }
+    h += '</div>';
+  }
+  return h;
+}
+function renderCtl(){
+  const s = S(), ph = RS.phase, run = ph === 'run', done = ph === 'done', stu = curStu(), act = activeEntry();
+  $('ctlCtx').textContent = [stu ? stu.name : 'Sans élève', curText().title || 'Sans titre', act ? act.name : 'Réglages personnalisés'].join(' · ');
+  const st = RS.cd ? ['cd','Décompte…'] : ph === 'ready' ? ['ready','Prêt'] : done ? ['done','Lecture terminée'] : (s.mode !== 'ligne' && !RS.playing) ? ['pause','En pause'] : ['run','Lecture en cours'];
+  $('ctlState').dataset.s = st[0]; $('ctlState').textContent = st[1];
+  const lab = mainLabel(ph, s.mode, RS.playing);
+  $('cMain').innerHTML = lab[0] + '<span>' + lab[1] + '</span><kbd>Espace</kbd>'; $('cMain').disabled = done;
+  $('cSpeedBox').hidden = s.mode === 'ligne'; $('cSpeed').textContent = speedLabel();
+  ['cErr','cMark','cEnd'].forEach(id => $(id).disabled = !run);
+  $('cUndo').disabled = !run || !RS.errors.length;
+  ['cPrev','cNext','cSpeak','cBlack'].forEach(id => $(id).disabled = done);
+  $('cMark').setAttribute('aria-pressed', !!RS.armMark);
+  $('cBlack').setAttribute('aria-pressed', !!RS.black);
+  $('cCount').textContent = run ? (RS.errors.length ? plural(RS.errors.length, 'erreur') + ' marquée' + (RS.errors.length > 1 ? 's' : '') : 'Aucune erreur marquée') : '';
+  document.querySelectorAll('[data-cmode]').forEach(b => { b.setAttribute('aria-pressed', b.dataset.cmode === s.mode); b.disabled = done; });
+  document.querySelectorAll('[data-cwin]').forEach(b => { b.setAttribute('aria-pressed', +b.dataset.cwin === s.win); b.disabled = done; });
+  $('ctlFollow').hidden = done; $('ctlResult').hidden = !done; $('ctlConfirm').hidden = !CTL.confirm;
+  if (!done) {
+    $('ctlLines').innerHTML = ctlLinesHTML();
+    $('ctlLines').classList.toggle('armed', !!RS.armMark);
+    $('ctlPos').textContent = (RS.lines.length ? 'Ligne ' + (RS.line + 1) + ' sur ' + RS.lines.length + ' · ' : '') +
+      (ph === 'ready' ? 'Cliquez un mot pour commencer à cet endroit, puis donnez le départ.' : RS.armMark ? 'Cliquez le dernier mot lu.' : 'Cliquez un mot pour y marquer une erreur.');
+  } else {
+    const sess = LAST && LAST.id ? sessOf(LAST.id) : null;
+    $('ctlResBody').innerHTML = !LAST || LAST.kind === 'gone' || (LAST.kind !== 'none' && !sess) ? '<p class="af-t">Cette lecture n’est pas enregistrée.</p>' : afterHTML(sess, 'ctl');
+    $('ctlDel').innerHTML = LAST && LAST.kind === 'ok' && sess && !sess.pending ? (LAST.del ? DEL_ASK : '<button class="btn link" type="button" data-af="del">Supprimer cette lecture</button>') : '';
+  }
+}
+$('ctl').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const w = b.closest('#ctlLines') && b.dataset.i !== undefined;
+  if (w) ctlCmd('word', {i: +b.dataset.i, shift: e.shiftKey});
+  else if (b.dataset.cmode) ctlCmd('mode', b.dataset.cmode);
+  else if (b.dataset.cwin) ctlCmd('win', +b.dataset.cwin);
+  else if (b.dataset.af) afterAct(b.dataset.af);
+  else if (b.dataset.c) ctlCmd(b.dataset.c);
+  else if (b.id === 'cEndQuit') { CTL.quitAfter = true; CTL.confirm = false; post({t:'cmd', c:'end'}); }
+  else if (b.id === 'cStay') { CTL.confirm = false; renderCtl(); }
+  else if (b.id === 'cQuit') closeCtl();
+  if (!CTL.confirm && CTL.on) $('ctl').focus();   /* Espace reste la commande principale après un clic */
+});
+
 /* Guide d'utilisation */
 const GUIDE_KEY = 'pupitre.guideAuto';
 function guideAutoPref(){ try { const v = localStorage.getItem(GUIDE_KEY); return v === null ? true : v === '1'; } catch(e){ return true; } }
@@ -2740,7 +3338,7 @@ document.addEventListener('keydown', e => {
   if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
   else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 });
-if (guideAutoPref()) setTimeout(() => openGuide(false), 300);
+if (!PROJ && guideAutoPref()) setTimeout(() => openGuide(false), 300);
 function applyTheme(t){ if (t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); }
 let uiTheme = ''; try { uiTheme = localStorage.getItem('pupitre.theme') || ''; } catch(e){}
 applyTheme(uiTheme);
@@ -2749,71 +3347,91 @@ $('bTheme').addEventListener('click', () => {
   uiTheme = dark ? 'light' : 'dark'; applyTheme(uiTheme);
   try { localStorage.setItem('pupitre.theme', uiTheme); } catch(e){}
 });
-$('xPlay').addEventListener('click', togglePlay);
-$('xPrev').addEventListener('click', () => step(-1));
-$('xNext').addEventListener('click', () => step(1));
-$('xSlow').addEventListener('click', () => speedDelta(-1));
-$('xFast').addEventListener('click', () => speedDelta(1));
-$('xChrono').addEventListener('click', toggleChrono);
-$('xErr').addEventListener('click', () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null));
-$('xSpeak').addEventListener('click', speakLine);
-$('xUndo').addEventListener('click', undoError);
-$('xMark').addEventListener('click', () => { if (!ST.chrono) return; ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); });
-$('xHelp').addEventListener('click', () => $('stHelp').hidden = !$('stHelp').hidden);
-$('xHelpClose').addEventListener('click', () => { $('stHelp').hidden = true; stage.focus(); });
+/* ---------- Commandes : une seule table pour le clavier, la barre et le panneau de pilotage ---------- */
+const CMDS = {
+  main: mainKey, fwd: forward, back: () => step(-1),
+  slow: () => speedDelta(-1), fast: () => speedDelta(1),
+  err: () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null), undo: undoError, arm: toggleArm,
+  end: finish, again: resetReading, word: a => wordAction(a.i, a.shift),
+  speak: speakLine, sons: toggleSons, cycle: cycleModeStage, win: n => setWin(n), mode: m => setModeStage(m),
+  full: toggleFull, help: () => toggleHelp(), black: toggleBlack,
+  home: () => gotoLine(0), last: () => gotoLine(ST.lines.length - 1), exit: requestExit,
+  legacy: () => ST.phase === 'ready' ? beginReading(true) : finish()   /* ancienne touche C : départ, puis fin */
+};
+/* Quand une fenêtre de projection est pilotée d'ici, la commande part vers elle ; sinon elle agit sur place. */
+function cmd(c, a){
+  if (CTL.on) return ctlCmd(c, a);
+  if (CMDS[c]) CMDS[c](a);
+}
+const KEYS = {
+  ' ':['main'], 'ArrowDown':['fwd'], 'ArrowRight':['fwd'], 'PageDown':['fwd'], 'ArrowUp':['back'], 'ArrowLeft':['back'], 'PageUp':['back'],
+  '+':['fast'], '=':['fast'], 'm':['fast'], '-':['slow'], '_':['slow'], 'n':['slow'],
+  'e':['err'], 'z':['undo'], 't':['end'], 'c':['legacy'], 'v':['speak'], 'f':['full'], 's':['sons'], 'l':['cycle'],
+  '1':['win',1], '2':['win',2], '3':['win',3], 'h':['help'], '?':['help'], 'b':['black'], '.':['black'],
+  'Home':['home'], 'End':['last'], 'Escape':['exit']
+};
+const keyCmd = e => KEYS[e.key] || KEYS[e.key.toLowerCase()];
+
+$('xPlay').addEventListener('click', () => cmd('main'));
+$('xPrev').addEventListener('click', () => cmd('back'));
+$('xNext').addEventListener('click', () => cmd('fwd'));
+$('xSlow').addEventListener('click', () => cmd('slow'));
+$('xFast').addEventListener('click', () => cmd('fast'));
+$('xErr').addEventListener('click', () => cmd('err'));
+$('xUndo').addEventListener('click', () => cmd('undo'));
+$('xMark').addEventListener('click', () => cmd('arm'));
+$('xEnd').addEventListener('click', () => cmd('end'));
+$('xSpeak').addEventListener('click', () => cmd('speak'));
+$('xFull').addEventListener('click', () => cmd('full'));
+$('xExit').addEventListener('click', () => cmd('exit'));
+$('xHelp').addEventListener('click', () => toggleHelp());
+$('xHelpClose').addEventListener('click', () => { toggleHelp(false); stage.focus(); });
+/* Réglages rapides du pupitre (« Mode ») : ancrés au-dessus de la barre, qui reste affichée tant qu'ils sont ouverts */
+function placeQuick(){ const q = $('stQuick'); if (q.hidden) return; const r = $('stBar').getBoundingClientRect(), sr = stage.getBoundingClientRect(); q.style.bottom = Math.round(sr.bottom - r.top + 10) + 'px'; }
 function toggleQuick(force){
   const q = $('stQuick'); q.hidden = typeof force === 'boolean' ? !force : !q.hidden;
   $('xQuick').setAttribute('aria-expanded', !q.hidden);
-  if (!q.hidden) { q.style.bottom = ($('stBar').offsetHeight + 30) + 'px'; syncQuick(); }
+  if (!q.hidden) { $('stHelp').hidden = true; showBar(); placeQuick(); syncQuick(); }
 }
 function syncQuick(){
   document.querySelectorAll('[data-qmode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.qmode === S().mode));
   document.querySelectorAll('[data-qwin]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.qwin === S().win));
 }
 $('xQuick').addEventListener('click', () => toggleQuick());
+$('xQuickClose').addEventListener('click', () => { toggleQuick(false); stage.focus(); });
 $('stQuick').addEventListener('click', e => {
   const m = e.target.closest('[data-qmode]'), w = e.target.closest('[data-qwin]');
-  if (m) setModeStage(m.dataset.qmode); else if (w) { setWin(+w.dataset.qwin); }
-  syncQuick();
+  if (m) setModeStage(m.dataset.qmode); else if (w) setWin(+w.dataset.qwin); else return;
+  syncQuick(); requestAnimationFrame(placeQuick);
 });
-$('xFull').addEventListener('click', toggleFull);
-function requestExit(){
-  if (!ST.open) return;
-  if (ST.chrono) { $('stExit').hidden = false; $('exitStay').focus(); return; }
-  exitStage();
-}
-$('xExit').addEventListener('click', requestExit);
-$('exitSave').addEventListener('click', () => { $('stExit').hidden = true; exitStage(); });
-$('exitDrop').addEventListener('click', () => { $('stExit').hidden = true; ST.chrono = null; exitStage(); });
+/* Fin de lecture et sortie : rien d'autre qu'une carte neutre sur l'écran de lecture */
+$('exitEnd').addEventListener('click', () => { $('stExit').hidden = true; exitStage(); });
 $('exitStay').addEventListener('click', () => { $('stExit').hidden = true; stage.focus(); });
+$('doneQuit').addEventListener('click', exitStage);
+$('doneAgain').addEventListener('click', resetReading);
 $('stBar').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); if (ST.open) stage.focus(); });
 
 document.addEventListener('keydown', e => {
+  if (CTL.on) return ctlKey(e);
   if (!ST.open) return;
-  if (!$('stExit').hidden) { if (e.key === 'Escape') { e.preventDefault(); $('stExit').hidden = true; stage.focus(); } return; }
-  if (!$('stDone').hidden) { if (e.key === 'Escape') { e.preventDefault(); closeDone(); } return; }
-  if (e.key === 'Escape' && !$('stQuick').hidden) { e.preventDefault(); toggleQuick(false); return; }
-  const k = e.key;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
-  const map = {
-    ' ': togglePlay, 'ArrowDown': () => step(1), 'ArrowRight': () => step(1), 'PageDown': () => step(1),
-    'ArrowUp': () => step(-1), 'ArrowLeft': () => step(-1), 'PageUp': () => step(-1),
-    '+': () => speedDelta(1), '=': () => speedDelta(1), '-': () => speedDelta(-1), '_': () => speedDelta(-1),
-    'c': toggleChrono, 'C': toggleChrono, 'e': () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null), 'E': () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null),
-    'z': undoError, 'Z': undoError, 'v': speakLine, 'V': speakLine, 'f': toggleFull, 'F': toggleFull,
-    's': toggleSons, 'S': toggleSons, 'l': cycleModeStage, 'L': cycleModeStage,
-    '1': () => setWin(1), '2': () => setWin(2), '3': () => setWin(3),
-    'n': () => speedDelta(-1), 'N': () => speedDelta(-1), 'm': () => speedDelta(1), 'M': () => speedDelta(1),
-    'h': () => $('stHelp').hidden = !$('stHelp').hidden, 'H': () => $('stHelp').hidden = !$('stHelp').hidden, '?': () => $('stHelp').hidden = !$('stHelp').hidden,
-    'b': () => $('stBlack').hidden = !$('stBlack').hidden, 'B': () => $('stBlack').hidden = !$('stBlack').hidden, '.': () => $('stBlack').hidden = !$('stBlack').hidden,
-    'Home': () => gotoLine(0), 'End': () => gotoLine(ST.lines.length - 1),
-    'Escape': requestExit, 'F5': () => {}
-  };
-  if (map[k]) { e.preventDefault(); map[k](); }
+  if (!$('stExit').hidden) { if (e.key === 'Escape') { e.preventDefault(); $('stExit').hidden = true; stage.focus(); } return; }
+  if (!$('stDone').hidden) {
+    if (e.key === 'Escape') { e.preventDefault(); exitStage(); }
+    else if (e.key.toLowerCase() === 'r') { e.preventDefault(); resetReading(); }
+    else if (e.key === ' ' && !e.target.closest('button')) e.preventDefault();   /* Espace ne quitte pas par mégarde */
+    return;
+  }
+  if (e.key === 'Escape' && !$('stQuick').hidden) { e.preventDefault(); toggleQuick(false); return; }
+  if (e.key === 'Escape' && !$('stHelp').hidden) { e.preventDefault(); toggleHelp(false); return; }
+  const k = keyCmd(e);
+  if (k) { e.preventDefault(); cmd(k[0], k[1]); }
+  else if (e.key === 'F5') e.preventDefault();
 });
 stage.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') showBar(); });
 stage.addEventListener('wheel', e => {
   e.preventDefault();
+  if (ST.phase === 'done' || !ST.lines.length) return;
   if (S().mode === 'continu') { ST.scrollY = Math.max(0, Math.min(ST.lines[ST.lines.length-1].top, ST.scrollY + e.deltaY * 0.4)); let k = 0; while (k < ST.lines.length-1 && ST.lines[k+1].top <= ST.scrollY + 1) k++; ST.line = k; render(false); return; }
   const now = performance.now(); if (now - ST.lastWheel < 220) return; ST.lastWheel = now;
   step(e.deltaY > 0 ? 1 : -1);
@@ -2821,27 +3439,19 @@ stage.addEventListener('wheel', e => {
 let pd = null;
 stText.addEventListener('pointerdown', e => { pd = {x:e.clientX, y:e.clientY, t:performance.now()}; });
 stage.addEventListener('pointerup', e => {
-  if (!pd) return; const dy = e.clientY - pd.y, dx = e.clientX - pd.x; const was = pd; pd = null;
-  if (e.target.closest('.st-bar,.st-help')) return;
-  if (Math.abs(dy) > 50 && Math.abs(dy) > Math.abs(dx)) { step(dy < 0 ? 1 : -1); return; }
+  if (!pd) { if (!e.target.closest('.st-ctl') && !$('stQuick').hidden) toggleQuick(false); return; }
+  const dy = e.clientY - pd.y, dx = e.clientX - pd.x; pd = null;
+  if (e.target.closest('.st-ctl')) return;
+  if (!$('stQuick').hidden) { toggleQuick(false); return; }
+  if (Math.abs(dy) > 50 && Math.abs(dy) > Math.abs(dx)) { if (dy < 0) forward(); else step(-1); return; }
   if (e.pointerType !== 'mouse') showBar();
   const w = e.target.closest('.w'); if (!w) return;
-  const i = +w.dataset.i;
-  if (ST.chrono) {
-    if (e.shiftKey || ST.armMark) {
-      ST.armMark = false; updateBar();
-      stText.querySelectorAll('.endmark').forEach(x => x.classList.remove('endmark'));
-      ST.endMark = (ST.endMark === i) ? null : i; if (ST.endMark !== null) w.classList.add('endmark');
-    } else addError(i);
-  } else {
-    if (S().mode === 'mot') { ST.word = i; ST.line = lineOfWord(i); render(); }
-    else gotoLine(lineOfWord(i));
-  }
+  wordAction(+w.dataset.i, e.shiftKey);
 });
-stText.addEventListener('dblclick', e => { const w = e.target.closest('.w'); if (w && !ST.chrono) speak(WORDS[+w.dataset.i].t); });
+stText.addEventListener('dblclick', e => { const w = e.target.closest('.w'); if (w && ST.phase === 'ready') speak(WORDS[+w.dataset.i].t); });
 let rsT = 0;
 window.addEventListener('resize', () => {
-  if (ST.open) { clearTimeout(rsT); rsT = setTimeout(() => { const L = ST.lines; relayout(L.length ? L[ST.line].first : 0); }, 150); }
+  if (ST.open) { clearTimeout(rsT); rsT = setTimeout(() => { const L = ST.lines; relayout(L.length ? L[ST.line].first : 0); placeQuick(); }, 150); }
   else schedulePreviewLines();
 });
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && ST.open && navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); });
@@ -2849,7 +3459,10 @@ document.addEventListener('visibilitychange', () => { if (document.visibilitySta
 /* ===================== SÉANCES ===================== */
 let sessFilter = '__all';
 const mcmOf = s => s.dur > 0 ? Math.max(0, (s.words - s.err)) / (s.dur / 60) : 0;
-function trialNo(s){ return DB.sessions.filter(x => x.stu === s.stu && x.textId === s.textId && x.ts <= s.ts).length; }
+/* Sous 30 s, une ligne de plus ou de moins pèse lourd : le MCM est donné comme indicatif. */
+const mcmIndic = s => s.dur < INDIC_SEC;
+const mcmTxt = s => (mcmIndic(s) ? '≈ ' : '') + Math.round(mcmOf(s));
+function trialNo(s){ return DB.sessions.filter(x => !x.pending && x.stu === s.stu && x.textId === s.textId && x.ts <= s.ts).length; }
 function renderStudents(){
   const cnt = id => DB.sessions.filter(s => id === '__all' || s.stu === id).length;
   const items = [['__all','Toutes les séances'], ...DB.students.map(s => [s.id, s.name]), ['','Sans élève']];
@@ -2864,80 +3477,177 @@ $('stuList').addEventListener('click', e => {
     d.parentElement.innerHTML = `<span class="confirm"><button class="btn sm danger" data-delyes="${id}">Supprimer${n ? ' + ' + n + ' séance' + (n>1?'s':'') : ''}</button><button class="btn sm" data-delno="1">Non</button></span>`; return; }
   const y = e.target.closest('[data-delyes]');
   if (y) { const id = y.dataset.delyes; DB.students = DB.students.filter(s => s.id !== id); DB.sessions = DB.sessions.filter(s => s.stu !== id);
-    if (DB.curStudent === id) DB.curStudent = ''; if (sessFilter === id) sessFilter = '__all'; save(); renderStudentSelect(); renderSessions(); return; }
+    if (DB.curStudent === id) DB.curStudent = ''; if (sessFilter === id) sessFilter = '__all'; save(); renderStudentSelect(); renderSessions(); renderHome(); return; }
   if (e.target.closest('[data-delno]')) renderStudents();
 });
 $('fStudent').addEventListener('submit', e => {
   e.preventDefault(); const n = $('newStudent').value.trim(); if (!n) return;
   const s = {id: uid(), name: n}; DB.students.push(s); DB.curStudent = s.id; sessFilter = s.id;
-  $('newStudent').value = ''; save(); renderStudentSelect(); renderSessions(); toast(n + ' ajouté·e, sélectionné·e pour la prochaine lecture');
+  $('newStudent').value = ''; save(); renderStudentSelect(); renderSessions(); renderHome(); toast(n + ' ajouté·e, sélectionné·e pour la prochaine lecture');
 });
-function spark(vals){
-  if (vals.length < 3) return '';
-  const W = 240, H = 56, max = Math.max(...vals) * 1.1 || 1, min = 0;
-  const x = i => 6 + i * (W - 12) / (vals.length - 1), y = v => H - 6 - (v - min) / (max - min) * (H - 12);
-  const pts = vals.map((v,i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true"><line x1="0" x2="${W}" y1="${H-6}" y2="${H-6}" stroke="var(--line)" stroke-width="1"/>` +
-    `<polygon points="${x(0)},${H-6} ${pts} ${x(vals.length-1)},${H-6}" fill="var(--accent-soft)"/>` +
-    `<polyline points="${pts}" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke"/>` +
-    `<circle cx="${x(vals.length-1)}" cy="${y(vals[vals.length-1])}" r="3.5" fill="var(--accent)"/></svg>`;
+/* ---------- Évolution d'un élève : MCM et erreurs, séance après séance ---------- */
+let evoText = '__all', evoList = [], evoX = [], evoAt = -1;
+function niceStep(max, n){ const raw = max / n, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p; }
+function renderEvo(){
+  const box = $('progBox'), stu = DB.students.find(s => s.id === sessFilter);
+  const all = stu ? DB.sessions.filter(s => !s.pending && s.stu === stu.id).sort((a,b) => a.ts - b.ts) : [];
+  if (!all.length) { box.innerHTML = ''; evoList = []; return; }
+  const texts = [];
+  all.forEach(s => { let t = texts.find(x => x.id === s.textId); if (!t) texts.push(t = {id:s.textId, n:0}); t.n++; t.title = s.title || 'Sans titre'; });
+  if (evoText !== '__all' && !texts.some(t => t.id === evoText)) evoText = '__all';
+  const list = evoList = evoText === '__all' ? all : all.filter(s => s.textId === evoText);
+  const last = list[list.length - 1], same = list.filter(s => s.textId === last.textId), prev = same.length > 1 ? same[same.length - 2] : null;
+  const d = prev ? Math.round(mcmOf(last)) - Math.round(mcmOf(prev)) : null;
+  const df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit', year:'2-digit'});
+  box.innerHTML = `<div class="evo">
+    <div class="evo-filter"><label for="evoText">Texte</label><select id="evoText"><option value="__all">Tous les textes (${plural(all.length, 'séance')})</option>${texts.map(t => `<option value="${t.id}">${esc(t.title)} (${plural(t.n, 'essai')})</option>`).join('')}</select></div>
+    <div class="tiles">
+      <div class="tile"><span class="tl">Dernière lecture</span><span class="tv">${mcmTxt(last)} <small>MCM</small></span>
+        <span class="td">${d === null ? 'premier essai de ce texte' : (d > 0 ? '▲ +' + d : d < 0 ? '▼ −' + Math.abs(d) : '= 0') + ' par rapport à l’essai précédent'}</span></div>
+      <div class="tile"><span class="tl">Erreurs à la dernière lecture</span><span class="tv">${last.err}</span><span class="td">${esc(last.title || 'Sans titre')} · ${df.format(new Date(last.ts))}</span></div>
+      <div class="tile"><span class="tl">Séances</span><span class="tv">${list.length}</span><span class="td">depuis le ${df.format(new Date(list[0].ts))}</span></div>
+    </div>
+    <figure class="evo-fig">
+      <div class="evo-plot" id="evoPlot" tabindex="0" role="img" aria-label="Évolution de ${esc(stu.name)} : MCM et erreurs de ${plural(list.length, 'séance')}. Les valeurs sont dans le tableau ci-dessous ; flèches gauche et droite pour parcourir les séances."></div>
+      <div class="evo-tip" id="evoTip" hidden></div>
+    </figure>
+    <p class="sub">${evoText === '__all' && texts.length > 1 ? 'Les textes n’ont pas la même difficulté : comparez surtout les essais d’un même texte (menu « Texte »). ' : ''}${list.some(mcmIndic) ? 'Point creux : lecture de moins de ' + INDIC_SEC + ' secondes, MCM indicatif.' : ''}</p>
+  </div>`;
+  $('evoText').value = evoText;
+  drawEvo();
 }
+function drawEvo(){
+  const el = $('evoPlot'); if (!el || !evoList.length) return;
+  const list = evoList, n = list.length, W = Math.max(280, el.clientWidth), mL = 42, mR = 46, top = 26, hA = 150, gap = 44, hB = 54, bot = 26;
+  const H = top + hA + gap + hB + bot, pw = W - mL - mR;
+  const X = evoX = list.map((s, i) => mL + (i + 0.5) * pw / n);
+  const vals = list.map(mcmOf), vmax = Math.max(10, ...vals), st = niceStep(vmax * 1.08, 3), ymax = Math.ceil(vmax * 1.08 / st) * st;
+  const yA = v => top + hA - v / ymax * hA;
+  const emax = Math.max(1, ...list.map(s => s.err)), est = Math.max(1, Math.ceil(emax / 2)), eTop = top + hA + gap, eMaxT = Math.ceil(emax / est) * est;
+  const yB = v => eTop + hB - v / eMaxT * hB;
+  let g = '';
+  for (let v = 0; v <= ymax + 1e-9; v += st) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yA(v)}" y2="${yA(v)}"/><text class="et" x="${mL - 8}" y="${yA(v) + 4}" text-anchor="end">${Math.round(v)}</text>`;
+  for (let v = 0; v <= eMaxT; v += est) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yB(v)}" y2="${yB(v)}"/><text class="et" x="${mL - 8}" y="${yB(v) + 4}" text-anchor="end">${v}</text>`;
+  const pts = vals.map((v, i) => X[i].toFixed(1) + ',' + yA(v).toFixed(1));
+  const area = n > 1 ? `<polygon class="ea" points="${X[0].toFixed(1)},${yA(0)} ${pts.join(' ')} ${X[n-1].toFixed(1)},${yA(0)}"/>` : '';
+  const line = n > 1 ? `<polyline class="el" points="${pts.join(' ')}"/>` : '';
+  const dots = pw / n >= 12 || n === 1;
+  let marks = '';
+  vals.forEach((v, i) => { if (dots || i === n - 1) marks += `<circle class="ed${mcmIndic(list[i]) ? ' hollow' : ''}" cx="${X[i].toFixed(1)}" cy="${yA(v).toFixed(1)}" r="4.5"/>`; });
+  const bw = Math.max(3, Math.min(24, pw / n - 2));
+  let bars = '';
+  list.forEach((s, i) => { if (!s.err) return; const y = yB(s.err), h = eTop + hB - y, r = Math.min(4, bw / 2, h);
+    bars += `<path class="eb" d="M${(X[i] - bw/2).toFixed(1)},${eTop + hB} v${-(h - r)} q0,${-r} ${r},${-r} h${(bw - 2*r).toFixed(1)} q${r},0 ${r},${r} v${h - r} z"/>`; });
+  const dfS = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit'});
+  let xl = '', lastX = -1e9;
+  const want = [0, n - 1]; for (let k = 1; k < 4; k++) want.push(Math.round(k * (n - 1) / 4));
+  [...new Set(want)].sort((a,b) => a - b).forEach(i => { if (i !== n - 1 && X[n-1] - X[i] < 58) return; if (X[i] - lastX < 58) return; lastX = X[i]; xl += `<text class="et" x="${X[i].toFixed(1)}" y="${H - 6}" text-anchor="middle">${dfS.format(new Date(list[i].ts))}</text>`; });
+  const endLab = `<text class="ev" x="${(X[n-1] + 10).toFixed(1)}" y="${(yA(vals[n-1]) + 5).toFixed(1)}">${Math.round(vals[n-1])}</text>`;
+  el.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false">
+    <text class="eh" x="${mL}" y="14">${W < 440 ? 'MCM' : 'MCM (mots correctement lus par minute)'}</text><text class="eh" x="${mL}" y="${eTop - 14}">Erreurs</text>
+    ${g}${area}${line}${bars}<line class="ex" id="evoCross" x1="0" x2="0" y1="${top}" y2="${eTop + hB}" visibility="hidden"/>${marks}${endLab}${xl}
+    <circle class="ed on" id="evoDot" r="6" visibility="hidden"/></svg>`;
+  el.dataset.y = JSON.stringify(vals.map(v => +yA(v).toFixed(1)));
+  evoAt = -1;
+}
+function evoShow(i){
+  const el = $('evoPlot'), tip = $('evoTip'); if (!el || !evoList.length) return;
+  i = Math.max(0, Math.min(evoList.length - 1, i)); evoAt = i;
+  const s = evoList[i], ys = JSON.parse(el.dataset.y || '[]'), cross = $('evoCross'), dot = $('evoDot');
+  cross.setAttribute('x1', evoX[i]); cross.setAttribute('x2', evoX[i]); cross.setAttribute('visibility', 'visible');
+  dot.setAttribute('cx', evoX[i]); dot.setAttribute('cy', ys[i]); dot.setAttribute('visibility', 'visible');
+  const df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit'});
+  tip.textContent = '';
+  const v = document.createElement('b'); v.textContent = mcmTxt(s) + ' MCM';
+  const r = document.createElement('span'); r.textContent = plural(s.err, 'erreur') + ' · ' + fmtDur(s.dur);
+  const c = document.createElement('span'); c.className = 'tc'; c.textContent = (s.title || 'Sans titre') + ' · essai ' + trialNo(s) + ' · ' + df.format(new Date(s.ts));
+  tip.append(v, r, c); tip.hidden = false;
+  const fw = el.clientWidth, tw = tip.offsetWidth; let left = evoX[i] + 14; if (left + tw > fw - 4) left = evoX[i] - tw - 14; if (left < 4) left = 4;
+  tip.style.left = left + 'px'; tip.style.top = Math.max(4, ys[i] - 14) + 'px';
+}
+function evoHide(){ const t = $('evoTip'); if (t) t.hidden = true; ['evoCross','evoDot'].forEach(id => { const e = $(id); if (e) e.setAttribute('visibility', 'hidden'); }); evoAt = -1; }
+$('progBox').addEventListener('change', e => { if (e.target.id === 'evoText') { evoText = e.target.value; renderEvo(); $('evoText').focus(); } });
+function evoPoint(e){
+  const el = $('evoPlot'); if (!el || !e.target.closest('#evoPlot')) return;
+  const x = e.clientX - el.getBoundingClientRect().left; let best = 0;
+  evoX.forEach((v, i) => { if (Math.abs(v - x) < Math.abs(evoX[best] - x)) best = i; });
+  if (best !== evoAt) evoShow(best);
+}
+$('progBox').addEventListener('pointermove', evoPoint);
+$('progBox').addEventListener('pointerdown', evoPoint);   /* au doigt : un toucher suffit */
+$('progBox').addEventListener('pointerleave', evoHide);
+$('progBox').addEventListener('focusin', e => { if (e.target.id === 'evoPlot' && evoAt < 0) evoShow(evoList.length - 1); });
+$('progBox').addEventListener('focusout', e => { if (e.target.id === 'evoPlot') evoHide(); });
+$('progBox').addEventListener('keydown', e => {
+  if (e.target.id !== 'evoPlot') return;
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); e.stopPropagation(); evoShow((evoAt < 0 ? evoList.length - 1 : evoAt) + (e.key === 'ArrowRight' ? 1 : -1)); }
+  else if (e.key === 'Home') { e.preventDefault(); evoShow(0); } else if (e.key === 'End') { e.preventDefault(); evoShow(evoList.length - 1); }
+  else if (e.key === 'Escape') evoHide();
+});
+let evoRT = 0;
+window.addEventListener('resize', () => { clearTimeout(evoRT); evoRT = setTimeout(() => { if (!$('viewSess').hidden) drawEvo(); }, 150); });
+
 function renderSessions(){
   renderStudents();
   const list = DB.sessions.filter(s => sessFilter === '__all' || s.stu === sessFilter).sort((a,b) => b.ts - a.ts);
   const name = sessFilter === '__all' ? 'Toutes les séances' : sessFilter === '' ? 'Sans élève' : (DB.students.find(s => s.id === sessFilter) || {}).name || '';
   $('sessTitle').textContent = name;
-  // progression (lectures répétées) si un élève est choisi
-  let prog = '';
-  if (sessFilter !== '__all') {
-    const byText = {};
-    list.slice().reverse().forEach(s => (byText[s.textId] = byText[s.textId] || {title:s.title, v:[]}).v.push(mcmOf(s)));
-    const cards = Object.values(byText).map(g => `<div class="card"><h3>${esc(g.title)}</h3><div class="row" style="justify-content:space-between"><span class="big">${Math.round(g.v[g.v.length-1])}</span><span class="hint">MCM · essai ${g.v.length}${g.v.length>1 ? ' · départ ' + Math.round(g.v[0]) : ''}</span></div>${spark(g.v)}</div>`);
-    if (cards.length) prog = '<div class="prog">' + cards.join('') + '</div>';
-  }
-  $('progBox').innerHTML = prog;
-  if (!list.length) { $('sessTbl').innerHTML = '<div class="empty">Aucune séance. Au pupitre, <kbd>C</kbd> démarre puis arrête le chrono ; la séance s\'enregistre ici.</div>'; return; }
+  renderEvo();
+  if (!list.length) { $('sessTbl').innerHTML = '<div class="empty">Aucune séance pour le moment. Chaque lecture lancée au pupitre s’enregistre ici toute seule, du départ à « Terminer ».</div>'; return; }
   const df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit'});
   $('sessTbl').innerHTML = '<table class="t"><thead><tr><th>Date</th><th>Élève</th><th>Texte</th><th>Essai</th><th>Durée</th><th>Mots lus</th><th>Erreurs</th><th>MCM</th><th></th></tr></thead><tbody>' +
-    list.map(s => `<tr><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}${s.level ? ' <span class="lvl">' + esc(s.level) + '</span>' : ''}</td>` +
+    list.map(s => s.pending
+      ? `<tr class="pend"><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}</td><td class="n">—</td><td class="n">${fmt(s.dur)}</td>` +
+        `<td colspan="3">Lecture très courte, pas encore enregistrée</td>` +
+        `<td><span class="confirm"><button class="btn sm pri" type="button" data-skeep="${s.id}">Enregistrer</button><button class="btn sm" type="button" data-sdelyes="${s.id}">Écarter</button></span></td></tr>`
+      : `<tr><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}${s.level ? ' <span class="lvl">' + esc(s.level) + '</span>' : ''}</td>` +
       `<td class="n">${trialNo(s)}</td><td class="n">${fmt(s.dur)}</td>` +
       `<td class="n"><input class="num" type="number" min="0" id="w_${s.id}" data-edit="words" data-id="${s.id}" value="${s.words}" aria-label="Mots lus"></td>` +
       `<td class="n"><input class="num" type="number" min="0" id="e_${s.id}" data-edit="err" data-id="${s.id}" value="${s.err}" aria-label="Erreurs" title="${esc((s.errWords||[]).filter(Boolean).join(', '))}"></td>` +
-      `<td class="n mcm">${Math.round(mcmOf(s))}</td>` +
+      `<td class="n mcm"${mcmIndic(s) ? ' title="' + INDIC_NOTE + '"' : ''}>${mcmTxt(s)}</td>` +
       `<td><span data-sdel="${s.id}"><button class="btn sm ghost" data-sdelask="${s.id}" aria-label="Supprimer la séance">✕</button></span></td></tr>`).join('') +
     '</tbody></table>';
 }
 $('sessTbl').addEventListener('change', e => {
   const t = e.target; if (!t.dataset.edit) return;
   const s = DB.sessions.find(x => x.id === t.dataset.id); if (!s) return;
-  s[t.dataset.edit] = Math.max(0, parseInt(t.value || '0', 10)); save(); renderSessions();
+  s[t.dataset.edit] = Math.max(0, parseInt(t.value || '0', 10)); save(); renderSessions(); renderHome();
 });
 $('sessTbl').addEventListener('click', e => {
   const a = e.target.closest('[data-sdelask]');
   if (a) { a.parentElement.innerHTML = `<span class="confirm"><button class="btn sm danger" data-sdelyes="${a.dataset.sdelask}">Supprimer</button></span>`; return; }
+  const k = e.target.closest('[data-skeep]');
+  if (k) { const s = sessOf(k.dataset.skeep); if (s) { delete s.pending; save(); renderSessions(); renderHome(); } return; }
   const y = e.target.closest('[data-sdelyes]');
-  if (y) { DB.sessions = DB.sessions.filter(s => s.id !== y.dataset.sdelyes); save(); renderSessions(); }
+  if (y) { DB.sessions = DB.sessions.filter(s => s.id !== y.dataset.sdelyes); save(); renderSessions(); renderHome(); }
 });
 
-/* Téléchargements (capacité downloads) */
-async function offerFile(filename, data){
+/* Téléchargements : un vrai fichier dans le navigateur ; à défaut, la capacité « downloads » de l'hôte, puis le presse-papiers */
+async function offerFile(filename, data, type){
   let dl = null;
   try { dl = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch(e){ dl = null; }
   if (dl) {
     try { await dl.save({filename, data}); toast('Fichier enregistré : ' + filename); return; }
     catch(err) { if (err && err.code === 'declined') return; }
   }
+  try {
+    const url = URL.createObjectURL(new Blob([data], {type: type || 'text/plain;charset=utf-8'}));
+    const a = document.createElement('a'); a.href = url; a.download = filename; a.style.display = 'none';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('Fichier téléchargé : ' + filename); return;
+  } catch(e){}
   try { await navigator.clipboard.writeText(data); toast('Téléchargement indisponible ici : contenu copié dans le presse-papiers'); }
   catch(e) { toast('Téléchargement indisponible dans cette vue'); }
 }
 $('bCsv').addEventListener('click', () => {
-  const rows = [['date','eleve','texte','niveau','essai','duree_s','mots_lus','erreurs','mcm','mots_en_erreur']];
-  DB.sessions.filter(s => sessFilter === '__all' || s.stu === sessFilter).sort((a,b) => a.ts - b.ts).forEach(s => rows.push([
-    new Date(s.ts).toISOString().slice(0,16).replace('T',' '), s.stuName || '', s.title, s.level || '', trialNo(s), s.dur, s.words, s.err, Math.round(mcmOf(s)), (s.errWords||[]).filter(Boolean).join(' ')]));
+  const rows = [['date','eleve','texte','niveau','essai','duree_s','mots_lus','erreurs','mcm','mcm_indicatif','mode','reglage','fin_marquee','mots_en_erreur']];
+  DB.sessions.filter(s => !s.pending && (sessFilter === '__all' || s.stu === sessFilter)).sort((a,b) => a.ts - b.ts).forEach(s => rows.push([
+    new Date(s.ts).toISOString().slice(0,16).replace('T',' '), s.stuName || '', s.title, s.level || '', trialNo(s), s.dur, s.words, s.err, Math.round(mcmOf(s)), mcmIndic(s) ? 'oui' : '',
+    s.mode || '', s.reg || '', s.end === 'mot' ? 'oui' : '', (s.errWords||[]).filter(Boolean).join(' ')]));
   const csv = '﻿' + rows.map(r => r.map(v => { v = String(v); return /[;"\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; }).join(';')).join('\r\n');
-  offerFile('seances-lecture-' + new Date().toISOString().slice(0,10) + '.csv', csv);
+  offerFile('seances-lecture-' + new Date().toISOString().slice(0,10) + '.csv', csv, 'text/csv;charset=utf-8');
 });
-$('bBackup').addEventListener('click', () => offerFile('pupitre-sauvegarde-' + new Date().toISOString().slice(0,10) + '.json', JSON.stringify(DB, null, 1)));
+$('bBackup').addEventListener('click', () => offerFile('pupitre-sauvegarde-' + new Date().toISOString().slice(0,10) + '.json', JSON.stringify(DB, null, 1), 'application/json'));
 let pendingRestore = null;
 $('fRestore').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value = ''; if (!f) return;
@@ -2974,7 +3684,7 @@ document.querySelector('[role="tablist"]').addEventListener('keydown', e => {
 /* ---------- Démarrage ---------- */
 function initAll(){
   syncUI(); renderPresets(); renderLib(); loadTextUI(); renderStudentSelect();
-  build(); applyStyle(); renderPreview(); renderSessions();
+  build(); applyStyle(); renderPreview(); renderSessions(); renderHome();
 }
 initAll();
 if (document.fonts) document.fonts.ready.then(schedulePreviewLines);
