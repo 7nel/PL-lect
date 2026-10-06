@@ -2599,6 +2599,7 @@ const PROFILES = [
 ];
 const canon = o => (o && typeof o === 'object') ? '{' + Object.keys(o).sort().map(k => JSON.stringify(k) + ':' + canon(o[k])).join(',') + '}' : JSON.stringify(o);
 const settingsKey = o => { const c = Object.assign({}, o); delete c.voice; delete c.hud; return canon(c); };
+let BASE = null; /* dernier réglage reconnu, pour dire « modifié » quand on s'en écarte */
 function activeEntry(){
   const s = S();
   const pr = PROFILES.find(x => Object.keys(x.s).every(k => s[k] === x.s[k]));
@@ -2630,9 +2631,11 @@ function updateHints(){
   const s = S();
   const act = activeEntry();
   document.querySelectorAll('#profiles button').forEach(b => b.setAttribute('aria-pressed', !!act && ((act.kind === 'prof' && b.dataset.prof === act.id) || (act.kind === 'preset' && b.dataset.preset === String(act.i)))));
-  $('profState').textContent = act ? 'Actif : ' + act.name : 'Réglages personnalisés';
+  if (act) BASE = {kind: act.kind, key: act.kind === 'prof' ? act.id : String(act.i), name: act.name};
+  else if (BASE && BASE.kind === 'preset' && !DB.presets[+BASE.key]) BASE = null;
+  $('profState').textContent = act ? 'Actif : ' + act.name : BASE ? 'Basé sur « ' + BASE.name + ' », modifié' : 'Réglages personnalisés';
   $('hTypo').textContent = s.font;
-  if (!$('presetName')) $('presetWrap').innerHTML = (act && act.kind === 'prof') ? '' : '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
+  if (!$('presetName')) $('presetWrap').innerHTML = (act && act.kind === 'prof') ? '' : (!act && BASE ? '<button class="btn sm" id="bPresetRevert" type="button">Rétablir « ' + esc(BASE.name) + ' »</button> ' : '') + '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
   $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
   const bgp = BG_PRESETS.find(p => p[1].toLowerCase() === s.bg.toLowerCase() && p[2].toLowerCase() === s.fg.toLowerCase());
   $('pvBg').textContent = bgp ? bgp[0].toLowerCase() : 'au choix';
@@ -2673,6 +2676,8 @@ $('presetWrap').addEventListener('click', e => {
   } else if (e.target.id === 'bPresetOk') {
     const n = $('presetName').value.trim() || 'Réglage ' + (DB.presets.length + 1);
     DB.presets.push({name:n, s: JSON.parse(JSON.stringify(S()))}); save(); w.innerHTML = ''; renderPresets(); toast('Réglages enregistrés : ' + n);
+  } else if (e.target.id === 'bPresetRevert') {
+    if (BASE) applyEntry(BASE.kind, BASE.key);
   } else if (e.target.id === 'bPresetNo') {
     w.innerHTML = ''; updateHints();
   } else if (e.target.id === 'bPresetDel') {
@@ -3451,7 +3456,7 @@ function openAsk(){
   const list = DB.students;
   $('askStudent').innerHTML = list.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('');
   $('askSel').hidden = $('askGo').hidden = !list.length;
-  $('askP').textContent = list.length ? 'La lecture sera enregistrée à son nom.' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
+  $('askP').textContent = list.length ? 'La lecture sera enregistrée à son nom. Sans élève, elle reste dans « Dernières lectures sans élève ».' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
   $('askBackdrop').hidden = false; (list.length ? $('askGo') : $('askAdd')).focus();
 }
 function closeAsk(){ $('askBackdrop').hidden = true; }
