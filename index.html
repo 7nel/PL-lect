@@ -82,6 +82,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 :root[data-theme="dark"] .guide-backdrop,:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}}
 .guide-modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);width:100%;max-width:760px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;gap:14px;padding:clamp(18px,3vh,28px)}
+.ask-modal{max-width:520px}
 .guide-top{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .guide-top h2{margin:0;font:700 1.5rem var(--display)}
 .guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:1rem;max-width:56ch}
@@ -90,7 +91,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-close svg{width:18px;height:18px}
 .guide-body{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding-right:6px}
 .guide-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.guide-step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px}
+.guide-step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:12px}
 .guide-step b{display:flex;align-items:center;gap:8px;font:700 .95rem var(--display);margin-bottom:4px}
 .guide-step .gnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.8rem}
 .guide-step p{margin:0;font-size:1rem;color:var(--ink-2);line-height:1.4}
@@ -102,7 +103,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-body li{font-size:1rem;line-height:1.55;color:var(--ink-2);max-width:68ch}
 .guide-body li b{color:var(--ink)}
 .guide-table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:2px}
-.guide-table th,.guide-table td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.guide-table th,.guide-table td{border:1px solid var(--line);padding:4px 10px;text-align:left;vertical-align:top}
 .guide-table th{background:var(--bg);font-weight:700;color:var(--ink-2);width:1%;white-space:nowrap}
 .guide-tabs{flex:0 0 auto;display:flex;gap:8px}
 .guide-tabs button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font:700 1rem var(--ui);cursor:pointer}
@@ -176,7 +177,7 @@ details.sec{margin:8px 14px 0;background:var(--bg);border:1px solid var(--line);
 details.sec>summary{list-style:none;cursor:pointer;padding:13px 16px;font:700 1rem var(--display);display:flex;align-items:center;gap:8px}
 details.sec>summary::-webkit-details-marker{display:none}
 details.sec>summary .sum-hint{margin-left:auto;font:400 .9rem var(--ui);color:var(--ink-2);text-align:right}
-.profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.profiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px}
 .profiles button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:8px 6px;min-height:44px;cursor:pointer;font:700 .95rem/1.2 var(--ui)}
 .profiles button:hover{border-color:var(--accent)}
 .profiles button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
@@ -203,7 +204,7 @@ input[type=color].swatch{padding:3px}
 .sub{font-size:14px;color:var(--ink-3);line-height:1.45;margin:0}
 .son-det>summary{cursor:pointer;font:700 .95rem var(--ui);color:var(--accent);padding:8px 0;min-height:36px;display:flex;align-items:center}
 .son-det[open]>summary{margin-bottom:8px}
-.sec-b h3{margin:6px 0 -4px;font:700 .8rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.sec-b h3{margin:6px 0 -4px;font:700 .875rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:16px}
 .sons .hd{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 .sons .ex{color:var(--ink-3);font-size:14px}
@@ -289,7 +290,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
 .st-black{position:absolute;inset:0;background:#000;z-index:50}
 .countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--num);color:var(--st-fg);opacity:.85;pointer-events:none}
-.st-bar{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
+.st-bar{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
 .st-bar.off{opacity:0;pointer-events:none}
 .st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
@@ -300,15 +301,21 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
-.st-bar .cnt{font-size:.8em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
+.st-bar .slot-off{visibility:hidden;pointer-events:none}
+.st-bar #xChrono{min-width:112px}
+.st-bar #xErr{min-width:104px}
+.st-bar .cnt{font-size:.9em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
 .st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:15px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
 .st-bar .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:15px/1.2 var(--ui)}
+.st-quick .q-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.st-quick .q-l{font-weight:700;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
 .st-q:hover{background:var(--surface)}
 .st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 16px var(--num);font-variant-numeric:tabular-nums}
 .st-bar:not(.off)~.st-hud{opacity:0}
-@media (max-width:860px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}.st-bar{left:8px;right:8px;transform:none;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
+@media (max-width:860px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}.st-bar{left:8px;right:8px;width:auto;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
 .st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
 .st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px) clamp(24px,5vw,56px);max-width:min(760px,100%);text-align:center;font:16px/1.45 var(--ui)}
 .st-done h3{margin:0 0 8px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
@@ -408,17 +415,26 @@ footer.about a{color:var(--ink-2)}
     </div>
 
     <aside class="panel settings" id="settings" aria-label="Réglages">
-      <div class="panel-h"><h2>Réglages</h2>
-        <select id="selPreset" class="btn sm" aria-label="Réglages enregistrés"></select>
-        <span id="presetWrap"><button class="btn sm" id="bPresetSave" title="Enregistrer ces réglages sous un nom">Enregistrer</button></span>
-      </div>
+      <div class="panel-h"><h2>Réglages</h2></div>
 
       <details class="sec" open>
         <summary>Réglages rapides <span class="sum-hint"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l" id="lProf">Point de départ</span>
+          <div class="fld stack"><span class="l" id="lProf">Réglages enregistrés</span>
             <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div>
+            <div class="row" id="presetWrap"></div>
             <p class="sub" id="profState" aria-live="polite"></p></div>
+          <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
+          <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
+          <div class="fld stack"><span class="l" id="lBg">Fond et texte</span>
+            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
+          <span class="sub" id="contrast"></span>
+        </div>
+      </details>
+
+      <details class="sec">
+        <summary>Typographie détaillée <span class="sum-hint" id="hTypo"></span></summary>
+        <div class="sec-b">
           <div class="fld"><label for="sFont">Police</label>
             <select id="sFont">
               <optgroup label="Conçues pour la lisibilité">
@@ -433,17 +449,6 @@ footer.about a{color:var(--ink-2)}
                 <option value="OpenDyslexic">OpenDyslexic</option>
               </optgroup>
             </select></div>
-          <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
-          <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
-          <div class="fld stack"><span class="l" id="lBg">Fond et texte</span>
-            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
-          <span class="sub" id="contrast"></span>
-        </div>
-      </details>
-
-      <details class="sec">
-        <summary>Typographie détaillée <span class="sum-hint"></span></summary>
-        <div class="sec-b">
           <div class="fld"><label for="sWord">Entre les mots</label><input type="range" id="sWord" min="0" max="1.2" step="0.05"><output id="oWord"></output></div>
           <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
           <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
@@ -573,7 +578,7 @@ footer.about a{color:var(--ink-2)}
           <div id="progBox"></div>
           <div class="tbl-wrap" id="sessTbl"></div>
         </div>
-        <p class="sub">MCM = mots correctement lus par minute = (mots lus − erreurs) ÷ minutes. Les mots lus sont comptés jusqu'à la ligne atteinte, ou jusqu'au mot marqué d'un <kbd>Maj</kbd>+clic. Corrigez les valeurs directement dans le tableau si besoin.</p>
+        <p class="sub">MCM = mots correctement lus par minute = (mots lus − erreurs) ÷ minutes. Les mots lus sont comptés jusqu'à la ligne atteinte, ou jusqu'au mot marqué d'un <kbd>Maj</kbd>+clic. Corrigez les valeurs directement dans le tableau si besoin. <b>Essai</b> = numéro de la lecture de ce texte par cet élève.</p>
       </div>
     </div>
   </section>
@@ -595,10 +600,10 @@ footer.about a{color:var(--ink-2)}
     </div>
     <div class="guide-body" id="gpStart" role="tabpanel" aria-labelledby="gtStart">
       <div class="guide-steps">
-        <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes » à gauche, ou « + Nouveau » pour en écrire un.</p></div>
-        <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Trois points de départ (dyslexie, allophonie, décrochage), puis police, taille, couleurs : l’aperçu se met à jour tout de suite.</p></div>
-        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Dans le menu « Lecteur·rice », à côté du bouton « Lancer ». Cette barre reste en bas de l’écran : le bouton est toujours à portée.</p></div>
-        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert « Lancer au pupitre », dans la barre du bas.</p></div>
+        <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes », ou « + Nouveau ».</p></div>
+        <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Un point de départ, puis taille et couleurs.</p></div>
+        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Menu « Lecteur·rice », en bas de la page.</p></div>
+        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Bouton vert « Lancer au pupitre ».</p></div>
       </div>
 
       <div>
@@ -631,23 +636,23 @@ footer.about a{color:var(--ink-2)}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglages rapides</b> : trois points de départ (<b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>) à ajuster ensuite, puis police, taille, espacement entre les lettres et fond. Les points de départ sont des suggestions : modifiez-les selon l’élève.</li>
-          <li><b>Typographie détaillée</b> : espacement entre les mots, interligne, longueur de ligne, gras.</li>
+          <li><b>Réglages rapides</b> : la liste des réglages enregistrés (trois points de départ, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille, espacement entre les lettres et fond. Les points de départ sont des suggestions : modifiez-les selon l’élève.</li>
+          <li><b>Typographie détaillée</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
           <li><b>Fond et texte</b> : quatre fonds rapides, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Pupitre</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché, en gris), décompte avant le départ, coin chrono et erreurs (facultatif).</li>
           <li><b>Voix</b> : la voix et le débit utilisés par la synthèse vocale.</li>
         </ul>
-        <p>Une fois un réglage trouvé, <b>Enregistrer</b> (en haut du panneau) le garde sous un nom, pour le retrouver dans le menu « Réglages… » avec un autre texte ou un autre élève.</p>
+        <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (dans « Réglages rapides ») le garde sous un nom : il rejoint les trois points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg></span>Au pupitre</h3>
         <p>« Lancer au pupitre » passe en plein écran. Une barre de commandes apparaît en bas ; elle se masque après quelques secondes et revient au moindre mouvement de souris ou toucher d'écran.</p>
         <ul>
-          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
+          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
           <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
-          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. Le résultat (MCM, erreurs) ne s’affiche que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez.</li>
+          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. La durée et le résultat (MCM, erreurs) ne s’affichent que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez ; sous 2 secondes, rien n’est enregistré. Si aucun élève n’est choisi, un message le propose au lancement.</li>
           <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
@@ -733,6 +738,7 @@ footer.about a{color:var(--ink-2)}
       <dt><kbd>H</kbd></dt><dd>Afficher / masquer cette aide</dd>
       <dt><kbd>Échap</kbd></dt><dd>Quitter le pupitre</dd>
     </dl>
+    <button class="btn sm" id="xHelpClose" type="button" style="margin-top:12px">Fermer</button>
   </div>
   <div class="st-bar" id="stBar">
     <div class="grp">
@@ -748,14 +754,21 @@ footer.about a{color:var(--ink-2)}
       <button id="xChrono" title="Chrono (C)"></button>
       <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN" class="cnt">0</span></button>
       <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
-      <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot lu</button>
+      <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
     </div>
     <span class="sep"></span>
     <div class="grp">
       <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
-      <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button id="xQuick" title="Mode d’avance et nombre de lignes" aria-expanded="false" aria-controls="stQuick">Mode</button>
+    <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       <button id="xExit" title="Quitter (Échap)">Quitter</button>
     </div>
+  </div>
+  <div class="st-quick" id="stQuick" hidden role="group" aria-label="Réglages rapides du pupitre">
+    <div class="q-row"><span class="q-l">Avancer</span><div class="seg" role="group" aria-label="Façon d’avancer">
+      <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button></div></div>
+    <div class="q-row"><span class="q-l">Lignes en évidence</span><div class="seg" role="group" aria-label="Lignes en évidence">
+      <button type="button" data-qwin="1">1</button><button type="button" data-qwin="2">2</button><button type="button" data-qwin="3">3</button></div></div>
   </div>
   <button class="st-q" id="xHelp" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
   <div class="st-hud" id="stHud" hidden><span id="hudChrono">00:00</span><span id="hudErr"></span></div>
@@ -771,6 +784,18 @@ footer.about a{color:var(--ink-2)}
         <button class="btn" id="doneSess" type="button">Ouvrir les séances</button>
         <button class="btn pri" id="doneClose" type="button">Continuer</button>
       </div>
+    </div>
+  </div>
+</div>
+<div class="guide-backdrop" id="askBackdrop" hidden>
+  <div class="guide-modal ask-modal" role="dialog" aria-modal="true" aria-labelledby="askT">
+    <h2 id="askT" style="margin:0;font:700 1.5rem var(--display)">Quel élève lit ?</h2>
+    <p id="askP" style="margin:0;color:var(--ink-2);font-size:1rem"></p>
+    <div class="fld stack" id="askSel"><label for="askStudent">Lecteur·rice</label><select id="askStudent"></select></div>
+    <div class="row">
+      <button class="btn pri" id="askGo" type="button">Lancer avec cet élève</button>
+      <button class="btn" id="askAdd" type="button">Ajouter un élève</button>
+      <button class="btn" id="askNone" type="button">Continuer sans élève</button>
     </div>
   </div>
 </div>
@@ -2253,19 +2278,39 @@ const PROFILES = [
   {id:'allo', name:'Allophonie', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:true, muet:true, liaison:true, mots:false, lignes:false, win:1}},
   {id:'decro', name:'Décrochage', s:{font:'Atkinson Hyperlegible', size:56, letter:0.06, word:0.3, line:1.7, syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:2}}
 ];
-$('profiles').innerHTML = PROFILES.map(p => `<button type="button" data-prof="${p.id}" aria-pressed="false">${p.name}</button>`).join('');
+const canon = o => (o && typeof o === 'object') ? '{' + Object.keys(o).sort().map(k => JSON.stringify(k) + ':' + canon(o[k])).join(',') + '}' : JSON.stringify(o);
+const settingsKey = o => { const c = Object.assign({}, o); delete c.voice; return canon(c); };
+function activeEntry(){
+  const s = S();
+  const pr = PROFILES.find(x => Object.keys(x.s).every(k => s[k] === x.s[k]));
+  const pi = DB.presets.findIndex(x => settingsKey(x.s) === settingsKey(s));
+  return pi >= 0 ? {kind:'preset', i:pi, name:DB.presets[pi].name} : pr ? {kind:'prof', id:pr.id, name:pr.name} : null;
+}
+function renderProfiles(){
+  $('profiles').innerHTML = PROFILES.map(p => `<button type="button" data-prof="${p.id}" aria-pressed="false">${p.name}</button>`).join('') +
+    DB.presets.map((p,i) => `<button type="button" data-preset="${i}" aria-pressed="false">${esc(p.name)}</button>`).join('');
+}
 $('profiles').addEventListener('click', e => {
-  const b = e.target.closest('[data-prof]'); if (!b) return;
-  const pr = PROFILES.find(x => x.id === b.dataset.prof);
-  Object.assign(S(), pr.s); save(); syncUI(); refreshAll(true);
-  toast('Point de départ « ' + pr.name + ' » appliqué : ajustez-le selon l’élève');
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.prof) {
+    const pr = PROFILES.find(x => x.id === b.dataset.prof);
+    Object.assign(S(), pr.s); save(); syncUI(); refreshAll(true);
+    toast('« ' + pr.name + ' » appliqué : ajustez-le selon l’élève');
+  } else if (b.dataset.preset) {
+    const pst = DB.presets[+b.dataset.preset];
+    DB.settings = Object.assign(defaults(), JSON.parse(JSON.stringify(pst.s)), {voice:S().voice});
+    save(); syncUI(); refreshAll(true);
+    toast('Réglages « ' + pst.name + ' » appliqués');
+  }
 });
 const MODE_SHORT = {ligne:'ligne par ligne', continu:'continu', mot:'mot à mot'};
 function updateHints(){
   const s = S();
-  PROFILES.forEach(pr => { const b = document.querySelector(`[data-prof="${pr.id}"]`); if (b) b.setAttribute('aria-pressed', Object.keys(pr.s).every(k => s[k] === pr.s[k])); });
-  const act = PROFILES.find(pr => Object.keys(pr.s).every(k => s[k] === pr.s[k]));
-  $('profState').textContent = act ? 'Actif : ' + act.name + ' (point de départ)' : 'Réglages personnalisés';
+  const act = activeEntry();
+  document.querySelectorAll('#profiles button').forEach(b => b.setAttribute('aria-pressed', !!act && ((act.kind === 'prof' && b.dataset.prof === act.id) || (act.kind === 'preset' && b.dataset.preset === String(act.i)))));
+  $('profState').textContent = act ? 'Actif : ' + act.name : 'Réglages personnalisés';
+  $('hTypo').textContent = s.font;
+  if (!$('presetName')) $('presetWrap').innerHTML = '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
   $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
   $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
 }
@@ -2292,29 +2337,19 @@ function syncUI(){
 }
 
 /* Réglages enregistrés */
-function renderPresets(){
-  $('selPreset').innerHTML = '<option value="">Réglages…</option>' + DB.presets.map((p,i) => `<option value="${i}">${esc(p.name)}</option>`).join('');
-}
-$('selPreset').addEventListener('change', () => {
-  const i = $('selPreset').value; if (i === '') return;
-  const keep = {voice:S().voice};
-  DB.settings = Object.assign(defaults(), JSON.parse(JSON.stringify(DB.presets[+i].s)), keep);
-  save(); syncUI(); refreshAll(true);
-  $('presetWrap').innerHTML = `<button class="btn sm danger" id="bPresetDel" data-i="${i}">Retirer</button>`;
-  toast('Réglages « ' + DB.presets[+i].name + ' » appliqués');
-});
+function renderPresets(){ renderProfiles(); updateHints(); }
 $('presetWrap').addEventListener('click', e => {
   const w = $('presetWrap');
   if (e.target.id === 'bPresetSave') {
-    w.innerHTML = '<input type="text" id="presetName" placeholder="Nom" style="width:110px;padding:4px 6px;border:1px solid var(--line-strong);border-radius:7px;background:var(--surface)"> <button class="btn sm pri" id="bPresetOk">OK</button>';
+    w.innerHTML = '<input type="text" id="presetName" placeholder="Nom" aria-label="Nom de ces réglages" style="width:140px;padding:4px 8px;min-height:36px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface)"> <button class="btn sm pri" id="bPresetOk" type="button">OK</button> <button class="btn sm" id="bPresetNo" type="button">Annuler</button>';
     $('presetName').focus();
   } else if (e.target.id === 'bPresetOk') {
     const n = $('presetName').value.trim() || 'Réglage ' + (DB.presets.length + 1);
-    DB.presets.push({name:n, s: JSON.parse(JSON.stringify(S()))}); save(); renderPresets();
-    w.innerHTML = '<button class="btn sm" id="bPresetSave">Enregistrer</button>'; toast('Réglages enregistrés : ' + n);
+    DB.presets.push({name:n, s: JSON.parse(JSON.stringify(S()))}); save(); w.innerHTML = ''; renderPresets(); toast('Réglages enregistrés : ' + n);
+  } else if (e.target.id === 'bPresetNo') {
+    w.innerHTML = ''; updateHints();
   } else if (e.target.id === 'bPresetDel') {
-    DB.presets.splice(+e.target.dataset.i, 1); save(); renderPresets();
-    w.innerHTML = '<button class="btn sm" id="bPresetSave">Enregistrer</button>';
+    DB.presets.splice(+e.target.dataset.i, 1); save(); w.innerHTML = ''; renderPresets();
   }
 });
 $('presetWrap').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'presetName') $('bPresetOk').click(); });
@@ -2513,7 +2548,8 @@ function stopChrono(record, fromExit){
   if (!ST.chrono) return;
   const dur = (performance.now() - ST.chrono) / 1000;
   ST.chrono = null; updateBar();
-  if (!record || dur < 2) return;
+  if (!record) return;
+  if (dur < 2) { if (!fromExit) stToast('Moins de 2 s : rien n’est enregistré', 2800); return; }
   if (dur < SHORT_SEC && fromExit) return;
   const t = curText(), stu = DB.students.find(x => x.id === DB.curStudent);
   const sess = {id: uid(), ts: Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
@@ -2526,12 +2562,12 @@ function stopChrono(record, fromExit){
 const SHORT_SEC = 10;
 let pendingShort = null;
 function showDone(sess, short){
-  $('doneT').textContent = short ? 'Lecture de ' + sess.dur + ' s' : 'Lecture enregistrée';
+  $('doneT').textContent = short ? 'Enregistrer cette lecture ?' : 'Lecture enregistrée';
   ['doneKeep','doneDrop'].forEach(id => $(id).hidden = !short);
   $('doneSess').hidden = $('doneClose').hidden = !!short;
-  $('doneSub').textContent = short ? 'Enregistrer cette lecture dans les séances ?' : 'Durée : ' + fmt(sess.dur);
+  $('doneSub').textContent = short ? 'Elle dure moins de 10 secondes.' : ''; $('doneSub').hidden = !short;
   const m = Math.round(mcmOf(sess));
-  $('doneRes').textContent = m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
+  $('doneRes').textContent = 'Durée ' + fmt(sess.dur) + ' · ' + m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
   $('doneRes').hidden = true; $('doneShow').hidden = !!short;
   $('stDone').hidden = false; (short ? $('doneKeep') : $('doneClose')).focus();
 }
@@ -2567,8 +2603,8 @@ function updateBar(){
   const c = $('xChrono');
   c.classList.toggle('rec', !!ST.chrono);
   c.textContent = ST.chrono ? '■ ' + fmt((performance.now() - ST.chrono)/1000) : '● Chrono';
-  $('xUndo').hidden = !ST.errors.length;
-  $('xMark').hidden = !ST.chrono;
+  $('xUndo').classList.toggle('slot-off', !ST.errors.length);
+  $('xMark').classList.toggle('slot-off', !ST.chrono);
   $('xMark').classList.toggle('armed', !!ST.armMark);
   const hud = $('stHud'); hud.hidden = !(s.hud && ST.open);
   if (!hud.hidden) {
@@ -2591,10 +2627,10 @@ function setWin(n){
   stToast(n + ' ligne' + (n > 1 ? 's' : '') + ' en évidence');
 }
 const MODE_LABEL = {ligne:'Ligne par ligne', continu:'Défilement continu', mot:'Mot à mot'};
-function cycleModeStage(){
+function cycleModeStage(){ const order = ['ligne','continu','mot']; setModeStage(order[(order.indexOf(S().mode) + 1) % order.length]); }
+function setModeStage(mode){
   pause();
-  const order = ['ligne','continu','mot'], s = S();
-  s.mode = order[(order.indexOf(s.mode) + 1) % order.length]; save();
+  const s = S(); s.mode = mode; save();
   const L = ST.lines, first = L.length ? L[ST.line].first : 0;
   ST.word = s.mode === 'mot' ? first : -1;
   updateBar(); relayout(first);
@@ -2622,7 +2658,30 @@ function speakLine(){
 }
 
 $('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
-$('bLaunch').addEventListener('click', launch);
+/* Choix de l'élève avant le pupitre (une seule fois par session si on continue sans) */
+let askedNoStudent = false;
+const hasStudent = () => DB.students.some(x => x.id === DB.curStudent);
+function openAsk(){
+  const list = DB.students;
+  $('askStudent').innerHTML = list.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('');
+  $('askSel').hidden = $('askGo').hidden = !list.length;
+  $('askP').textContent = list.length ? 'Les lectures chronométrées seront enregistrées à son nom.' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
+  $('askBackdrop').hidden = false; (list.length ? $('askGo') : $('askAdd')).focus();
+}
+function closeAsk(){ $('askBackdrop').hidden = true; }
+function tryLaunch(){ if (hasStudent() || askedNoStudent) launch(); else openAsk(); }
+$('askGo').addEventListener('click', () => { DB.curStudent = $('askStudent').value; save(); renderStudentSelect(); closeAsk(); launch(); });
+$('askNone').addEventListener('click', () => { askedNoStudent = true; closeAsk(); launch(); });
+$('askAdd').addEventListener('click', () => { closeAsk(); setTab('sess'); $('newStudent').focus(); });
+$('askBackdrop').addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeAsk(); return; }
+  if (e.key !== 'Tab') return;
+  const f = [...$('askBackdrop').querySelectorAll('button,select')].filter(x => x.offsetParent !== null);
+  if (!f.length) return;
+  if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length-1].focus(); }
+  else if (!e.shiftKey && document.activeElement === f[f.length-1]) { e.preventDefault(); f[0].focus(); }
+});
+$('bLaunch').addEventListener('click', tryLaunch);
 /* Guide d'utilisation */
 const GUIDE_KEY = 'pupitre.guideAuto';
 function guideAutoPref(){ try { const v = localStorage.getItem(GUIDE_KEY); return v === null ? true : v === '1'; } catch(e){ return true; } }
@@ -2642,7 +2701,8 @@ $('gtStart').parentElement.addEventListener('keydown', e => {
 });
 function openGuide(fromUser){
   setGuideTab('start');
-  $('guideAuto').checked = guideAutoPref();
+  $('guideAuto').checked = fromUser ? guideAutoPref() : false;
+  if (!fromUser) setGuideAutoPref(false);
   $('guideBackdrop').hidden = false;
   $('bHelp').setAttribute('aria-expanded','true'); $('bHelp').classList.add('on');
   guideOpener = fromUser ? document.activeElement : null;
@@ -2688,6 +2748,22 @@ $('xSpeak').addEventListener('click', speakLine);
 $('xUndo').addEventListener('click', undoError);
 $('xMark').addEventListener('click', () => { ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); });
 $('xHelp').addEventListener('click', () => $('stHelp').hidden = !$('stHelp').hidden);
+$('xHelpClose').addEventListener('click', () => { $('stHelp').hidden = true; stage.focus(); });
+function toggleQuick(force){
+  const q = $('stQuick'); q.hidden = typeof force === 'boolean' ? !force : !q.hidden;
+  $('xQuick').setAttribute('aria-expanded', !q.hidden);
+  if (!q.hidden) { q.style.bottom = ($('stBar').offsetHeight + 30) + 'px'; syncQuick(); }
+}
+function syncQuick(){
+  document.querySelectorAll('[data-qmode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.qmode === S().mode));
+  document.querySelectorAll('[data-qwin]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.qwin === S().win));
+}
+$('xQuick').addEventListener('click', () => toggleQuick());
+$('stQuick').addEventListener('click', e => {
+  const m = e.target.closest('[data-qmode]'), w = e.target.closest('[data-qwin]');
+  if (m) setModeStage(m.dataset.qmode); else if (w) { setWin(+w.dataset.qwin); }
+  syncQuick();
+});
 $('xFull').addEventListener('click', toggleFull);
 $('xExit').addEventListener('click', exitStage);
 $('stBar').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); if (ST.open) stage.focus(); });
@@ -2695,6 +2771,7 @@ $('stBar').addEventListener('click', () => { if (document.activeElement && docum
 document.addEventListener('keydown', e => {
   if (!ST.open) return;
   if (!$('stDone').hidden) { if (e.key === 'Escape') { e.preventDefault(); closeDone(); } return; }
+  if (e.key === 'Escape' && !$('stQuick').hidden) { e.preventDefault(); toggleQuick(false); return; }
   const k = e.key;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const map = {
