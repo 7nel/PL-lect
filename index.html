@@ -83,6 +83,9 @@ h1,h2,h3,p{overflow-wrap:break-word}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}}
 .guide-modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);width:100%;max-width:760px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;gap:14px;padding:clamp(18px,3vh,28px)}
 .ask-modal{max-width:520px}
+@media (max-height:800px){.guide-top p{display:none}}
+.ask-modal .fld select{grid-column:1/-1;width:100%}
+.btn.link{border-color:transparent;background:none;color:var(--ink-2);text-decoration:underline;text-underline-offset:.2em}
 .guide-top{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .guide-top h2{margin:0;font:700 1.5rem var(--display)}
 .guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:1rem;max-width:56ch}
@@ -128,7 +131,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lib-list button[aria-current="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
 .lvl{flex:none;display:inline-grid;place-items:center;min-width:28px;height:24px;padding-inline:7px;border-radius:999px;font-size:.875rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
-.lib-m{font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.lib-m{font-size:15px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .tag-ex{font-size:.875rem;color:var(--ink);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
@@ -200,14 +203,14 @@ input[type=range]{width:100%;height:28px;accent-color:var(--accent)}
 .swatch{width:40px;height:32px;border:1px solid var(--line);border-radius:10px;padding:0;background:var(--surface);cursor:pointer}
 input[type=color].swatch{padding:3px}
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.presets button{border:1px solid var(--line);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .9rem var(--ui)}
-.sub{font-size:14px;color:var(--ink-3);line-height:1.45;margin:0}
+.presets button{border:1px solid var(--line-strong);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .9rem var(--ui)}
+.sub{font-size:15px;color:var(--ink-3);line-height:1.45;margin:0}
 .son-det>summary{cursor:pointer;font:700 .95rem var(--ui);color:var(--accent);padding:8px 0;min-height:36px;display:flex;align-items:center}
 .son-det[open]>summary{margin-bottom:8px}
 .sec-b h3{margin:6px 0 -4px;font:700 .875rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:16px}
-.sons .hd{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-.sons .ex{color:var(--ink-3);font-size:14px}
+.sons .hd{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.sons .ex{color:var(--ink-3);font-size:15px}
 .sons select{padding:3px 5px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-size:14px}
 .sons .grp{grid-column:1/-1;margin-top:6px;font:700 15px var(--display);color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
 
@@ -246,7 +249,8 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .confirm{display:inline-flex;gap:6px;align-items:center;font-size:15px;flex-wrap:wrap}
 
 /* Toast */
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:var(--shadow);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:700;box-shadow:var(--shadow);z-index:200;opacity:0;pointer-events:none;transition:opacity .2s}
+@media (max-width:860px){.toast{bottom:calc(168px + env(safe-area-inset-bottom,0px))}}
 .toast.on{opacity:1}
 
 /* ---------- Texte codé (commun aperçu + pupitre) ---------- */
@@ -290,14 +294,16 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
 .st-black{position:absolute;inset:0;background:#000;z-index:50}
 .countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--num);color:var(--st-fg);opacity:.85;pointer-events:none}
-.st-bar{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
+.st-bar{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:16px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
 .st-bar.off{opacity:0;pointer-events:none}
 .st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
 .st-bar button.main{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .st-bar button.main:hover{filter:brightness(1.08);background:var(--accent)}
 .st-bar #xNext,.st-bar #xPrev,.st-bar #xPlay{min-width:52px;min-height:52px}
-.st-bar button.rec{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.st-bar button.rec{background:var(--danger);border-color:var(--danger);color:var(--accent-ink)}
+.st-bar kbd{background:transparent;color:inherit;border-color:currentColor;opacity:.85}
+.st-bar #xChrono:not(.rec){background:var(--surface-2)}
 .st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
@@ -305,10 +311,10 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar #xChrono{min-width:112px}
 .st-bar #xErr{min-width:104px}
 .st-bar .cnt{font-size:.9em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
-.st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:15px;color:var(--ink-2)}
+.st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:16px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
 .st-bar .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
-.st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:15px/1.2 var(--ui)}
+.st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:16px/1.2 var(--ui)}
 .st-quick .q-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .st-quick .q-l{font-weight:700;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
@@ -321,6 +327,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-done h3{margin:0 0 8px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
 .st-done p{margin:0 0 20px;color:var(--ink-2);font:400 clamp(1.15rem,2vw,1.5rem)/1.4 var(--num)}
 .st-done .btn{font-size:1.1rem;padding:12px 22px;min-height:52px}
+.st-done #doneCtx{font-weight:700;color:var(--ink);margin-bottom:6px}
 .st-done .res{margin:0 0 16px;font:700 1.6rem var(--num);color:var(--ink);font-variant-numeric:tabular-nums}
 .st-done .row{justify-content:center}
 .st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
@@ -331,7 +338,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:12px;font:600 15px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
 .st-toast.on{opacity:1}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-footer.about{margin-top:4px;font-size:14px;color:var(--ink-3);line-height:1.5}
+footer.about{margin-top:4px;font-size:15px;color:var(--ink-3);line-height:1.5}
 footer.about a{color:var(--ink-2)}
 </style>
 <style id="dyn"></style>
@@ -433,6 +440,68 @@ footer.about a{color:var(--ink-2)}
       </details>
 
       <details class="sec">
+        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
+        <div class="sec-b">
+          <div class="fld stack"><span class="l">Syllabes</span>
+            <div class="seg" role="group" aria-label="Syllabes">
+              <button data-syl="none">Aucun</button><button data-syl="couleurs">Couleurs</button><button data-syl="arcs">Arcs</button>
+            </div></div>
+          <div class="row" id="sylOpts">
+            <input type="color" id="cSyl0" class="swatch" title="Couleur syllabe 1" aria-label="Couleur syllabe 1">
+            <input type="color" id="cSyl1" class="swatch" title="Couleur syllabe 2" aria-label="Couleur syllabe 2">
+            <input type="color" id="cArc" class="swatch" title="Couleur des arcs" aria-label="Couleur des arcs">
+            <label class="chk"><input type="checkbox" id="sSylOral"> Syllabes orales (<i>pou|le</i> → <i>poule</i>)</label>
+          </div>
+          <label class="chk"><input type="checkbox" id="sMuet"> Lettres muettes <input type="color" id="cMuet" class="swatch" aria-label="Couleur des lettres muettes"></label>
+          <label class="chk"><input type="checkbox" id="sLiaison"> Liaisons <input type="color" id="cLiaison" class="swatch" aria-label="Couleur des liaisons"></label>
+          <label class="chk"><input type="checkbox" id="sMots"> Mots alternés <input type="color" id="cMot0" class="swatch" aria-label="Fond mot 1"><input type="color" id="cMot1" class="swatch" aria-label="Fond mot 2"></label>
+          <label class="chk"><input type="checkbox" id="sLignes"> Lignes alternées <input type="color" id="cLig0" class="swatch" aria-label="Fond ligne 1"><input type="color" id="cLig1" class="swatch" aria-label="Fond ligne 2"></label>
+          <label class="chk"><input type="checkbox" id="sSons"> <b>Sons en couleur</b></label>
+          <div id="sonsBox">
+            <div class="row" style="margin-bottom:6px">
+              <button class="btn sm" id="bSonsVoy">Voyelles</button>
+              <button class="btn sm" id="bSonsAll">Tout</button>
+              <button class="btn sm" id="bSonsNone">Aucun</button>
+            </div>
+            <details class="son-det">
+              <summary>Choisir les sons un par un…</summary>
+              <div class="sons" id="sonsTbl"></div>
+            </details>
+
+      <details class="sec">
+        <summary>Pupitre <span class="sum-hint" id="hStage"></span></summary>
+        <div class="sec-b">
+          <h3>Avancer</h3>
+          <div class="fld stack"><span class="l">Façon d’avancer</span>
+            <div class="seg" role="group" aria-label="Mode d'avance">
+              <button data-mode="ligne">Ligne par ligne</button><button data-mode="continu">Continu</button><button data-mode="mot">Mot à mot</button>
+            </div></div>
+          <div class="fld" id="fLpm"><label for="sLpm">Vitesse</label><input type="range" id="sLpm" min="2" max="40" step="1"><output id="oLpm"></output></div>
+          <div class="fld" id="fWpm"><label for="sWpm">Vitesse</label><input type="range" id="sWpm" min="20" max="220" step="5"><output id="oWpm"></output></div>
+          <div class="fld stack"><span class="l">Lignes en évidence</span>
+            <div class="seg" role="group" aria-label="Lignes en évidence">
+              <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
+            </div></div>
+          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
+          <h3>Apparence</h3>
+          <div class="fld"><label for="sDim">Texte autour</label>
+            <select id="sDim">
+              <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
+            </select></div>
+          <div class="fld"><label for="sPos">Position de la ligne</label>
+            <select id="sPos"><option value="0.2">en haut</option><option value="0.33">au tiers</option><option value="0.45">au milieu</option></select></div>
+          <div class="fld"><label for="sBand">Marque de la ligne</label>
+            <select id="sBand"><option value="surligneur">surligneur</option><option value="cadre">cadre</option><option value="aucun">aucun</option></select>
+          </div>
+          <div class="row"><span class="hint">Couleur de la marque</span><input type="color" id="cBand" class="swatch" aria-label="Couleur de la marque de la ligne"></div>
+          <h3>Chrono et erreurs</h3>
+          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées pendant la lecture</label>
+          <label class="chk"><input type="checkbox" id="sHud"> Garder chrono et erreurs visibles dans un coin</label>
+          <p class="sub">Par défaut, chrono et erreurs restent invisibles à l’écran projeté : seule l’enseignante les retrouve dans « Séances ». Cochez ces options seulement si vous lisez sur votre propre écran.</p>
+        </div>
+      </details>
+
+      <details class="sec">
         <summary>Typographie détaillée <span class="sum-hint" id="hTypo"></span></summary>
         <div class="sec-b">
           <div class="fld"><label for="sFont">Police</label>
@@ -469,83 +538,13 @@ footer.about a{color:var(--ink-2)}
       </details>
 
       <details class="sec">
-        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
+        <summary>Voix et sauvegarde <span class="sum-hint"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l">Syllabes</span>
-            <div class="seg" role="group" aria-label="Syllabes">
-              <button data-syl="none">Aucun</button><button data-syl="couleurs">Couleurs</button><button data-syl="arcs">Arcs</button>
-            </div></div>
-          <div class="row" id="sylOpts">
-            <input type="color" id="cSyl0" class="swatch" title="Couleur syllabe 1" aria-label="Couleur syllabe 1">
-            <input type="color" id="cSyl1" class="swatch" title="Couleur syllabe 2" aria-label="Couleur syllabe 2">
-            <input type="color" id="cArc" class="swatch" title="Couleur des arcs" aria-label="Couleur des arcs">
-            <label class="chk"><input type="checkbox" id="sSylOral"> Syllabes orales (<i>pou|le</i> → <i>poule</i>)</label>
-          </div>
-          <label class="chk"><input type="checkbox" id="sMuet"> Lettres muettes <input type="color" id="cMuet" class="swatch" aria-label="Couleur des lettres muettes"></label>
-          <label class="chk"><input type="checkbox" id="sLiaison"> Liaisons <input type="color" id="cLiaison" class="swatch" aria-label="Couleur des liaisons"></label>
-          <label class="chk"><input type="checkbox" id="sMots"> Mots alternés <input type="color" id="cMot0" class="swatch" aria-label="Fond mot 1"><input type="color" id="cMot1" class="swatch" aria-label="Fond mot 2"></label>
-          <label class="chk"><input type="checkbox" id="sLignes"> Lignes alternées <input type="color" id="cLig0" class="swatch" aria-label="Fond ligne 1"><input type="color" id="cLig1" class="swatch" aria-label="Fond ligne 2"></label>
-          <label class="chk"><input type="checkbox" id="sSons"> <b>Sons en couleur</b></label>
-          <div id="sonsBox">
-            <div class="row" style="margin-bottom:6px">
-              <button class="btn sm" id="bSonsVoy">Voyelles</button>
-              <button class="btn sm" id="bSonsAll">Tout</button>
-              <button class="btn sm" id="bSonsNone">Aucun</button>
-            </div>
-            <details class="son-det">
-              <summary>Choisir les sons un par un…</summary>
-              <div class="sons" id="sonsTbl"></div>
-            </details>
-            <p class="sub" style="margin-top:8px">Cochez seulement le ou les sons travaillés : une coloration ciblée est plus lisible qu'une coloration complète.</p>
-          </div>
-        </div>
-      </details>
-
-      <details class="sec">
-        <summary>Pupitre <span class="sum-hint" id="hStage"></span></summary>
-        <div class="sec-b">
-          <h3>Avancer</h3>
-          <div class="fld stack"><span class="l">Façon d’avancer</span>
-            <div class="seg" role="group" aria-label="Mode d'avance">
-              <button data-mode="ligne">Ligne par ligne</button><button data-mode="continu">Continu</button><button data-mode="mot">Mot à mot</button>
-            </div></div>
-          <div class="fld" id="fLpm"><label for="sLpm">Vitesse</label><input type="range" id="sLpm" min="2" max="40" step="1"><output id="oLpm"></output></div>
-          <div class="fld" id="fWpm"><label for="sWpm">Vitesse</label><input type="range" id="sWpm" min="20" max="220" step="5"><output id="oWpm"></output></div>
-          <div class="fld stack"><span class="l">Lignes en évidence</span>
-            <div class="seg" role="group" aria-label="Lignes en évidence">
-              <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
-            </div></div>
-          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
-          <h3>Apparence</h3>
-          <div class="fld"><label for="sDim">Texte autour</label>
-            <select id="sDim">
-              <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
-            </select></div>
-          <div class="fld"><label for="sPos">Position de la ligne</label>
-            <select id="sPos"><option value="0.2">en haut</option><option value="0.33">au tiers</option><option value="0.45">au milieu</option></select></div>
-          <div class="fld"><label for="sBand">Marque de la ligne</label>
-            <select id="sBand"><option value="surligneur">surligneur</option><option value="cadre">cadre</option><option value="aucun">aucun</option></select>
-          </div>
-          <div class="row"><span class="hint">Couleur de la marque</span><input type="color" id="cBand" class="swatch" aria-label="Couleur de la marque de la ligne"></div>
-          <h3>Chrono et erreurs</h3>
-          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées pendant la lecture</label>
-          <label class="chk"><input type="checkbox" id="sHud"> Garder chrono et erreurs visibles dans un coin</label>
-          <p class="sub">Par défaut, chrono et erreurs restent invisibles à l’écran projeté : seule l’enseignante les retrouve dans « Séances ». Cochez ces options seulement si vous lisez sur votre propre écran.</p>
-        </div>
-      </details>
-
-      <details class="sec">
-        <summary>Voix <span class="sum-hint"></span></summary>
-        <div class="sec-b">
+          <h3>Voix</h3>
           <div class="fld"><label for="sVoice">Voix</label><select id="sVoice"></select></div>
           <div class="fld"><label for="sRate">Débit</label><input type="range" id="sRate" min="0.5" max="1.3" step="0.05"><output id="oRate"></output></div>
           <div class="row"><button class="btn sm" id="bTestVoice">Tester</button><span class="sub" id="voiceNote"></span></div>
-        </div>
-      </details>
-
-      <details class="sec">
-        <summary>Sauvegarde <span class="sum-hint"></span></summary>
-        <div class="sec-b">
+                  <h3>Sauvegarde</h3>
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
             <label class="btn sm" for="fRestore" style="cursor:pointer">Restaurer…</label>
@@ -641,7 +640,7 @@ footer.about a{color:var(--ink-2)}
           <li><b>Fond et texte</b> : quatre fonds rapides, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Pupitre</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché, en gris), décompte avant le départ, coin chrono et erreurs (facultatif).</li>
-          <li><b>Voix</b> : la voix et le débit utilisés par la synthèse vocale.</li>
+          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données.</li>
         </ul>
         <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (dans « Réglages rapides ») le garde sous un nom : il rejoint les trois points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
@@ -653,6 +652,7 @@ footer.about a{color:var(--ink-2)}
           <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
           <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
           <li>À l’arrêt du chrono, une carte confirme l’enregistrement. La durée et le résultat (MCM, erreurs) ne s’affichent que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez ; sous 2 secondes, rien n’est enregistré. Si aucun élève n’est choisi, un message le propose au lancement.</li>
+          <li>Le bouton « Chrono » de la barre est gris à l’arrêt (○) et rouge quand il tourne (■), avec sa touche C ; « Erreur » ne montre que sa touche E. Ni les secondes ni le nombre d’erreurs ne s’affichent. <b>Échap</b> pendant le chrono demande quoi faire (quitter et enregistrer, quitter sans enregistrer, ou continuer à lire).</li>
           <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
@@ -694,7 +694,7 @@ footer.about a{color:var(--ink-2)}
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 20h14"/></svg></span>Sauvegarde des données</h3>
         <p>Textes, réglages, élèves et séances sont gardés uniquement dans ce navigateur, sur cet ordinateur : rien n'est envoyé ailleurs, mais rien n'est partagé entre appareils non plus.</p>
-        <p>Dans Réglages → <b>Sauvegarde</b>, « Sauvegarder tout (.json) » télécharge une copie complète ; « Restaurer… » la recharge, y compris sur un autre ordinateur. Une sauvegarde régulière évite de tout perdre si le navigateur efface ses données.</p>
+        <p>Dans Réglages → <b>Voix et sauvegarde</b>, « Sauvegarder tout (.json) » télécharge une copie complète ; « Restaurer… » la recharge, y compris sur un autre ordinateur. Une sauvegarde régulière évite de tout perdre si le navigateur efface ses données.</p>
       </div>
     </div>
     <div class="guide-foot">
@@ -752,7 +752,7 @@ footer.about a{color:var(--ink-2)}
     <span class="sep"></span>
     <div class="grp">
       <button id="xChrono" title="Chrono (C)"></button>
-      <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN" class="cnt">0</span></button>
+      <button id="xErr" title="Erreur (E)" aria-label="Marquer une erreur (E)">Erreur <kbd>E</kbd></button>
       <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
       <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
     </div>
@@ -772,9 +772,21 @@ footer.about a{color:var(--ink-2)}
   </div>
   <button class="st-q" id="xHelp" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
   <div class="st-hud" id="stHud" hidden><span id="hudChrono">00:00</span><span id="hudErr"></span></div>
+  <div class="st-done" id="stExit" hidden>
+    <div class="box" role="alertdialog" aria-labelledby="exitT">
+      <h3 id="exitT">Quitter pendant le chrono ?</h3>
+      <p>La lecture n’est pas encore enregistrée.</p>
+      <div class="row">
+        <button class="btn pri" id="exitSave" type="button">Quitter et enregistrer</button>
+        <button class="btn" id="exitDrop" type="button">Quitter sans enregistrer</button>
+        <button class="btn" id="exitStay" type="button">Continuer à lire</button>
+      </div>
+    </div>
+  </div>
   <div class="st-done" id="stDone" hidden>
     <div class="box" role="group" aria-labelledby="doneT">
       <h3 id="doneT">Lecture enregistrée</h3>
+      <p id="doneCtx"></p>
       <p id="doneSub"></p>
       <p class="res" id="doneRes" hidden></p>
       <div class="row">
@@ -795,8 +807,8 @@ footer.about a{color:var(--ink-2)}
     <div class="row">
       <button class="btn pri" id="askGo" type="button">Lancer avec cet élève</button>
       <button class="btn" id="askAdd" type="button">Ajouter un élève</button>
-      <button class="btn" id="askNone" type="button">Continuer sans élève</button>
     </div>
+    <div class="row"><button class="btn link" id="askNone" type="button">Continuer sans élève</button></div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -2401,7 +2413,7 @@ function launch(){
   if (ST.open) return;
   ST.open = true; ST.playing = false; ST.line = 0; ST.word = -1; ST.scrollY = 0;
   ST.errors = []; ST.endMark = null; ST.chrono = null; ST.armMark = false;
-  $('stDone').hidden = true;
+  $('stDone').hidden = true; $('stExit').hidden = true;
   clearTimeout(toastT); $('toast').classList.remove('on');
   applyStyle();
   stText.innerHTML = HTML;
@@ -2525,7 +2537,7 @@ function speedLabel(){
     return s.lpm + ' l/min' + (wpl ? ' ≈ ' + Math.round(s.lpm * wpl) + ' m/min' : '');
   }
   if (s.mode === 'mot') return s.wpm + ' m/min';
-  return 'manuel';
+  return 'à la main';
 }
 
 /* Chrono et erreurs */
@@ -2567,7 +2579,8 @@ function showDone(sess, short){
   $('doneSess').hidden = $('doneClose').hidden = !!short;
   $('doneSub').textContent = short ? 'Elle dure moins de 10 secondes.' : ''; $('doneSub').hidden = !short;
   const m = Math.round(mcmOf(sess));
-  $('doneRes').textContent = 'Durée ' + fmt(sess.dur) + ' · ' + m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
+  $('doneCtx').textContent = (sess.stuName || 'Sans élève') + ' · ' + (sess.title || 'Sans titre');
+  $('doneRes').textContent = (short ? '' : 'Essai ' + trialNo(sess) + ' · ') + 'Durée ' + fmt(sess.dur) + ' · ' + m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
   $('doneRes').hidden = true; $('doneShow').hidden = !!short;
   $('stDone').hidden = false; (short ? $('doneKeep') : $('doneClose')).focus();
 }
@@ -2599,11 +2612,10 @@ function updateBar(){
   $('xSlow').hidden = $('xFast').hidden = s.mode === 'ligne';
   $('xPlay').innerHTML = (ST.playing ? ICON_PAUSE + 'Pause' : ICON_PLAY + 'Démarrer');
   $('xSpeed').textContent = speedLabel();
-  $('xErrN').textContent = ST.errors.length;
   const c = $('xChrono');
   c.classList.toggle('rec', !!ST.chrono);
-  c.textContent = ST.chrono ? '■ ' + fmt((performance.now() - ST.chrono)/1000) : '● Chrono';
-  $('xUndo').classList.toggle('slot-off', !ST.errors.length);
+  c.innerHTML = (ST.chrono ? '■' : '○') + ' Chrono <kbd>C</kbd>';
+  c.setAttribute('aria-label', 'Chrono ' + (ST.chrono ? 'en cours (C pour arrêter)' : 'arrêté (C pour démarrer)'));
   $('xMark').classList.toggle('slot-off', !ST.chrono);
   $('xMark').classList.toggle('armed', !!ST.armMark);
   const hud = $('stHud'); hud.hidden = !(s.hud && ST.open);
@@ -2765,11 +2777,20 @@ $('stQuick').addEventListener('click', e => {
   syncQuick();
 });
 $('xFull').addEventListener('click', toggleFull);
-$('xExit').addEventListener('click', exitStage);
+function requestExit(){
+  if (!ST.open) return;
+  if (ST.chrono) { $('stExit').hidden = false; $('exitStay').focus(); return; }
+  exitStage();
+}
+$('xExit').addEventListener('click', requestExit);
+$('exitSave').addEventListener('click', () => { $('stExit').hidden = true; exitStage(); });
+$('exitDrop').addEventListener('click', () => { $('stExit').hidden = true; ST.chrono = null; exitStage(); });
+$('exitStay').addEventListener('click', () => { $('stExit').hidden = true; stage.focus(); });
 $('stBar').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); if (ST.open) stage.focus(); });
 
 document.addEventListener('keydown', e => {
   if (!ST.open) return;
+  if (!$('stExit').hidden) { if (e.key === 'Escape') { e.preventDefault(); $('stExit').hidden = true; stage.focus(); } return; }
   if (!$('stDone').hidden) { if (e.key === 'Escape') { e.preventDefault(); closeDone(); } return; }
   if (e.key === 'Escape' && !$('stQuick').hidden) { e.preventDefault(); toggleQuick(false); return; }
   const k = e.key;
@@ -2786,7 +2807,7 @@ document.addEventListener('keydown', e => {
     'h': () => $('stHelp').hidden = !$('stHelp').hidden, 'H': () => $('stHelp').hidden = !$('stHelp').hidden, '?': () => $('stHelp').hidden = !$('stHelp').hidden,
     'b': () => $('stBlack').hidden = !$('stBlack').hidden, 'B': () => $('stBlack').hidden = !$('stBlack').hidden, '.': () => $('stBlack').hidden = !$('stBlack').hidden,
     'Home': () => gotoLine(0), 'End': () => gotoLine(ST.lines.length - 1),
-    'Escape': exitStage, 'F5': () => {}
+    'Escape': requestExit, 'F5': () => {}
   };
   if (map[k]) { e.preventDefault(); map[k](); }
 });
@@ -2852,7 +2873,7 @@ $('fStudent').addEventListener('submit', e => {
   $('newStudent').value = ''; save(); renderStudentSelect(); renderSessions(); toast(n + ' ajouté·e, sélectionné·e pour la prochaine lecture');
 });
 function spark(vals){
-  if (vals.length < 2) return '';
+  if (vals.length < 3) return '';
   const W = 240, H = 56, max = Math.max(...vals) * 1.1 || 1, min = 0;
   const x = i => 6 + i * (W - 12) / (vals.length - 1), y = v => H - 6 - (v - min) / (max - min) * (H - 12);
   const pts = vals.map((v,i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
