@@ -605,6 +605,12 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
           <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
+          <div class="fld stack"><span class="l" id="lBg">Fond</span>
+            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
+          <div class="fld stack"><span class="l" id="codePreL">Préréglages du codage</span>
+            <div class="seg" role="group" aria-labelledby="codePreL">
+              <button type="button" data-code="aucun">Aucun</button><button type="button" data-code="syl">Syllabes</button><button type="button" data-code="sons">Sons ciblés</button>
+            </div></div>
           <div class="row" id="presetWrap"></div>
         </div>
       </details>
@@ -639,14 +645,12 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <details class="sec">
         <summary>Couleurs <span class="sum-hint" id="hCol"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l" id="lBg">Fond</span>
-            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
           <div class="row">
             <label class="row hint" for="sBg">Fond <input type="color" id="sBg" class="swatch"></label>
             <label class="row hint" for="sFg">Texte <input type="color" id="sFg" class="swatch"></label>
           </div>
           <span class="sub" id="contrast"></span>
-          <p class="sub">Pour aller vite, les quatre fonds ci-dessus suffisent. Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
+          <p class="sub">Pour aller vite, les quatre fonds de « Réglage rapide » suffisent. Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
         </div>
       </details>
 
@@ -654,10 +658,6 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <details class="sec">
         <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l" id="codePreL">Préréglages du codage</span>
-            <div class="seg" role="group" aria-labelledby="codePreL">
-              <button type="button" data-code="aucun">Aucun</button><button type="button" data-code="syl">Syllabes</button><button type="button" data-code="sons">Sons ciblés</button>
-            </div></div>
           <div class="fld stack"><span class="l">Syllabes</span>
             <div class="seg" role="group" aria-label="Syllabes">
               <button data-syl="none">Aucun</button><button data-syl="couleurs">Couleurs</button><button data-syl="arcs">Arcs</button>
@@ -839,7 +839,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les fonds sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
+          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille, espacement entre les lettres, fond et préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
           <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage du texte</b> : trois préréglages en tête (Aucun, Syllabes, Sons ciblés), puis les syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
