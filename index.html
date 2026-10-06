@@ -51,25 +51,30 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 var(--ui);}
 *{box-sizing:border-box;min-width:0}
 button,input,select,textarea{font:inherit;color:inherit;max-width:100%}
 h1,h2,h3,p{overflow-wrap:break-word}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.nb.go:focus-visible,.btn.pri:focus-visible{outline-color:var(--ink);outline-offset:3px}
+::selection{background:var(--accent-soft);color:var(--ink)}
 
 /* ---------- En-tête ---------- */
 .app{display:flex;flex-direction:column;min-height:100%;padding-inline:clamp(16px,3vw,48px);padding-block:clamp(10px,2vh,24px)}
-.top{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;padding-block:0 18px;position:relative}
+.top{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding-block:0 18px;position:relative}
 .brand{margin-right:auto;min-width:0}
-.eyebrow{font:700 .8rem/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
-.brand h1{font:700 clamp(1.7rem,3.4vw,2.5rem)/1.1 var(--display);margin:0;text-wrap:balance}
-.icons{display:flex;gap:8px;flex-wrap:wrap}
-.ib{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink);transition:transform .15s ease}
-.ib:hover{transform:translateY(-1px)}
-.ib svg{width:22px;height:22px}
-.ib[aria-selected="true"],.ib.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
-.ib.go{background:var(--accent);color:var(--surface);border-color:transparent}
+.wordmark{display:flex;align-items:center;gap:12px;margin:0;font:700 clamp(1.7rem,3.4vw,2.5rem)/1.1 var(--display);letter-spacing:-.01em}
+.wordmark svg{flex:none;width:1.15em;height:1.15em}
+.nav-group{display:flex;gap:8px;flex-wrap:wrap}
+.nav-tools{padding-right:20px;border-right:1px solid var(--line)}
+.nb{min-height:48px;display:inline-flex;align-items:center;gap:8px;padding:0 16px 0 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink);font:700 .95rem var(--ui);white-space:nowrap}
+.nb:hover{border-color:var(--accent)}
+.nb svg{width:22px;height:22px;flex:none}
+.nb[aria-selected="true"],.nb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.nb.go{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.nb.go:hover{filter:brightness(1.08)}
+@media (max-width:860px){.nb.go{display:none}.nav-tools{padding-right:0;border-right:0}.nb{padding:0 12px 0 10px}}
 /* ---------- Guide d'utilisation ---------- */
 .guide-backdrop{position:fixed;inset:0;background:rgba(20,26,25,.5);z-index:120;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
 :root[data-theme="dark"] .guide-backdrop,:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .guide-backdrop{background:rgba(0,0,0,.6)}}
-.guide-modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);width:100%;max-width:760px;max-height:88vh;display:flex;flex-direction:column;gap:14px;padding:clamp(18px,3vh,28px)}
+.guide-modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);width:100%;max-width:760px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;gap:14px;padding:clamp(18px,3vh,28px)}
 .guide-top{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .guide-top h2{margin:0;font:700 1.5rem var(--display)}
 .guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:.95rem;max-width:56ch}
@@ -85,9 +90,9 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-body h3{margin:0 0 8px;font:700 1.05rem var(--display);display:flex;align-items:center;gap:8px}
 .guide-body h3 .gi{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .guide-body h3 .gi svg{width:16px;height:16px}
-.guide-body p{margin:0 0 8px;color:var(--ink-2);font-size:.92rem;line-height:1.55}
+.guide-body p{margin:0 0 8px;color:var(--ink-2);font-size:.92rem;line-height:1.55;max-width:68ch}
 .guide-body ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
-.guide-body li{font-size:.92rem;line-height:1.55;color:var(--ink-2)}
+.guide-body li{font-size:.92rem;line-height:1.55;color:var(--ink-2);max-width:68ch}
 .guide-body li b{color:var(--ink)}
 .guide-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:2px}
 .guide-table th,.guide-table td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
@@ -113,7 +118,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lvl{flex:none;display:inline-grid;place-items:center;min-width:26px;height:22px;padding-inline:7px;border-radius:999px;font-size:.75rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
 .lib-m{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.tag-ex{font-size:.68rem;color:var(--ink-2);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
+.tag-ex{font-size:.78rem;color:var(--ink-2);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.85rem;white-space:nowrap}
@@ -121,7 +126,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .btn.sm{padding:5px 12px;font-size:.82rem}
 .btn.pri{background:var(--accent);border-color:transparent;color:var(--surface)}
 .btn.pri:hover{filter:brightness(1.08)}
-.btn.danger{color:var(--danger);background:var(--danger-soft);border-color:color-mix(in srgb, var(--danger) 45%, var(--line))}
+.btn.danger{color:color-mix(in srgb, var(--danger) 65%, var(--ink));background:var(--danger-soft);border-color:color-mix(in srgb, var(--danger) 45%, var(--line))}
 .btn.ghost{border-color:transparent;background:none}
 .btn svg{width:18px;height:18px;flex:none}
 .btn.big{padding:11px 22px;font:700 1.05rem var(--display)}
@@ -144,6 +149,14 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .launch label{display:flex;align-items:center;gap:10px;font:700 1rem var(--display)}
 .launch select{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font:700 .95rem var(--ui)}
 .launch .sp{margin-left:auto}
+.launch{position:sticky;bottom:16px;z-index:5}
+.launch .go-set{display:none}
+@media (max-width:860px){
+  .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
+  .launch .hint{display:none}
+  .launch .go-set{display:inline-flex}
+  .app{padding-bottom:140px}
+}
 .hint{font-size:14px;color:var(--ink-3)}
 kbd{font:600 12px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:2px 6px;background:var(--surface);color:var(--ink-2)}
 
@@ -153,7 +166,12 @@ kbd{font:600 12px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-
 details.sec{margin:8px 14px 0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
 details.sec>summary{list-style:none;cursor:pointer;padding:13px 16px;font:700 1rem var(--display);display:flex;align-items:center;gap:8px}
 details.sec>summary::-webkit-details-marker{display:none}
-details.sec>summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
+details.sec>summary .sum-hint{margin-left:auto;font:400 .82rem var(--ui);color:var(--ink-2);text-align:right}
+.profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.profiles button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:8px 6px;min-height:44px;cursor:pointer;font:700 .85rem/1.2 var(--ui)}
+.profiles button:hover{border-color:var(--accent)}
+.profiles button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+details.sec>summary::after{content:"";margin-left:0;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
 details.sec[open]>summary::after{transform:rotate(-135deg)}
 .sec-b{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
 .fld{display:grid;grid-template-columns:118px minmax(0,1fr) 60px;align-items:center;gap:8px;font-size:15px}
@@ -174,20 +192,32 @@ input[type=color].swatch{padding:3px}
 .presets button{border:1px solid var(--line);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .82rem var(--ui)}
 .sub{font-size:13px;color:var(--ink-3);line-height:1.45;margin:0}
 .sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:15px}
-.sons .hd{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.sons .hd{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 .sons .ex{color:var(--ink-3);font-size:13px}
 .sons select{padding:3px 5px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-size:13px}
 .sons .grp{grid-column:1/-1;margin-top:6px;font:700 14px var(--display);color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
 
+/* Tactile : cibles de 44 px et indices adaptés */
+@media (pointer:coarse){
+  .btn.sm,.seg button,.presets button,.lib-list button,.launch select,.fld select,.fld input[type=text]{min-height:44px}
+  .swatch{width:48px;height:44px}
+  .chk{min-height:44px}
+  .chk input,.sons input[type=checkbox]{width:24px;height:24px}
+  .sons{grid-template-columns:30px 1fr 52px 112px}
+  .sons select{min-height:44px;font-size:15px}
+}
+@media (hover:hover){.only-touch{display:none}}
+@media (hover:none){.only-hover{display:none}}
+
 /* Séances */
 .sessions{display:grid;grid-template-columns:280px minmax(0,1fr);gap:18px;align-items:start}
 @media (max-width:860px){.sessions{grid-template-columns:1fr}}
-.notice{padding:12px 18px;background:var(--accent-soft);border:1px solid color-mix(in srgb, var(--accent) 35%, var(--line));border-radius:var(--r-panel);font-weight:700;font-size:15px;color:var(--ink-2);margin-bottom:18px}
+.notice{padding:12px 18px;background:var(--accent-soft);border:1px solid color-mix(in srgb, var(--accent) 35%, var(--line));border-radius:var(--r-panel);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:18px}
 .tbl-wrap{overflow-x:auto;margin:0 22px 22px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
 table.t{width:100%;border-collapse:collapse;font-size:15px}
 table.t th,table.t td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
 table.t tr:last-child td{border-bottom:0}
-table.t th{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+table.t th{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 table.t td.n{text-align:right;font-variant-numeric:tabular-nums}
 table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
 .mcm{font:700 18px var(--display)}
@@ -225,19 +255,19 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .rt.cLignes .lines-layer{display:block}
 .rt .lbg.l0{background:var(--c-lig0)}
 .rt .lbg.l1{background:var(--c-lig1)}
-.st-tick{position:absolute;right:10px;bottom:10px;width:7px;height:7px;border-radius:50%;background:var(--st-fg);opacity:0;z-index:66;transition:opacity .15s}
-.st-tick.on{opacity:.35}
+.st-tick{position:absolute;right:12px;bottom:12px;width:10px;height:10px;border-radius:50%;background:var(--st-fg);opacity:0;z-index:66;transition:opacity .15s}
+.st-tick.on{opacity:.6}
 .pv{padding:22px 26px;position:relative;isolation:isolate}
 .pv .w{cursor:help}
 
 /* ---------- Pupitre (plein écran) ---------- */
 .stage{position:fixed;inset:0;z-index:100;overflow:hidden;background:var(--st-bg);color:var(--st-fg);cursor:default;touch-action:none}
 .stage.hide-cursor{cursor:none}
-.st-col{position:absolute;left:50%;top:0;transform:translateX(-50%);max-width:calc(100% - 48px)}
+.st-col{position:absolute;left:50%;top:0;transform:translateX(-50%);max-width:calc(100% - 2 * clamp(24px, .45em, 72px))}
 .st-move{will-change:transform;isolation:isolate}
 .st-move.anim{transition:transform .38s cubic-bezier(.3,.7,.3,1)}
 @media (prefers-reduced-motion: reduce){.st-move.anim{transition:none}}
-.mask{position:absolute;left:0;right:0;pointer-events:none;background:var(--st-bg);z-index:3;transition:top .38s cubic-bezier(.3,.7,.3,1),height .38s cubic-bezier(.3,.7,.3,1)}
+.mask{position:absolute;left:0;right:0;pointer-events:none;background:color-mix(in srgb, var(--st-bg) calc(var(--dim, 0) * 100%), transparent);-webkit-backdrop-filter:grayscale(calc(var(--dim, 0) * 2));backdrop-filter:grayscale(calc(var(--dim, 0) * 2));z-index:3;transition:top .38s cubic-bezier(.3,.7,.3,1),height .38s cubic-bezier(.3,.7,.3,1)}
 .mask.top{top:0}
 .mask.bot{bottom:0}
 .band{position:absolute;pointer-events:none;z-index:-1;transition:top .38s cubic-bezier(.3,.7,.3,1),height .38s cubic-bezier(.3,.7,.3,1)}
@@ -246,21 +276,30 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
 .st-black{position:absolute;inset:0;background:#000;z-index:50}
 .countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--display);color:var(--st-fg);opacity:.85;pointer-events:none}
-.st-bar{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.97);color:#253433;border:1px solid #d7ddda;box-shadow:0 8px 28px rgba(31,42,40,.18);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 "Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;transition:opacity .25s;max-width:calc(100% - 24px)}
+.st-bar{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:15px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
 .st-bar.off{opacity:0;pointer-events:none}
-.st-bar button{background:#fff;border:1px solid #d7ddda;color:inherit;border-radius:14px;font-weight:700;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600}
-.st-bar button:hover{background:#e4e9e6;border-color:#c3cbc7}
-.st-bar button.rec{background:#2f6f63;border-color:#2f6f63;color:#fff}
-.st-bar #xExit{background:#d6e5e1;border-color:#2f6f63}
+.st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
+.st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
+.st-bar button.rec{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
-.st-bar .v{font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:14px;color:#5b6c6a}
-.st-bar .sep{width:1px;height:28px;background:#d7ddda;margin-inline:2px}
-.st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:#fff;color:#253433;border:1px solid #d7ddda;box-shadow:0 8px 28px rgba(31,42,40,.18);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 "Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;max-width:min(440px,calc(100% - 36px))}
-.st-help h3{margin:0 0 10px;font:700 19px "Atkinson Hyperlegible",sans-serif}
+.st-bar .v{font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:14px;color:var(--ink-2)}
+.st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
+.st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 15px var(--ui);font-variant-numeric:tabular-nums}
+.st-bar:not(.off)~.st-hud{opacity:0}
+.st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
+.st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:28px 32px;max-width:min(460px,100%);text-align:center;font:16px/1.45 var(--ui)}
+.st-done h3{margin:0 0 6px;font:700 1.5rem/1.2 var(--display)}
+.st-done p{margin:0 0 16px;color:var(--ink-2)}
+.st-done .res{margin:0 0 16px;font:700 1.2rem var(--display);color:var(--ink);font-variant-numeric:tabular-nums}
+.st-done .row{justify-content:center}
+.st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
+.st-help h3{margin:0 0 10px;font:700 19px var(--display)}
 .st-help dl{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}
 .st-help dt{white-space:nowrap}
-.st-help kbd{background:#e4e9e6;color:#253433;border-color:#c3cbc7}
-.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:#fff;color:#253433;border:1px solid #d7ddda;padding:8px 14px;border-radius:12px;font:600 14px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
+.st-help kbd{background:var(--surface-2);color:var(--ink);border-color:var(--line-strong)}
+.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:12px;font:600 14px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
 .st-toast.on{opacity:1}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 footer.about{margin-top:4px;font-size:13px;color:var(--ink-3);line-height:1.5}
@@ -274,16 +313,17 @@ footer.about a{color:var(--ink-2)}
 <div class="app">
   <header class="top">
     <div class="brand">
-      <p class="eyebrow" id="hEyebrow">PL-lect'</p>
-      <h1 id="hTitle">PL-lect'</h1>
+      <h1 class="wordmark"><svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="76" fill="var(--accent)"/><g fill="none" stroke="var(--accent-ink)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76"/><path d="M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111"/></g></svg>PL-lect’</h1>
     </div>
-    <nav class="icons" role="tablist" aria-label="Sections">
-      <button class="ib" id="bHelp" title="Aide" aria-label="Aide" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 015.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg></button>
-      <button class="ib" id="bTheme" title="Thème clair / sombre de l'interface" aria-label="Thème clair ou sombre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5a9.5 9.5 0 000 19z" fill="currentColor"/></svg></button>
-      <button class="ib" id="tabPrep" role="tab" aria-selected="true" aria-controls="viewPrep" title="Préparer les textes" aria-label="Préparer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg></button>
-      <button class="ib" id="tabSess" role="tab" aria-selected="false" aria-controls="viewSess" title="Séances et progression" aria-label="Séances"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></svg></button>
-      <button class="ib go" id="bLaunchTop" title="Vue projetée : lancer au pupitre" aria-label="Lancer au pupitre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg></button>
+    <div class="nav-group nav-tools">
+      <button class="nb" id="bHelp" aria-expanded="false" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 015.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg>Aide</button>
+      <button class="nb" id="bTheme" aria-label="Thème de l’interface : clair ou sombre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5a9.5 9.5 0 000 19z" fill="currentColor"/></svg>Thème</button>
+    </div>
+    <nav class="nav-group" role="tablist" aria-label="Sections">
+      <button class="nb" id="tabPrep" role="tab" aria-selected="true" aria-controls="viewPrep"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.8"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.8"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.8"/></svg>Préparer</button>
+      <button class="nb" id="tabSess" role="tab" aria-selected="false" aria-controls="viewSess" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></svg>Séances</button>
     </nav>
+    <button class="nb go" id="bLaunchTop" title="Lancer le texte au pupitre (plein écran)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg>Lancer</button>
   </header>
 
   <!-- ================= PRÉPARER ================= -->
@@ -301,7 +341,7 @@ footer.about a{color:var(--ink-2)}
           <input type="text" id="tTitle" aria-label="Titre du texte" placeholder="Titre du texte">
           <label class="row hint" for="tLevel">Niveau
             <select id="tLevel" class="btn sm" style="font-weight:700">
-              <option value="">—</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              <option value="">aucun</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
             </select>
           </label>
           <div class="seg" role="group" aria-label="Affichage">
@@ -324,7 +364,7 @@ footer.about a{color:var(--ink-2)}
           <div class="preview-note">
             <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
             <span><b id="nWords">0</b> mots</span>
-            <span>Survoler un mot : transcription · clic : écouter</span>
+            <span class="only-hover">Survoler un mot : transcription · clic : écouter</span><span class="only-touch">Toucher un mot : l’écouter et voir sa transcription</span>
           </div>
         </div>
       </div>
@@ -334,6 +374,7 @@ footer.about a{color:var(--ink-2)}
           <select id="selStudent"></select>
         </label>
         <span class="hint">Chrono : <kbd>C</kbd> · erreur : <kbd>E</kbd> ou clic sur le mot</span>
+        <button class="btn go-set" id="bGoSet" type="button">Réglages</button>
         <button class="btn pri big sp" id="bLaunch">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
           Lancer au pupitre
@@ -346,15 +387,17 @@ footer.about a{color:var(--ink-2)}
       </footer>
     </div>
 
-    <aside class="panel settings" aria-label="Réglages">
+    <aside class="panel settings" id="settings" aria-label="Réglages">
       <div class="panel-h"><h2>Réglages</h2>
         <select id="selPreset" class="btn sm" aria-label="Réglages enregistrés"></select>
         <span id="presetWrap"><button class="btn sm" id="bPresetSave" title="Enregistrer ces réglages sous un nom">Enregistrer</button></span>
       </div>
 
       <details class="sec" open>
-        <summary>Typographie</summary>
+        <summary>Réglages rapides <span class="sum-hint"></span></summary>
         <div class="sec-b">
+          <div class="fld stack"><span class="l" id="lProf">Point de départ</span>
+            <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div></div>
           <div class="fld"><label for="sFont">Police</label>
             <select id="sFont">
               <option value="Luciole">Luciole</option>
@@ -367,29 +410,36 @@ footer.about a{color:var(--ink-2)}
             </select></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
           <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
+          <div class="fld stack"><span class="l" id="lBg">Fond et texte</span>
+            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
+          <span class="sub" id="contrast"></span>
+        </div>
+      </details>
+
+      <details class="sec">
+        <summary>Typographie détaillée <span class="sum-hint"></span></summary>
+        <div class="sec-b">
           <div class="fld"><label for="sWord">Entre les mots</label><input type="range" id="sWord" min="0" max="1.2" step="0.05"><output id="oWord"></output></div>
           <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
           <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
           <label class="chk"><input type="checkbox" id="sBold"> Texte en gras</label>
-          <p class="sub">L'espacement élargi entre les lettres est le réglage le mieux étayé pour les lecteurs dyslexiques (Zorzi et al., 2012). Les polices « dyslexie » n'ont pas montré d'effet (Kuster et al., 2018).</p>
+          <p class="sub">L’espacement élargi entre les lettres est le réglage le mieux étayé pour les lecteurs dyslexiques (Zorzi et al., 2012). Les polices « dyslexie » n’ont pas montré d’effet (Kuster et al., 2018).</p>
         </div>
       </details>
 
-      <details class="sec" open>
-        <summary>Fond et texte</summary>
+      <details class="sec">
+        <summary>Couleurs au choix <span class="sum-hint"></span></summary>
         <div class="sec-b">
-          <div class="presets" id="bgPresets"></div>
           <div class="row">
             <label class="row hint" for="sBg">Fond <input type="color" id="sBg" class="swatch"></label>
             <label class="row hint" for="sFg">Texte <input type="color" id="sFg" class="swatch"></label>
-            <span class="sub" id="contrast"></span>
           </div>
-          <p class="sub">Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s'applique tout seul.</p>
+          <p class="sub">Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
         </div>
       </details>
 
       <details class="sec" open>
-        <summary>Codage</summary>
+        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l">Syllabes</span>
             <div class="seg" role="group" aria-label="Syllabes">
@@ -418,10 +468,10 @@ footer.about a{color:var(--ink-2)}
         </div>
       </details>
 
-      <details class="sec" open>
-        <summary>Pupitre</summary>
+      <details class="sec">
+        <summary>Pupitre <span class="sum-hint" id="hStage"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l">Avance</span>
+          <div class="fld stack"><span class="l">Façon d’avancer</span>
             <div class="seg" role="group" aria-label="Mode d'avance">
               <button data-mode="ligne">Ligne par ligne</button><button data-mode="continu">Continu</button><button data-mode="mot">Mot à mot</button>
             </div></div>
@@ -431,24 +481,25 @@ footer.about a{color:var(--ink-2)}
             <div class="seg" role="group" aria-label="Lignes en évidence">
               <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
             </div></div>
-          <div class="fld"><label for="sDim">Reste du texte</label>
+          <div class="fld"><label for="sDim">Texte autour</label>
             <select id="sDim">
-              <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">masqué</option>
+              <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
             </select></div>
-          <div class="fld"><label for="sPos">Ligne de lecture</label>
+          <div class="fld"><label for="sPos">Position de la ligne</label>
             <select id="sPos"><option value="0.2">en haut</option><option value="0.33">au tiers</option><option value="0.45">au milieu</option></select></div>
-          <div class="fld"><label for="sBand">Repère</label>
+          <div class="fld"><label for="sBand">Marque de la ligne</label>
             <select id="sBand"><option value="surligneur">surligneur</option><option value="cadre">cadre</option><option value="aucun">aucun</option></select>
           </div>
-          <div class="row"><span class="hint">Couleur du repère</span><input type="color" id="cBand" class="swatch" aria-label="Couleur du repère"></div>
+          <div class="row"><span class="hint">Couleur de la marque</span><input type="color" id="cBand" class="swatch" aria-label="Couleur de la marque de la ligne"></div>
           <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
           <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées pendant la lecture</label>
-          <p class="sub">Par défaut, les erreurs restent invisibles à l'écran projeté : seule l'enseignante les retrouve dans « Séances ».</p>
+          <label class="chk"><input type="checkbox" id="sHud"> Garder chrono et erreurs visibles dans un coin</label>
+          <p class="sub">Par défaut, chrono et erreurs restent invisibles à l’écran projeté : seule l’enseignante les retrouve dans « Séances ». Cochez ces options seulement si vous lisez sur votre propre écran.</p>
         </div>
       </details>
 
       <details class="sec">
-        <summary>Voix</summary>
+        <summary>Voix <span class="sum-hint"></span></summary>
         <div class="sec-b">
           <div class="fld"><label for="sVoice">Voix</label><select id="sVoice"></select></div>
           <div class="fld"><label for="sRate">Débit</label><input type="range" id="sRate" min="0.5" max="1.3" step="0.05"><output id="oRate"></output></div>
@@ -457,7 +508,7 @@ footer.about a{color:var(--ink-2)}
       </details>
 
       <details class="sec">
-        <summary>Sauvegarde</summary>
+        <summary>Sauvegarde <span class="sum-hint"></span></summary>
         <div class="sec-b">
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
@@ -510,14 +561,14 @@ footer.about a{color:var(--ink-2)}
     <div class="guide-body">
       <div class="guide-steps">
         <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes » à gauche, ou « + Nouveau » pour en écrire un.</p></div>
-        <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Taille, couleurs, codage des sons : l'aperçu se met à jour tout de suite.</p></div>
-        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Dans le menu « Lecteur·rice », en bas du texte.</p></div>
-        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert, ou l'icône écran en haut à droite.</p></div>
+        <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Trois points de départ (dyslexie, allophonie, décrochage), puis police, taille, couleurs : l’aperçu se met à jour tout de suite.</p></div>
+        <div class="guide-step"><b><span class="gnum">3</span>Choisir l'élève</b><p>Dans le menu « Lecteur·rice », à côté du bouton « Lancer ». Cette barre reste visible quand vous faites défiler la page.</p></div>
+        <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert « Lancer », en bas de la page ou en haut à droite.</p></div>
       </div>
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Préparer un texte</h3>
-        <p>L'onglet <b>Préparer</b> (première icône carrée en haut) est la page de départ. À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
+        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
         <ul>
           <li><b>+ Nouveau</b> crée un texte vide ; <b>Modifier le texte</b> permet de le taper ou de le coller, une ligne vide séparant les paragraphes.</li>
           <li><b>Importer .txt / .docx</b>, en haut de la zone de texte, récupère un fichier existant.</li>
@@ -529,12 +580,13 @@ footer.about a{color:var(--ink-2)}
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
-        <p>Le panneau <b>Réglages</b>, à droite, s'applique tout de suite à l'aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l'ouvrir ou le refermer.</p>
+        <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Typographie</b> : police, taille, espacement entre les lettres et les mots, interligne, longueur de ligne.</li>
-          <li><b>Fond et texte</b> : quatre présets rapides, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
+          <li><b>Réglages rapides</b> : trois points de départ (<b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>) à ajuster ensuite, puis police, taille, espacement entre les lettres et fond. Les points de départ sont des suggestions : modifiez-les selon l’élève.</li>
+          <li><b>Typographie détaillée</b> : espacement entre les mots, interligne, longueur de ligne, gras.</li>
+          <li><b>Fond et texte</b> : quatre fonds rapides, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
-          <li><b>Pupitre</b> : façon d'avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, décompte avant le départ.</li>
+          <li><b>Pupitre</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché, en gris), décompte avant le départ, coin chrono et erreurs (facultatif).</li>
           <li><b>Voix</b> : la voix et le débit utilisés par la synthèse vocale.</li>
         </ul>
         <p>Une fois un réglage trouvé, <b>Enregistrer</b> (en haut du panneau) le garde sous un nom, pour le retrouver dans le menu « Réglages… » avec un autre texte ou un autre élève.</p>
@@ -544,8 +596,10 @@ footer.about a{color:var(--ink-2)}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg></span>Au pupitre</h3>
         <p>« Lancer au pupitre » passe en plein écran. Une barre de commandes apparaît en bas ; elle se masque après quelques secondes et revient au moindre mouvement de souris ou toucher d'écran.</p>
         <ul>
-          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, lire à voix haute, aide, plein écran, quitter : tout est dans cette barre, et fonctionne aussi au clavier.</li>
-          <li>Par défaut, les erreurs comptées restent invisibles à l'écran projeté ; seule l'enseignante les retrouve ensuite dans « Séances ».</li>
+          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, aide, plein écran, quitter : tout est dans cette barre, et fonctionne aussi au clavier.</li>
+          <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
+          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. Le résultat (MCM, erreurs) ne s’affiche que si vous cliquez sur « Voir le résultat ».</li>
+          <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
       </div>
@@ -575,7 +629,7 @@ footer.about a{color:var(--ink-2)}
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4M4 20h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></svg></span>Séances et suivi</h3>
-        <p>L'onglet <b>Séances</b> (icône graphique) enregistre chaque lecture chronométrée. À gauche, la liste des élèves (pseudonymes conseillés) ; à droite, le tableau des séances et, si un élève est sélectionné, une carte de progression par texte.</p>
+        <p>L’onglet <b>Séances</b> enregistre chaque lecture chronométrée. À gauche, la liste des élèves (pseudonymes conseillés) ; à droite, le tableau des séances et, si un élève est sélectionné, une carte de progression par texte.</p>
         <ul>
           <li><b>MCM</b> (mots correctement lus par minute) = (mots lus − erreurs) ÷ minutes. Les mots lus comptent jusqu'à la ligne atteinte, ou jusqu'au mot marqué au pupitre avec <b>Maj</b>+clic.</li>
           <li>Les valeurs du tableau se corrigent directement, si besoin.</li>
@@ -597,7 +651,8 @@ footer.about a{color:var(--ink-2)}
 </div>
 
 <!-- ================= PUPITRE ================= -->
-<div class="stage" id="stage" hidden aria-label="PL-lect'">
+<div class="stage" id="stage" hidden role="dialog" aria-modal="true" aria-label="Pupitre de lecture">
+  <div class="sr" id="stLive" aria-live="polite" aria-atomic="true"></div>
   <div class="st-col" id="stCol">
     <div class="st-move" id="stMove">
       <div class="band" id="band"></div>
@@ -642,11 +697,26 @@ footer.about a{color:var(--ink-2)}
     <span class="sep"></span>
     <button id="xChrono" title="Chrono (C)"></button>
     <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN">0</span></button>
-    <button id="xSpeak" title="Lire la ligne (L)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
+    <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
+    <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot lu</button>
+    <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
     <span class="sep"></span>
     <button id="xHelp" title="Aide (H)" aria-label="Aide">?</button>
     <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
     <button id="xExit" title="Quitter (Échap)">Quitter</button>
+  </div>
+  <div class="st-hud" id="stHud" hidden><span id="hudChrono">00:00</span><span id="hudErr"></span></div>
+  <div class="st-done" id="stDone" hidden>
+    <div class="box" role="group" aria-labelledby="doneT">
+      <h3 id="doneT">Lecture enregistrée</h3>
+      <p id="doneSub"></p>
+      <p class="res" id="doneRes" hidden></p>
+      <div class="row">
+        <button class="btn" id="doneShow" type="button">Voir le résultat</button>
+        <button class="btn" id="doneSess" type="button">Ouvrir les séances</button>
+        <button class="btn pri" id="doneClose" type="button">Continuer</button>
+      </div>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1767,7 +1837,7 @@ function defaults(){
     syl:'couleurs', sylOral:false, muet:true, liaison:true, mots:false, lignes:false, sons:false,
     sonsSel: defaultSons(),
     pal:{light:JSON.parse(JSON.stringify(PAL_L)), dark:JSON.parse(JSON.stringify(PAL_D))},
-    mode:'ligne', lpm:12, wpm:70, win:1, dim:0.5, pos:0.33, band:'surligneur', countdown:true, showErr:false,
+    mode:'ligne', lpm:12, wpm:70, win:1, dim:0.5, pos:0.33, band:'surligneur', countdown:true, showErr:false, hud:false,
     voice:'', rate:0.9
   };
 }
@@ -1982,8 +2052,6 @@ function toast(msg){ const t = $('toast'); t.textContent = msg; t.classList.add(
 function renderLib(){
   const list = $('libList');
   const ct = curText();
-  $('hTitle').textContent = ct.title || 'Sans titre';
-  $('hEyebrow').textContent = "PL-lect'" + (ct.level ? ' · niveau ' + ct.level : '') + ' · ' + ((ct.text||'').match(TOKEN) || []).length + ' mots';
   const sorted = DB.texts.slice().sort((a,b) => (a.level||'9').localeCompare(b.level||'9') || a.title.localeCompare(b.title,'fr'));
   list.innerHTML = sorted.map(t => {
     const n = (t.text.match(TOKEN) || []).length;
@@ -2057,7 +2125,11 @@ $('pv').addEventListener('mouseover', e => {
   const w = e.target.closest('.w'); if (!w || w.title) return;
   const d = WORDS[+w.dataset.i]; if (d && d.ipa) w.title = '/' + d.ipa + '/';
 });
-$('pv').addEventListener('click', e => { const w = e.target.closest('.w'); if (w) speak(WORDS[+w.dataset.i].t); });
+$('pv').addEventListener('click', e => {
+  const w = e.target.closest('.w'); if (!w) return;
+  const d = WORDS[+w.dataset.i]; speak(d.t);
+  if (matchMedia('(hover:none)').matches && d.ipa) toast(d.t + '  /' + d.ipa + '/');
+});
 
 /* ---------- Panneau réglages ---------- */
 const RANGES = [['sSize','size','oSize',v=>v+' px'],['sLetter','letter','oLetter',v=>(+v).toFixed(2)+' em'],['sWord','word','oWord',v=>(+v).toFixed(2)+' em'],
@@ -2072,7 +2144,7 @@ let pvT = 0;
 function schedulePreviewLines(){ clearTimeout(pvT); pvT = setTimeout(() => computeLines($('pv')), 120); }
 const COLORS = [['cSyl0','syl0'],['cSyl1','syl1'],['cArc','arc'],['cMuet','muet'],['cLiaison','liaison'],['cMot0','mot0'],['cMot1','mot1'],['cLig0','lig0'],['cLig1','lig1'],['cBand','band']];
 COLORS.forEach(([id,key]) => $(id).addEventListener('input', () => { P()[key] = $(id).value; save(); applyStyle(); }));
-const CHECKS = [['sBold','bold'],['sMuet','muet'],['sLiaison','liaison'],['sMots','mots'],['sLignes','lignes'],['sSons','sons'],['sCount','countdown'],['sShowErr','showErr']];
+const CHECKS = [['sBold','bold'],['sMuet','muet'],['sLiaison','liaison'],['sMots','mots'],['sLignes','lignes'],['sSons','sons'],['sCount','countdown'],['sShowErr','showErr'],['sHud','hud']];
 CHECKS.forEach(([id,key]) => $(id).addEventListener('change', () => { S()[key] = $(id).checked; save(); syncUI(); applyStyle(); if (key==='bold') schedulePreviewLines(); }));
 $('sSylOral').addEventListener('change', () => { S().sylOral = $('sSylOral').checked; save(); refreshAll(true); });
 $('sFont').addEventListener('change', () => { S().font = $('sFont').value; save(); applyStyle(); (document.fonts ? document.fonts.ready : Promise.resolve()).then(schedulePreviewLines); });
@@ -2120,8 +2192,30 @@ $('bSonsVoy').addEventListener('click', () => setSons(g => g[4]==='v' && g[0]!==
 $('bSonsAll').addEventListener('click', () => setSons(() => true));
 $('bSonsNone').addEventListener('click', () => setSons(() => false));
 
+/* Points de départ (suggestions à ajuster selon l'élève) */
+const PROFILES = [
+  {id:'dys', name:'Dyslexie', s:{font:'Luciole', size:64, letter:0.14, word:0.4, line:2.0, syl:'couleurs', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:1}},
+  {id:'allo', name:'Allophonie', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:true, muet:true, liaison:true, mots:false, lignes:false, win:1}},
+  {id:'decro', name:'Décrochage', s:{font:'Atkinson Hyperlegible', size:56, letter:0.06, word:0.3, line:1.7, syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:2}}
+];
+$('profiles').innerHTML = PROFILES.map(p => `<button type="button" data-prof="${p.id}" aria-pressed="false">${p.name}</button>`).join('');
+$('profiles').addEventListener('click', e => {
+  const b = e.target.closest('[data-prof]'); if (!b) return;
+  const pr = PROFILES.find(x => x.id === b.dataset.prof);
+  Object.assign(S(), pr.s); save(); syncUI(); refreshAll(true);
+  toast('Point de départ « ' + pr.name + ' » appliqué : ajustez-le selon l’élève');
+});
+const MODE_SHORT = {ligne:'ligne par ligne', continu:'continu', mot:'mot à mot'};
+function updateHints(){
+  const s = S();
+  PROFILES.forEach(pr => { const b = document.querySelector(`[data-prof="${pr.id}"]`); if (b) b.setAttribute('aria-pressed', Object.keys(pr.s).every(k => s[k] === pr.s[k])); });
+  $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
+  $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
+}
+
 function syncUI(){
   const s = S(), p = P();
+  updateHints();
   RANGES.forEach(([id,key,out,fmt]) => { $(id).value = s[key]; $(out).textContent = fmt(s[key]); });
   COLORS.forEach(([id,key]) => $(id).value = p[key]);
   CHECKS.forEach(([id,key]) => $(id).checked = !!s[key]);
@@ -2129,7 +2223,7 @@ function syncUI(){
   $('sFont').value = s.font; $('sDim').value = String(s.dim); $('sPos').value = String(s.pos); $('sBand').value = s.band;
   $('sBg').value = s.bg; $('sFg').value = s.fg;
   const cr = contrast(s.bg, s.fg);
-  $('contrast').textContent = 'Contraste ' + cr.toFixed(1) + ' : 1' + (cr < 7 ? ' — faible pour un beamer' : '');
+  $('contrast').textContent = 'Contraste ' + cr.toFixed(1) + ' : 1' + (cr < 7 ? ' : faible pour un beamer' : '');
   document.querySelectorAll('[data-syl]').forEach(b => b.setAttribute('aria-pressed', b.dataset.syl === s.syl));
   document.querySelectorAll('[data-mode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.mode === s.mode));
   document.querySelectorAll('[data-win]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.win === s.win));
@@ -2214,7 +2308,8 @@ function lineOfWord(i){ const L = ST.lines; for (let k = 0; k < L.length; k++) i
 function launch(){
   if (ST.open) return;
   ST.open = true; ST.playing = false; ST.line = 0; ST.word = -1; ST.scrollY = 0;
-  ST.errors = []; ST.endMark = null; ST.chrono = null;
+  ST.errors = []; ST.endMark = null; ST.chrono = null; ST.armMark = false;
+  $('stDone').hidden = true;
   applyStyle();
   stText.innerHTML = HTML;
   stage.hidden = false;
@@ -2257,14 +2352,18 @@ function render(animate){
   band.style.left = (-0.35 * fs) + 'px'; band.style.right = (-0.35 * fs) + 'px';
   const vTop = bTop + tr, vBot = vTop + bH;
   const mt = $('mTop'), mb = $('mBot');
-  mt.style.opacity = mb.style.opacity = s.dim;
+  mt.style.setProperty('--dim', s.dim); mb.style.setProperty('--dim', s.dim);
   mt.style.height = Math.max(0, vTop) + 'px';
   mb.style.top = vBot + 'px'; mb.style.height = Math.max(0, vh() - vBot) + 'px';
   // mot courant
   if (s.mode === 'mot' || ST.hadCur) { stText.querySelectorAll('.w.cur').forEach(w => w.classList.remove('cur')); ST.hadCur = false; }
   if (s.mode === 'mot' && ST.word >= 0) ST.hadCur = true;
   if (s.mode === 'mot' && ST.word >= 0) { const w = stText.querySelector(`.w[data-i="${ST.word}"]`); if (w) w.classList.add('cur'); }
-  // erreurs visibles ?
+  if (s.mode === 'ligne' && !ST.playing) {
+    const a = L[ST.line], b = L[Math.min(L.length - 1, ST.line + s.win - 1)], t = [];
+    for (let i = a.first; i <= b.last; i++) t.push(WORDS[i].t);
+    $('stLive').textContent = t.join(' ');
+  }
 }
 function gotoLine(k){
   const L = ST.lines; if (!L.length) return;
@@ -2356,9 +2455,20 @@ function stopChrono(record){
   const sess = {id: uid(), ts: Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
     dur: Math.round(dur), words: wordsRead(), err: ST.errors.length, errWords: ST.errors.filter(i => i !== null).map(i => WORDS[i] ? WORDS[i].t : ''), total: WORDS.length};
   DB.sessions.push(sess); save();
-  stToast('Séance enregistrée · ' + fmt(dur));
+  showDone(sess);
   renderSessions();
 }
+function showDone(sess){
+  $('doneSub').textContent = 'Durée : ' + fmt(sess.dur);
+  const m = Math.round(mcmOf(sess));
+  $('doneRes').textContent = m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
+  $('doneRes').hidden = true; $('doneShow').hidden = false;
+  $('stDone').hidden = false; $('doneClose').focus();
+}
+function closeDone(){ $('stDone').hidden = true; if (ST.open) stage.focus(); }
+$('doneShow').addEventListener('click', () => { $('doneRes').hidden = false; $('doneShow').hidden = true; });
+$('doneClose').addEventListener('click', closeDone);
+$('doneSess').addEventListener('click', () => { $('stDone').hidden = true; exitStage(); setTab('sess'); });
 function addError(i){
   if (!ST.chrono) { stToast('Chrono arrêté (C pour démarrer)'); return; }
   if (i !== null && i !== undefined) {
@@ -2385,8 +2495,16 @@ function updateBar(){
   const c = $('xChrono');
   c.classList.toggle('rec', !!ST.chrono);
   c.textContent = ST.chrono ? '■ ' + fmt((performance.now() - ST.chrono)/1000) : '● Chrono';
+  $('xUndo').hidden = !ST.errors.length;
+  $('xMark').hidden = !ST.chrono;
+  $('xMark').classList.toggle('armed', !!ST.armMark);
+  const hud = $('stHud'); hud.hidden = !(s.hud && ST.open);
+  if (!hud.hidden) {
+    $('hudChrono').textContent = ST.chrono ? '● ' + fmt((performance.now() - ST.chrono)/1000) : 'Chrono arrêté';
+    $('hudErr').textContent = ST.errors.length + ' erreur' + (ST.errors.length > 1 ? 's' : '');
+  }
 }
-setInterval(() => { if (ST.open && ST.chrono && !$('stBar').classList.contains('off')) updateBar(); }, 500);
+setInterval(() => { if (ST.open && ST.chrono && (S().hud || !$('stBar').classList.contains('off'))) updateBar(); }, 500);
 function showBar(){ $('stBar').classList.remove('off'); stage.classList.remove('hide-cursor'); hideBarSoon(); }
 function hideBarSoon(){ clearTimeout(ST.barT); ST.barT = setTimeout(() => { if ($('stBar').matches(':hover')) return hideBarSoon(); $('stBar').classList.add('off'); stage.classList.add('hide-cursor'); }, 2600); }
 let stToastT = 0;
@@ -2430,6 +2548,7 @@ function speakLine(){
   speak(parts.join(' '));
 }
 
+$('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
 $('bLaunch').addEventListener('click', launch);
 $('bLaunchTop').addEventListener('click', launch);
 /* Guide d'utilisation */
@@ -2454,7 +2573,16 @@ $('bHelp').addEventListener('click', () => openGuide(true));
 $('guideClose').addEventListener('click', closeGuide);
 $('guideCloseBtn').addEventListener('click', closeGuide);
 $('guideBackdrop').addEventListener('click', e => { if (e.target === $('guideBackdrop')) closeGuide(); });
-document.addEventListener('keydown', e => { if (!$('guideBackdrop').hidden && e.key === 'Escape') closeGuide(); });
+document.addEventListener('keydown', e => {
+  if ($('guideBackdrop').hidden) return;
+  if (e.key === 'Escape') { closeGuide(); return; }
+  if (e.key !== 'Tab') return;
+  const f = [...$('guideBackdrop').querySelectorAll('button,input,a[href]')].filter(x => !x.disabled && x.offsetParent !== null);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+});
 if (guideAutoPref()) setTimeout(() => openGuide(false), 300);
 function applyTheme(t){ if (t) document.documentElement.setAttribute('data-theme', t); else document.documentElement.removeAttribute('data-theme'); }
 let uiTheme = ''; try { uiTheme = localStorage.getItem('pupitre.theme') || ''; } catch(e){}
@@ -2472,6 +2600,8 @@ $('xFast').addEventListener('click', () => speedDelta(1));
 $('xChrono').addEventListener('click', toggleChrono);
 $('xErr').addEventListener('click', () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null));
 $('xSpeak').addEventListener('click', speakLine);
+$('xUndo').addEventListener('click', undoError);
+$('xMark').addEventListener('click', () => { ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); });
 $('xHelp').addEventListener('click', () => $('stHelp').hidden = !$('stHelp').hidden);
 $('xFull').addEventListener('click', toggleFull);
 $('xExit').addEventListener('click', exitStage);
@@ -2479,6 +2609,7 @@ $('stBar').addEventListener('click', () => { if (document.activeElement && docum
 
 document.addEventListener('keydown', e => {
   if (!ST.open) return;
+  if (!$('stDone').hidden) { if (e.key === 'Escape') { e.preventDefault(); closeDone(); } return; }
   const k = e.key;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const map = {
@@ -2514,7 +2645,8 @@ stage.addEventListener('pointerup', e => {
   const w = e.target.closest('.w'); if (!w) return;
   const i = +w.dataset.i;
   if (ST.chrono) {
-    if (e.shiftKey) {
+    if (e.shiftKey || ST.armMark) {
+      ST.armMark = false; updateBar();
       stText.querySelectorAll('.endmark').forEach(x => x.classList.remove('endmark'));
       ST.endMark = (ST.endMark === i) ? null : i; if (ST.endMark !== null) w.classList.add('endmark'); tickMark();
     } else addError(i);
@@ -2640,11 +2772,18 @@ $('restoreConfirm').addEventListener('click', e => {
 /* ---------- Onglets ---------- */
 function setTab(t){
   $('tabPrep').setAttribute('aria-selected', t === 'prep'); $('tabSess').setAttribute('aria-selected', t === 'sess');
+  $('tabPrep').tabIndex = t === 'prep' ? 0 : -1; $('tabSess').tabIndex = t === 'sess' ? 0 : -1;
   $('viewPrep').hidden = t !== 'prep'; $('viewSess').hidden = t !== 'sess';
   if (t === 'sess') renderSessions(); else schedulePreviewLines();
 }
 $('tabPrep').addEventListener('click', () => setTab('prep'));
 $('tabSess').addEventListener('click', () => setTab('sess'));
+document.querySelector('[role="tablist"]').addEventListener('keydown', e => {
+  if (!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+  e.preventDefault();
+  const t = (e.key === 'ArrowLeft' || e.key === 'Home') ? 'prep' : 'sess';
+  setTab(t); $(t === 'prep' ? 'tabPrep' : 'tabSess').focus();
+});
 
 /* ---------- Démarrage ---------- */
 function initAll(){
