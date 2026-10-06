@@ -183,7 +183,15 @@ kbd{font:600 16px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-
 
 /* Réglages */
 .settings{max-height:calc(100vh - 40px);overflow:auto;position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);padding-bottom:10px}
-@media (max-width:860px){.settings{max-height:none;position:static}}
+.sheet-x{display:none}
+@media (max-width:860px){
+  /* Petit écran : les réglages s'ouvrent en feuille au-dessus de la barre de lancement, l'aperçu reste visible au-dessus */
+  .settings{display:none;position:fixed;left:8px;right:8px;top:auto;bottom:var(--launch-h,170px);max-height:42vh;max-height:42dvh;overflow:auto;z-index:29;box-shadow:0 -8px 28px rgba(0,0,0,.28)}
+  html.sheet .settings{display:block}
+  html.sheet .app{padding-bottom:calc(var(--launch-h,170px) + 42vh + 12px);padding-bottom:calc(var(--launch-h,170px) + 42dvh + 12px)}
+  html.sheet .preview-wrap{max-height:max(140px, calc(100vh - var(--launch-h,170px) - 42vh - 90px));max-height:max(140px, calc(100dvh - var(--launch-h,170px) - 42dvh - 90px))}
+  .sheet-x{display:inline-flex}
+}
 details.sec{margin:8px 14px 0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
 details.sec>summary{list-style:none;cursor:pointer;padding:13px 16px;font:700 1.125rem var(--display);display:flex;align-items:center;gap:8px}
 details.sec>summary::-webkit-details-marker{display:none}
@@ -537,7 +545,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
 
       <div class="panel launch">
         <span class="launch-sum" id="launchSum"></span>
-        <button class="btn go-set" id="bGoSet" type="button">Réglages</button>
+        <button class="btn go-set" id="bGoSet" type="button" aria-expanded="false" aria-controls="settings">Réglages</button>
         <button class="btn proj-btn" id="bProj" type="button" aria-pressed="false" title="Ouvre une fenêtre à glisser sur l’écran projeté : les élèves n’y voient que le texte, vous pilotez depuis celui-ci.">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6" fill="var(--surface-2)"/></svg>
           <span id="bProjT">Ouvrir un 2ᵉ écran</span>
@@ -595,7 +603,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     </div>
 
     <aside class="panel settings" id="settings" aria-label="Réglages">
-      <div class="panel-h"><h2>Réglages</h2></div>
+      <div class="panel-h"><h2>Réglages</h2><button class="btn sm sheet-x" id="bSheetX" type="button">Fermer</button></div>
 
       <!-- 1. Réglage rapide : un point de départ, puis les trois ajustements les plus fréquents -->
       <details class="sec" open>
@@ -841,7 +849,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
 
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
-        <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
+        <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas, qui ouvre les réglages en feuille sous l’aperçu ; « Fermer » les referme), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
           <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. Sous « Fond et codage du texte… » : le fond et le préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
           <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
@@ -3482,7 +3490,22 @@ $('recentBody').addEventListener('click', e => { if (e.target.id === 'bEvo') { s
 function renderHome(){ $('stepHint').hidden = DB.sessions.length > 0; renderAfter(); renderRecent(); renderLaunch(); }
 $('selReg').addEventListener('change', () => { const v = $('selReg').value; if (v) applyEntry(v.split(':')[0], v.split(':')[1]); });
 
-$('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
+/* Petit écran : feuille de réglages sous l'aperçu (voir .settings dans la feuille de style) */
+const narrowMQ = matchMedia('(max-width:860px)');
+function setSheet(on){
+  const root = document.documentElement;
+  if (on && !narrowMQ.matches) on = false;
+  root.classList.toggle('sheet', on);
+  $('bGoSet').setAttribute('aria-expanded', on);
+  if (!on) return;
+  root.style.setProperty('--launch-h', document.querySelector('.launch').offsetHeight + 'px');
+  $('pvWrap').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'});
+}
+$('bGoSet').addEventListener('click', () => setSheet(!document.documentElement.classList.contains('sheet')));
+$('bSheetX').addEventListener('click', () => { setSheet(false); $('bGoSet').focus(); });
+narrowMQ.addEventListener('change', () => { if (!narrowMQ.matches) setSheet(false); });
+window.addEventListener('resize', () => { if (document.documentElement.classList.contains('sheet')) document.documentElement.style.setProperty('--launch-h', document.querySelector('.launch').offsetHeight + 'px'); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !e.defaultPrevented && document.documentElement.classList.contains('sheet') && $('settings').contains(document.activeElement)) { setSheet(false); $('bGoSet').focus(); } });
 /* Choix de l'élève avant le pupitre (une seule fois par session si on continue sans) */
 let askedNoStudent = false;
 const hasStudent = () => DB.students.some(x => x.id === DB.curStudent);
