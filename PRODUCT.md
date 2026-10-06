@@ -40,7 +40,7 @@ Deux choses qu'un prompteur ou un lecteur de texte ordinaire ne fait pas :
 - Aperçu codé en direct, à 50 % de la taille du pupitre.
 - Pupitre plein écran : trois modes d'avance (ligne par ligne, continu, mot à mot), lignes en évidence, décompte, commandes tactiles et raccourcis clavier.
 - Chronométrage et suivi par élève : MCM, erreurs, historique, export CSV.
-- Synthèse vocale pour un mot, une ligne ou un texte.
+- Synthèse vocale pour un mot, une ligne ou un texte : voix du système (meilleure voix française choisie automatiquement) ou voix naturelle Piper, téléchargée volontairement une fois par appareil (environ 93 Mo) et utilisable hors ligne depuis la version en ligne.
 - Guide d'utilisation intégré en deux onglets.
 - **Pas de données nominatives d'élèves** : pseudonymes ou initiales, rien n'est envoyé vers un serveur.
 - Le décodage des sons est automatique et peut se tromper (homographes, liaisons facultatives) : à vérifier avant une lecture importante.

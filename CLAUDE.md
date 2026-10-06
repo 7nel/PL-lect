@@ -27,6 +27,13 @@ Polices : Atkinson Hyperlegible, Andika et Lexend sont intégrées en base64 dan
 
 Écart assumé avec la charte : `--accent-soft` utilise 16 % comme la charte ; `--ink-2` est un peu plus foncé (#52635f en clair) pour tenir 4,5:1 sur `--surface-2`.
 
+## Voix naturelle (dossier `voix/`)
+
+- `voix/` pèse environ 93 Mo (modèle, phonétiseur, moteur ONNX, bibliothèque modifiée). Ne pas le modifier à la légère : chaque version s'ajoute à l'historique git.
+- `sw.js` (à la racine) garde ces fichiers dans le cache `pl-lect-voix-v1` pour le hors ligne. Si un fichier de `voix/` change, changer le nom du cache dans `sw.js`, dans `voix/vendor/piper-tts-web.js` et dans `index.html` (`PIPER_CACHE`).
+- La voix naturelle exige `https` ou `localhost` (service worker) : elle n'existe pas quand `index.html` est ouvert directement depuis un fichier.
+- La voix du système reste le repli : une erreur de Piper ne doit jamais empêcher d'entendre un mot.
+
 ## Règles propres au projet
 
 - **Le pupitre appartient à l'élève.** Aucun chrono, score, nom ou signal d'erreur visible à l'écran projeté, sauf option explicite de l'enseignante.
