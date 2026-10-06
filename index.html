@@ -542,6 +542,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div class="preview-note">
             <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
             <span><b id="nWords">0</b> mots</span>
+            <span>Fond : <b id="pvBg"></b></span>
             <span class="only-hover">Survoler un mot : transcription · clic : écouter</span><span class="only-touch">Toucher un mot : l’écouter et voir sa transcription</span>
           </div>
         </div>
@@ -2582,6 +2583,7 @@ function updateHints(){
   if (!$('presetName')) $('presetWrap').innerHTML = (act && act.kind === 'prof') ? '' : '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
   $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
   const bgp = BG_PRESETS.find(p => p[1].toLowerCase() === s.bg.toLowerCase() && p[2].toLowerCase() === s.fg.toLowerCase());
+  $('pvBg').textContent = bgp ? bgp[0].toLowerCase() : 'au choix';
   $('hCol').textContent = (bgp ? bgp[0].toLowerCase() : 'au choix') + (contrast(s.bg, s.fg) < 7 ? ' · contraste faible' : '');
   document.querySelectorAll('[data-bgp]').forEach(b => b.setAttribute('aria-pressed', BG_PRESETS[+b.dataset.bgp] === bgp));
   $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
@@ -2614,7 +2616,7 @@ function renderPresets(){ renderProfiles(); updateHints(); }
 $('presetWrap').addEventListener('click', e => {
   const w = $('presetWrap');
   if (e.target.id === 'bPresetSave') {
-    w.innerHTML = '<input type="text" id="presetName" placeholder="Nom" aria-label="Nom de ces réglages" style="width:140px;padding:4px 8px;min-height:36px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface)"> <button class="btn sm pri" id="bPresetOk" type="button">OK</button> <button class="btn sm" id="bPresetNo" type="button">Annuler</button>';
+    w.innerHTML = '<input type="text" id="presetName" placeholder="Nom" aria-label="Nom de ces réglages" style="width:140px;padding:4px 8px;min-height:44px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface)"> <button class="btn sm pri" id="bPresetOk" type="button">OK</button> <button class="btn sm" id="bPresetNo" type="button">Annuler</button>';
     $('presetName').focus();
   } else if (e.target.id === 'bPresetOk') {
     const n = $('presetName').value.trim() || 'Réglage ' + (DB.presets.length + 1);
