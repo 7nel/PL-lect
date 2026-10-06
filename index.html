@@ -84,7 +84,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-modal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);width:100%;max-width:760px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;gap:14px;padding:clamp(18px,3vh,28px)}
 .guide-top{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .guide-top h2{margin:0;font:700 1.5rem var(--display)}
-.guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:.95rem;max-width:56ch}
+.guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:1rem;max-width:56ch}
 .guide-close{flex:none;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
 .guide-close:hover{border-color:var(--line-strong)}
 .guide-close svg{width:18px;height:18px}
@@ -93,17 +93,20 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:14px}
 .guide-step b{display:flex;align-items:center;gap:8px;font:700 .95rem var(--display);margin-bottom:4px}
 .guide-step .gnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.8rem}
-.guide-step p{margin:0;font-size:.95rem;color:var(--ink-2);line-height:1.4}
+.guide-step p{margin:0;font-size:1rem;color:var(--ink-2);line-height:1.4}
 .guide-body h3{margin:0 0 8px;font:700 1.05rem var(--display);display:flex;align-items:center;gap:8px}
 .guide-body h3 .gi{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .guide-body h3 .gi svg{width:16px;height:16px}
-.guide-body p{margin:0 0 8px;color:var(--ink-2);font-size:.92rem;line-height:1.55;max-width:68ch}
+.guide-body p{margin:0 0 8px;color:var(--ink-2);font-size:1rem;line-height:1.55;max-width:68ch}
 .guide-body ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
-.guide-body li{font-size:.92rem;line-height:1.55;color:var(--ink-2);max-width:68ch}
+.guide-body li{font-size:1rem;line-height:1.55;color:var(--ink-2);max-width:68ch}
 .guide-body li b{color:var(--ink)}
-.guide-table{width:100%;border-collapse:collapse;font-size:.95rem;margin-top:2px}
+.guide-table{width:100%;border-collapse:collapse;font-size:1rem;margin-top:2px}
 .guide-table th,.guide-table td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
 .guide-table th{background:var(--bg);font-weight:700;color:var(--ink-2);width:1%;white-space:nowrap}
+.guide-tabs{flex:0 0 auto;display:flex;gap:8px}
+.guide-tabs button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);font:700 1rem var(--ui);cursor:pointer}
+.guide-tabs button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .guide-foot{flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
 .guide-foot label{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--ink-2);cursor:pointer;margin-right:auto}
 .guide-foot input{accent-color:var(--accent);width:16px;height:16px}
@@ -125,13 +128,13 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lvl{flex:none;display:inline-grid;place-items:center;min-width:28px;height:24px;padding-inline:7px;border-radius:999px;font-size:.875rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
 .lib-m{font-size:14px;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.tag-ex{font-size:.875rem;color:var(--ink-2);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
+.tag-ex{font-size:.875rem;color:var(--ink);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:.95rem;white-space:nowrap}
 .btn:hover{border-color:var(--accent)}
 .btn.sm{padding:5px 12px;min-height:36px;font-size:.9rem}
-.btn.pri{background:var(--accent);border-color:transparent;color:var(--surface)}
+.btn.pri{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
 .btn.pri:hover{filter:brightness(1.08)}
 .btn.danger{color:color-mix(in srgb, var(--danger) 65%, var(--ink));background:var(--danger-soft);border-color:color-mix(in srgb, var(--danger) 45%, var(--line))}
 .btn.ghost{border-color:transparent;background:none}
@@ -198,6 +201,9 @@ input[type=color].swatch{padding:3px}
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .presets button{border:1px solid var(--line);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 .9rem var(--ui)}
 .sub{font-size:14px;color:var(--ink-3);line-height:1.45;margin:0}
+.son-det>summary{cursor:pointer;font:700 .95rem var(--ui);color:var(--accent);padding:8px 0;min-height:36px;display:flex;align-items:center}
+.son-det[open]>summary{margin-bottom:8px}
+.sec-b h3{margin:6px 0 -4px;font:700 .8rem var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:16px}
 .sons .hd{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 .sons .ex{color:var(--ink-3);font-size:14px}
@@ -264,8 +270,6 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .rt.cLignes .lines-layer{display:block}
 .rt .lbg.l0{background:var(--c-lig0)}
 .rt .lbg.l1{background:var(--c-lig1)}
-.st-tick{position:absolute;right:12px;bottom:12px;width:10px;height:10px;border-radius:50%;background:var(--st-fg);opacity:0;z-index:66;transition:opacity .15s}
-.st-tick.on{opacity:.6}
 .pv{padding:22px 26px;position:relative;isolation:isolate}
 .pv .w{cursor:help}
 
@@ -299,9 +303,12 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar .cnt{font-size:.8em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
 .st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:15px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
+.st-bar .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+.st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
+.st-q:hover{background:var(--surface)}
 .st-hud{position:absolute;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;gap:14px;align-items:center;background:color-mix(in srgb, var(--surface) 92%, transparent);color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 16px;font:700 16px var(--num);font-variant-numeric:tabular-nums}
 .st-bar:not(.off)~.st-hud{opacity:0}
-@media (max-width:860px){.st-bar{left:8px;right:8px;transform:none;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
+@media (max-width:860px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}.st-bar{left:8px;right:8px;transform:none;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
 .st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
 .st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px) clamp(24px,5vw,56px);max-width:min(760px,100%);text-align:center;font:16px/1.45 var(--ui)}
 .st-done h3{margin:0 0 8px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
@@ -414,13 +421,17 @@ footer.about a{color:var(--ink-2)}
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sFont">Police</label>
             <select id="sFont">
-              <option value="Luciole">Luciole</option>
-              <option value="Atkinson Hyperlegible">Atkinson Hyperlegible</option>
-              <option value="Andika">Andika</option>
-              <option value="Lexend">Lexend</option>
-              <option value="Arial">Arial</option>
-              <option value="Verdana">Verdana</option>
-              <option value="OpenDyslexic">OpenDyslexic</option>
+              <optgroup label="Conçues pour la lisibilité">
+                <option value="Luciole">Luciole</option>
+                <option value="Atkinson Hyperlegible">Atkinson Hyperlegible</option>
+                <option value="Andika">Andika</option>
+                <option value="Lexend">Lexend</option>
+              </optgroup>
+              <optgroup label="Autres">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="OpenDyslexic">OpenDyslexic</option>
+              </optgroup>
             </select></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
           <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
@@ -476,7 +487,10 @@ footer.about a{color:var(--ink-2)}
               <button class="btn sm" id="bSonsAll">Tout</button>
               <button class="btn sm" id="bSonsNone">Aucun</button>
             </div>
-            <div class="sons" id="sonsTbl"></div>
+            <details class="son-det">
+              <summary>Choisir les sons un par un…</summary>
+              <div class="sons" id="sonsTbl"></div>
+            </details>
             <p class="sub" style="margin-top:8px">Cochez seulement le ou les sons travaillés : une coloration ciblée est plus lisible qu'une coloration complète.</p>
           </div>
         </div>
@@ -485,6 +499,7 @@ footer.about a{color:var(--ink-2)}
       <details class="sec">
         <summary>Pupitre <span class="sum-hint" id="hStage"></span></summary>
         <div class="sec-b">
+          <h3>Avancer</h3>
           <div class="fld stack"><span class="l">Façon d’avancer</span>
             <div class="seg" role="group" aria-label="Mode d'avance">
               <button data-mode="ligne">Ligne par ligne</button><button data-mode="continu">Continu</button><button data-mode="mot">Mot à mot</button>
@@ -495,6 +510,8 @@ footer.about a{color:var(--ink-2)}
             <div class="seg" role="group" aria-label="Lignes en évidence">
               <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
             </div></div>
+          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
+          <h3>Apparence</h3>
           <div class="fld"><label for="sDim">Texte autour</label>
             <select id="sDim">
               <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
@@ -505,7 +522,7 @@ footer.about a{color:var(--ink-2)}
             <select id="sBand"><option value="surligneur">surligneur</option><option value="cadre">cadre</option><option value="aucun">aucun</option></select>
           </div>
           <div class="row"><span class="hint">Couleur de la marque</span><input type="color" id="cBand" class="swatch" aria-label="Couleur de la marque de la ligne"></div>
-          <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
+          <h3>Chrono et erreurs</h3>
           <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées pendant la lecture</label>
           <label class="chk"><input type="checkbox" id="sHud"> Garder chrono et erreurs visibles dans un coin</label>
           <p class="sub">Par défaut, chrono et erreurs restent invisibles à l’écran projeté : seule l’enseignante les retrouve dans « Séances ». Cochez ces options seulement si vous lisez sur votre propre écran.</p>
@@ -572,7 +589,11 @@ footer.about a{color:var(--ink-2)}
       </div>
       <button class="guide-close" id="guideClose" aria-label="Fermer le guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
-    <div class="guide-body">
+    <div class="guide-tabs" role="tablist" aria-label="Contenu du guide">
+      <button type="button" role="tab" id="gtStart" aria-selected="true" aria-controls="gpStart">Démarrer</button>
+      <button type="button" role="tab" id="gtRef" aria-selected="false" aria-controls="gpRef" tabindex="-1">Référence</button>
+    </div>
+    <div class="guide-body" id="gpStart" role="tabpanel" aria-labelledby="gtStart">
       <div class="guide-steps">
         <div class="guide-step"><b><span class="gnum">1</span>Choisir un texte</b><p>Dans « Textes » à gauche, ou « + Nouveau » pour en écrire un.</p></div>
         <div class="guide-step"><b><span class="gnum">2</span>Régler l'affichage</b><p>Trois points de départ (dyslexie, allophonie, décrochage), puis police, taille, couleurs : l’aperçu se met à jour tout de suite.</p></div>
@@ -580,6 +601,20 @@ footer.about a{color:var(--ink-2)}
         <div class="guide-step"><b><span class="gnum">4</span>Lancer au pupitre</b><p>Le bouton vert « Lancer au pupitre », dans la barre du bas.</p></div>
       </div>
 
+      <div>
+        <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2"/><path d="M3 9h18M8 4v4"/></svg></span>Les touches utiles au pupitre</h3>
+        <table class="guide-table">
+          <tr><th>Espace ou ↓</th><td>Ligne suivante</td></tr>
+          <tr><th>C</th><td>Démarrer / arrêter le chrono</td></tr>
+          <tr><th>E ou clic</th><td>Compter une erreur</td></tr>
+          <tr><th>Z</th><td>Annuler la dernière erreur</td></tr>
+          <tr><th>H ou ?</th><td>Toutes les commandes</td></tr>
+          <tr><th>Échap</th><td>Quitter le pupitre</td></tr>
+        </table>
+        <p>Tout le reste (réglages, séances, sauvegarde) est détaillé dans l’onglet « Référence ».</p>
+      </div>
+    </div>
+    <div class="guide-body" id="gpRef" role="tabpanel" aria-labelledby="gtRef" hidden>
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Préparer un texte</h3>
         <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
@@ -610,7 +645,7 @@ footer.about a{color:var(--ink-2)}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 16.5v4"/><path d="M6.5 12.5l3.5-3.5 2.5 2 4.5-4.5"/></svg></span>Au pupitre</h3>
         <p>« Lancer au pupitre » passe en plein écran. Une barre de commandes apparaît en bas ; elle se masque après quelques secondes et revient au moindre mouvement de souris ou toucher d'écran.</p>
         <ul>
-          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, aide, plein écran, quitter : tout est dans cette barre, et fonctionne aussi au clavier.</li>
+          <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
           <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
           <li>À l’arrêt du chrono, une carte confirme l’enregistrement. Le résultat (MCM, erreurs) ne s’affiche que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez.</li>
           <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
@@ -678,7 +713,6 @@ footer.about a{color:var(--ink-2)}
   <div class="countdown" id="countdown" hidden></div>
   <div class="st-black" id="stBlack" hidden></div>
   <div class="st-toast" id="stToast"></div>
-  <div class="st-tick" id="stTick"></div>
   <div class="st-help" id="stHelp" hidden>
     <h3>Commandes</h3>
     <dl>
@@ -701,24 +735,29 @@ footer.about a{color:var(--ink-2)}
     </dl>
   </div>
   <div class="st-bar" id="stBar">
-    <button id="xPlay" title="Démarrer / pause (Espace)"></button>
-    <button id="xPrev" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
-    <button id="xNext" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="grp">
+      <button id="xPlay" title="Démarrer / pause (Espace)"></button>
+      <button id="xPrev" title="Ligne précédente (↑)" aria-label="Ligne précédente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+      <button id="xNext" title="Ligne suivante (↓)" aria-label="Ligne suivante"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+      <button id="xSlow" title="Moins vite (−)" aria-label="Moins vite">−</button>
+      <span class="v" id="xSpeed"></span>
+      <button id="xFast" title="Plus vite (+)" aria-label="Plus vite">+</button>
+    </div>
     <span class="sep"></span>
-    <button id="xSlow" title="Moins vite (−)" aria-label="Moins vite">−</button>
-    <span class="v" id="xSpeed"></span>
-    <button id="xFast" title="Plus vite (+)" aria-label="Plus vite">+</button>
+    <div class="grp">
+      <button id="xChrono" title="Chrono (C)"></button>
+      <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN" class="cnt">0</span></button>
+      <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
+      <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot lu</button>
+    </div>
     <span class="sep"></span>
-    <button id="xChrono" title="Chrono (C)"></button>
-    <button id="xErr" title="Erreur (E)">Erreur <span id="xErrN" class="cnt">0</span></button>
-    <button id="xUndo" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
-    <button id="xMark" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot lu</button>
-    <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
-    <span class="sep"></span>
-    <button id="xHelp" title="Aide (H)" aria-label="Aide">?</button>
-    <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-    <button id="xExit" title="Quitter (Échap)">Quitter</button>
+    <div class="grp">
+      <button id="xSpeak" title="Lire la ligne à voix haute (V)" aria-label="Lire la ligne à voix haute"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></svg></button>
+      <button id="xFull" title="Plein écran (F)" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button id="xExit" title="Quitter (Échap)">Quitter</button>
+    </div>
   </div>
+  <button class="st-q" id="xHelp" title="Aide (H)" aria-label="Aide : commandes du pupitre">?</button>
   <div class="st-hud" id="stHud" hidden><span id="hudChrono">00:00</span><span id="hudErr"></span></div>
   <div class="st-done" id="stDone" hidden>
     <div class="box" role="group" aria-labelledby="doneT">
@@ -726,8 +765,8 @@ footer.about a{color:var(--ink-2)}
       <p id="doneSub"></p>
       <p class="res" id="doneRes" hidden></p>
       <div class="row">
-        <button class="btn" id="doneKeep" type="button" hidden>Enregistrer quand même</button>
-        <button class="btn pri" id="doneDrop" type="button" hidden>Ne pas enregistrer</button>
+        <button class="btn pri" id="doneKeep" type="button" hidden>Enregistrer cette lecture</button>
+        <button class="btn" id="doneDrop" type="button" hidden>Ne pas l’enregistrer</button>
         <button class="btn" id="doneShow" type="button">Voir le résultat</button>
         <button class="btn" id="doneSess" type="button">Ouvrir les séances</button>
         <button class="btn pri" id="doneClose" type="button">Continuer</button>
@@ -2328,6 +2367,7 @@ function launch(){
   ST.open = true; ST.playing = false; ST.line = 0; ST.word = -1; ST.scrollY = 0;
   ST.errors = []; ST.endMark = null; ST.chrono = null; ST.armMark = false;
   $('stDone').hidden = true;
+  clearTimeout(toastT); $('toast').classList.remove('on');
   applyStyle();
   stText.innerHTML = HTML;
   stage.hidden = false;
@@ -2365,6 +2405,10 @@ function render(animate){
     bTop = a.top - pad; bH = (b.bottom - a.top) + 2 * pad;
   }
   if (animate === false) stMove.classList.remove('anim');
+  { /* la bande ne passe jamais sous la barre de commandes */
+    const reserve = Math.min(vh() * 0.4, $('stBar').offsetHeight + 28), over = bTop + tr + bH - (vh() - reserve);
+    if (over > 0) tr = Math.max(tr - over, -bTop);
+  }
   stMove.style.transform = `translateY(${tr}px)`;
   band.className = 'band ' + (s.mode === 'mot' ? 'aucun' : s.band);
   band.style.top = bTop + 'px'; band.style.height = bH + 'px';
@@ -2455,7 +2499,7 @@ function toggleChrono(){
   if (!ST.chrono) {
     ST.chrono = performance.now(); ST.errors = []; ST.endMark = null;
     stText.querySelectorAll('.err-show,.endmark').forEach(w => w.classList.remove('err-show','endmark'));
-    tickMark(); updateBar();
+    updateBar();
   } else stopChrono(true);
 }
 function wordsRead(){
@@ -2482,14 +2526,14 @@ function stopChrono(record, fromExit){
 const SHORT_SEC = 10;
 let pendingShort = null;
 function showDone(sess, short){
-  $('doneT').textContent = short ? 'Lecture très courte' : 'Lecture enregistrée';
+  $('doneT').textContent = short ? 'Lecture de ' + sess.dur + ' s' : 'Lecture enregistrée';
   ['doneKeep','doneDrop'].forEach(id => $(id).hidden = !short);
   $('doneSess').hidden = $('doneClose').hidden = !!short;
-  $('doneSub').textContent = 'Durée : ' + fmt(sess.dur) + (short ? '. L’enregistrer quand même ?' : '');
+  $('doneSub').textContent = short ? 'Enregistrer cette lecture dans les séances ?' : 'Durée : ' + fmt(sess.dur);
   const m = Math.round(mcmOf(sess));
   $('doneRes').textContent = m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
   $('doneRes').hidden = true; $('doneShow').hidden = !!short;
-  $('stDone').hidden = false; (short ? $('doneDrop') : $('doneClose')).focus();
+  $('stDone').hidden = false; (short ? $('doneKeep') : $('doneClose')).focus();
 }
 function closeDone(){ pendingShort = null; $('stDone').hidden = true; if (ST.open) stage.focus(); }
 $('doneKeep').addEventListener('click', () => { const sess = pendingShort; if (!sess) return; DB.sessions.push(sess); save(); renderSessions(); closeDone(); stToast('Séance enregistrée'); });
@@ -2502,13 +2546,12 @@ function addError(i){
   if (i !== null && i !== undefined) {
     const k = ST.errors.indexOf(i);
     const w = stText.querySelector(`.w[data-i="${i}"]`);
-    if (k >= 0) { ST.errors.splice(k,1); if (w) w.classList.remove('err-show'); tickMark(); updateBar(); return; }
+    if (k >= 0) { ST.errors.splice(k,1); if (w) w.classList.remove('err-show'); updateBar(); return; }
     if (w && S().showErr) w.classList.add('err-show');
   }
-  ST.errors.push(i === undefined ? null : i); tickMark(); updateBar();
+  ST.errors.push(i === undefined ? null : i); updateBar();
 }
-function undoError(){ if (!ST.errors.length) return; const i = ST.errors.pop(); if (i !== null) { const w = stText.querySelector(`.w[data-i="${i}"]`); if (w) w.classList.remove('err-show'); } tickMark(); updateBar(); }
-function tickMark(){ const t = $('stTick'); t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 350); }
+function undoError(){ if (!ST.errors.length) return; const i = ST.errors.pop(); if (i !== null) { const w = stText.querySelector(`.w[data-i="${i}"]`); if (w) w.classList.remove('err-show'); } updateBar(); }
 
 /* Barre de commandes */
 const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
@@ -2585,7 +2628,20 @@ const GUIDE_KEY = 'pupitre.guideAuto';
 function guideAutoPref(){ try { const v = localStorage.getItem(GUIDE_KEY); return v === null ? true : v === '1'; } catch(e){ return true; } }
 function setGuideAutoPref(v){ try { localStorage.setItem(GUIDE_KEY, v ? '1' : '0'); } catch(e){} }
 let guideOpener = null;
+function setGuideTab(t){
+  const st = t === 'start';
+  $('gtStart').setAttribute('aria-selected', st); $('gtRef').setAttribute('aria-selected', !st);
+  $('gtStart').tabIndex = st ? 0 : -1; $('gtRef').tabIndex = st ? -1 : 0;
+  $('gpStart').hidden = !st; $('gpRef').hidden = st;
+}
+$('gtStart').addEventListener('click', () => setGuideTab('start'));
+$('gtRef').addEventListener('click', () => setGuideTab('ref'));
+$('gtStart').parentElement.addEventListener('keydown', e => {
+  if (!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+  e.preventDefault(); const t = e.key === 'ArrowLeft' ? 'start' : 'ref'; setGuideTab(t); $(t === 'start' ? 'gtStart' : 'gtRef').focus();
+});
 function openGuide(fromUser){
+  setGuideTab('start');
   $('guideAuto').checked = guideAutoPref();
   $('guideBackdrop').hidden = false;
   $('bHelp').setAttribute('aria-expanded','true'); $('bHelp').classList.add('on');
@@ -2677,7 +2733,7 @@ stage.addEventListener('pointerup', e => {
     if (e.shiftKey || ST.armMark) {
       ST.armMark = false; updateBar();
       stText.querySelectorAll('.endmark').forEach(x => x.classList.remove('endmark'));
-      ST.endMark = (ST.endMark === i) ? null : i; if (ST.endMark !== null) w.classList.add('endmark'); tickMark();
+      ST.endMark = (ST.endMark === i) ? null : i; if (ST.endMark !== null) w.classList.add('endmark');
     } else addError(i);
   } else {
     if (S().mode === 'mot') { ST.word = i; ST.line = lineOfWord(i); render(); }
