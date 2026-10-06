@@ -157,6 +157,7 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
 .launch .go-set{display:none}
+.launch .btn.pri{margin-left:auto}
 @media (max-width:860px){
   .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
   .launch .go-set{display:inline-flex}
@@ -172,8 +173,9 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .stu-form{padding:8px 22px 6px;gap:6px}
 .stu-form input{flex:1;min-width:0;min-height:44px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:var(--r-ctl);background:var(--surface)}
 #stuList{max-height:none}
-#askT{margin:0;font:700 1.5rem var(--display)}
-#askP{margin:0;color:var(--ink-2);font-size:1rem}
+#askT,#laT{margin:0;font:700 1.5rem var(--display)}
+#askP,#laP{margin:0;color:var(--ink-2);font-size:1rem}
+#laProg{width:100%}
 kbd{font:600 16px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:2px 6px;background:var(--surface);color:var(--ink-2)}
 
 /* Réglages */
@@ -389,7 +391,7 @@ table.t tr.pend td{color:var(--ink-2);background:color-mix(in srgb, var(--accent
 .rc-r{font-family:var(--num);font-variant-numeric:tabular-nums;white-space:nowrap}
 .rc-r .num{color:var(--accent);font-size:1.15rem}
 @media (max-width:620px){.rc li{grid-template-columns:auto minmax(0,1fr)}.rc-r{grid-column:1/-1}}
-.launch-sum{flex:1 1 100px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 1rem var(--display);color:var(--ink-2)}
+.launch-sum{flex:1 1 100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 1rem var(--display);color:var(--ink-2)}
 .proj-btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .proj-btn{min-height:44px}
 @media (hover:none),(max-width:860px){.proj-btn{display:none}}
@@ -528,6 +530,10 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <button class="btn proj-btn" id="bProj" type="button" aria-pressed="false" title="Ouvre une fenêtre à glisser sur l’écran projeté : les élèves n’y voient que le texte, vous pilotez depuis celui-ci.">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6" fill="var(--surface-2)"/></svg>
           <span id="bProjT">Ouvrir un 2ᵉ écran</span>
+        </button>
+        <button class="btn" id="bListen" type="button" title="Le texte est lu à voix haute et défile en continu ; rien n’est mesuré ni enregistré">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
+          <span>Écouter</span>
         </button>
         <button class="btn pri big" id="bLaunch" type="button">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -813,7 +819,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage du texte</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
-          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données. La voix « Automatique » choisit la meilleure voix française de l’appareil. Le bouton « Télécharger » ajoute une voix naturelle (environ 93 Mo, une fois par appareil) qui fonctionne ensuite hors ligne ; il n’est disponible que sur la version en ligne. Une fois téléchargée, elle passe en premier. Sur iPad, ajoutez l’outil à l’écran d’accueil pour éviter que le navigateur efface la voix. Une rubrique explique aussi comment installer une voix plus naturelle sur l’appareil.</li>
+          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données. La voix « Automatique » choisit la meilleure voix française de l’appareil. Le bouton « Télécharger » ajoute une voix naturelle (environ 93 Mo, une fois par appareil) qui fonctionne ensuite hors ligne ; il n’est disponible que sur la version en ligne. Une fois téléchargée, elle passe en premier. Sur iPad, ajoutez l’outil à l’écran d’accueil pour éviter que le navigateur efface la voix. Une rubrique explique aussi comment installer une voix plus naturelle sur l’appareil. Le bouton « Écouter » de la préparation lance l’écoute : la voix lit le texte phrase par phrase et le texte défile en continu avec elle ; rien n’est mesuré ni enregistré.</li>
         </ul>
         <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
@@ -826,6 +832,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Pendant la lecture.</b> Le bouton vert suit la touche Espace : « Suivante » en ligne par ligne, « Pause » / « Reprendre » en défilement. Un clic sur un mot (ou <b>E</b>) marque une erreur, sans aucune trace à l’écran ; « Dernier mot » puis un mot marque l’endroit où l’élève s’est arrêté.</li>
           <li><b>La fin.</b> <b>T</b> (ou « Terminer ») arrête la mesure. L’écran n’affiche qu’une carte neutre, « Lecture terminée » : ni durée, ni résultat, ni nom. <b>Échap</b> pendant une lecture demande seulement s’il faut la terminer.</li>
           <li><b>Le résultat.</b> En quittant le pupitre, le bloc Préparer la lecture indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
+          <li><b>Écoute.</b> Le bouton « Écouter » de la préparation (ou « Écoute » dans « Mode ») fait lire le texte à voix haute, phrase par phrase : le mot lu est surligné et le texte défile en continu avec la voix. Espace met en pause et reprend, ↑ ↓ passent à la phrase précédente ou suivante, <b>N</b> et <b>M</b> règlent le débit de la voix, un clic sur un mot reprend à sa phrase. Rien n’est mesuré, noté ni enregistré, et Échap quitte sans confirmation. L’écoute se fait sur un seul écran (pas avec le 2ᵉ écran), et la voix naturelle donne le suivi le plus précis.</li>
           <li>Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
           <li>Si le nombre de lignes en évidence ne tient pas à l’écran (très grande taille), il est réduit et un message le signale : la zone lue ne passe jamais sous la barre.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
@@ -924,6 +931,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <dt><kbd>L</kbd></dt><dd>Changer d'avance : ligne par ligne → continu → mot à mot</dd>
         <dt><kbd>N</kbd> <kbd>M</kbd></dt><dd>Ralentir / accélérer</dd>
         <dt><kbd>V</kbd></dt><dd>Lire la ligne à voix haute</dd>
+        <dt>Écoute</dt><dd>Espace : pause / reprise · <kbd>↑</kbd> <kbd>↓</kbd> : phrase précédente / suivante · <kbd>N</kbd> <kbd>M</kbd> : débit de la voix</dd>
         <dt><kbd>B</kbd></dt><dd>Écran noir</dd>
         <dt><kbd>F</kbd></dt><dd>Plein écran</dd>
         <dt><kbd>H</kbd></dt><dd>Afficher / masquer cette aide</dd>
@@ -941,8 +949,8 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <span class="v" id="xSpeed"></span>
         <button id="xFast" type="button" title="Plus vite (M)" aria-label="Plus vite">+</button>
       </div>
-      <span class="sep"></span>
-      <div class="grp">
+      <span class="sep" id="sepMeasure"></span>
+      <div class="grp" id="grpMeasure">
         <button id="xErr" type="button" title="Marquer une erreur (E)" aria-label="Marquer une erreur (E)">Erreur <kbd>E</kbd></button>
         <button id="xUndo" type="button" title="Annuler la dernière erreur (Z)" aria-label="Annuler la dernière erreur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 010 12h-3"/></svg></button>
         <button id="xMark" type="button" title="Marquer le dernier mot lu (Maj + clic)">Dernier mot</button>
@@ -958,7 +966,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     </div>
     <div class="st-quick" id="stQuick" hidden role="group" aria-label="Réglages rapides du pupitre">
       <div class="q-row"><span class="q-l">Avancer</span><div class="seg" role="group" aria-label="Façon d’avancer">
-        <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button></div></div>
+        <button type="button" data-qmode="ligne">Ligne par ligne</button><button type="button" data-qmode="continu">Continu</button><button type="button" data-qmode="mot">Mot à mot</button><button type="button" data-qmode="ecoute">Écoute</button></div></div>
       <div class="q-row"><span class="q-l">Lignes en évidence</span><div class="seg" role="group" aria-label="Lignes en évidence">
         <button type="button" data-qwin="1">1</button><button type="button" data-qwin="2">2</button><button type="button" data-qwin="3">3</button></div></div>
       <div class="q-row"><span></span><button class="btn sm" id="xQuickClose" type="button">Fermer</button></div>
@@ -1056,6 +1064,19 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <button class="btn" id="askAdd" type="button">Ajouter un élève</button>
     </div>
     <div class="row"><button class="btn link" id="askNone" type="button">Continuer sans élève</button></div>
+  </div>
+</div>
+<div class="guide-backdrop" id="listenAsk" hidden>
+  <div class="guide-modal ask-modal" role="dialog" aria-modal="true" aria-labelledby="laT">
+    <h2 id="laT">Écouter le texte</h2>
+    <p id="laP">La voix du système peut sembler robotique. Une voix naturelle se télécharge une seule fois (environ 93 Mo) puis fonctionne hors ligne.</p>
+    <progress id="laProg" max="100" value="0" hidden aria-label="Téléchargement de la voix"></progress>
+    <p class="sub" id="laState" aria-live="polite"></p>
+    <div class="row">
+      <button class="btn pri" id="laDl" type="button">Télécharger la voix naturelle</button>
+      <button class="btn" id="laSys" type="button">Écouter avec la voix du système</button>
+    </div>
+    <div class="row"><button class="btn link" id="laNo" type="button">Annuler</button></div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -2305,19 +2326,20 @@ function build(){
     if (!par.trim()) return;
     const lines = par.split('\n');
     const lh = lines.map(line => {
-      let html = '', i = 0, prev = null;
+      let html = '', i = 0, prev = null, prevWi = -1;
       for (const m of line.matchAll(TOKEN)) {
         const inter = line.slice(i, m.index);
         const tok = m[0];
         const isWord = HASLETTER.test(tok) || /[0-9]/.test(tok);
         const dec = HASLETTER.test(tok) ? decodeWord(tok, oral) : null;
+        if (inter && prevWi >= 0) WORDS[prevWi].p = (WORDS[prevWi].p || '') + inter;
         if (inter) {
           const lz = prev && prev.aval && dec && dec.amont && inter.trim() === '' ;
           html += lz ? '<span class="lz">' + esc(inter).replace(/ /g, '\u00a0') + '</span>' : esc(inter);
         }
         if (isWord) {
           const wi = WORDS.length;
-          WORDS.push({t: tok, ipa: dec ? dec.ipa : ''});
+          WORDS.push({t: tok, ipa: dec ? dec.ipa : ''}); prevWi = wi;
           let inner = '';
           if (dec) {
             dec.syl.forEach(sy => {
@@ -2330,9 +2352,11 @@ function build(){
         } else html += esc(tok);
         prev = dec; i = m.index + tok.length;
       }
+      if (prevWi >= 0) WORDS[prevWi].p = (WORDS[prevWi].p || '') + line.slice(i);
       html += esc(line.slice(i));
       return html;
     });
+    if (WORDS.length) WORDS[WORDS.length - 1].par = true;
     out.push('<p>' + lh.join('<br>') + '</p>');
   });
   HTML = '<div class="lines-layer"></div>' + (out.join('') || '<p style="opacity:.5">(texte vide)</p>');
@@ -2738,8 +2762,10 @@ async function piperCheck(){
   piperUI(); loadVoices();
 }
 async function piperDownload(){
-  if (piper.busy || !piperCan()) return;
-  piper.busy = true; $('piperProg').hidden = false; $('piperProg').value = 0; piperUI('Téléchargement…');
+  if (piper.busy || !piperCan()) return false;
+  const prog = v => { $('piperProg').value = v; $('laProg').value = v; };
+  const say = m => { $('laState').textContent = m || ''; };
+  piper.busy = true; $('piperProg').hidden = false; $('laProg').hidden = false; prog(0); piperUI('Téléchargement…'); say('Téléchargement…');
   try {
     const reg = await navigator.serviceWorker.register('./sw.js'); await navigator.serviceWorker.ready;
     if (!navigator.serviceWorker.controller) await new Promise(ok => { navigator.serviceWorker.addEventListener('controllerchange', ok, { once: true }); setTimeout(ok, 3000); });
@@ -2748,13 +2774,14 @@ async function piperDownload(){
     for (const [path, size] of PIPER_FILES) {
       const res = await fetch(path); if (!res.ok) throw new Error(path + ' : ' + res.status);
       const rd = res.body.getReader(); let got = 0;
-      for (;;) { const { done: d, value } = await rd.read(); if (d) break; got += value.length; $('piperProg').value = Math.min(99, Math.round((done + Math.min(got, size)) * 100 / total)); }
+      for (;;) { const { done: d, value } = await rd.read(); if (d) break; got += value.length; prog(Math.min(99, Math.round((done + Math.min(got, size)) * 100 / total))); }
       done += size;
     }
-    $('piperProg').value = 100; piper.busy = false; await piperCheck();
+    prog(100); piper.busy = false; await piperCheck();
     toast(piper.ok ? 'Voix naturelle prête' : 'Téléchargement incomplet : réessayez');
-  } catch(e){ piper.busy = false; piperUI('Échec du téléchargement : ' + e.message + '. Réessayez avec une connexion stable.'); }
-  piper.busy = false; $('piperProg').hidden = true; piperUI();
+  } catch(e){ piper.busy = false; piperUI('Échec du téléchargement : ' + e.message + '. Réessayez avec une connexion stable.'); say('Échec du téléchargement. Réessayez avec une connexion stable.'); }
+  piper.busy = false; $('piperProg').hidden = true; $('laProg').hidden = true; piperUI();
+  return piper.ok;
 }
 async function piperRemove(){
   stopSpeech(); piper.lib = null;
@@ -2798,9 +2825,11 @@ function resetReadingState(){
   ST.phase = 'ready'; ST.run = null; ST.errors = []; ST.endMark = null; ST.armMark = false; ST.cdOn = false;
 }
 
-function launch(){
+function launch(opts){
   if (ST.open) return;
   ST.open = true; resetReadingState(); ST.winTold = '';
+  ST.listen = !!(opts && opts.listen);
+  if (ST.listen) { ST.prevMode = S().mode; S().mode = 'continu'; }
   $('stDone').hidden = true; $('stExit').hidden = true;
   clearTimeout(toastT); $('toast').classList.remove('on');
   applyStyle();
@@ -2810,7 +2839,7 @@ function launch(){
   try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); } catch(e){}
   $('stHelp').hidden = true; $('stBlack').hidden = true; toggleQuick(false);
   updateBar(); showBar();
-  const go = () => requestAnimationFrame(() => { relayout(); });
+  const go = () => requestAnimationFrame(() => { relayout(); if (ST.listen) listenBegin(0); });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
   stage.setAttribute('tabindex','-1'); stage.focus();
 }
@@ -2905,6 +2934,7 @@ function gotoLine(k){
   render();
 }
 function step(d){
+  if (ST.listen) return listenJump(d);
   if (ST.phase === 'done') return;
   if (S().mode === 'mot') {
     ST.word = Math.max(0, Math.min(WORDS.length - 1, (ST.word < 0 ? 0 : ST.word + d)));
@@ -2948,15 +2978,17 @@ function startAuto(){
   ST.raf = requestAnimationFrame(tick); updateBar(); hideBarSoon();
 }
 function play(){ if (S().mode === 'ligne' || ST.playing || ST.cdOn || ST.phase !== 'run') return; countdownThen(startAuto); }
-function pause(){ ST.playing = false; cancelAnimationFrame(ST.raf); cancelCountdown(); updateBar(); showBar(); }
+function pause(){ if (ST.listen && LS.started) { listenPause(); cancelCountdown(); return; } ST.playing = false; cancelAnimationFrame(ST.raf); cancelCountdown(); updateBar(); showBar(); }
 function bumpSpeed(d){
   const s = S();
+  if (ST.listen) { s.rate = Math.max(0.5, Math.min(1.3, Math.round((s.rate + d * 0.05) * 100) / 100)); if (LS.el) LS.el.playbackRate = s.rate; return; }
   if (s.mode === 'continu') s.lpm = Math.max(2, Math.min(40, s.lpm + d));
   else if (s.mode === 'mot') s.wpm = Math.max(20, Math.min(220, s.wpm + d * 5));
 }
 function speedDelta(d){ bumpSpeed(d); save(); updateBar(); stToast(speedLabel()); }
 function speedLabel(){
   const s = S();
+  if (ST.listen) return 'voix × ' + (+s.rate).toFixed(2);
   if (s.mode === 'continu') {
     const L = CTL.on ? RS.lines : ST.lines, wpl = L.length ? WORDS.length / L.length : 0;
     return s.lpm + ' l/min' + (wpl ? ' ≈ ' + Math.round(s.lpm * wpl) + ' m/min' : '');
@@ -2964,6 +2996,200 @@ function speedLabel(){
   if (s.mode === 'mot') return s.wpm + ' m/min';
   return 'à la main';
 }
+
+/* ---------- Écoute : la voix lit, le texte défile à son rythme ---------- */
+/* Une phrase à la fois. Avec la voix naturelle, la durée de chaque phrase est connue : la position dans l'audio
+   donne le mot lu, et le texte défile en continu avec lui. Avec la voix du système, le mot est suivi par les
+   repères de la voix quand elle en donne, sinon estimé. Rien n'est chronométré ni enregistré. */
+const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=';
+const LS = { chunks: [], ci: 0, el: null, started: false, raf: 0, tok: 0, cur: -1, prep: new Map(), q: Promise.resolve(), sys: false, loaded: -1, t0: 0, est: 1, bpos: -1, warn: false };
+function listenUnlock(){
+  try { if (!LS.el) LS.el = new Audio(); LS.el.src = SILENT_WAV; const pr = LS.el.play(); if (pr && pr.catch) pr.catch(() => {}); } catch(e){}
+}
+function listenChunks(){
+  const out = []; let cur = [];
+  const flush = () => {
+    if (!cur.length) return;
+    let text = '', cum = [0], off = [];
+    cur.forEach(i => {
+      const w = WORDS[i], p = (w.p || '').replace(/\s+/g, ' ');
+      off.push(text.length);
+      text += w.t + p + (/^[-‑–]+$/.test(p) || /\s$/.test(p) ? '' : ' ');
+      cum.push(cum[cum.length - 1] + Math.max(2, w.t.length) + (/[.!?…]/.test(p) ? 5 : /[;:]/.test(p) ? 3 : /,/.test(p) ? 2 : 0));
+    });
+    out.push({first: cur[0], last: cur[cur.length - 1], text: text.trim(), cum, off});
+    cur = [];
+  };
+  WORDS.forEach((w, i) => {
+    cur.push(i);
+    const p = w.p || '';
+    if (/[.!?…]/.test(p) || w.par || (cur.length >= 14 && /[,;:]/.test(p)) || cur.length >= 30) flush();
+  });
+  flush();
+  return out;
+}
+function listenPrep(i){
+  const ch = LS.chunks[i]; if (!ch || LS.prep.has(i)) return;
+  const pr = LS.q.then(async () => {
+    piper.lib = piper.lib || await import('./voix/vendor/piper-tts-web.js');
+    return piper.lib.predict({ text: ch.text, voiceId: PIPER_ID });
+  });
+  LS.q = pr.catch(() => {});
+  LS.prep.set(i, pr);
+}
+function listenCue(w){
+  if (LS.cur === w) return;
+  const old = stText.querySelector('.w.cur'); if (old) old.classList.remove('cur');
+  const el = stText.querySelector('.w[data-i="' + w + '"]'); if (el) el.classList.add('cur');
+  LS.cur = w;
+}
+function listenShow(w, frac){
+  const L = ST.lines; if (!L.length) return;
+  const k = lineOfWord(w), a = L[k], n = a.last - a.first + 1, next = L[k + 1];
+  const pos = Math.max(0, Math.min(1, (w - a.first + frac) / n));
+  ST.scrollY = a.top + (next ? (next.top - a.top) * pos : 0);
+  ST.line = k; render(false); listenCue(w);
+}
+function listenLocate(ch, f){
+  const T = ch.cum[ch.cum.length - 1] * Math.max(0, Math.min(1, f)); let k = 0;
+  while (k < ch.cum.length - 2 && ch.cum[k + 1] <= T) k++;
+  const span = ch.cum[k + 1] - ch.cum[k];
+  return [k, span ? Math.min(1, (T - ch.cum[k]) / span) : 0];
+}
+function listenFrame(){
+  if (!ST.listen || !ST.playing) return;
+  const ch = LS.chunks[LS.ci];
+  if (ch) {
+    let f = 0;
+    if (LS.sys) {
+      if (LS.bpos >= 0) {
+        let k = 0; while (k < ch.off.length - 1 && ch.off[k + 1] <= LS.bpos) k++;
+        const tot = ch.cum[ch.cum.length - 1], span = ch.cum[k + 1] - ch.cum[k], wd = Math.max(0.15, LS.est * span / tot);
+        f = (ch.cum[k] + Math.min(0.95, (performance.now() - LS.bt) / 1000 / wd) * span) / tot;
+      }
+      else f = Math.min(0.97, (performance.now() - LS.t0) / 1000 / LS.est);
+    } else if (LS.el && LS.el.duration) f = LS.el.currentTime / LS.el.duration;
+    const [k, frac] = listenLocate(ch, f);
+    listenShow(ch.first + k, frac);
+  }
+  LS.raf = requestAnimationFrame(listenFrame);
+}
+function listenHalt(){
+  LS.tok++; cancelAnimationFrame(LS.raf);
+  try { if (LS.el) { LS.el.onended = null; LS.el.pause(); } } catch(e){}
+  try { if (synth) synth.cancel(); } catch(e){}
+}
+async function listenPlay(i){
+  const ch = LS.chunks[i];
+  if (!ch) return listenEnd();
+  listenHalt(); const tok = LS.tok; LS.ci = i; ST.playing = true; updateBar();
+  listenShow(ch.first, 0);
+  for (let k = 0; k < i - 1; k++) LS.prep.delete(k);
+  if (!LS.sys) {
+    listenPrep(i); listenPrep(i + 1); listenPrep(i + 2);
+    let wav;
+    try { wav = await LS.prep.get(i); }
+    catch(e) { if (tok !== LS.tok) return; LS.sys = true; stToast('Voix naturelle indisponible : voix du système', 3000); return listenPlay(i); }
+    if (tok !== LS.tok || !ST.listen) return;
+    const el = LS.el;
+    try { if (el.src && el.src.startsWith('blob:')) URL.revokeObjectURL(el.src); } catch(e){}
+    el.src = URL.createObjectURL(wav); el.playbackRate = S().rate; LS.loaded = i;
+    el.onended = () => { if (tok !== LS.tok) return; setTimeout(() => { if (tok === LS.tok && ST.playing) listenPlay(i + 1); }, 170); };
+    try { await el.play(); }
+    catch(e) { if (tok !== LS.tok) return; ST.playing = false; updateBar(); showBar(); stToast('Touchez « Écouter » pour lancer le son', 3000); return; }
+    LS.raf = requestAnimationFrame(listenFrame);
+  } else {
+    if (!synth) { ST.playing = false; updateBar(); stToast('Aucune synthèse vocale disponible'); return; }
+    const u = new SpeechSynthesisUtterance(ch.text); u.lang = 'fr-FR'; u.rate = S().rate;
+    const v = voices.find(v => v.voiceURI === S().voice) || voices[0]; if (v) { u.voice = v; u.lang = v.lang; }
+    LS.t0 = performance.now(); LS.bt = LS.t0; LS.bpos = -1; LS.loaded = i; LS.est = Math.max(1.2, ch.text.length / (13 * S().rate));
+    u.onboundary = e => { if (tok === LS.tok && (!e.name || e.name === 'word')) { LS.bpos = e.charIndex; LS.bt = performance.now(); } };
+    u.onend = () => { if (tok !== LS.tok) return; setTimeout(() => { if (tok === LS.tok && ST.playing) listenPlay(i + 1); }, 120); };
+    u.onerror = () => { if (tok === LS.tok) { ST.playing = false; updateBar(); } };
+    synth.speak(u);
+    LS.raf = requestAnimationFrame(listenFrame);
+  }
+}
+function listenBegin(from){
+  LS.chunks = listenChunks();
+  if (!LS.chunks.length) { stToast('Le texte est vide'); return; }
+  LS.prep.clear(); LS.q = Promise.resolve(); LS.sys = !piper.ok; LS.started = true; LS.cur = -1;
+  ST.phase = 'run'; ST.run = null;
+  if (LS.sys && LS.warn) { stToast('Voix du système : elle peut sembler robotique. Une voix naturelle se télécharge dans Réglages → Voix.', 4500); }
+  LS.warn = false; hideBarSoon();
+  listenPlay(typeof from === 'number' ? from : 0);
+}
+function listenToggle(){
+  if (!LS.started) { ST.scrollY = 0; ST.line = 0; return listenBegin(0); }
+  if (ST.playing) listenPause();
+  else if (LS.sys || LS.loaded !== LS.ci) listenPlay(LS.ci);
+  else { ST.playing = true; updateBar(); hideBarSoon(); LS.el.play().then(() => { LS.raf = requestAnimationFrame(listenFrame); }).catch(() => { ST.playing = false; updateBar(); }); }
+}
+function listenPause(){
+  ST.playing = false; cancelAnimationFrame(LS.raf);
+  if (LS.sys) { LS.tok++; try { synth.cancel(); } catch(e){} } else { try { LS.el.pause(); } catch(e){} }
+  updateBar(); showBar();
+}
+function listenJump(d){
+  if (!LS.started) { if (d > 0) listenBegin(0); return; }
+  const i = Math.max(0, Math.min(LS.chunks.length - 1, LS.ci + d));
+  if (ST.playing) listenPlay(i);
+  else { listenHalt(); LS.ci = i; listenShow(LS.chunks[i].first, 0); }
+}
+function listenSeek(w){
+  const i = LS.chunks.findIndex(c => w >= c.first && w <= c.last);
+  if (i < 0) return;
+  if (!LS.started) { LS.chunks = listenChunks(); listenBegin(LS.chunks.findIndex(c => w >= c.first && w <= c.last)); return; }
+  if (ST.playing) listenPlay(i); else { listenHalt(); LS.ci = i; listenShow(LS.chunks[i].first, 0); }
+}
+function listenEnd(){
+  listenHalt(); ST.playing = false; LS.started = false; LS.ci = 0; LS.loaded = -1;
+  updateBar(); showBar(); stToast('Fin du texte');
+}
+/* Quitter l'écoute (sortie du pupitre ou changement de mode) : le mode d'avance de l'enseignante est rétabli. */
+function listenStop(){
+  if (!ST.listen) return;
+  listenHalt(); ST.playing = false; LS.started = false; LS.cur = -1; LS.prep.clear();
+  try { if (LS.el && LS.el.src && LS.el.src.startsWith('blob:')) URL.revokeObjectURL(LS.el.src); } catch(e){}
+  stText.querySelectorAll('.w.cur').forEach(w => w.classList.remove('cur'));
+  ST.listen = false;
+  if (ST.prevMode) { S().mode = ST.prevMode; ST.prevMode = null; save(); }
+}
+function listenEnter(){
+  if (ST.listen) return;
+  if (ST.phase === 'run') { stToast('Terminez d’abord la lecture en cours'); return; }
+  pause(); resetReadingState(); clearMarks();
+  ST.prevMode = S().mode; S().mode = 'continu'; ST.listen = true; LS.warn = !piper.ok;
+  listenUnlock(); relayout(0); updateBar(); listenBegin(0);
+}
+/* Le bouton « Écouter » de la préparation */
+function listenLaunch(){
+  if (ST.open || CTL.on) return;
+  if (projOpen()) { toast('L’écoute se fait sur un seul écran : fermez le 2ᵉ écran pour écouter.'); return; }
+  if (!(curText().text || '').trim()) { toast('Le texte est vide'); return; }
+  listenUnlock();
+  if (piper.ok || !piperCan()) { LS.warn = !piper.ok; LAST = null; renderAfter(); launch({listen: true}); return; }
+  $('laState').textContent = ''; $('laProg').hidden = true; $('listenAsk').hidden = false; $('laDl').focus();
+}
+function closeListenAsk(){ $('listenAsk').hidden = true; $('bListen').focus(); }
+$('bListen').addEventListener('click', listenLaunch);
+$('laNo').addEventListener('click', closeListenAsk);
+$('laSys').addEventListener('click', () => { listenUnlock(); $('listenAsk').hidden = true; LS.warn = true; LAST = null; renderAfter(); launch({listen: true}); });
+$('laDl').addEventListener('click', async () => {
+  listenUnlock(); $('laDl').disabled = $('laSys').disabled = true;
+  const ok = await piperDownload();
+  $('laDl').disabled = $('laSys').disabled = false;
+  if (ok) { $('listenAsk').hidden = true; LS.warn = false; LAST = null; renderAfter(); launch({listen: true}); }
+});
+$('listenAsk').addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !piper.busy) { closeListenAsk(); return; }
+  if (e.key !== 'Tab') return;
+  const f = [...$('listenAsk').querySelectorAll('button')].filter(x => x.offsetParent !== null && !x.disabled);
+  if (!f.length) return;
+  if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length-1].focus(); }
+  else if (!e.shiftKey && document.activeElement === f[f.length-1]) { e.preventDefault(); f[0].focus(); }
+});
+window.addEventListener('pagehide', () => { if (ST.listen && ST.prevMode) { S().mode = ST.prevMode; save(); } });
 
 /* ---------- La séance : du départ à « Terminer » ---------- */
 /* Le temps n'est jamais affiché. Il part au signal de départ (Espace, « Démarrer » ou première avance),
@@ -2984,6 +3210,7 @@ function beginReading(auto){
 }
 /* Espace et le bouton principal : départ, puis ligne suivante (à la main) ou pause / reprise (défilement). */
 function mainKey(){
+  if (ST.listen) return listenToggle();
   if (ST.phase === 'done') return;
   if (ST.cdOn) { cancelCountdown(); updateBar(); showBar(); return; }   /* faux départ : Espace pendant le décompte l'annule */
   if (ST.phase === 'ready') return beginReading(true);
@@ -2991,7 +3218,7 @@ function mainKey(){
   ST.playing ? pause() : play();
 }
 /* Flèche, glissement ou télécommande : la première avance donne aussi le départ, pour qu'aucune lecture ne passe sans être mesurée. */
-function forward(){ if (ST.phase === 'ready') beginReading(false); else step(1); }
+function forward(){ if (ST.listen) return listenJump(1); if (ST.phase === 'ready') beginReading(false); else step(1); }
 function lastWordRead(){
   if (ST.endMark !== null) return ST.endMark;
   const L = ST.lines; if (!L.length) return WORDS.length - 1;
@@ -3017,7 +3244,7 @@ function resetReading(){
   relayout(); updateBar(); showBar(); stage.focus();
 }
 function addError(i){
-  if (ST.phase !== 'run') { showBar(); return; }
+  if (ST.phase !== 'run' || ST.listen) { showBar(); return; }
   if (i !== null && i !== undefined) {
     const k = ST.errors.indexOf(i);
     const w = stText.querySelector(`.w[data-i="${i}"]`);
@@ -3030,6 +3257,7 @@ function undoError(){ if (ST.phase !== 'run' || !ST.errors.length) return; const
 function toggleArm(){ if (ST.phase !== 'run') { showBar(); return; } ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); }
 /* Un mot touché : avant le départ, on s'y place ; pendant la lecture, on y marque une erreur (ou le dernier mot lu). */
 function wordAction(i, shift){
+  if (ST.listen) { listenSeek(i); return; }
   if (ST.phase === 'run') {
     if (shift || ST.armMark) {
       ST.armMark = false;
@@ -3056,12 +3284,14 @@ function mainLabel(phase, mode, playing){
 }
 function updateBar(){
   const s = S(), run = ST.phase === 'run';
-  const lab = mainLabel(ST.phase, s.mode, ST.playing);
+  const lab = ST.listen ? (ST.playing ? [ICON_PAUSE, 'Pause'] : [ICON_PLAY, LS.started ? 'Reprendre' : 'Écouter']) : mainLabel(ST.phase, s.mode, ST.playing);
   $('xPlay').innerHTML = lab[0] + '<span>' + lab[1] + '</span>';
   $('xPlay').disabled = ST.phase === 'done';
   $('xSlow').hidden = $('xFast').hidden = $('xSpeed').hidden = s.mode === 'ligne';
   $('xSpeed').textContent = speedLabel();
-  ['xErr','xMark','xEnd'].forEach(id => $(id).disabled = !run);
+  ['xErr','xMark','xEnd'].forEach(id => $(id).disabled = !run || ST.listen);
+  ['grpMeasure','sepMeasure','xSpeak'].forEach(id => $(id).hidden = !!ST.listen);
+  $('xPrev').title = ST.listen ? 'Phrase précédente (↑)' : 'Ligne précédente (↑)'; $('xNext').title = ST.listen ? 'Phrase suivante (↓)' : 'Ligne suivante (↓)';
   $('xUndo').disabled = !run || !ST.errors.length;
   $('xMark').classList.toggle('armed', !!ST.armMark);
   stage.dataset.phase = ST.phase;
@@ -3085,6 +3315,8 @@ function setWin(n){
 const MODE_LABEL = {ligne:'Ligne par ligne', continu:'Défilement continu', mot:'Mot à mot'};
 function cycleModeStage(){ const order = ['ligne','continu','mot']; setModeStage(order[(order.indexOf(S().mode) + 1) % order.length]); }
 function setModeStage(mode){
+  if (mode === 'ecoute') return listenEnter();
+  if (ST.listen) { listenStop(); ST.prevMode = null; ST.phase = 'ready'; }
   pause();
   const s = S(); s.mode = mode; save();
   const L = ST.lines, first = L.length ? L[ST.line].first : 0;
@@ -3097,13 +3329,13 @@ function toggleHelp(force){ const h = $('stHelp'); h.hidden = typeof force === '
 function requestExit(){
   if (!ST.open) return;
   if (PROJ) { post({t:'askExit'}); return; }
-  if (ST.phase === 'run') { $('stExit').hidden = false; $('exitStay').focus(); return; }
+  if (ST.phase === 'run' && !ST.listen) { $('stExit').hidden = false; $('exitStay').focus(); return; }
   exitStage();
 }
 function exitStage(){
   if (!ST.open) return;
   if (ST.phase === 'run') finish();   /* filet : une lecture en cours n'est jamais perdue en quittant */
-  pause(); ST.open = false; stage.hidden = true;
+  pause(); listenStop(); ST.open = false; stage.hidden = true;
   stopSpeech();
   try { if (ST.wake) ST.wake.release(); } catch(e){}
   ST.wake = null;
@@ -3119,6 +3351,7 @@ function toggleFull(){
   try { if (document.fullscreenElement) document.exitFullscreen(); else fsEl().requestFullscreen().catch(() => stToast('Plein écran indisponible ici')); } catch(e){ stToast('Plein écran indisponible ici'); }
 }
 function speakLine(){
+  if (ST.listen) return;
   const L = ST.lines; if (!L.length) return;
   const a = L[ST.line], b = L[Math.min(L.length-1, ST.line + win() - 1)];
   const parts = []; for (let i = a.first; i <= b.last; i++) parts.push(WORDS[i].t);
@@ -3515,7 +3748,7 @@ function toggleQuick(force){
   if (!q.hidden) { $('stHelp').hidden = true; showBar(); placeQuick(); syncQuick(); }
 }
 function syncQuick(){
-  document.querySelectorAll('[data-qmode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.qmode === S().mode));
+  document.querySelectorAll('[data-qmode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.qmode === (ST.listen ? 'ecoute' : S().mode)));
   document.querySelectorAll('[data-qwin]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.qwin === S().win));
 }
 $('xQuick').addEventListener('click', () => toggleQuick());
@@ -3553,6 +3786,7 @@ stage.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') show
 stage.addEventListener('wheel', e => {
   e.preventDefault();
   if (ST.phase === 'done' || !ST.lines.length) return;
+  if (ST.listen) return;
   if (S().mode === 'continu') { ST.scrollY = Math.max(0, Math.min(ST.lines[ST.lines.length-1].top, ST.scrollY + e.deltaY * 0.4)); let k = 0; while (k < ST.lines.length-1 && ST.lines[k+1].top <= ST.scrollY + 1) k++; ST.line = k; render(false); return; }
   const now = performance.now(); if (now - ST.lastWheel < 220) return; ST.lastWheel = now;
   step(e.deltaY > 0 ? 1 : -1);
