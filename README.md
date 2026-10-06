@@ -24,6 +24,8 @@ Aucune installation n'est nécessaire.
 
 Le décodage des sons est automatique et peut se tromper, en particulier sur les homographes (*les poules couvent* / *le couvent*) et les liaisons facultatives : à vérifier avant une lecture importante.
 
+L'icône (`icon-*.png`) et `manifest.json` permettent d'ajouter l'outil à l'écran d'accueil d'une tablette ou d'un téléphone (Safari : Partager → Sur l'écran d'accueil).
+
 ## Licence
 
 Cette page intègre le moteur de décodage du projet **LireCouleur** (`module.js`), écrit par Marie-Pierre et Luc Brungard — <https://lirecouleur.forge.apps.education.fr> — sous licence **GNU General Public License v3**. L'ensemble de ce dépôt est donc distribué sous la même licence : voir [LICENSE](LICENSE).
