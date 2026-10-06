@@ -56,7 +56,7 @@ Nom : **PL-lect'** (préfixe de la suite PL, apostrophe typographique à l'affic
 - Moteur LireCouleur, de Marie-Pierre et Luc Brungard (licence GPL v3), intégré tel quel dans `index.html` ; voir `NOTICE.md`.
 - Polices intégrées : Luciole (CC BY 4.0) et OpenDyslexic (SIL OFL).
 - Textes d'exemple écrits pour l'outil, sans donnée d'élève.
-- Le guide intégré cite Zorzi et al. (2012) et Kuster et al. (2018) à propos de l'espacement des lettres et des polices « dyslexie ». Ces références n'ont pas été vérifiées ici.
+- Le guide intégré cite Zorzi et al. (2012, *PNAS*, 109(28), 11455–11459) et Kuster et al. (2018, *Annals of Dyslexia*, 68(1), 25–42). Leur existence et leur contenu ont été vérifiés par la propriétaire du projet (PubMed Central) ; je ne les ai pas revérifiés. Zorzi : effet de l'espacement rapporté chez des enfants dyslexiques, mais non spécifique à la dyslexie selon un travail ultérieur. Kuster : la police Dyslexie n'apporte pas de bénéfice.
 - Absences à ne pas combler : aucun témoignage, aucune étude d'efficacité de l'outil, aucune mesure d'usage.
 
 ## Product Principles
