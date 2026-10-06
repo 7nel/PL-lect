@@ -193,8 +193,8 @@ Un vert sauge posé sur des gris tirant sur le vert. L'ensemble est calme et tam
 
 ### Hierarchy
 - **Display** (700, `clamp(1.7rem, 3.4vw, 2.5rem)`, 1.1) : le nom de l'outil dans l'en-tête. Le pupitre a ses propres titres (jusqu'à 3rem pour le compte à rebours et la carte de fin) et le guide un titre à 1,5rem.
-- **Headline** (700, 1.25rem, 1.2) : titres des cartes (« Textes », « Préparer la lecture », « Réglages »). 1,5rem pour le titre du guide.
-- **Title** (700, 1rem) : titres des sections repliables et libellés de champs.
+- **Headline** (700, 1.5rem, 1.2) : titres des cartes (« Textes », « Préparer la lecture », « Réglages ») et titre du guide.
+- **Title** (700, 1.125rem) : titres des sections repliables. Les libellés de champs et sous-titres restent à 1rem.
 - **Body** (400, 18px, 1.5) : texte courant. Le guide monte à 1,125rem et se limite à 68 caractères par ligne.
 - **Label** (700, 1rem) : boutons, onglets, légendes de réglages, en-têtes de tableau.
 - **Figure** (Lexend 700, 34px pour les cartes de résultats, 18px dans les tableaux) : MCM et durées.
@@ -227,7 +227,7 @@ Les surfaces sont posées sur un fond uni, séparées par un filet de 1 px et un
 
 ## Shapes
 
-Une famille de coins larges, du plus intime au plus généreux : **champs** à 10 px, **contrôles** à 14 px (profils, onglets, liste de textes), **panneaux** intérieurs à 16 px, **cartes** à 24 px, **pilules** à 999 px pour les boutons, choix et étiquettes. Les cartes d'écran ont une bordure d'un pixel. Les touches clavier (6 px de rayon) gardent un bord inférieur plus épais (`2px`) pour imiter une touche.
+Une famille de coins larges, du plus intime au plus généreux : **champs** à 10 px, **contrôles** à 14 px (profils, onglets, liste de textes), **panneaux** intérieurs à 16 px, **cartes** à 24 px, **pilules** à 999 px pour les boutons, choix et étiquettes. Les cartes d'écran ont une bordure d'un pixel. Le fond du voile des fenêtres en mode sombre est `rgba(0,0,0,.6)`, un noir neutre hors palette. Les touches clavier (6 px de rayon) gardent un bord inférieur plus épais (`2px`) pour imiter une touche.
 
 Deux exceptions de gabarit : les touches clavier (6 px) et les repères du texte codé (arcs, soulignements, fonds de mots), dont le rayon est exprimé en `em` pour suivre la taille de lecture. Rien n'est anguleux. Les icônes sont des traits arrondis, de 1,8 px, en une seule graisse.
 
