@@ -158,6 +158,9 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
 .launch .go-set{display:none}
 .launch .btn.pri{margin-left:auto}
+@media (min-width:861px){
+  .launch{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30}
+}
 @media (max-width:860px){
   .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
   .launch .go-set{display:inline-flex}
