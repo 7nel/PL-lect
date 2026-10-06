@@ -263,7 +263,7 @@ Deux exceptions de gabarit : les touches clavier (6 px) et les repères du texte
 - **Style:** onglets en 14 px de rayon, 48 px de haut, avec icône de 22 px et libellé écrit. L'onglet actif prend le sauge doux ; les outils (Aide, Thème) sont séparés par un filet vertical. Sous 860 px, les onglets se resserrent et passent à la ligne si besoin.
 
 ### Pupitre (composant signature)
-Le plein écran de lecture : un fond uni (Papier, Crème, Sombre ou Noir, au choix), le texte en très grand, la bande de lecture (surligneur jaune ou cadre) sur 1 à 3 lignes, le reste du texte atténué en gris. La barre de commandes flottante est une carte de 22 px de rayon, en trois groupes de largeur stable, qui se masque ; les boutons y font 44 à 52 px. Le décompte occupe tout l'écran en Lexend. Une carte de fin de lecture confirme l'enregistrement sans montrer le résultat.
+Le plein écran de lecture : un fond uni (Papier, Crème, Sombre ou Noir, au choix), le texte en très grand, la bande de lecture (surligneur jaune ou cadre) sur 1 à 3 lignes, le reste du texte atténué en gris (sur les appareils tactiles, par un simple voile, sans filtre de gris, pour ménager les tablettes). La barre de commandes flottante est une carte de 22 px de rayon, en trois groupes de largeur stable, qui se masque ; les boutons y font 44 à 52 px. Le décompte occupe tout l'écran en Lexend. Une carte de fin de lecture confirme l'enregistrement sans montrer le résultat.
 
 ## Do's and Don'ts
 
