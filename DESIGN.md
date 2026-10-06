@@ -201,7 +201,7 @@ Un vert sauge posé sur des gris tirant sur le vert. L'ensemble est calme et tam
 
 ## Layout
 
-La préparation est une grille de trois colonnes : bibliothèque de textes (260 px), centre souple, réglages (380 px), séparées de 18 px. Sous 1220 px, la bibliothèque passe au-dessus du reste ; sous 860 px, tout s'empile sur une colonne, et la barre de lancement devient une barre fixe en bas de l'écran, avec la zone sûre de l'appareil. Le rythme intérieur est de 18 à 22 px pour les cartes, 12 px entre champs, 6 à 8 px dans un groupe serré.
+La préparation est une grille de trois colonnes : bibliothèque de textes (260 px), centre souple, réglages (380 px), séparées de 18 px. La barre de lancement se place dans le flux, sous « Préparer la lecture », pour que l'action principale reste visible sans défiler. Sous 1220 px, la bibliothèque passe au-dessus du reste ; sous 860 px, tout s'empile sur une colonne, et la barre de lancement devient une barre fixe en bas de l'écran, avec la zone sûre de l'appareil. Le rythme intérieur est de 18 à 22 px pour les cartes, 12 px entre champs, 6 à 8 px dans un groupe serré.
 
 Le pupitre est un autre espace : une colonne de texte centrée, avec une marge minimale de 24 à 72 px selon la taille, la zone lue placée en haut, au tiers ou au milieu de l'écran, et une barre de commandes flottante, jamais recouvrante pour la zone lue.
 
@@ -221,7 +221,7 @@ Les surfaces sont posées sur un fond uni, séparées par un filet de 1 px et un
 
 ## Shapes
 
-Une famille de coins larges, du plus intime au plus généreux : **champs** à 10 px, **contrôles** à 14 px (profils, onglets, liste de textes), **panneaux** intérieurs à 16 px, **cartes** à 24 px, **pilules** à 999 px pour les boutons, choix et étiquettes. Les cartes d'écran ont une bordure d'un pixel. Les touches clavier gardent un bord inférieur plus épais (`2px`) pour imiter une touche.
+Une famille de coins larges, du plus intime au plus généreux : **champs** à 10 px, **contrôles** à 14 px (profils, onglets, liste de textes), **panneaux** intérieurs à 16 px, **cartes** à 24 px, **pilules** à 999 px pour les boutons, choix et étiquettes. Les cartes d'écran ont une bordure d'un pixel. Les touches clavier (6 px de rayon) gardent un bord inférieur plus épais (`2px`) pour imiter une touche.
 
 Rien n'est anguleux. Les icônes sont des traits arrondis, de 1,8 px, en une seule graisse.
 

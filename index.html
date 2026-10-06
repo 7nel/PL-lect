@@ -89,17 +89,17 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-top{flex:0 0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
 .guide-top h2{margin:0;font:700 1.5rem var(--display)}
 .guide-top p{margin:6px 0 0;color:var(--ink-2);font-size:1rem;max-width:56ch}
-.guide-close{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.guide-close{flex:none;width:44px;height:44px;border-radius:var(--r-ctl);border:1px solid var(--line);background:var(--surface-2);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
 .guide-close:hover{border-color:var(--line-strong)}
 .guide-close svg{width:18px;height:18px}
 .guide-body{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:22px;padding-right:6px}
 .guide-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .guide-step{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:12px}
-.guide-step b{display:flex;align-items:center;gap:8px;font:700 .95rem var(--display);margin-bottom:4px}
-.guide-step .gnum{flex:none;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:.8rem}
+.guide-step b{display:flex;align-items:center;gap:8px;font:700 1rem var(--display);margin-bottom:4px}
+.guide-step .gnum{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:1rem}
 .guide-step p{margin:0;font-size:1.0625rem;color:var(--ink-2);line-height:1.5}
 .guide-body h3{margin:0 0 8px;font:700 1.05rem var(--display);display:flex;align-items:center;gap:8px}
-.guide-body h3 .gi{flex:none;width:30px;height:30px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.guide-body h3 .gi{flex:none;width:30px;height:30px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .guide-body h3 .gi svg{width:16px;height:16px}
 .guide-body p{margin:0 0 8px;color:var(--ink-2);font-size:1.125rem;line-height:1.55;max-width:68ch}
 .guide-body ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px}
@@ -135,7 +135,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .tag-ex{font-size:1rem;color:var(--ink);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
-.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:1rem;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:1rem;white-space:nowrap;min-height:44px}
 .btn:hover{border-color:var(--accent)}
 .btn.sm{padding:5px 12px;min-height:44px;font-size:1rem}
 .btn.pri{background:var(--accent);border-color:transparent;color:var(--accent-ink)}
@@ -148,7 +148,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 /* Centre */
 .center{display:flex;flex-direction:column;gap:18px;min-width:0}
 .meta-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:18px 22px 14px}
-.meta-row input[type=text]{flex:1 1 220px;min-width:0;font:700 1.15rem var(--display);border:1px dashed transparent;border-radius:10px;padding:8px 12px;background:var(--bg)}
+.meta-row input[type=text]{flex:1 1 220px;min-width:0;min-height:44px;font:700 1.15rem var(--display);border:1px dashed transparent;border-radius:10px;padding:8px 12px;background:var(--bg)}
 .meta-row input[type=text]:hover,.meta-row input[type=text]:focus{border-color:var(--line-strong);outline:none}
 .seg{display:inline-flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px}
 .seg button{border:1px solid transparent;background:none;padding:5px 12px;min-height:44px;cursor:pointer;font-weight:700;font-size:1rem;color:var(--ink-2);border-radius:999px}
@@ -160,7 +160,6 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .preview-note b{color:var(--ink-2);font-variant-numeric:tabular-nums}
 
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
-.launch{position:sticky;bottom:16px;z-index:5}
 .launch .go-set{display:none}
 @media (max-width:860px){
   .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
@@ -168,6 +167,16 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
   .app{padding-bottom:176px}
 }
 .hint{font-size:16px;color:var(--ink-3)}
+.edit-row{padding:0 22px 12px;gap:8px}
+.push{margin-left:auto}
+.pv-note{margin:0;padding:0 22px 10px}
+.gap-b{margin-bottom:6px}
+.gap-t{margin-top:8px}
+.stu-form{padding:8px 22px 6px;gap:6px}
+.stu-form input{flex:1;min-width:0;min-height:44px;padding:8px 10px;border:1px solid var(--line-strong);border-radius:var(--r-ctl);background:var(--surface)}
+#stuList{max-height:none}
+#askT{margin:0;font:700 1.5rem var(--display)}
+#askP{margin:0;color:var(--ink-2);font-size:1rem}
 kbd{font:600 16px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:6px;padding:2px 6px;background:var(--surface);color:var(--ink-2)}
 
 /* Réglages */
@@ -176,7 +185,7 @@ kbd{font:600 16px/1 var(--ui);border:1px solid var(--line-strong);border-bottom-
 details.sec{margin:8px 14px 0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel)}
 details.sec>summary{list-style:none;cursor:pointer;padding:13px 16px;font:700 1rem var(--display);display:flex;align-items:center;gap:8px}
 details.sec>summary::-webkit-details-marker{display:none}
-details.sec>summary .sum-hint{margin-left:auto;font:400 .9rem var(--ui);color:var(--ink-2);text-align:right}
+details.sec>summary .sum-hint{margin-left:auto;font:400 1rem var(--ui);color:var(--ink-2);text-align:right}
 .profiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:6px}
 .profiles button{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:8px 6px;min-height:44px;cursor:pointer;font:700 1rem/1.2 var(--ui)}
 .profiles button:hover{border-color:var(--accent)}
@@ -200,7 +209,7 @@ input[type=range]{width:100%;height:28px;accent-color:var(--accent)}
 .swatch{width:44px;height:44px;border:1px solid var(--line);border-radius:10px;padding:0;background:var(--surface);cursor:pointer}
 input[type=color].swatch{padding:3px}
 .presets{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.presets button{border:1px solid var(--line-strong);border-radius:999px;padding:8px 4px;cursor:pointer;font:700 1rem var(--ui)}
+.presets button{border:1px solid var(--line-strong);border-radius:999px;padding:8px 4px;min-height:44px;cursor:pointer;font:700 1rem var(--ui)}
 .presets button[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:2px}
 .sub{font-size:16px;color:var(--ink-3);line-height:1.45;margin:0}
 .son-det>summary{cursor:pointer;font:700 1rem var(--ui);color:var(--accent);padding:8px 0;min-height:44px;display:flex;align-items:center}
@@ -209,7 +218,7 @@ input[type=color].swatch{padding:3px}
 .sons{display:grid;grid-template-columns:22px 1fr 42px 92px;gap:5px 8px;align-items:center;font-size:16px}
 .sons .hd{font-size:16px;color:var(--ink-3);font-weight:700}
 .sons .ex{color:var(--ink-3);font-size:16px}
-.sons select{padding:3px 5px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);font-size:16px}
+.sons select{padding:3px 5px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface);font-size:16px}
 .sons .grp{grid-column:1/-1;margin-top:6px;font:700 16px var(--display);color:var(--ink-2);border-top:1px solid var(--line);padding-top:8px}
 
 /* Tactile : cibles de 44 px et indices adaptés */
@@ -236,7 +245,7 @@ table.t th,table.t td{padding:10px 12px;border-bottom:1px solid var(--line);text
 table.t tr:last-child td{border-bottom:0}
 table.t th{font-size:1rem;color:var(--ink-3);font-weight:700}
 table.t td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--num)}
-table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font-variant-numeric:tabular-nums}
+table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);font-variant-numeric:tabular-nums}
 .mcm{font:700 18px var(--num)}
 .empty{padding:28px 14px;color:var(--ink-3);text-align:center}
 .confirm{display:inline-flex;gap:6px;align-items:center;font-size:16px;flex-wrap:wrap}
@@ -287,7 +296,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
 .st-black{position:absolute;inset:0;background:#000;z-index:50}
 .countdown{position:absolute;inset:0;display:grid;place-items:center;z-index:40;font:700 min(40vh,30vw)/1 var(--num);color:var(--st-fg);opacity:.85;pointer-events:none}
-.st-bar{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:22px;z-index:60;font:16px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
+.st-bar{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;bottom:calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center;background:color-mix(in srgb, var(--surface) 97%, transparent);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:var(--r-card);z-index:60;font:16px/1.2 var(--ui);transition:opacity .25s;max-width:calc(100% - 24px)}
 .st-bar.off{opacity:0;pointer-events:none}
 .st-bar button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-bar button:hover{background:var(--surface-2);border-color:var(--line-strong)}
@@ -302,25 +311,25 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:16px;color:var(--ink-2)}
 .st-bar .sep{width:1px;height:28px;background:var(--line);margin-inline:2px}
 .st-bar .grp{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
-.st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:16px/1.2 var(--ui)}
+.st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:16px/1.2 var(--ui)}
 .st-quick .q-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .st-quick .q-l{font-weight:700;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
 .st-q:hover{background:var(--surface)}
 @media (max-width:1320px){.st-q{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px));right:12px}.st-help{top:calc(66px + env(safe-area-inset-top,0px))}.st-toast{right:66px;top:16px}}
-@media (max-width:860px){.st-bar{left:8px;right:8px;width:auto;max-width:none;padding:8px;gap:6px;border-radius:18px;bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
+@media (max-width:860px){.st-bar{left:8px;right:8px;width:auto;max-width:none;padding:8px;gap:6px;border-radius:var(--r-panel);bottom:calc(8px + env(safe-area-inset-bottom,0px))}.st-bar .sep{display:none}.st-bar button{padding:6px 10px}}
 .st-done{position:absolute;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:color-mix(in srgb, var(--st-bg) 72%, transparent)}
 .st-done .box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-card);box-shadow:var(--shadow);padding:clamp(24px,4vw,44px) clamp(24px,5vw,56px);max-width:min(760px,100%);text-align:center;font:16px/1.45 var(--ui)}
 .st-done h3{margin:0 0 22px;font:700 clamp(1.8rem,3.4vw,2.6rem)/1.15 var(--display)}
 .st-done p{margin:0 0 20px;color:var(--ink-2);font:400 clamp(1.15rem,2vw,1.5rem)/1.4 var(--num)}
 .st-done .btn{font-size:1.1rem;padding:12px 22px;min-height:52px}
 .st-done .row{justify-content:center}
-.st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:22px;padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
+.st-help{position:absolute;right:18px;top:calc(18px + env(safe-area-inset-top,0px));background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--r-card);padding:18px 22px;z-index:70;font:15px/1.5 var(--ui);max-width:min(440px,calc(100% - 36px));max-height:calc(100% - 36px);overflow:auto}
 .st-help h3{margin:0 0 10px;font:700 19px var(--display)}
 .st-help dl{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}
 .st-help dt{white-space:nowrap}
 .st-help kbd{background:var(--surface-2);color:var(--ink);border-color:var(--line-strong)}
-.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:12px;font:600 15px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
+.st-toast{position:absolute;right:18px;top:18px;z-index:65;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:var(--r-ctl);font:600 16px var(--ui);opacity:0;transition:opacity .2s;pointer-events:none}
 .st-toast.on{opacity:1}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 footer.about{margin-top:4px;font-size:16px;color:var(--ink-3);line-height:1.5}
@@ -328,8 +337,8 @@ footer.about a{color:var(--ink-2)}
 
 /* ---------- Séances : évolution d'un élève ---------- */
 .evo{padding:4px 22px 18px;display:flex;flex-direction:column;gap:14px}
-.evo-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 .95rem var(--ui);color:var(--ink-2)}
-.evo-filter select{padding:8px 10px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);max-width:100%}
+.evo-filter{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:700 1rem var(--ui);color:var(--ink-2)}
+.evo-filter select{padding:8px 10px;min-height:44px;border-radius:var(--r-ctl);border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);max-width:100%}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .tile{background:var(--bg);border:1px solid var(--line);border-radius:var(--r-panel);padding:12px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
 .tl{font-size:1rem;color:var(--ink-2);font-weight:700}
@@ -350,17 +359,17 @@ footer.about a{color:var(--ink-2)}
 .evo-plot .ed.on{fill:var(--ink);stroke:var(--bg)}
 .evo-plot .eb{fill:var(--accent)}
 .evo-plot .ex{stroke:var(--ink-2);stroke-width:1}
-.evo-tip{position:absolute;z-index:2;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);border-radius:12px;box-shadow:var(--shadow);padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-size:15px;max-width:min(320px,90%)}
+.evo-tip{position:absolute;z-index:2;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line-strong);border-radius:var(--r-ctl);box-shadow:var(--shadow);padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-size:15px;max-width:min(320px,90%)}
 .evo-tip b{font:700 1.15rem var(--num)}
 .evo-tip .tc{color:var(--ink-2);font-size:16px}
 table.t tr.pend td{color:var(--ink-2);background:color-mix(in srgb, var(--accent) 6%, transparent)}
 
 /* ---------- Aujourd'hui : élève → texte → réglage ---------- */
 .today{padding-bottom:16px}
-.pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:2px 22px 0}
+.pick{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:2px 22px 0}
 @media (max-width:620px){.pick{grid-template-columns:1fr}}
 .pk{display:flex;flex-direction:column;gap:5px;font:700 1rem var(--ui);color:var(--ink-2)}
-.pk select{width:100%;padding:9px 10px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);text-overflow:ellipsis}
+.pk select{width:100%;padding:9px 10px;min-height:44px;border-radius:var(--r-ctl);border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 1rem var(--ui);text-overflow:ellipsis}
 .pk select:hover{border-color:var(--accent)}
 .after{margin:14px 22px 0;padding:12px 16px;border:1px solid var(--accent);background:var(--accent-soft);border-radius:var(--r-panel);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
 .af-t{margin:0;flex:1 1 240px;font-size:1rem}
@@ -371,7 +380,7 @@ table.t tr.pend td{color:var(--ink-2);background:color-mix(in srgb, var(--accent
 .recent{margin:14px 22px 0;border-top:1px solid var(--line)}
 .recent>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;min-height:44px;font:700 1rem var(--display)}
 .recent>summary::-webkit-details-marker{display:none}
-.recent>summary .sum-hint{margin-left:auto;font:400 .9rem var(--ui);color:var(--ink-2)}
+.recent>summary .sum-hint{margin-left:auto;font:400 1rem var(--ui);color:var(--ink-2)}
 .recent>summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .15s}
 .recent[open]>summary::after{transform:rotate(-135deg)}
 .rc{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
@@ -504,7 +513,6 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <div class="panel-h"><h2 id="todayT">Préparer la lecture</h2></div>
         <div class="pick">
           <label class="pk" for="selStudent"><span>Élève</span><select id="selStudent"></select></label>
-          <label class="pk" for="selText"><span>Texte</span><select id="selText"></select></label>
           <label class="pk" for="selReg"><span>Réglage</span><select id="selReg"></select></label>
         </div>
         <div class="after" id="after" hidden role="status"></div>
@@ -512,41 +520,6 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <summary><span id="recentT">Dernières lectures</span><span class="sum-hint" id="recentN"></span></summary>
           <div id="recentBody"></div>
         </details>
-      </div>
-
-      <div class="panel">
-        <div class="meta-row">
-          <input type="text" id="tTitle" aria-label="Titre du texte" placeholder="Titre du texte">
-          <label class="row hint" for="tLevel">Niveau
-            <select id="tLevel" class="btn sm" style="font-weight:700">
-              <option value="">aucun</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-            </select>
-          </label>
-          <div class="seg" role="group" aria-label="Affichage">
-            <button id="vPrev" aria-pressed="true">Aperçu codé</button>
-            <button id="vEdit" aria-pressed="false">Modifier le texte</button>
-          </div>
-        </div>
-        <div id="editBox" hidden>
-          <div class="row" style="padding:0 22px 12px;gap:8px">
-            <label class="btn sm" for="fImport" style="cursor:pointer">Importer .txt / .docx</label>
-            <input type="file" id="fImport" accept=".txt,.md,.docx,text/plain" class="sr">
-            <button class="btn sm" id="bDup">Dupliquer</button>
-            <span id="delWrap"><button class="btn sm danger" id="bDel">Supprimer</button></span>
-            <span class="hint" style="margin-left:auto">Enregistrement automatique</span>
-          </div>
-          <div class="inner"><textarea id="txt" spellcheck="true" aria-label="Texte à lire" placeholder="Collez ou tapez le texte ici. Une ligne vide sépare les paragraphes."></textarea></div>
-        </div>
-        <div id="prevBox">
-          <p class="hint" style="margin:0;padding:0 22px 10px">Voici le texte tel qu’il apparaîtra au pupitre. Pour colorer les syllabes, les lettres muettes ou les sons, ouvrez « Codage du texte » dans les réglages.</p>
-          <div class="inner"><div class="preview-wrap" id="pvWrap"><div class="rt pv" id="pv"></div></div></div>
-          <div class="preview-note">
-            <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
-            <span><b id="nWords">0</b> mots</span>
-            <span>Fond : <b id="pvBg"></b></span>
-            <span class="only-hover">Survoler un mot : transcription · clic : écouter</span><span class="only-touch">Toucher un mot : l’écouter et voir sa transcription</span>
-          </div>
-        </div>
       </div>
 
       <div class="panel launch">
@@ -561,6 +534,42 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <span id="bLaunchT">Lancer au pupitre</span>
         </button>
       </div>
+
+      <div class="panel">
+        <div class="meta-row">
+          <input type="text" id="tTitle" aria-label="Titre du texte" placeholder="Titre du texte">
+          <label class="row hint" for="tLevel">Niveau
+            <select id="tLevel" class="btn sm">
+              <option value="">aucun</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+            </select>
+          </label>
+          <div class="seg" role="group" aria-label="Affichage">
+            <button id="vPrev" aria-pressed="true">Aperçu codé</button>
+            <button id="vEdit" aria-pressed="false">Modifier le texte</button>
+          </div>
+        </div>
+        <div id="editBox" hidden>
+          <div class="row edit-row">
+            <label class="btn sm" for="fImport">Importer .txt / .docx</label>
+            <input type="file" id="fImport" accept=".txt,.md,.docx,text/plain" class="sr">
+            <button class="btn sm" id="bDup">Dupliquer</button>
+            <span id="delWrap"><button class="btn sm danger" id="bDel">Supprimer</button></span>
+            <span class="hint push">Enregistrement automatique</span>
+          </div>
+          <div class="inner"><textarea id="txt" spellcheck="true" aria-label="Texte à lire" placeholder="Collez ou tapez le texte ici. Une ligne vide sépare les paragraphes."></textarea></div>
+        </div>
+        <div id="prevBox">
+          <p class="hint pv-note">Voici le texte tel qu’il apparaîtra au pupitre. Pour colorer les syllabes, les lettres muettes ou les sons, ouvrez « Codage du texte » dans les réglages.</p>
+          <div class="inner"><div class="preview-wrap" id="pvWrap"><div class="rt pv" id="pv"></div></div></div>
+          <div class="preview-note">
+            <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
+            <span><b id="nWords">0</b> mots</span>
+            <span>Fond : <b id="pvBg"></b></span>
+            <span class="only-hover">Survoler un mot : transcription · clic : écouter</span><span class="only-touch">Toucher un mot : l’écouter et voir sa transcription</span>
+          </div>
+        </div>
+      </div>
+
       <footer class="about">
         Moteur de décodage phonologique : <a href="https://lirecouleur.forge.apps.education.fr" target="_blank" rel="noopener">LireCouleur</a> (Marie-Pierre et Luc Brungard), licence GNU GPL v3 ; cette page est diffusée sous la même licence.
         Polices Luciole (CC BY 4.0) et OpenDyslexic (SIL OFL). Le décodage est automatique : homographes (<i>le fils / des fils</i>) et liaisons facultatives peuvent être mal codés.
@@ -645,7 +654,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <label class="chk"><input type="checkbox" id="sLignes"> Lignes alternées <input type="color" id="cLig0" class="swatch" aria-label="Fond ligne 1"><input type="color" id="cLig1" class="swatch" aria-label="Fond ligne 2"></label>
           <label class="chk"><input type="checkbox" id="sSons"> <b>Sons en couleur</b></label>
           <div id="sonsBox">
-            <div class="row" style="margin-bottom:6px">
+            <div class="row gap-b">
               <button class="btn sm" id="bSonsVoy">Voyelles</button>
               <button class="btn sm" id="bSonsAll">Tout</button>
               <button class="btn sm" id="bSonsNone">Aucun</button>
@@ -654,7 +663,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
               <summary>Choisir les sons un par un…</summary>
               <div class="sons" id="sonsTbl"></div>
             </details>
-            <p class="sub" style="margin-top:8px">Cochez seulement le ou les sons travaillés : une coloration ciblée est plus lisible qu'une coloration complète.</p>
+            <p class="sub gap-t">Cochez seulement le ou les sons travaillés : une coloration ciblée est plus lisible qu'une coloration complète.</p>
           </div>
         </div>
       </details>
@@ -700,7 +709,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <h3>Sauvegarde</h3>
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
-            <label class="btn sm" for="fRestore" style="cursor:pointer">Restaurer…</label>
+            <label class="btn sm" for="fRestore">Restaurer…</label>
             <input type="file" id="fRestore" accept=".json,application/json" class="sr">
           </div>
           <div id="restoreConfirm"></div>
@@ -716,11 +725,11 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     <div class="sessions">
       <aside class="panel">
         <div class="panel-h"><h2>Élèves</h2></div>
-        <form id="fStudent" class="row" style="padding:8px 22px 6px;gap:6px">
-          <input type="text" id="newStudent" placeholder="Pseudonyme" aria-label="Pseudonyme" style="flex:1;min-width:0;padding:8px 10px;border:1px solid var(--line-strong);border-radius:12px;background:var(--surface)">
+        <form id="fStudent" class="row stu-form">
+          <input type="text" id="newStudent" placeholder="Pseudonyme" aria-label="Pseudonyme">
           <button class="btn sm pri" type="submit">Ajouter</button>
         </form>
-        <ul class="lib-list" id="stuList" style="max-height:none"></ul>
+        <ul class="lib-list" id="stuList"></ul>
       </aside>
       <div class="center">
         <div class="panel">
@@ -752,7 +761,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     </div>
     <div class="guide-body" id="gpStart" role="tabpanel" aria-labelledby="gtStart">
       <div class="guide-steps">
-        <div class="guide-step"><b><span class="gnum">1</span>Choisir</b><p>Dans « Préparer la lecture » : l’élève, le texte, le réglage.</p></div>
+        <div class="guide-step"><b><span class="gnum">1</span>Choisir</b><p>Dans « Textes » : le texte. Dans « Préparer la lecture » : l’élève et le réglage.</p></div>
         <div class="guide-step"><b><span class="gnum">2</span>Lancer</b><p>Bouton vert « Lancer au pupitre ».</p></div>
         <div class="guide-step"><b><span class="gnum">3</span>Donner le départ</b><p>Touche Espace. Puis Espace ou ↓ à chaque ligne.</p></div>
         <div class="guide-step"><b><span class="gnum">4</span>Terminer</b><p>Touche T. Le résultat vous attend en quittant.</p></div>
@@ -774,7 +783,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     <div class="guide-body" id="gpRef" role="tabpanel" aria-labelledby="gtRef" hidden>
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Préparer un texte</h3>
-        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. Le bloc <b>Préparer la lecture</b> réunit les trois choix d’une séance : l’élève, le texte et le réglage ; la barre du bas les rappelle à côté du bouton « Lancer ». L’aperçu montre le texte tel qu’il sera lu ; la coloration (syllabes, lettres muettes, sons) se règle dans « Codage du texte ». À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
+        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. Le bloc <b>Préparer la lecture</b> réunit deux choix d’une séance : l’élève et le réglage. Le texte se choisit dans la liste « Textes », à gauche. La barre de lancement rappelle les trois à côté du bouton « Lancer ». L’aperçu montre le texte tel qu’il sera lu ; la coloration (syllabes, lettres muettes, sons) se règle dans « Codage du texte ». À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
         <ul>
           <li><b>+ Nouveau</b> crée un texte vide ; <b>Modifier le texte</b> permet de le taper ou de le coller, une ligne vide séparant les paragraphes.</li>
           <li><b>Importer .txt / .docx</b>, en haut de la zone de texte, récupère un fichier existant.</li>
@@ -1028,8 +1037,8 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
 </div>
 <div class="guide-backdrop" id="askBackdrop" hidden>
   <div class="guide-modal ask-modal" role="dialog" aria-modal="true" aria-labelledby="askT">
-    <h2 id="askT" style="margin:0;font:700 1.5rem var(--display)">Quel élève lit ?</h2>
-    <p id="askP" style="margin:0;color:var(--ink-2);font-size:1rem"></p>
+    <h2 id="askT">Quel élève lit ?</h2>
+    <p id="askP"></p>
     <div class="fld stack" id="askSel"><label for="askStudent">Élève</label><select id="askStudent"></select></div>
     <div class="row">
       <button class="btn pri" id="askGo" type="button">Lancer avec cet élève</button>
@@ -3034,11 +3043,6 @@ const plural = (n, w) => n + ' ' + w + (n > 1 ? 's' : '');
 function resLine(s){ return `<b class="num">${mcmTxt(s)}</b> MCM · ${plural(s.err, 'erreur')} · ${fmtDur(s.dur)}`; }
 const DEL_ASK = '<span class="confirm">Supprimer cette lecture ? <button class="btn sm danger" type="button" data-af="delYes">Supprimer</button><button class="btn sm" type="button" data-af="delNo">Annuler</button></span>';
 const INDIC_NOTE = `Lecture de moins de ${INDIC_SEC} secondes : le MCM est indicatif.`;
-function renderPick(){
-  const sorted = DB.texts.slice().sort((a,b) => (a.level||'9').localeCompare(b.level||'9') || a.title.localeCompare(b.title,'fr'));
-  $('selText').innerHTML = sorted.map(t => `<option value="${t.id}">${t.level ? 'N' + esc(t.level) + ' · ' : ''}${esc(t.title || 'Sans titre')}</option>`).join('');
-  $('selText').value = DB.cur;
-}
 function renderReg(act){
   $('selReg').innerHTML = (act ? '' : '<option value="">Personnalisés</option>') +
     PROFILES.map(p => `<option value="prof:${p.id}">${p.name}</option>`).join('') +
@@ -3093,8 +3097,7 @@ function renderRecent(){
     : '<p class="sub">Aucune lecture enregistrée pour le moment. Lancez une lecture : elle s’ajoutera ici.</p>';
 }
 $('recentBody').addEventListener('click', e => { if (e.target.id === 'bEvo') { sessFilter = DB.curStudent || ''; setTab('sess'); } });
-function renderHome(){ renderPick(); renderAfter(); renderRecent(); renderLaunch(); }
-$('selText').addEventListener('change', () => { DB.cur = $('selText').value; save(); loadTextUI(); renderLib(); refreshAll(true); renderHome(); });
+function renderHome(){ renderAfter(); renderRecent(); renderLaunch(); }
 $('selReg').addEventListener('change', () => { const v = $('selReg').value; if (v) applyEntry(v.split(':')[0], v.split(':')[1]); });
 
 $('bGoSet').addEventListener('click', () => $('settings').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
