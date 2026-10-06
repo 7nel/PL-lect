@@ -857,8 +857,8 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Pendant la lecture.</b> Le bouton vert suit la touche Espace : « Suivante » en ligne par ligne, « Pause » / « Reprendre » en défilement. Un clic sur un mot (ou <b>E</b>) marque une erreur, sans aucune trace à l’écran ; « Dernier mot » puis un mot marque l’endroit où l’élève s’est arrêté.</li>
           <li><b>La fin.</b> <b>T</b> (ou « Terminer ») arrête la mesure. L’écran n’affiche qu’une carte neutre, « Lecture terminée » : ni durée, ni résultat, ni nom. <b>Échap</b> pendant une lecture demande seulement s’il faut la terminer.</li>
           <li><b>Le résultat.</b> En quittant le pupitre, le bloc Préparer la lecture indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
-          <li><b>Écoute.</b> Le bouton « Écouter » de la préparation (ou « Écoute » dans « Mode ») fait lire le texte à voix haute, phrase par phrase : le mot lu est surligné et le texte défile en continu avec la voix. Espace met en pause et reprend, ↑ ↓ passent à la phrase précédente ou suivante, <b>N</b> et <b>M</b> règlent le débit de la voix, un clic sur un mot reprend à sa phrase. Rien n’est mesuré, noté ni enregistré, et Échap quitte sans confirmation. L’écoute se fait sur un seul écran (pas avec le 2ᵉ écran), et la voix naturelle donne le suivi le plus précis.</li>
-          <li>Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
+          <li><b>Écoute.</b> Le bouton « Écouter » de la préparation (ou « Écoute » dans « Plus ») fait lire le texte à voix haute, phrase par phrase : le mot lu est surligné et le texte défile en continu avec la voix. Espace met en pause et reprend, ↑ ↓ passent à la phrase précédente ou suivante, <b>N</b> et <b>M</b> règlent le débit de la voix, un clic sur un mot reprend à sa phrase. Rien n’est mesuré, noté ni enregistré, et Échap quitte sans confirmation. L’écoute se fait sur un seul écran (pas avec le 2ᵉ écran), et la voix naturelle donne le suivi le plus précis.</li>
+          <li>Le bouton « Plus » ouvre, sans quitter le pupitre, la façon d’avancer, le nombre de lignes en évidence, la vitesse, « Dernier mot », « Lire la ligne » et le plein écran ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
           <li>Si le nombre de lignes en évidence ne tient pas à l’écran (très grande taille), il est réduit et un message le signale : la zone lue ne passe jamais sous la barre.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
         </ul>
@@ -3494,7 +3494,7 @@ function go(){
   if (projOpen()) { if (CTL.ready) launchRemote(); else toast('Le 2ᵉ écran se prépare : réessayez dans un instant'); return; }
   LAST = null; renderAfter(); launch();
 }
-function tryLaunch(){ if (hasStudent() || askedNoStudent) go(); else openAsk(); }
+function tryLaunch(){ if (hasStudent() || askedNoStudent || !DB.students.length) go(); else openAsk(); }
 $('askGo').addEventListener('click', () => { DB.curStudent = $('askStudent').value; save(); renderStudentSelect(); renderHome(); closeAsk(); go(); });
 $('askNone').addEventListener('click', () => { askedNoStudent = true; closeAsk(); go(); });
 $('askAdd').addEventListener('click', () => { closeAsk(); setTab('sess'); $('newStudent').focus(); });
