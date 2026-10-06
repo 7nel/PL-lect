@@ -3438,6 +3438,7 @@ stage.addEventListener('wheel', e => {
 }, {passive:false});
 let pd = null;
 stText.addEventListener('pointerdown', e => { pd = {x:e.clientX, y:e.clientY, t:performance.now()}; });
+stage.addEventListener('pointercancel', () => { pd = null; });
 stage.addEventListener('pointerup', e => {
   if (!pd) { if (!e.target.closest('.st-ctl') && !$('stQuick').hidden) toggleQuick(false); return; }
   const dy = e.clientY - pd.y, dx = e.clientX - pd.x; pd = null;
