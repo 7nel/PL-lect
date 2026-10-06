@@ -279,7 +279,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-move.anim{transition:transform .38s cubic-bezier(.3,.7,.3,1)}
 @media (prefers-reduced-motion: reduce){.st-move.anim{transition:none}}
 .mask{position:absolute;left:0;right:0;pointer-events:none;background:color-mix(in srgb, var(--st-bg) calc(var(--dim, 0) * 100%), transparent);-webkit-backdrop-filter:grayscale(calc(var(--dim, 0) * 2));backdrop-filter:grayscale(calc(var(--dim, 0) * 2));z-index:3;top:0;height:100%;transition:transform .38s cubic-bezier(.3,.7,.3,1)}
-.mask.top{transform:translateY(-100%)}
+.mask.top{top:auto;bottom:100%}
 .mask.bot{transform:translateY(100%)}
 .band{position:absolute;top:0;pointer-events:none;z-index:-1;transform-origin:0 0;transition:transform .38s cubic-bezier(.3,.7,.3,1)}
 @media (prefers-reduced-motion: reduce){.mask,.band{transition:none}}
@@ -2772,7 +2772,7 @@ function render(animate){
   const vTop = bTop + tr, vBot = vTop + bH;
   const mt = $('mTop'), mb = $('mBot');
   mt.style.setProperty('--dim', s.dim); mb.style.setProperty('--dim', s.dim);
-  mt.style.transform = `translateY(${vTop - vh()}px)`;
+  mt.style.transform = `translateY(${vTop}px)`;
   mb.style.transform = `translateY(${vBot}px)`;
   // mot courant
   if (s.mode === 'mot' || ST.hadCur) { stText.querySelectorAll('.w.cur').forEach(w => w.classList.remove('cur')); ST.hadCur = false; }
