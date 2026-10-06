@@ -278,10 +278,10 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-move{will-change:transform;isolation:isolate}
 .st-move.anim{transition:transform .38s cubic-bezier(.3,.7,.3,1)}
 @media (prefers-reduced-motion: reduce){.st-move.anim{transition:none}}
-.mask{position:absolute;left:0;right:0;pointer-events:none;background:color-mix(in srgb, var(--st-bg) calc(var(--dim, 0) * 100%), transparent);-webkit-backdrop-filter:grayscale(calc(var(--dim, 0) * 2));backdrop-filter:grayscale(calc(var(--dim, 0) * 2));z-index:3;transition:top .38s cubic-bezier(.3,.7,.3,1),height .38s cubic-bezier(.3,.7,.3,1)}
-.mask.top{top:0}
-.mask.bot{bottom:0}
-.band{position:absolute;pointer-events:none;z-index:-1;transition:top .38s cubic-bezier(.3,.7,.3,1),height .38s cubic-bezier(.3,.7,.3,1)}
+.mask{position:absolute;left:0;right:0;pointer-events:none;background:color-mix(in srgb, var(--st-bg) calc(var(--dim, 0) * 100%), transparent);-webkit-backdrop-filter:grayscale(calc(var(--dim, 0) * 2));backdrop-filter:grayscale(calc(var(--dim, 0) * 2));z-index:3;top:0;height:100%;transition:transform .38s cubic-bezier(.3,.7,.3,1)}
+.mask.top{transform:translateY(-100%)}
+.mask.bot{transform:translateY(100%)}
+.band{position:absolute;top:0;pointer-events:none;z-index:-1;transform-origin:0 0;transition:transform .38s cubic-bezier(.3,.7,.3,1)}
 @media (prefers-reduced-motion: reduce){.mask,.band{transition:none}}
 .band.surligneur{background:var(--c-band)}
 .band.cadre{border:.06em solid var(--c-bandline);border-radius:.18em}
@@ -2693,7 +2693,7 @@ function launch(){
   clearTimeout(toastT); $('toast').classList.remove('on');
   applyStyle();
   stText.innerHTML = HTML;
-  stage.hidden = false; setAppInert(true);
+  stage.hidden = false; setAppInert(true); band._y = undefined;
   if (!PROJ) { try { if (stage.requestFullscreen) stage.requestFullscreen().catch(() => {}); } catch(e){} }
   try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); } catch(e){}
   $('stHelp').hidden = true; $('stBlack').hidden = true; toggleQuick(false);
@@ -2756,13 +2756,24 @@ function render(animate){
   }
   stMove.style.transform = `translateY(${tr}px)`;
   band.className = 'band ' + (s.mode === 'mot' ? 'aucun' : s.band);
-  band.style.top = bTop + 'px'; band.style.height = bH + 'px';
+  /* La zone lue et les masques glissent en transform (sans recalcul de mise en page). Un changement de hauteur
+     de la zone est animé par un scaleY de départ, puis ramené à 1. */
+  if (band._y === undefined) { band.style.transition = 'none'; band.style.height = bH + 'px'; band.style.transform = `translateY(${bTop}px)`; void band.offsetHeight; band.style.transition = ''; }
+  else {
+    if (band._h && Math.abs(band._h - bH) > 1) {
+      band.style.transition = 'none'; band.style.height = bH + 'px';
+      band.style.transform = `translateY(${band._y}px) scaleY(${band._h / bH})`;
+      void band.offsetHeight; band.style.transition = '';
+    }
+    band.style.height = bH + 'px'; band.style.transform = `translateY(${bTop}px)`;
+  }
+  band._y = bTop; band._h = bH;
   band.style.left = (-0.35 * fs) + 'px'; band.style.right = (-0.35 * fs) + 'px';
   const vTop = bTop + tr, vBot = vTop + bH;
   const mt = $('mTop'), mb = $('mBot');
   mt.style.setProperty('--dim', s.dim); mb.style.setProperty('--dim', s.dim);
-  mt.style.height = Math.max(0, vTop) + 'px';
-  mb.style.top = vBot + 'px'; mb.style.height = Math.max(0, vh() - vBot) + 'px';
+  mt.style.transform = `translateY(${vTop - vh()}px)`;
+  mb.style.transform = `translateY(${vBot}px)`;
   // mot courant
   if (s.mode === 'mot' || ST.hadCur) { stText.querySelectorAll('.w.cur').forEach(w => w.classList.remove('cur')); ST.hadCur = false; }
   if (s.mode === 'mot' && ST.word >= 0) ST.hadCur = true;
