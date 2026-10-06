@@ -2154,7 +2154,7 @@ function defaults(){
   return {
     font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, width:36, bold:false,
     bg:'#FFFFFF', fg:'#15171C',
-    syl:'couleurs', sylOral:false, muet:true, liaison:true, mots:false, lignes:false, sons:false,
+    syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, sons:false,
     sonsSel: defaultSons(),
     pal:{light:JSON.parse(JSON.stringify(PAL_L)), dark:JSON.parse(JSON.stringify(PAL_D))},
     mode:'ligne', lpm:12, wpm:70, win:1, dim:0.5, pos:0.33, band:'surligneur', countdown:true, showErr:false,
@@ -2539,7 +2539,7 @@ $('bSonsNone').addEventListener('click', () => setSons(() => false));
 
 /* Points de départ (suggestions à ajuster selon l'élève) */
 const PROFILES = [
-  {id:'std', name:'Standard', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:false, muet:true, liaison:true, mots:false, lignes:false, win:1}},
+  {id:'std', name:'Standard', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:1}},
   {id:'dys', name:'Dyslexie', s:{font:'Luciole', size:64, letter:0.14, word:0.4, line:2.0, syl:'couleurs', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:1}},
   {id:'allo', name:'Allophonie', s:{font:'Luciole', size:64, letter:0.08, word:0.3, line:1.9, syl:'couleurs', sylOral:true, muet:true, liaison:true, mots:false, lignes:false, win:1}},
   {id:'decro', name:'Décrochage', s:{font:'Atkinson Hyperlegible', size:56, letter:0.06, word:0.3, line:1.7, syl:'none', sylOral:false, muet:false, liaison:false, mots:false, lignes:false, win:2}}
