@@ -128,7 +128,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lvl{flex:none;display:inline-grid;place-items:center;min-width:30px;height:28px;padding-inline:8px;border-radius:999px;font-size:1rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
 .lib-m{font-family:var(--num);font-size:16px;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.tag-ex{font-size:1rem;color:var(--ink);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
+.tag-ex{font-size:1rem;color:var(--ink-3)}
 
 /* Boutons */
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface-2);padding:7px 14px;border-radius:999px;cursor:pointer;font-weight:700;font-size:1rem;white-space:nowrap;min-height:44px}
@@ -331,7 +331,7 @@ table.t input.num{font-family:var(--num);width:66px;text-align:right;padding:4px
 .st-quick .q-ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .st-quick .q-ctl button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-quick .q-ctl button:hover{background:var(--surface-2);border-color:var(--line-strong)}
-.st-quick .q-ctl button:disabled{opacity:.45;cursor:default}
+.st-quick .q-ctl button:disabled{opacity:.62;cursor:default}
 .st-quick .q-ctl svg{width:20px;height:20px}
 .st-quick .q-ctl .v{font-family:var(--num);font-variant-numeric:tabular-nums;min-width:5em;text-align:center;font-size:16px;color:var(--ink-2)}
 .st-q{position:absolute;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb, var(--surface) 90%, transparent);color:var(--ink);font:700 18px var(--ui);cursor:pointer}
@@ -418,7 +418,7 @@ table.t tr.pend td{color:var(--ink-2);background:color-mix(in srgb, var(--accent
 /* ---------- Pupitre : pilotage sur écran unique ---------- */
 .st-ctl{display:contents}
 .st-bar #xPlay{min-width:164px;justify-content:flex-start;padding-inline:16px}
-.st-bar button:disabled{opacity:.45;cursor:default}
+.st-bar button:disabled{opacity:.62;cursor:default}
 .st-bar button:disabled:hover{background:var(--surface);border-color:var(--line)}
 .st-bar button.go:disabled:hover{background:var(--accent);border-color:var(--accent);filter:none}
 .stage[data-phase="done"] .st-bar,.stage[data-phase="done"] .st-q{display:none}
@@ -531,7 +531,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <!-- Aujourd'hui : qui lit, quel texte, quel réglage -->
       <div class="panel today" id="today" aria-labelledby="todayT">
         <div class="panel-h"><h2 id="todayT">Préparer la lecture</h2></div>
-        <p class="hint step-hint" id="stepHint">D’abord le texte (liste « Textes »), puis l’élève et le réglage, puis « Lancer au pupitre » (l’écran de lecture, en plein écran).</p>
+        <p class="hint step-hint" id="stepHint">D’abord le texte, puis l’élève et le réglage, puis « Lancer au pupitre » (l’écran de lecture).</p>
         <div class="pick">
           <label class="pk" for="selStudent"><span>Élève</span><select id="selStudent"></select></label>
           <label class="pk" for="selReg"><span>Réglage</span><select id="selReg"></select></label>
@@ -551,7 +551,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <span id="bProjT">Ouvrir un 2ᵉ écran</span>
         </button>
         <button class="btn" id="bListen" type="button" title="Le texte est lu à voix haute et défile en continu ; rien n’est mesuré ni enregistré">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0116 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
           <span>Écouter</span>
         </button>
         <button class="btn pri big" id="bLaunch" type="button">
@@ -584,7 +584,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div class="inner"><textarea id="txt" spellcheck="true" aria-label="Texte à lire" placeholder="Collez ou tapez le texte ici. Une ligne vide sépare les paragraphes."></textarea></div>
         </div>
         <div id="prevBox">
-          <p class="hint pv-note">Voici le texte tel qu’il apparaîtra au pupitre. Pour colorer les syllabes, les lettres muettes ou les sons, ouvrez « Codage du texte » dans les réglages.</p>
+          <p class="hint pv-note">Le texte tel qu’il sera lu. Pour colorer syllabes, lettres muettes ou sons : « Codage du texte », dans les réglages.</p>
           <div class="inner"><div class="preview-wrap" id="pvWrap"><div class="rt pv" id="pv"></div></div></div>
           <div class="preview-note">
             <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
@@ -649,7 +649,9 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
           <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
           <label class="chk"><input type="checkbox" id="sBold"> Texte en gras</label>
-          <p class="sub">La taille et l’espacement entre les lettres sont dans « Réglage rapide ». Dans une étude, un espacement élargi entre les lettres a amélioré la lecture d’enfants dyslexiques (Zorzi et al., 2012). Une étude ultérieure retrouve moins d’erreurs avec cet espacement, mais aussi chez les lecteurs non dyslexiques : l’effet n’est pas propre à la dyslexie (Hakvoort et al., 2017). La police « Dyslexie » n’a pas amélioré la lecture, avec ou sans dyslexie (Kuster et al., 2018).</p>
+          <p class="sub">La taille et l’espacement entre les lettres sont dans « Réglage rapide ».</p>
+          <details class="son-det"><summary>Pourquoi cet espacement ?</summary>
+            <p class="sub">Dans une étude, un espacement élargi entre les lettres a amélioré la lecture d’enfants dyslexiques (Zorzi et al., 2012). Une étude ultérieure retrouve moins d’erreurs avec cet espacement, mais aussi chez les lecteurs non dyslexiques : l’effet n’est pas propre à la dyslexie (Hakvoort et al., 2017). La police « Dyslexie » n’a pas amélioré la lecture, avec ou sans dyslexie (Kuster et al., 2018).</p></details>
         </div>
       </details>
 
@@ -793,7 +795,9 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div id="progBox"></div>
           <div class="tbl-wrap" id="sessTbl"></div>
         </div>
-        <p class="sub">MCM = mots correctement lus par minute = (mots lus − erreurs) ÷ minutes. La durée va du signal de départ à « Terminer ». Les mots lus sont comptés depuis la ligne de départ jusqu’à la ligne atteinte, ou jusqu’au mot marqué d’un <kbd>Maj</kbd>+clic. Sous 30 secondes, le MCM est précédé de « ≈ » : il est indicatif. Corrigez les valeurs directement dans le tableau si besoin. <b>Essai</b> = numéro de la lecture de ce texte par cet élève.</p>
+        <p class="sub">MCM = mots correctement lus par minute. <b>Essai</b> = numéro de la lecture de ce texte par cet élève. Les valeurs se corrigent directement dans le tableau.</p>
+        <details class="son-det"><summary>Comment le MCM est calculé</summary>
+          <p class="sub">MCM = (mots lus − erreurs) ÷ minutes. La durée va du signal de départ à « Terminer ». Les mots lus sont comptés depuis la ligne de départ jusqu’à la ligne atteinte, ou jusqu’au mot marqué d’un <kbd>Maj</kbd>+clic. Sous 30 secondes, le MCM est précédé de « ≈ » : il est indicatif.</p></details>
       </div>
     </div>
   </section>
