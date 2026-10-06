@@ -45,6 +45,12 @@ typography:
     fontSize: "1rem"
     fontWeight: 700
     lineHeight: 1.2
+  reading:
+    fontFamily: "Luciole, Atkinson Hyperlegible, Andika, Lexend, OpenDyslexic, Arial, Verdana, sans-serif"
+    fontSize: "64px"
+    fontWeight: 400
+    lineHeight: 1.9
+    letterSpacing: "0.08em"
   figure:
     fontFamily: "Lexend, Atkinson Hyperlegible, Segoe UI, system-ui, sans-serif"
     fontSize: "34px"
@@ -186,7 +192,7 @@ Un vert sauge posé sur des gris tirant sur le vert. L'ensemble est calme et tam
 **Character:** Une famille unique pour toute l'interface, dessinée pour la lisibilité ; la hiérarchie vient du poids et de la taille, pas du changement de police. Lexend ne sert qu'aux chiffres, en graisse 700, avec chiffres tabulaires.
 
 ### Hierarchy
-- **Display** (700, `clamp(1.7rem, 3.4vw, 2.5rem)`, 1.1) : le nom de l'outil dans l'en-tête.
+- **Display** (700, `clamp(1.7rem, 3.4vw, 2.5rem)`, 1.1) : le nom de l'outil dans l'en-tête. Le pupitre a ses propres titres (jusqu'à 3rem pour le compte à rebours et la carte de fin) et le guide un titre à 1,5rem.
 - **Headline** (700, 1.25rem, 1.2) : titres des cartes (« Textes », « Préparer la lecture », « Réglages »). 1,5rem pour le titre du guide.
 - **Title** (700, 1rem) : titres des sections repliables et libellés de champs.
 - **Body** (400, 18px, 1.5) : texte courant. Le guide monte à 1,125rem et se limite à 68 caractères par ligne.
@@ -223,7 +229,7 @@ Les surfaces sont posées sur un fond uni, séparées par un filet de 1 px et un
 
 Une famille de coins larges, du plus intime au plus généreux : **champs** à 10 px, **contrôles** à 14 px (profils, onglets, liste de textes), **panneaux** intérieurs à 16 px, **cartes** à 24 px, **pilules** à 999 px pour les boutons, choix et étiquettes. Les cartes d'écran ont une bordure d'un pixel. Les touches clavier (6 px de rayon) gardent un bord inférieur plus épais (`2px`) pour imiter une touche.
 
-Rien n'est anguleux. Les icônes sont des traits arrondis, de 1,8 px, en une seule graisse.
+Deux exceptions de gabarit : les touches clavier (6 px) et les repères du texte codé (arcs, soulignements, fonds de mots), dont le rayon est exprimé en `em` pour suivre la taille de lecture. Rien n'est anguleux. Les icônes sont des traits arrondis, de 1,8 px, en une seule graisse.
 
 ## Components
 

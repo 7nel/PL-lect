@@ -17,5 +17,10 @@ Parce que ce fichier est GPL, l'ensemble formé avec le reste de la page (une œ
 |---|---|---|---|
 | Luciole | Laurent Bourcellier et Jonathan Perez | Creative Commons Attribution (CC BY) | <https://luciole-vision.com> |
 | OpenDyslexic | Abbie Gonzalez (« antijingoist ») | SIL Open Font License 1.1 | <https://opendyslexic.org> |
+| Atkinson Hyperlegible | Braille Institute of America | SIL Open Font License 1.1 | <https://fonts.google.com/specimen/Atkinson+Hyperlegible> |
+| Andika | SIL Global | SIL Open Font License 1.1 | <https://fonts.google.com/specimen/Andika> |
+| Lexend | Bonnie Shaver-Troup, Thomas Jockin et le projet Lexend | SIL Open Font License 1.1 | <https://fonts.google.com/specimen/Lexend> |
+
+Atkinson Hyperlegible, Andika et Lexend sont intégrées en sous-ensemble latin (WOFF2, tel que servi par Google Fonts) : ces polices n'ont pas été modifiées. Les noms d'auteurs et licences ci-dessus sont ceux des fiches Google Fonts et sont à recouper avec les sources avant toute redistribution.
 
 Ces polices restent sous leur licence d'origine, distincte de la GPL du moteur LireCouleur ; leur intégration dans cette page n'y change rien. Se référer aux sources ci-dessus pour le texte complet de chaque licence avant toute redistribution.

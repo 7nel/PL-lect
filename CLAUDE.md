@@ -23,6 +23,8 @@ Ils s'ajoutent aux tokens de la charte commune. Ne pas en inventer d'autres sans
 | `--c-*` | Couleurs du texte codé (syllabes, arcs, muettes, liaisons, repère de ligne…) | Écrites en JavaScript selon le fond (jeu clair ou sombre). |
 | `--st-*` | Couleurs du pupitre plein écran | Le pupitre a son propre fond et sa propre encre, réglables par l'enseignante. |
 
+Polices : Atkinson Hyperlegible, Andika et Lexend sont intégrées en base64 dans `index.html` (sous-ensemble latin), à la place du lien Google Fonts que prescrit la charte commune. Raison : l'outil doit fonctionner hors ligne et sur un réseau d'école qui bloque `googleapis.com`. Les autres polices de lecture suivent la même règle (voir `NOTICE.md`).
+
 Écart assumé avec la charte : `--accent-soft` utilise 16 % comme la charte ; `--ink-2` est un peu plus foncé (#52635f en clair) pour tenir 4,5:1 sur `--surface-2`.
 
 ## Règles propres au projet

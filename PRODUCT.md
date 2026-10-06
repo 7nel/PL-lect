@@ -45,7 +45,7 @@ Deux choses qu'un prompteur ou un lecteur de texte ordinaire ne fait pas :
 - **Pas de données nominatives d'élèves** : pseudonymes ou initiales, rien n'est envoyé vers un serveur.
 - Le décodage des sons est automatique et peut se tromper (homographes, liaisons facultatives) : à vérifier avant une lecture importante.
 - Licence GNU GPL v3, imposée par le moteur LireCouleur.
-- Stade des décisions ouvertes : doublon du choix de texte et de réglage à deux endroits (liste de gauche et bloc du haut), polices chargées depuis Google Fonts.
+- Décisions prises : le texte se choisit dans la liste « Textes » (plus de doublon) ; les polices Atkinson Hyperlegible, Andika et Lexend sont intégrées dans `index.html` (plus de dépendance réseau) ; les noms de profils « Dyslexie », « Allophonie » et « Décrochage » sont assumés par l'enseignante.
 
 ## Brand Commitments
 
@@ -56,7 +56,7 @@ Nom : **PL-lect'** (préfixe de la suite PL, apostrophe typographique à l'affic
 - Moteur LireCouleur, de Marie-Pierre et Luc Brungard (licence GPL v3), intégré tel quel dans `index.html` ; voir `NOTICE.md`.
 - Polices intégrées : Luciole (CC BY 4.0) et OpenDyslexic (SIL OFL).
 - Textes d'exemple écrits pour l'outil, sans donnée d'élève.
-- Le guide intégré cite Zorzi et al. (2012, *PNAS*, 109(28), 11455–11459) et Kuster et al. (2018, *Annals of Dyslexia*, 68(1), 25–42). Leur existence et leur contenu ont été vérifiés par la propriétaire du projet (PubMed Central) ; je ne les ai pas revérifiés. Zorzi : effet de l'espacement rapporté chez des enfants dyslexiques, mais non spécifique à la dyslexie selon un travail ultérieur. Kuster : la police Dyslexie n'apporte pas de bénéfice.
+- Le guide intégré cite Zorzi et al. (2012, *PNAS*, 109(28), 11455–11459) et Kuster et al. (2018, *Annals of Dyslexia*, 68(1), 25–42). Leur existence et leur contenu ont été vérifiés par la propriétaire du projet (PubMed Central) ; je ne les ai pas revérifiés. Zorzi : effet de l'espacement rapporté chez des enfants dyslexiques. Hakvoort, B., van den Boer, M., Leenaars, T., Bos, P., & Tijms, J. (2017). *Improvements in reading accuracy as a result of increased interletter spacing are not specific to children with dyslexia*. *Journal of Experimental Child Psychology*, 164, 101–116. https://doi.org/10.1016/j.jecp.2017.07.010 : moins d'erreurs avec l'espacement accru, mais pas propre à la dyslexie (références trouvées par recherche web, PubMed et ScienceDirect ; le titre fourni par la propriétaire, « Improving reading fluency in children with dyslexia: Effects of spacing manipulation », n'a pas été retrouvé et les initiales de deux auteurs diffèrent : à recouper). Kuster : la police Dyslexie n'apporte pas de bénéfice.
 - Absences à ne pas combler : aucun témoignage, aucune étude d'efficacité de l'outil, aucune mesure d'usage.
 
 ## Product Principles
