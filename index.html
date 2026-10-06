@@ -127,7 +127,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .lib-list button[aria-current="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
 .lvl{flex:none;display:inline-grid;place-items:center;min-width:30px;height:28px;padding-inline:8px;border-radius:999px;font-size:1rem;font-weight:700;color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 45%, var(--line));font-variant-numeric:tabular-nums}
 .lib-t{flex:1;min-width:0;line-height:1.3}
-.lib-m{font-size:16px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.lib-m{font-family:var(--num);font-size:16px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .tag-ex{font-size:1rem;color:var(--ink);border:1px solid color-mix(in srgb, var(--ink-2) 55%, var(--line));border-radius:999px;padding:1px 7px}
 
 /* Boutons */
@@ -153,7 +153,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;padding:16px 18px;background:var(--surface);font:1.125rem/1.6 var(--ui)}
 .preview-wrap{overflow:auto;max-height:max(260px, calc(100vh - 380px))}
 .preview-note{display:flex;gap:16px;flex-wrap:wrap;padding:10px 22px 16px;font-size:16px;color:var(--ink-3);margin-top:-10px}
-.preview-note b{color:var(--ink-2);font-variant-numeric:tabular-nums}
+.preview-note b{color:var(--ink-2);font-family:var(--num);font-variant-numeric:tabular-nums}
 
 .launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
 .launch .go-set{display:none}
@@ -205,7 +205,7 @@ details.sec[open]>summary::after{transform:rotate(-135deg)}
 .sec-b{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
 .fld{display:grid;grid-template-columns:132px minmax(0,1fr) 76px;align-items:center;gap:8px;font-size:16px}
 .fld>label,.fld>span.l{color:var(--ink-2);font-weight:700;font-size:1rem}
-.fld output{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right;font-size:16px;color:var(--ink-2)}
+.fld output{white-space:nowrap;font-family:var(--num);font-variant-numeric:tabular-nums;text-align:right;font-size:16px;color:var(--ink-2)}
 .fld select,.fld input[type=text]{grid-column:2/4;padding:7px 10px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface);min-width:0;font-weight:700}
 .fld .seg{grid-column:2/4;justify-self:start}
 .fld.stack{grid-template-columns:1fr}
@@ -255,7 +255,7 @@ table.t th,table.t td{padding:10px 12px;border-bottom:1px solid var(--line);text
 table.t tr:last-child td{border-bottom:0}
 table.t th{font-size:1rem;color:var(--ink-3);font-weight:700}
 table.t td.n{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--num)}
-table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);font-variant-numeric:tabular-nums}
+table.t input.num{font-family:var(--num);width:66px;text-align:right;padding:4px 6px;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface);font-variant-numeric:tabular-nums}
 .mcm{font:700 18px var(--num)}
 .empty{padding:28px 14px;color:var(--ink-3);text-align:center}
 .confirm{display:inline-flex;gap:6px;align-items:center;font-size:16px;flex-wrap:wrap}
@@ -531,7 +531,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <!-- Aujourd'hui : qui lit, quel texte, quel réglage -->
       <div class="panel today" id="today" aria-labelledby="todayT">
         <div class="panel-h"><h2 id="todayT">Préparer la lecture</h2></div>
-        <p class="hint step-hint" id="stepHint">D’abord le texte (liste « Textes »), puis l’élève et le réglage, puis « Lancer au pupitre ».</p>
+        <p class="hint step-hint" id="stepHint">D’abord le texte (liste « Textes »), puis l’élève et le réglage, puis « Lancer au pupitre » (l’écran de lecture, en plein écran).</p>
         <div class="pick">
           <label class="pk" for="selStudent"><span>Élève</span><select id="selStudent"></select></label>
           <label class="pk" for="selReg"><span>Réglage</span><select id="selReg"></select></label>
@@ -609,7 +609,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <details class="sec" open>
         <summary>Réglage rapide <span class="sum-hint"></span></summary>
         <div class="sec-b">
-          <div class="fld stack"><span class="l" id="lProf">Réglages enregistrés</span>
+          <div class="fld stack"><span class="l" id="lProf">Choisir un réglage</span>
             <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div>
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
@@ -851,14 +851,14 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas, qui ouvre les réglages en feuille sous l’aperçu ; « Fermer » les referme), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. Sous « Fond et codage du texte… » : le fond et le préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
+          <li><b>Réglage rapide</b> : « Choisir un réglage », la liste des réglages (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. Sous « Fond et codage du texte… » : le fond et le préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
           <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage du texte</b> : trois préréglages en tête (Aucun, Syllabes, Sons ciblés), puis les syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
           <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données. La voix « Automatique » choisit la meilleure voix française de l’appareil. Le bouton « Télécharger » ajoute une voix naturelle (environ 93 Mo, une fois par appareil) qui fonctionne ensuite hors ligne ; il n’est disponible que sur la version en ligne. Une fois téléchargée, elle passe en premier. Sur iPad, ajoutez l’outil à l’écran d’accueil pour éviter que le navigateur efface la voix. Une rubrique explique aussi comment installer une voix plus naturelle sur l’appareil. Le bouton « Écouter » de la préparation lance l’écoute : la voix lit le texte phrase par phrase et le texte défile en continu avec elle ; rien n’est mesuré ni enregistré.</li>
         </ul>
-        <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
+        <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Choisir un réglage », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
 
       <div>
@@ -2716,7 +2716,7 @@ $('presetWrap').addEventListener('click', e => {
     $('presetName').focus();
   } else if (e.target.id === 'bPresetOk') {
     const n = $('presetName').value.trim() || 'Réglage ' + (DB.presets.length + 1);
-    DB.presets.push({name:n, s: JSON.parse(JSON.stringify(S()))}); save(); w.innerHTML = ''; renderPresets(); toast('Réglages enregistrés : ' + n);
+    DB.presets.push({name:n, s: JSON.parse(JSON.stringify(S()))}); save(); w.innerHTML = ''; renderPresets(); toast('Réglage enregistré : ' + n);
   } else if (e.target.id === 'bPresetRevert') {
     if (BASE) applyEntry(BASE.kind, BASE.key);
   } else if (e.target.id === 'bPresetNo') {
@@ -3430,7 +3430,7 @@ const stuLabel = s => s.stuName || 'Sans élève';
 const curStu = () => DB.students.find(x => x.id === DB.curStudent) || null;
 const sessOf = id => DB.sessions.find(x => x.id === id);
 const plural = (n, w) => n + ' ' + w + (n > 1 ? 's' : '');
-function resLine(s){ return `<b class="num">${mcmTxt(s)}</b> MCM · ${plural(s.err, 'erreur')} · ${fmtDur(s.dur)}`; }
+function resLine(s){ return `<b class="num">${mcmTxt(s)}</b> <abbr title="mots correctement lus par minute">MCM</abbr> · ${plural(s.err, 'erreur')} · ${fmtDur(s.dur)}`; }
 const DEL_ASK = '<span class="confirm">Supprimer cette lecture ? <button class="btn sm danger" type="button" data-af="delYes">Supprimer</button><button class="btn sm" type="button" data-af="delNo">Annuler</button></span>';
 const INDIC_NOTE = `Lecture de moins de ${INDIC_SEC} secondes : le MCM est indicatif.`;
 function renderReg(act){
@@ -3928,7 +3928,7 @@ function renderEvo(){
   box.innerHTML = `<div class="evo">
     <div class="evo-filter"><label for="evoText">Texte</label><select id="evoText"><option value="__all">Tous les textes (${plural(all.length, 'séance')})</option>${texts.map(t => `<option value="${t.id}">${esc(t.title)} (${plural(t.n, 'essai')})</option>`).join('')}</select></div>
     <div class="tiles">
-      <div class="tile"><span class="tl">Dernière lecture</span><span class="tv">${mcmTxt(last)} <small>MCM</small></span>
+      <div class="tile"><span class="tl">Dernière lecture</span><span class="tv">${mcmTxt(last)} <small><abbr title="mots correctement lus par minute">MCM</abbr></small></span>
         <span class="td">${d === null ? 'premier essai de ce texte' : (d > 0 ? '▲ +' + d : d < 0 ? '▼ −' + Math.abs(d) : '= 0') + ' par rapport à l’essai précédent'}</span></div>
       <div class="tile"><span class="tl">Erreurs à la dernière lecture</span><span class="tv">${last.err}</span><span class="td">${esc(last.title || 'Sans titre')} · ${df.format(new Date(last.ts))}</span></div>
       <div class="tile"><span class="tl">Séances</span><span class="tv">${list.length}</span><span class="td">depuis le ${df.format(new Date(list[0].ts))}</span></div>
