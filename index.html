@@ -307,7 +307,6 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-bar button.armed{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .st-bar #xExit{background:var(--accent-soft);border-color:var(--accent)}
 .st-bar svg{width:20px;height:20px}
-.st-bar .slot-off{visibility:hidden;pointer-events:none}
 .st-bar #xChrono{min-width:112px}
 .st-bar #xErr{min-width:104px}
 .st-bar .cnt{font-size:.9em;font-weight:600;color:var(--ink-2);font-family:var(--num)}
@@ -654,8 +653,8 @@ footer.about a{color:var(--ink-2)}
         <p>« Lancer au pupitre » passe en plein écran. Une barre de commandes apparaît en bas ; elle se masque après quelques secondes et revient au moindre mouvement de souris ou toucher d'écran.</p>
         <ul>
           <li>Démarrer / mettre en pause, ligne précédente / suivante, vitesse, chrono, erreur, annuler, dernier mot lu, lire à voix haute, plein écran, quitter : tout est dans cette barre, en trois groupes (lecture, mesure, écran), et fonctionne aussi au clavier. Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre. Le bouton « ? », dans le coin, reste affiché et ouvre la liste des commandes.</li>
-          <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot lu » demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
-          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. La durée et le résultat (MCM, erreurs) ne s’affichent que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez ; sous 2 secondes, rien n’est enregistré. Si aucun élève n’est choisi, un message le propose au lancement.</li>
+          <li>Sur tablette : « Erreur » compte une erreur, puis « Annuler » la retire ; « Dernier mot » (utile chrono lancé) demande de toucher le mot où l’élève s’est arrêté (équivalent de Maj + clic).</li>
+          <li>À l’arrêt du chrono, une carte confirme l’enregistrement. La durée et le résultat (MCM, erreurs) ne s’affichent que si vous cliquez sur « Voir le résultat ». Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez ; sous 2 secondes, rien n’est enregistré. « Quitter et enregistrer » enregistre la lecture même si elle est courte (de 2 à 10 secondes). Si aucun élève n’est choisi, un message le propose au lancement.</li>
           <li>Le bouton « Chrono » de la barre est gris à l’arrêt (○) et rouge quand il tourne (■), avec sa touche C ; « Erreur » ne montre que sa touche E. Ni les secondes ni le nombre d’erreurs ne s’affichent. <b>Échap</b> pendant le chrono demande quoi faire (quitter et enregistrer, quitter sans enregistrer, ou continuer à lire).</li>
           <li>Par défaut, le chrono et les erreurs comptées restent invisibles à l’écran projeté ; seule l’enseignante les retrouve ensuite dans « Séances ». Une option du panneau Réglages les garde visibles dans un coin.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
@@ -2426,7 +2425,6 @@ function launch(){
   try { if (navigator.wakeLock) navigator.wakeLock.request('screen').then(w => ST.wake = w).catch(() => {}); } catch(e){}
   $('stHelp').hidden = true; $('stBlack').hidden = true;
   updateBar(); showBar();
-  stToast('↓ ligne suivante · C chrono · E erreur · H aide', 4500);
   const go = () => requestAnimationFrame(() => { relayout(); });
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(go);
   stage.focus && stage.setAttribute('tabindex','-1'); stage.focus();
@@ -2566,11 +2564,10 @@ function stopChrono(record, fromExit){
   ST.chrono = null; updateBar();
   if (!record) return;
   if (dur < 2) { if (!fromExit) stToast('Moins de 2 s : rien n’est enregistré', 2800); return; }
-  if (dur < SHORT_SEC && fromExit) return;
   const t = curText(), stu = DB.students.find(x => x.id === DB.curStudent);
   const sess = {id: uid(), ts: Date.now(), stu: stu ? stu.id : '', stuName: stu ? stu.name : '', textId: t.id, title: t.title, level: t.level || '',
     dur: Math.round(dur), words: wordsRead(), err: ST.errors.length, errWords: ST.errors.filter(i => i !== null).map(i => WORDS[i] ? WORDS[i].t : ''), total: WORDS.length};
-  if (dur < SHORT_SEC) { pendingShort = sess; showDone(sess, true); return; }
+  if (dur < SHORT_SEC && !fromExit) { pendingShort = sess; showDone(sess, true); return; }
   DB.sessions.push(sess); save();
   showDone(sess);
   renderSessions();
@@ -2583,7 +2580,7 @@ function showDone(sess, short){
   $('doneSess').hidden = $('doneClose').hidden = !!short;
   $('doneSub').textContent = short ? 'Elle dure moins de 10 secondes.' : ''; $('doneSub').hidden = !short;
   const m = Math.round(mcmOf(sess));
-  $('doneCtx').textContent = (sess.stuName || 'Sans élève') + ' · ' + (sess.title || 'Sans titre');
+  $('doneCtx').textContent = sess.title || 'Sans titre';
   $('doneRes').textContent = (short ? '' : 'Essai ' + trialNo(sess) + ' · ') + 'Durée ' + fmt(sess.dur) + ' · ' + m + ' MCM · ' + sess.err + ' erreur' + (sess.err > 1 ? 's' : '');
   $('doneRes').hidden = true; $('doneShow').hidden = !!short;
   $('stDone').hidden = false; (short ? $('doneKeep') : $('doneClose')).focus();
@@ -2595,7 +2592,7 @@ $('doneShow').addEventListener('click', () => { $('doneRes').hidden = false; $('
 $('doneClose').addEventListener('click', closeDone);
 $('doneSess').addEventListener('click', () => { $('stDone').hidden = true; exitStage(); setTab('sess'); });
 function addError(i){
-  if (!ST.chrono) { stToast('Chrono arrêté (C pour démarrer)'); return; }
+  if (!ST.chrono) return;
   if (i !== null && i !== undefined) {
     const k = ST.errors.indexOf(i);
     const w = stText.querySelector(`.w[data-i="${i}"]`);
@@ -2620,7 +2617,6 @@ function updateBar(){
   c.classList.toggle('rec', !!ST.chrono);
   c.innerHTML = (ST.chrono ? '■' : '○') + ' Chrono <kbd>C</kbd>';
   c.setAttribute('aria-label', 'Chrono ' + (ST.chrono ? 'en cours (C pour arrêter)' : 'arrêté (C pour démarrer)'));
-  $('xMark').classList.toggle('slot-off', !ST.chrono);
   $('xMark').classList.toggle('armed', !!ST.armMark);
   const hud = $('stHud'); hud.hidden = !(s.hud && ST.open);
   if (!hud.hidden) {
@@ -2762,7 +2758,7 @@ $('xChrono').addEventListener('click', toggleChrono);
 $('xErr').addEventListener('click', () => addError(S().mode === 'mot' && ST.word >= 0 ? ST.word : null));
 $('xSpeak').addEventListener('click', speakLine);
 $('xUndo').addEventListener('click', undoError);
-$('xMark').addEventListener('click', () => { ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); });
+$('xMark').addEventListener('click', () => { if (!ST.chrono) return; ST.armMark = !ST.armMark; updateBar(); stToast(ST.armMark ? 'Touchez le dernier mot lu' : 'Marque annulée'); });
 $('xHelp').addEventListener('click', () => $('stHelp').hidden = !$('stHelp').hidden);
 $('xHelpClose').addEventListener('click', () => { $('stHelp').hidden = true; stage.focus(); });
 function toggleQuick(force){
