@@ -319,6 +319,7 @@ table.t input.num{width:66px;text-align:right;padding:4px 6px;border:1px solid v
 .st-quick{position:absolute;left:12px;right:12px;margin-inline:auto;width:max-content;max-width:calc(100% - 24px);bottom:calc(18px + 126px + env(safe-area-inset-bottom,0px));z-index:61;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-panel);box-shadow:var(--shadow);padding:14px 16px;display:flex;flex-direction:column;gap:12px;font:16px/1.2 var(--ui)}
 .st-quick .q-row{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .st-quick .q-l{font-weight:700;color:var(--ink-2)}
+.st-quick .seg button{min-width:44px}
 .st-quick .q-ctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .st-quick .q-ctl button{background:var(--surface);border:1px solid var(--line);color:inherit;border-radius:14px;min-height:44px;min-width:44px;padding:8px 12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:700}
 .st-quick .q-ctl button:hover{background:var(--surface-2);border-color:var(--line-strong)}
@@ -605,12 +606,15 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
           <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
+          <details class="son-det" id="moreQuick">
+            <summary>Fond et codage du texte…</summary>
           <div class="fld stack"><span class="l" id="lBg">Fond</span>
             <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
           <div class="fld stack"><span class="l" id="codePreL">Préréglages du codage</span>
             <div class="seg" role="group" aria-labelledby="codePreL">
               <button type="button" data-code="aucun">Aucun</button><button type="button" data-code="syl">Syllabes</button><button type="button" data-code="sons">Sons ciblés</button>
             </div></div>
+          </details>
           <div class="row" id="presetWrap"></div>
         </div>
       </details>
@@ -839,7 +843,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille, espacement entre les lettres, fond et préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
+          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. Sous « Fond et codage du texte… » : le fond et le préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
           <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage du texte</b> : trois préréglages en tête (Aucun, Syllabes, Sons ciblés), puis les syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
@@ -2898,8 +2902,8 @@ function relayout(keepWord){
 }
 /* Place réservée à la barre de commandes : la zone lue ne passe jamais dessous. */
 function barReserve(){
-  const h = $('stBar').offsetHeight;
-  return h ? Math.min(vh() * 0.45, h + 18 + 28) : Math.round(S().size * 0.35);
+  const h = $('stBar').offsetHeight, q = $('stQuick'), qh = q && !q.hidden ? q.offsetHeight + 10 : 0;
+  return h ? Math.min(vh() * (qh ? 0.7 : 0.45), h + 18 + 28 + qh) : Math.round(S().size * 0.35);
 }
 /* Hauteur de la zone lue pour w lignes à partir de la ligne k (toutes les lignes en défilement continu). */
 function zoneH(k, w){
@@ -3788,6 +3792,7 @@ function toggleQuick(force){
   const q = $('stQuick'); q.hidden = typeof force === 'boolean' ? !force : !q.hidden;
   $('xQuick').setAttribute('aria-expanded', !q.hidden);
   if (!q.hidden) { $('stHelp').hidden = true; showBar(); placeQuick(); syncQuick(); }
+  if (ST.open && ST.lines && ST.lines.length) relayout(ST.lines[ST.line].first); /* le texte monte au lieu de passer sous le panneau */
 }
 function syncQuick(){
   document.querySelectorAll('[data-qmode]').forEach(b => b.setAttribute('aria-pressed', b.dataset.qmode === (ST.listen ? 'ecoute' : S().mode)));
