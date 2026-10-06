@@ -13,7 +13,7 @@ Un prompteur de lecture pour la classe : on y prépare un texte, on le règle (t
 - **Durée mesurée en silence.** Il n'y a pas de chrono à lancer : Espace (ou « Démarrer ») donne le départ, après le décompte s'il est activé ; « Terminer » (touche T) arrête la mesure. Toutes les lectures sont enregistrées, avec ou sans élève.
 - **Second écran (facultatif).** Avec un beamer en écran étendu, une fenêtre de projection n'affiche que le texte ; l'enseignante pilote depuis son propre écran (texte suivi, mots à cliquer pour marquer une erreur, résultat à la fin). Avec un écran dupliqué ou une tablette seule, tout se pilote sur le pupitre, discrètement.
 - **Résultat après la séance.** En quittant le pupitre : « Lecture enregistrée », puis durée, MCM et erreurs sur demande. Une lecture de 2 à 10 secondes n'est enregistrée que sur confirmation ; sous 2 secondes, rien n'est gardé ; sous 30 secondes, le MCM est donné comme indicatif (« ≈ »).
-- **Synthèse vocale** pour faire entendre un mot, une ligne ou un texte.
+- **Synthèse vocale** pour faire entendre un mot, une ligne ou un texte. La voix « Automatique » choisit la meilleure voix française de l'appareil (« Premium », « Amélioré », « Natural » d'abord) ; hors ligne, les voix en ligne sont écartées. Une rubrique explique comment installer une voix plus naturelle.
 - **Suivi** : mots correctement lus par minute (MCM), dernières lectures de l'élève choisi, évolution par élève (MCM et erreurs séance après séance, filtrables par texte), tableau corrigeable, export CSV.
 - **Guide d'utilisation intégré** en deux onglets (« Démarrer » : quatre étapes et six touches ; « Référence » : tout le détail), pensé pour une prise en main sans avoir vu l'outil avant.
 

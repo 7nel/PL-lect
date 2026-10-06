@@ -705,6 +705,11 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div class="fld"><label for="sVoice">Voix</label><select id="sVoice"></select></div>
           <div class="fld"><label for="sRate">Débit</label><input type="range" id="sRate" min="0.5" max="1.3" step="0.05"><output id="oRate"></output></div>
           <div class="row"><button class="btn sm" id="bTestVoice">Tester</button><span class="sub" id="voiceNote"></span></div>
+          <details class="son-det" id="voiceHelp">
+            <summary>Obtenir une voix plus naturelle</summary>
+            <p class="sub">La qualité dépend des voix installées sur l’appareil, pas de l’outil. Cherchez les voix françaises « Premium », « Amélioré » ou « Natural ».</p>
+            <p class="sub"><b>iPad</b> : Réglages → Accessibilité → Contenu énoncé → Voix → Français, puis une voix « Premium » ou « Amélioré ».<br><b>Mac</b> : Réglages Système → Accessibilité → Contenu énoncé → Voix du système → Gérer les voix.<br><b>Windows</b> : Réglages → Heure et langue → Voix. Dans Edge, les voix « Online (Natural) » sont les plus naturelles mais demandent du réseau.</p>
+          </details>
           <h3>Sauvegarde</h3>
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
@@ -801,7 +806,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
           <li><b>Codage du texte</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
-          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données.</li>
+          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données. La voix « Automatique » choisit la meilleure voix française de l’appareil ; une rubrique explique comment en installer une plus naturelle.</li>
         </ul>
         <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Réglages enregistrés », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
@@ -2645,12 +2650,26 @@ let voices = [];
 function loadVoices(){
   if (!synth) { $('sVoice').innerHTML = '<option value="">indisponible</option>'; $('voiceNote').textContent = "La synthèse vocale n'est pas disponible dans ce navigateur."; return; }
   voices = synth.getVoices().filter(v => /^fr/i.test(v.lang));
-  voices.sort((a,b) => (b.lang==='fr-CH') - (a.lang==='fr-CH') || (b.localService - a.localService));
-  $('sVoice').innerHTML = '<option value="">Automatique (français)</option>' + voices.map(v => `<option value="${esc(v.voiceURI)}">${esc(v.name)} (${v.lang})</option>`).join('');
+  voices.sort((a,b) => voiceScore(b) - voiceScore(a));
+  const tag = v => { const t = voiceTier(v); return (t >= 3 ? ' · qualité haute' : t <= 1 ? ' · voix basique' : '') + (v.localService ? '' : ' · en ligne'); };
+  $('sVoice').innerHTML = '<option value="">Automatique (la meilleure)</option>' + voices.map(v => `<option value="${esc(v.voiceURI)}">${esc(v.name)} (${v.lang})${tag(v)}</option>`).join('');
   $('sVoice').value = S().voice;
-  $('voiceNote').textContent = voices.length ? voices.length + ' voix françaises' : 'Aucune voix française trouvée';
+  const best = voices[0];
+  $('voiceNote').textContent = !voices.length ? 'Aucune voix française trouvée' : voices.length + ' voix françaises' + (voiceTier(best) < 3 ? ' · aucune voix de qualité haute' : '');
 }
-if (synth) { loadVoices(); synth.onvoiceschanged = loadVoices; } else loadVoices();
+/* Classement des voix : qualité d'abord (noms « Premium », « Amélioré », « Natural »…), voix locales avant voix en ligne.
+   Hors ligne, une voix en ligne ne passe jamais devant : elle ne dirait rien. */
+function voiceTier(v){
+  const n = v.name;
+  if (/premium|enhanced|am[ée]lior|neural|natural|siri/i.test(n)) return 3;
+  if (/compact|espeak|hortense|julie|\bpaul\b/i.test(n)) return 1;
+  return 2;
+}
+function voiceScore(v){
+  if (!v.localService && !navigator.onLine) return -1;
+  return voiceTier(v) * 10 + (v.localService ? 5 : 0) + (v.lang === 'fr-CH' ? 1 : 0);
+}
+if (synth) { loadVoices(); synth.onvoiceschanged = loadVoices; window.addEventListener('online', loadVoices); window.addEventListener('offline', loadVoices); } else loadVoices();
 function speak(text){
   if (!synth || !text) return;
   synth.cancel();
