@@ -5,7 +5,7 @@ Un prompteur de lecture pour la classe : on y prépare un texte, on le règle (t
 ## Fonctionnalités
 
 - **Bibliothèque de textes** classés par niveau, avec import `.txt` / `.docx`.
-- **Codage phonologique du texte** (syllabes, lettres muettes, liaisons, sons ciblés) grâce au moteur du projet [LireCouleur](https://lirecouleur.forge.apps.education.fr).
+- **Codage phonologique du texte** (préréglages Aucun, Syllabes et Sons ciblés ; syllabes, lettres muettes, liaisons, sons ciblés) grâce au moteur du projet [LireCouleur](https://lirecouleur.forge.apps.education.fr).
 - **Préparer la lecture : élève → texte → réglage → lancer.** Le texte se choisit dans la liste « Textes » ; un bloc réunit l'élève et le réglage ; la barre de lancement rappelle les trois à côté du bouton « Lancer ». Elle est collée en bas de l'écran sur tablette et téléphone.
 - **Réglages en cinq niveaux** : réglage rapide (quatre points de départ — standard, sans couleurs de syllabes, puis dyslexie, allophonie, décrochage — plus les vôtres, avec taille et espacement des lettres), typographie, couleurs (dont les quatre fonds), codage du texte, lecture. « Enregistrer ces réglages » n'apparaît qu'après un ajustement. Seul le premier est ouvert par défaut.
 - **Pupitre en plein écran** : trois façons d'avancer (ligne par ligne, défilement continu, mot à mot), nombre de lignes en évidence, décompte de départ, commandes tactiles et raccourcis clavier. Le texte hors des lignes lues est atténué. La zone lue ne passe jamais sous la barre de commandes : si le nombre de lignes demandé ne tient pas à l'écran, il est réduit et un message le signale.
