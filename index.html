@@ -501,7 +501,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     <div class="center">
       <!-- Aujourd'hui : qui lit, quel texte, quel réglage -->
       <div class="panel today" id="today" aria-labelledby="todayT">
-        <div class="panel-h"><h2 id="todayT">Aujourd’hui</h2></div>
+        <div class="panel-h"><h2 id="todayT">Préparer la lecture</h2></div>
         <div class="pick">
           <label class="pk" for="selStudent"><span>Élève</span><select id="selStudent"></select></label>
           <label class="pk" for="selText"><span>Texte</span><select id="selText"></select></label>
@@ -625,7 +625,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
 
       <!-- 4. Codage -->
       <details class="sec">
-        <summary>Codage <span class="sum-hint" id="hCode"></span></summary>
+        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l">Syllabes</span>
             <div class="seg" role="group" aria-label="Syllabes">
@@ -750,7 +750,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     </div>
     <div class="guide-body" id="gpStart" role="tabpanel" aria-labelledby="gtStart">
       <div class="guide-steps">
-        <div class="guide-step"><b><span class="gnum">1</span>Choisir</b><p>Dans « Aujourd’hui » : l’élève, le texte, le réglage.</p></div>
+        <div class="guide-step"><b><span class="gnum">1</span>Choisir</b><p>Dans « Préparer la lecture » : l’élève, le texte, le réglage.</p></div>
         <div class="guide-step"><b><span class="gnum">2</span>Lancer</b><p>Bouton vert « Lancer au pupitre ».</p></div>
         <div class="guide-step"><b><span class="gnum">3</span>Donner le départ</b><p>Touche Espace. Puis Espace ou ↓ à chaque ligne.</p></div>
         <div class="guide-step"><b><span class="gnum">4</span>Terminer</b><p>Touche T. Le résultat vous attend en quittant.</p></div>
@@ -772,7 +772,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     <div class="guide-body" id="gpRef" role="tabpanel" aria-labelledby="gtRef" hidden>
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span>Préparer un texte</h3>
-        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. Le bloc <b>Aujourd’hui</b> réunit les trois choix d’une séance : l’élève, le texte et le réglage ; la barre du bas les rappelle à côté du bouton « Lancer ». À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
+        <p>L’onglet <b>Préparer</b> (en haut) est la page de départ. Le bloc <b>Préparer la lecture</b> réunit les trois choix d’une séance : l’élève, le texte et le réglage ; la barre du bas les rappelle à côté du bouton « Lancer ». À gauche, la bibliothèque liste vos textes ; deux exemples sont déjà là pour essayer l'application sans rien taper.</p>
         <ul>
           <li><b>+ Nouveau</b> crée un texte vide ; <b>Modifier le texte</b> permet de le taper ou de le coller, une ligne vide séparant les paragraphes.</li>
           <li><b>Importer .txt / .docx</b>, en haut de la zone de texte, récupère un fichier existant.</li>
@@ -786,10 +786,10 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les fonds sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Aujourd’hui propose la même liste.</li>
+          <li><b>Réglage rapide</b> : la liste des réglages enregistrés (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les fonds sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
           <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
           <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
-          <li><b>Codage</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
+          <li><b>Codage du texte</b> : syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
           <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
           <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données.</li>
         </ul>
@@ -803,7 +803,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Le départ.</b> Le texte s’affiche, rien n’est encore mesuré. <b>Espace</b> (ou le bouton vert « Démarrer ») donne le départ, après le décompte 3-2-1 s’il est activé ; la première avance (↓, glissement, télécommande) le donne aussi. Avant le départ, cliquez une ligne pour commencer à cet endroit.</li>
           <li><b>Pendant la lecture.</b> Le bouton vert suit la touche Espace : « Suivante » en ligne par ligne, « Pause » / « Reprendre » en défilement. Un clic sur un mot (ou <b>E</b>) marque une erreur, sans aucune trace à l’écran ; « Dernier mot » puis un mot marque l’endroit où l’élève s’est arrêté.</li>
           <li><b>La fin.</b> <b>T</b> (ou « Terminer ») arrête la mesure. L’écran n’affiche qu’une carte neutre, « Lecture terminée » : ni durée, ni résultat, ni nom. <b>Échap</b> pendant une lecture demande seulement s’il faut la terminer.</li>
-          <li><b>Le résultat.</b> En quittant le pupitre, le bloc Aujourd’hui indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
+          <li><b>Le résultat.</b> En quittant le pupitre, le bloc Préparer la lecture indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
           <li>Le bouton « Mode » règle la façon d’avancer et le nombre de lignes en évidence sans quitter le pupitre ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
           <li>Si le nombre de lignes en évidence ne tient pas à l’écran (très grande taille), il est réduit et un message le signale : la zone lue ne passe jamais sous la barre.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
@@ -2399,7 +2399,7 @@ function renderLib(){
   const sorted = DB.texts.slice().sort((a,b) => (a.level||'9').localeCompare(b.level||'9') || a.title.localeCompare(b.title,'fr'));
   list.innerHTML = sorted.map(t => {
     const n = (t.text.match(TOKEN) || []).length;
-    return `<li><button data-id="${t.id}" aria-current="${t.id===DB.cur}"><span class="lvl" title="Niveau">${t.level||'—'}</span><span class="lib-t">${esc(t.title||'Sans titre')}</span>${t.ex?'<span class="tag-ex">exemple</span>':`<span class="lib-m">${n}</span>`}</button></li>`;
+    return `<li><button data-id="${t.id}" aria-current="${t.id===DB.cur}"><span class="lvl" title="Niveau">${t.level ? 'N' + t.level : '—'}</span><span class="lib-t">${esc(t.title||'Sans titre')}</span>${t.ex?'<span class="tag-ex">exemple</span>':`<span class="lib-m">${n}</span>`}</button></li>`;
   }).join('');
 }
 $('libList').addEventListener('click', e => {
@@ -3596,12 +3596,12 @@ function renderSessions(){
   renderEvo();
   if (!list.length) { $('sessTbl').innerHTML = '<div class="empty">Aucune séance pour le moment. Chaque lecture lancée au pupitre s’enregistre ici toute seule, du départ à « Terminer ».</div>'; return; }
   const df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit', year:'2-digit', hour:'2-digit', minute:'2-digit'});
-  $('sessTbl').innerHTML = '<table class="t"><thead><tr><th>Date</th><th>Élève</th><th>Texte</th><th>Essai</th><th>Durée</th><th>Mots lus</th><th>Erreurs</th><th>MCM</th><th></th></tr></thead><tbody>' +
+  $('sessTbl').innerHTML = '<table class="t"><thead><tr><th>Date</th><th>Élève</th><th>Texte</th><th>Essai</th><th>Durée</th><th>Mots lus</th><th>Erreurs</th><th><abbr title="mots correctement lus par minute">MCM</abbr></th><th></th></tr></thead><tbody>' +
     list.map(s => s.pending
       ? `<tr class="pend"><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}</td><td class="n">—</td><td class="n">${fmt(s.dur)}</td>` +
         `<td colspan="3">Lecture très courte, pas encore enregistrée</td>` +
         `<td><span class="confirm"><button class="btn sm pri" type="button" data-skeep="${s.id}">Enregistrer</button><button class="btn sm" type="button" data-sdelyes="${s.id}">Écarter</button></span></td></tr>`
-      : `<tr><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}${s.level ? ' <span class="lvl">' + esc(s.level) + '</span>' : ''}</td>` +
+      : `<tr><td>${df.format(new Date(s.ts))}</td><td>${esc(s.stuName || '—')}</td><td>${esc(s.title)}${s.level ? ' <span class="lvl" title="Niveau">N' + esc(s.level) + '</span>' : ''}</td>` +
       `<td class="n">${trialNo(s)}</td><td class="n">${fmt(s.dur)}</td>` +
       `<td class="n"><input class="num" type="number" min="0" id="w_${s.id}" data-edit="words" data-id="${s.id}" value="${s.words}" aria-label="Mots lus"></td>` +
       `<td class="n"><input class="num" type="number" min="0" id="e_${s.id}" data-edit="err" data-id="${s.id}" value="${s.err}" aria-label="Erreurs" title="${esc((s.errWords||[]).filter(Boolean).join(', '))}"></td>` +
