@@ -50,7 +50,7 @@ Deux choses qu'un prompteur ou un lecteur de texte ordinaire ne fait pas :
 
 ## Brand Commitments
 
-Nom : **PL-lect'** (préfixe de la suite PL, apostrophe typographique à l'affichage ; dépôt `PL-lect`). Fait partie de la suite d'outils PL de Pauline Lentes. Français de Suisse romande. Identité décrite dans `../CLAUDE.md` et `CLAUDE.md`.
+Nom : **PL-lect’** (préfixe de la suite PL, apostrophe typographique à l'affichage ; dépôt `PL-lect`). Fait partie de la suite d'outils PL de Pauline Lentes. Français de Suisse romande. Identité décrite dans `../CLAUDE.md` et `CLAUDE.md`.
 
 ## Evidence on Hand
 

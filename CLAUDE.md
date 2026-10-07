@@ -1,6 +1,6 @@
-# PL-lect' — règles du projet
+# PL-lect’ — règles du projet
 
-Complète `../CLAUDE.md` (charte commune des sites PL). En cas de conflit, ce fichier prévaut pour PL-lect'.
+Complète `../CLAUDE.md` (charte commune des sites PL). En cas de conflit, ce fichier prévaut pour PL-lect’.
 
 ## Contexte
 
@@ -10,7 +10,7 @@ Prompteur de lecture pour la classe : on prépare un texte, on le règle, puis o
 
 GNU GPL v3, parce que la page intègre le moteur LireCouleur (voir `NOTICE.md` et `README.md`). Ne pas changer de licence sans retirer ce moteur.
 
-## Tokens propres à PL-lect'
+## Tokens propres à PL-lect’
 
 Ils s'ajoutent aux tokens de la charte commune. Ne pas en inventer d'autres sans les déclarer ici.
 

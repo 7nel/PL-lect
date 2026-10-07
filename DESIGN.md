@@ -1,5 +1,5 @@
 ---
-name: PL-lect'
+name: PL-lect’
 description: Un pupitre de lecture calme et sobre, qui s'efface devant le texte et devant l'élève.
 colors:
   sage: "#2f6f63"
@@ -133,13 +133,13 @@ components:
     textColor: "{colors.sage}"
 ---
 
-# Design System: PL-lect'
+# Design System: PL-lect’
 
 ## Overview
 
 **Creative North Star: "Le pupitre de l'atelier"**
 
-PL-lect' est un outil de travail posé sur un établi calme : des surfaces unies, un seul vert, des coins larges et rassurants, rien qui réclame l'attention. L'interface de préparation s'efface devant ce qui compte, le texte de l'élève, et le pupitre plein écran s'efface devant la lecture. Le geste de l'enseignante doit être sûr, jamais décoratif.
+PL-lect’ est un outil de travail posé sur un établi calme : des surfaces unies, un seul vert, des coins larges et rassurants, rien qui réclame l'attention. L'interface de préparation s'efface devant ce qui compte, le texte de l'élève, et le pupitre plein écran s'efface devant la lecture. Le geste de l'enseignante doit être sûr, jamais décoratif.
 
 Le système tient en deux écrans qui n'ont pas la même loi. L'écran de préparation est dense mais rangé : trois colonnes de cartes douces sur un fond gris-vert, où l'on règle, choisit et lance. Le pupitre est son opposé : un fond uni choisi par l'enseignante, le texte en très grand, une bande de lecture, et c'est tout. Tout ce que l'élève voit au beamer appartient au texte, pas à l'interface.
 

@@ -1,6 +1,6 @@
 {
-  "name": "PL-lect' · Pupitre de lecture",
-  "short_name": "PL-lect'",
+  "name": "PL-lect’ · Pupitre de lecture",
+  "short_name": "PL-lect’",
   "description": "Prompteur de lecture pour la classe : texte codé, réglages d'affichage, chronométrage et suivi de fluence.",
   "lang": "fr",
   "start_url": "./",

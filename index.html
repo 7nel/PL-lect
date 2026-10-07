@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Prompteur de lecture pour la classe : texte codé (syllabes, sons, liaisons, lettres muettes), réglages d'affichage, mesure discrète de la durée et suivi de fluence.">
-<title>PL-lect'</title>
+<title>PL-lect’</title>
 <meta name="theme-color" content="#2f6f63">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="PL-lect'">
+<meta name="apple-mobile-web-app-title" content="PL-lect’">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'><circle cx='80' cy='80' r='76' fill='%232F6F63'/><g fill='none' stroke='%23FFFFFF' stroke-width='11' stroke-linecap='round' stroke-linejoin='round'><path d='M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76'/><path d='M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111'/></g></svg>">
 <!--
-  PL-lect' — prompteur de lecture avec codage phonologique.
+  PL-lect’ — prompteur de lecture avec codage phonologique.
   Moteur de décodage : LireCouleur (Marie-Pierre et Luc Brungard), GNU GPL v3.
   Cette page intègre ce moteur et est donc diffusée sous la même licence (GNU GPL v3).
   Polices intégrées : Luciole (CC BY 4.0, L. Bourcellier & J. Perez) ; OpenDyslexic, Atkinson Hyperlegible, Andika et Lexend (SIL OFL 1.1).
@@ -64,9 +64,14 @@ h1,h2,h3,p{overflow-wrap:break-word}
 /* ---------- En-tête ---------- */
 .app{display:flex;flex-direction:column;min-height:100%;padding-inline:clamp(16px,3vw,48px);padding-block:clamp(10px,2vh,24px)}
 .top{display:flex;align-items:center;gap:12px 20px;flex-wrap:wrap;padding-block:0 18px;position:relative}
-.brand{margin-right:auto;min-width:0}
-.wordmark{display:flex;align-items:center;gap:12px;margin:0;font:700 clamp(1.7rem,3.4vw,2.5rem)/1.1 var(--display);letter-spacing:-.01em}
-.wordmark svg{flex:none;width:1.15em;height:1.15em}
+.brand{margin-right:auto;min-width:0;display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap}
+.wordmark{display:flex;align-items:center;gap:8px;margin:0;font:700 1.1rem/1.2 var(--display)}
+.wordmark svg{flex:none;width:1.45em;height:1.45em}
+/* retour vers PL, commun à la famille d'outils */
+.pl-back{position:relative;color:var(--ink-2);font-weight:700;font-size:.95rem;text-decoration:none;white-space:nowrap}
+.pl-back::after{content:"";position:absolute;inset:-12px -8px}
+.pl-back:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.pl-back:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
 .nav-group{display:flex;gap:8px;flex-wrap:wrap}
 .nav-tools{padding-right:20px;border-right:1px solid var(--line)}
 .nb{min-height:48px;display:inline-flex;align-items:center;gap:8px;padding:0 16px 0 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink);font:700 1rem var(--ui);white-space:nowrap}
@@ -506,7 +511,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
 <div class="app">
   <header class="top">
     <div class="brand">
-      <h1 class="wordmark"><svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="76" fill="var(--accent)"/><g fill="none" stroke="var(--accent-ink)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76"/><path d="M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111"/></g></svg>PL-lect’</h1>
+      <h1 class="wordmark"><svg viewBox="0 0 160 160" aria-hidden="true"><circle cx="80" cy="80" r="76" fill="var(--accent)"/><g fill="none" stroke="var(--accent-ink)" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"><path d="M56,114 C55,100 58,86 56,70 C55,58 57,50 56,48 C64,46 78,45 80,58 C82,70 70,76 56,76"/><path d="M100,48 C99,64 101,86 100,100 C99,108 101,112 100,112 L128,111"/></g></svg>PL-lect’</h1><a class="pl-back" href="https://7nel.github.io/PL/" aria-label="Retour à PL, tous les outils"><span aria-hidden="true">←</span> PL</a>
     </div>
     <div class="nav-group nav-tools">
       <button class="nb" id="bHelp" aria-expanded="false" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 015.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg>Aide</button>
@@ -808,7 +813,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
   <div class="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
     <div class="guide-top">
       <div>
-        <h2 id="guideTitle">Découvrir PL-lect'</h2>
+        <h2 id="guideTitle">Découvrir PL-lect’</h2>
         <p>Un prompteur pour faire lire vos élèves à voix haute, avec un texte adapté (couleurs, espacement, sons) projeté au beamer ou affiché sur une tablette.</p>
       </div>
       <button class="guide-close" id="guideClose" aria-label="Fermer le guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -2198,11 +2203,11 @@ class LireCouleur {
 </script>
 <script>
 /* ==========================================================================
-   Application "PL-lect'" — interface, réglages, pupitre, séances.
+   Application "PL-lect’" — interface, réglages, pupitre, séances.
    Écrit pour ce dépôt ; s'appuie sur le moteur LireCouleur ci-dessus.
    ========================================================================== */
 
-/* ===================== PL-lect' — application ===================== */
+/* ===================== PL-lect’ — application ===================== */
 (function(){
 "use strict";
 const $ = id => document.getElementById(id);
