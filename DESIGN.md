@@ -4,25 +4,26 @@ description: Un pupitre de lecture calme et sobre, qui s'efface devant le texte 
 colors:
   sage: "#2f6f63"
   sage-on: "#ffffff"
-  sage-soft: "#dee8e6"
+  sage-soft: "#dee6e1"
   sage-light: "#6fbfae"
-  sage-light-on: "#182422"
-  paper-grey: "#eff2f0"
-  card-white: "#ffffff"
-  wash-grey: "#e4e9e6"
-  hairline: "#d7ddda"
-  hairline-strong: "#c3cbc7"
+  sage-light-on: "#1e2220"
+  warm-paper: "#f4f0e8"
+  card-white: "#fffdf9"
+  sand-wash: "#e9e4d9"
+  hairline: "#dcd6c8"
+  hairline-strong: "#c4bdad"
+  control-line: "#7a8077"
   deep-ink: "#253433"
   quiet-ink: "#52635f"
   reading-yellow: "#FFD83D"
-  alert-brick: "#a8402f"
-  alert-brick-light: "#d98070"
-  night-green: "#182422"
-  night-card: "#202f2c"
-  night-wash: "#24322f"
-  night-hairline: "#33443f"
-  night-ink: "#eaf1ee"
-  night-quiet-ink: "#9fb0ac"
+  alert-brick: "#a03a2a"
+  alert-brick-light: "#eb9b8b"
+  night-green: "#1e2220"
+  night-card: "#282d2a"
+  night-wash: "#2d332f"
+  night-hairline: "#3b423d"
+  night-ink: "#f0ede6"
+  night-quiet-ink: "#b3b6ab"
 typography:
   body:
     fontFamily: "Atkinson Hyperlegible, Segoe UI, system-ui, sans-serif"
@@ -84,14 +85,14 @@ components:
     padding: "14px 26px"
     height: "56px"
   button-secondary:
-    backgroundColor: "{colors.wash-grey}"
+    backgroundColor: "{colors.sand-wash}"
     textColor: "{colors.deep-ink}"
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
     padding: "7px 14px"
     height: "44px"
   button-danger:
-    backgroundColor: "{colors.wash-grey}"
+    backgroundColor: "{colors.sand-wash}"
     textColor: "{colors.alert-brick}"
     typography: "{typography.label}"
     rounded: "{rounded.pill}"
@@ -103,7 +104,7 @@ components:
     rounded: "{rounded.card}"
     padding: "18px 22px"
   panel-inset:
-    backgroundColor: "{colors.paper-grey}"
+    backgroundColor: "{colors.warm-paper}"
     textColor: "{colors.deep-ink}"
     rounded: "{rounded.panel}"
     padding: "13px 16px"
@@ -154,26 +155,27 @@ La douceur est le ton : bords arrondis, bordures d'un pixel, ombre légère, peu
 
 ## Colors
 
-Un vert sauge posé sur des gris tirant sur le vert. L'ensemble est calme et tamisé, sans couleur secondaire d'interface.
+Un vert sauge posé sur des neutres chauds (palette de la charte v2.2, 2026-10-15). L'ensemble est calme et tamisé, sans couleur secondaire d'interface.
 
 ### Primary
-- **Sauge** (#2f6f63) : la couleur d'action. Bouton « Lancer », onglet et choix actifs (en fond doux), focus, curseurs, liens. En mode sombre elle devient **Sauge clair** (#6fbfae) avec une encre sombre (#182422) dessus.
-- **Sauge doux** (#dee8e6, mélange de 16 % de sauge sur la carte) : fond d'un choix actif ou sélectionné. Le texte et le contour restent en sauge.
+- **Sauge** (#2f6f63) : la couleur d'action. Bouton « Lancer », onglet et choix actifs (en fond doux), focus, curseurs, liens. En mode sombre elle devient **Sauge clair** (#6fbfae) avec une encre sombre (#1e2220) dessus.
+- **Sauge doux** (#dee6e1, mélange de 16 % de sauge sur la carte) : fond d'un choix actif ou sélectionné. Le texte et le contour restent en sauge.
 
 ### Secondary
-- **Jaune repère** (#FFD83D) : la bande de lecture sur le pupitre et le marqueur de mots dans le texte codé. Il est appliqué en transparence (45 % en clair, 30 % en sombre) sur le fond du pupitre, d'où un jaune pâle à l'écran. Il n'est jamais utilisé comme couleur d'interface.
+- **Jaune repère** (#FFD83D) : la bande de lecture sur le pupitre et le marqueur de mots dans le texte codé. Il est appliqué en transparence (45 % en clair, 30 % en sombre) sur le fond du pupitre, d'où un jaune pâle à l'écran. Il n'est jamais utilisé comme couleur d'interface. Ce surligneur est l'exception déclarée de la charte commune à la règle « un seul jaune par écran, en aplat » (plusieurs éléments à la fois, jaune translucide sous le texte).
 
 ### Tertiary
-- **Brique d'alerte** (#a8402f ; #d98070 en sombre) : actions destructrices (« Supprimer », « Retirer ») et lecture en cours d'enregistrement. Jamais pour décorer.
+- **Brique d'alerte** (#a03a2a ; #eb9b8b en sombre) : actions destructrices (« Supprimer », « Retirer ») et lecture en cours d'enregistrement. Jamais pour décorer.
 
 ### Neutral
-- **Gris papier** (#eff2f0) : le fond de page et l'intérieur des sections repliables.
-- **Blanc carte** (#ffffff) : les cartes et les champs.
-- **Gris lavé** (#e4e9e6) : les boutons secondaires et les fonds de contrôle.
-- **Filet** (#d7ddda) et **Filet renforcé** (#c3cbc7) : bordures de 1 px.
+- **Papier chaud** (#f4f0e8) : le fond de page et l'intérieur des sections repliables.
+- **Blanc carte** (#fffdf9) : les cartes et les champs.
+- **Sable lavé** (#e9e4d9) : les boutons secondaires et les fonds de contrôle.
+- **Filet** (#dcd6c8) et **Filet renforcé** (#c4bdad) : séparateurs et bordures de cartes de 1 px.
+- **Contour de contrôle** (#7a8077 ; #778179 en sombre) : contour des champs et des boutons secondaires, au moins 3:1 sur le fond, la carte et le sable lavé.
 - **Encre profonde** (#253433) : texte principal.
-- **Encre discrète** (#52635f) : texte secondaire, libellés, légendes ; 5,2:1 sur gris lavé.
-- **Vert nuit** (#182422), **Carte nuit** (#202f2c), **Lavis nuit** (#24322f), **Filet nuit** (#33443f), **Encre nuit** (#eaf1ee), **Encre discrète nuit** (#9fb0ac) : les équivalents du mode sombre, aux mêmes rapports de valeur.
+- **Encre discrète** (#52635f) : texte secondaire, libellés, légendes ; 5,0:1 sur sable lavé.
+- **Vert nuit** (#1e2220), **Carte nuit** (#282d2a), **Lavis nuit** (#2d332f), **Filet nuit** (#3b423d), **Encre nuit** (#f0ede6), **Encre discrète nuit** (#b3b6ab) : les équivalents du mode sombre, aux mêmes rapports de valeur.
 
 ### Named Rules
 **The One Green Rule.** Le sauge est la seule couleur d'interface. Le jaune appartient au repère de lecture, le rouge au danger et à l'enregistrement. Une deuxième teinte d'accent est un défaut.
@@ -223,7 +225,7 @@ Les surfaces sont posées sur un fond uni, séparées par un filet de 1 px et un
 ### Named Rules
 **The Hairline-and-Soft Rule.** Le filet de 1 px et l'ombre douce vont ensemble sur les cartes : c'est le choix du système, assumé, pas un oubli.
 
-**The Flat Content Rule.** Le contenu à l'intérieur d'une carte (sections repliables, aperçu, tableaux) reste plat : seul le fond gris papier le distingue, jamais une ombre.
+**The Flat Content Rule.** Le contenu à l'intérieur d'une carte (sections repliables, aperçu, tableaux) reste plat : seul le fond papier chaud le distingue, jamais une ombre.
 
 ## Shapes
 
@@ -237,12 +239,12 @@ Deux exceptions de gabarit : les touches clavier (6 px) et les repères du texte
 - **Shape:** pilule (999 px), hauteur minimale de 44 px, et de 56 px pour le lancement.
 - **Primary:** fond sauge, texte blanc (encre sombre en mode sombre), police 1rem 700 ; « Lancer au pupitre » monte à 1,25rem avec un padding de 14 px 26 px.
 - **Hover / Focus:** le contour passe au sauge au survol ; le bouton primaire s'éclaircit légèrement. Le focus est un anneau de 3 px sauge avec 2 px de marge ; sur le bouton primaire, l'anneau passe à l'encre pour rester visible.
-- **Secondary:** fond gris lavé, filet de 1 px, texte encre profonde.
+- **Secondary:** fond sable lavé, filet de 1 px, texte encre profonde.
 - **Danger:** fond rouge très doux, texte rouge mêlé d'encre, contour rouge atténué. Un bouton « ghost » sans fond ni bordure existe pour les liens d'action discrets.
 
 ### Chips and Segmented Controls
 - **Profils de réglage :** boutons à 14 px de rayon, fond blanc et filet ; l'actif prend le sauge doux, un contour sauge et un texte sauge, signalé aussi par `aria-pressed`.
-- **Segments :** une piste en pilule gris papier avec 3 px de marge ; le segment actif prend le même traitement doux.
+- **Segments :** une piste en pilule papier chaud avec 3 px de marge ; le segment actif prend le même traitement doux.
 - **Étiquettes de niveau :** petites pilules « N1 », « N3 », contour sauge atténué, chiffres tabulaires.
 
 ### Cards / Containers
@@ -251,7 +253,7 @@ Deux exceptions de gabarit : les touches clavier (6 px) et les repères du texte
 - **Shadow Strategy:** ombre « Carte », avec un filet de 1 px (voir Elevation).
 - **Border:** `1px solid` Filet.
 - **Internal Padding:** 18 px 22 px pour l'en-tête, 22 px sur les côtés pour le contenu.
-- **Sections repliables:** fond gris papier, 16 px de rayon, chevron de 8 px qui pivote à 0,15 s.
+- **Sections repliables:** fond papier chaud, 16 px de rayon, chevron de 8 px qui pivote à 0,15 s.
 
 ### Inputs / Fields
 - **Style:** fond blanc, filet de 1 px, 10 px de rayon, hauteur de 44 px, texte en 700.

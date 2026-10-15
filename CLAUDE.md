@@ -12,20 +12,29 @@ GNU GPL v3, parce que la page intègre le moteur LireCouleur (voir `NOTICE.md` e
 
 ## Tokens propres à PL-lect’
 
-Ils s'ajoutent aux tokens de la charte commune. Ne pas en inventer d'autres sans les déclarer ici.
+Ils s'ajoutent aux tokens de la charte commune (v2.2, fond chaud). `--danger`, `--danger-soft`, `--ok`, `--line-ctl`, `--mark` et `--mark-ink` sont des tokens de la charte : ils ne sont plus déclarés ici. Ne pas en inventer d'autres sans les déclarer ici.
 
 | Token | Rôle | Pourquoi il existe |
 |---|---|---|
-| `--danger`, `--danger-soft` | Action destructrice, chrono en cours (rouge) | La charte prévoit `--warn` (ambre) ; ici le rouge distingue « Supprimer » et l'enregistrement en cours. |
-| `--ok` | Confirmation (même vert que `--accent`) | Nom sémantique pour les états réussis. |
 | `--ink-3` | Texte tertiaire | Aujourd'hui identique à `--ink-2` ; gardé pour pouvoir l'éclaircir sans toucher aux composants. Contraste AA minimum. |
 | `--display` | Titres | Identique à `--ui` (Atkinson Hyperlegible) ; gardé pour pouvoir distinguer les titres plus tard. |
 | `--c-*` | Couleurs du texte codé (syllabes, arcs, muettes, liaisons, repère de ligne…) | Écrites en JavaScript selon le fond (jeu clair ou sombre). |
 | `--st-*` | Couleurs du pupitre plein écran | Le pupitre a son propre fond et sa propre encre, réglables par l'enseignante. |
 
-Polices : Atkinson Hyperlegible, Andika et Lexend sont intégrées en base64 dans `index.html` (sous-ensemble latin), à la place du lien Google Fonts que prescrit la charte commune. Raison : l'outil doit fonctionner hors ligne et sur un réseau d'école qui bloque `googleapis.com`. Les autres polices de lecture suivent la même règle (voir `NOTICE.md`).
+Polices : Atkinson Hyperlegible, Andika et Lexend sont intégrées en base64 dans `index.html` (sous-ensemble latin), au lieu de fichiers `.woff2` séparés dans `fonts/`, parce que l'outil tient en un seul fichier `index.html`. La charte commune interdit Google Fonts et autorise cette intégration en base64 pour un fichier unique. Les autres polices de lecture suivent la même règle (voir `NOTICE.md`).
 
-Écart assumé avec la charte : `--accent-soft` utilise 16 % comme la charte ; `--ink-2` est un peu plus foncé (#52635f en clair) pour tenir 4,5:1 sur `--surface-2`.
+## Écarts assumés avec la charte commune
+
+État au 2026-10-15 : la palette de la charte v2.2 (fond chaud, sombre `#1e2220`) est reportée dans `DESIGN.md`, mais pas encore appliquée au code de `index.html`, qui porte encore l'ancienne palette (par exemple `--danger` `#a8402f`). Ces écarts valent jusqu'à l'application, qui se décide à part.
+
+| Variable | Valeur | Raison |
+|---|---|---|
+| `--danger` (code actuel) | `#a8402f` (clair), `#d98070` (sombre) | Ancienne valeur : la charte donne `#a03a2a` et `#eb9b8b`. À aligner à l'application. |
+| Jaune `--mark` (surligneur de lecture) | `#FFD83D`, translucide (45 % en clair, 30 % en sombre) | Exception déclarée de la charte : plusieurs éléments à la fois (bande de lecture, marqueur de mots), texte en encre par-dessus. |
+| `--st-*`, palettes de lecture `--c-*` | réglables par l'enseignante | Le pupitre et le texte codé ont leurs propres fonds et encres ; hors palette commune. |
+| Anciennes valeurs du fond et des neutres | `#eff2f0`, `#e4e9e6`, `#d7ddda`, `#c3cbc7`, `#ffffff` | Remplacées par la charte à l'application. `--ink-2` `#52635f` est déjà la valeur de la charte. |
+
+Les accents `--accent-soft` (16 %) et `--ink-2` (`#52635f`) sont alignés sur la charte : ce ne sont plus des écarts.
 
 ## Voix naturelle (dossier `voix/`)
 
