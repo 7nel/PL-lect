@@ -200,6 +200,7 @@ Un vert sauge posé sur des neutres chauds (palette de la charte v2.2, 2026-10-1
 - **Body** (400, 18px, 1.5) : texte courant. Le guide monte à 1,125rem et se limite à 68 caractères par ligne.
 - **Label** (700, 1rem) : boutons, onglets, légendes de réglages, en-têtes de tableau.
 - **Figure** (Lexend 700, 34px pour les cartes de résultats, 18px dans les tableaux) : MCM et durées.
+- **Exceptions de taille** (hors échelle, assumées) : résultat de fin de lecture 1,4rem (`.af-res`), mot courant du pilotage 1,5rem (`.cl.cur .cw`), compte à rebours et chiffre de la carte de fin 3rem (`.num`). Les textes des graphiques d'évolution sont à 16 px.
 - **Reading** (police au choix, 64 px par défaut, interligne 1,9, 0,08 em entre les lettres) : le texte projeté. Taille réglable de 24 à 160 px.
 
 ### Named Rules
@@ -209,7 +210,7 @@ Un vert sauge posé sur des neutres chauds (palette de la charte v2.2, 2026-10-1
 
 ## Layout
 
-La préparation est une grille de trois colonnes : bibliothèque de textes (260 px), centre souple, réglages (380 px), séparées de 18 px. La barre de lancement se place dans le flux, sous « Préparer la lecture », pour que l'action principale reste visible sans défiler. Sous 1220 px, la bibliothèque passe au-dessus du reste ; sous 860 px, tout s'empile sur une colonne, et la barre de lancement devient une barre fixe en bas de l'écran, avec la zone sûre de l'appareil. Le rythme intérieur est de 18 à 22 px pour les cartes, 12 px entre champs, 6 à 8 px dans un groupe serré.
+La préparation est une grille de trois colonnes : bibliothèque de textes (260 px), centre souple, réglages (380 px), séparées de 18 px. L'aperçu codé suit directement le bloc compact « Préparer la lecture » (élève et réglage) : c'est lui que l'enseignante doit voir sans défiler. La barre de lancement, après l'aperçu, reste collée en bas de l'écran : un seul bouton plein (« Lancer au pupitre »), et « Ouvrir un 2ᵉ écran » et « Seulement écouter » en boutons discrets. Sous 1220 px, la bibliothèque passe au-dessus du reste ; sous 860 px, tout s'empile sur une colonne, et la barre de lancement devient une barre fixe en bas de l'écran, avec la zone sûre de l'appareil. Le rythme intérieur est de 18 à 22 px pour les cartes, 12 px entre champs, 6 à 8 px dans un groupe serré.
 
 Le pupitre est un autre espace : une colonne de texte centrée, avec une marge minimale de 24 à 72 px selon la taille, la zone lue placée en haut, au tiers ou au milieu de l'écran, et une barre de commandes flottante, jamais recouvrante pour la zone lue.
 

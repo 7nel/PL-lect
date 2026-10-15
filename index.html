@@ -70,18 +70,23 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .wordmark svg{flex:none;width:1.45em;height:1.45em;transition:transform .15s ease}
 /* pastille PL = retour vers PL ; nom = accueil de l'outil */
 .pl-logo{position:relative;display:inline-flex;flex:none;border-radius:50%;line-height:0}
-.pl-logo::after{content:"";position:absolute;inset:-8px}
+.pl-logo::after{content:"";position:absolute;inset:-10px}
 .pl-logo:hover .pl-mark,.wordmark .pl-logo:hover svg{transform:scale(1.08)}
 .pl-mark{transition:transform .15s ease}
-.pl-title{color:inherit;text-decoration:none}
+.pl-title{color:inherit;text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .pl-title:hover{text-decoration:underline;text-underline-offset:4px}
-.pl-logo:focus-visible,.pl-title:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.pl-logo:focus-visible,.pl-title:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.pl-logo:focus-visible{border-radius:50%}
+.pl-title:focus-visible{border-radius:var(--r-ctl)}
 .nav-group{display:flex;gap:8px;flex-wrap:wrap}
 .nav-tools{padding-right:20px;border-right:1px solid var(--line)}
 .nb{min-height:48px;display:inline-flex;align-items:center;gap:8px;padding:0 16px 0 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink);font:700 1rem var(--ui);white-space:nowrap}
 .nb:hover{border-color:var(--accent)}
+.nav-tools .nb{background:none;border-color:transparent;color:var(--ink-2)}
+.nav-tools .nb:hover{border-color:var(--accent);color:var(--ink)}
+.nav-tools .nb[aria-pressed="true"],.nav-tools .nb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .nb svg{width:22px;height:22px;flex:none}
-.nb[aria-selected="true"],.nb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.nb[aria-selected="true"],.nb[aria-pressed="true"],.nb.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 @media (max-width:860px){.nav-tools{padding-right:0;border-right:0}.nb{padding:0 12px 0 10px}}
 /* ---------- Guide d'utilisation ---------- */
 .guide-backdrop{position:fixed;inset:0;background:rgba(20,26,25,.5);z-index:120;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
@@ -117,8 +122,8 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .guide-tabs button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--line-ctl);background:var(--surface);color:var(--ink-2);font:700 1rem var(--ui);cursor:pointer}
 .guide-tabs button[aria-selected="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
 .guide-foot{flex:0 0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
-.guide-foot label{display:flex;align-items:center;gap:8px;font-size:1rem;color:var(--ink-2);cursor:pointer;margin-right:auto}
-.guide-foot input{accent-color:var(--accent);width:16px;height:16px}
+.guide-foot label{display:flex;align-items:center;gap:8px;font-size:1rem;color:var(--ink-2);cursor:pointer;margin-right:auto;min-height:44px}
+.guide-foot input{accent-color:var(--accent);width:24px;height:24px}
 
 /* ---------- Grille principale ---------- */
 .main{display:grid;grid-template-columns:260px minmax(0,1fr) 380px;gap:18px;align-items:start;flex:1}
@@ -148,7 +153,7 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .btn.danger{color:color-mix(in srgb, var(--danger) 65%, var(--ink));background:var(--danger-soft);border-color:color-mix(in srgb, var(--danger) 45%, var(--line))}
 .btn.ghost{border-color:transparent;background:none}
 .btn svg{width:18px;height:18px;flex:none}
-.btn.big{padding:14px 26px;min-height:56px;font:700 1.25rem var(--display)}
+.btn.big{padding:14px 22px;min-height:56px;font:700 1.25rem var(--display)}
 
 /* Centre */
 .center{display:flex;flex-direction:column;gap:18px;min-width:0}
@@ -164,21 +169,29 @@ textarea#txt{display:block;width:100%;min-height:360px;resize:vertical;border:0;
 .preview-note{display:flex;gap:16px;flex-wrap:wrap;padding:10px 22px 16px;font-size:16px;color:var(--ink-3);margin-top:-10px}
 .preview-note b{color:var(--ink-2);font-family:var(--num);font-variant-numeric:tabular-nums}
 
-.launch{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:18px 22px}
+.launch{display:flex;gap:8px 12px;align-items:center;flex-wrap:wrap;padding:14px 20px}
 .launch .go-set{display:none}
 .launch .btn.pri{margin-left:auto}
+.alt-ways{display:flex;gap:2px;flex-wrap:wrap}
+.alt-ways .btn.ghost{color:var(--ink-2);padding-inline:9px}
+.alt-ways .btn.ghost:hover{color:var(--ink)}
 @media (min-width:861px){
   .launch{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30}
 }
 @media (max-width:860px){
   .launch{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:10px;border-radius:var(--r-card) var(--r-card) 0 0;padding:14px clamp(16px,3vw,48px) calc(14px + env(safe-area-inset-bottom,0px))}
   .launch .go-set{display:inline-flex}
-  .app{padding-bottom:176px}
+  .launch{row-gap:6px;padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
+  .app{padding-bottom:150px}
 }
 .hint{font-size:16px;color:var(--ink-3)}
 .edit-row{padding:0 22px 12px;gap:8px}
 .push{margin-left:auto}
 .step-hint{margin:0;padding:0 22px 10px}
+.today .panel-h{padding-block:14px 4px}
+.today .panel-h h2{font-size:1.25rem}
+.lib-legend{margin:0;padding:0 22px 2px}
+html.names-off #recent,html.names-off #after,html.names-off #tabSess,html.names-off .fld.stack:has(#profiles),html.names-off #profiles,html.names-off #profState,html.names-off #hQuick,html.names-off label[for="selReg"]{display:none!important}
 .pv-note{margin:0;padding:0 22px 10px}
 .gap-b{margin-bottom:6px}
 .gap-t{margin-top:8px}
@@ -378,9 +391,9 @@ footer.about a{color:var(--ink-2)}
 .evo-plot{display:block;width:100%;border-radius:10px;touch-action:pan-y}
 .evo-plot svg{display:block;max-width:100%}
 .evo-plot .eg{stroke:var(--line);stroke-width:1}
-.evo-plot .et{fill:var(--ink-2);font:13px var(--num);font-variant-numeric:tabular-nums}
-.evo-plot .eh{fill:var(--ink-2);font:700 13px var(--ui)}
-.evo-plot .ev{fill:var(--ink);font:700 14px var(--num)}
+.evo-plot .et{fill:var(--ink-2);font:16px var(--num);font-variant-numeric:tabular-nums}
+.evo-plot .eh{fill:var(--ink-2);font:700 16px var(--ui)}
+.evo-plot .ev{fill:var(--ink);font:700 16px var(--num)}
 .evo-plot .el{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
 .evo-plot .ea{fill:var(--accent);opacity:.1}
 .evo-plot .ed{fill:var(--accent);stroke:var(--bg);stroke-width:2}
@@ -519,6 +532,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     </div>
     <div class="nav-group nav-tools">
       <button class="nb" id="bHelp" aria-expanded="false" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 015.4 1c0 1.9-2.7 2.4-2.7 4"/><circle cx="12" cy="17.3" r=".6" fill="currentColor"/></svg>Aide</button>
+      <button class="nb" id="bNames" type="button" aria-pressed="false" title="Cache les noms d’élèves, les réglages nommés et les résultats : pour une préparation que la classe peut voir."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.8"/></svg><span id="bNamesT">Masquer les noms</span></button>
       <button class="nb" id="bTheme" aria-label="Thème de l’interface : clair ou sombre"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M12 2.5a9.5 9.5 0 000 19z" fill="currentColor"/></svg>Thème</button>
     </div>
     <nav class="nav-group" role="tablist" aria-label="Sections">
@@ -533,6 +547,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <div class="panel-h"><h2>Textes</h2>
         <button class="btn sm" id="bNew" title="Nouveau texte">+ Nouveau</button>
       </div>
+      <p class="hint lib-legend">N1 à N5 : niveau du texte</p>
       <ul class="lib-list" id="libList"></ul>
     </aside>
 
@@ -550,23 +565,6 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <summary><span id="recentT">Dernières lectures</span><span class="sum-hint" id="recentN"></span></summary>
           <div id="recentBody"></div>
         </details>
-      </div>
-
-      <div class="panel launch">
-        <span class="launch-sum" id="launchSum"></span>
-        <button class="btn go-set" id="bGoSet" type="button" aria-expanded="false" aria-controls="settings">Réglages</button>
-        <button class="btn proj-btn" id="bProj" type="button" aria-pressed="false" title="Ouvre une fenêtre à glisser sur l’écran projeté : les élèves n’y voient que le texte, vous pilotez depuis celui-ci.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6" fill="var(--surface-2)"/></svg>
-          <span id="bProjT">Ouvrir un 2ᵉ écran</span>
-        </button>
-        <button class="btn" id="bListen" type="button" title="Le texte est lu à voix haute et défile en continu ; rien n’est mesuré ni enregistré">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0116 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
-          <span>Écouter</span>
-        </button>
-        <button class="btn pri big" id="bLaunch" type="button">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          <span id="bLaunchT">Lancer au pupitre</span>
-        </button>
       </div>
 
       <div class="panel">
@@ -593,15 +591,34 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <div class="inner"><textarea id="txt" spellcheck="true" aria-label="Texte à lire" placeholder="Collez ou tapez le texte ici. Une ligne vide sépare les paragraphes."></textarea></div>
         </div>
         <div id="prevBox">
-          <p class="hint pv-note">Le texte tel qu’il sera lu. Pour colorer syllabes, lettres muettes ou sons : « Codage du texte », dans les réglages.</p>
+          <p class="hint pv-note">Pour colorer syllabes, lettres muettes ou sons : « Couleurs et codage », dans les réglages.</p>
           <div class="inner"><div class="preview-wrap" id="pvWrap"><div class="rt pv" id="pv"></div></div></div>
           <div class="preview-note">
             <span>Aperçu à <b>50 %</b> de la taille du pupitre</span>
             <span><b id="nWords">0</b> mots</span>
-            <span>Fond : <b id="pvBg"></b></span>
+            <span>Fond du pupitre : <b id="pvBg"></b></span>
             <span class="only-hover">Survoler un mot : transcription · clic : écouter</span><span class="only-touch">Toucher un mot : l’écouter et voir sa transcription</span>
           </div>
         </div>
+      </div>
+
+      <div class="panel launch">
+        <span class="launch-sum" id="launchSum"></span>
+        <button class="btn go-set" id="bGoSet" type="button" aria-expanded="false" aria-controls="settings">Réglages</button>
+        <div class="alt-ways" role="group" aria-label="Autres façons de lire">
+        <button class="btn ghost proj-btn" id="bProj" type="button" aria-pressed="false" title="Ouvre une fenêtre à glisser sur l’écran projeté : les élèves n’y voient que le texte, vous pilotez depuis celui-ci.">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="13" height="9" rx="1.6"/><rect x="9.5" y="10.5" width="12" height="9" rx="1.6" fill="var(--surface-2)"/></svg>
+          <span id="bProjT">Ouvrir un 2ᵉ écran</span>
+        </button>
+        <button class="btn ghost" id="bListen" type="button" title="Le texte est lu à voix haute et défile en continu ; rien n’est mesuré ni enregistré">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15v-3a8 8 0 0116 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg>
+          <span>Seulement écouter</span>
+        </button>
+        </div>
+        <button class="btn pri big" id="bLaunch" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span id="bLaunchT">Lancer au pupitre</span>
+        </button>
       </div>
 
       <footer class="about">
@@ -614,24 +631,14 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
     <aside class="panel settings" id="settings" aria-label="Réglages">
       <div class="panel-h"><h2>Réglages</h2><button class="btn sm sheet-x" id="bSheetX" type="button">Fermer</button></div>
 
-      <!-- 1. Réglage rapide : un point de départ, puis les trois ajustements les plus fréquents -->
+      <!-- 1. Réglage rapide : un point de départ, puis la taille -->
       <details class="sec" open>
-        <summary>Réglage rapide <span class="sum-hint"></span></summary>
+        <summary>Réglage rapide <span class="sum-hint" id="hQuick"></span></summary>
         <div class="sec-b">
           <div class="fld stack"><span class="l" id="lProf">Choisir un réglage</span>
             <div class="profiles" id="profiles" role="group" aria-labelledby="lProf"></div>
             <p class="sub" id="profState" aria-live="polite"></p></div>
           <div class="fld"><label for="sSize">Taille</label><input type="range" id="sSize" min="24" max="160" step="2"><output for="sSize" id="oSize"></output></div>
-          <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
-          <details class="son-det" id="moreQuick">
-            <summary>Fond et codage du texte…</summary>
-          <div class="fld stack"><span class="l" id="lBg">Fond</span>
-            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
-          <div class="fld stack"><span class="l" id="codePreL">Préréglages du codage</span>
-            <div class="seg" role="group" aria-labelledby="codePreL">
-              <button type="button" data-code="aucun">Aucun</button><button type="button" data-code="syl">Syllabes</button><button type="button" data-code="sons">Sons ciblés</button>
-            </div></div>
-          </details>
           <div class="row" id="presetWrap"></div>
         </div>
       </details>
@@ -654,33 +661,35 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
                 <option value="OpenDyslexic">OpenDyslexic</option>
               </optgroup>
             </select></div>
+          <div class="fld"><label for="sLetter">Entre les lettres</label><input type="range" id="sLetter" min="0" max="0.5" step="0.01"><output id="oLetter"></output></div>
           <div class="fld"><label for="sWord">Entre les mots</label><input type="range" id="sWord" min="0" max="1.2" step="0.05"><output id="oWord"></output></div>
           <div class="fld"><label for="sLine">Interligne</label><input type="range" id="sLine" min="1.2" max="3.2" step="0.05"><output id="oLine"></output></div>
           <div class="fld"><label for="sWidth">Longueur de ligne</label><input type="range" id="sWidth" min="16" max="80" step="1"><output id="oWidth"></output></div>
           <label class="chk"><input type="checkbox" id="sBold"> Texte en gras</label>
-          <p class="sub">La taille et l’espacement entre les lettres sont dans « Réglage rapide ».</p>
+          <p class="sub">La taille est dans « Réglage rapide ».</p>
           <details class="son-det"><summary>Pourquoi cet espacement ?</summary>
             <p class="sub">Dans une étude, un espacement élargi entre les lettres a amélioré la lecture d’enfants dyslexiques (Zorzi et al., 2012). Une étude ultérieure retrouve moins d’erreurs avec cet espacement, mais aussi chez les lecteurs non dyslexiques : l’effet n’est pas propre à la dyslexie (Hakvoort et al., 2017). La police « Dyslexie » n’a pas amélioré la lecture, avec ou sans dyslexie (Kuster et al., 2018).</p></details>
         </div>
       </details>
 
-      <!-- 3. Couleurs -->
+      <!-- 3. Couleurs et codage -->
       <details class="sec">
-        <summary>Couleurs <span class="sum-hint" id="hCol"></span></summary>
+        <summary>Couleurs et codage <span class="sum-hint" id="hCode"></span></summary>
         <div class="sec-b">
+          <h3>Couleurs</h3>
+          <div class="fld stack"><span class="l" id="lBg">Fond</span>
+            <div class="presets" id="bgPresets" role="group" aria-labelledby="lBg"></div></div>
           <div class="row">
             <label class="row hint" for="sBg">Fond <input type="color" id="sBg" class="swatch"></label>
             <label class="row hint" for="sFg">Texte <input type="color" id="sFg" class="swatch"></label>
           </div>
           <span class="sub" id="contrast"></span>
-          <p class="sub">Pour aller vite, les quatre fonds de « Réglage rapide » suffisent. Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
-        </div>
-      </details>
-
-      <!-- 4. Codage -->
-      <details class="sec">
-        <summary>Codage du texte <span class="sum-hint" id="hCode"></span></summary>
-        <div class="sec-b">
+          <p class="sub">Pour aller vite, les quatre fonds ci-dessus suffisent. Les couleurs de codage ont deux jeux, un pour fond clair et un pour fond sombre ; le bon jeu s’applique tout seul.</p>
+          <h3>Codage du texte</h3>
+          <div class="fld stack"><span class="l" id="codePreL">Préréglages du codage</span>
+            <div class="seg" role="group" aria-labelledby="codePreL">
+              <button type="button" data-code="aucun">Aucun</button><button type="button" data-code="syl">Syllabes</button><button type="button" data-code="sons">Sons ciblés</button>
+            </div></div>
           <div class="fld stack"><span class="l">Syllabes</span>
             <div class="seg" role="group" aria-label="Syllabes">
               <button data-syl="none">Aucun</button><button data-syl="couleurs">Couleurs</button><button data-syl="arcs">Arcs</button>
@@ -736,6 +745,8 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
             <div class="seg" role="group" aria-label="Lignes en évidence">
               <button data-win="1">1</button><button data-win="2">2</button><button data-win="3">3</button>
             </div></div>
+          <details class="son-det" id="moreRead">
+            <summary>Plus d’options de lecture…</summary>
           <div class="fld"><label for="sDim">Texte autour</label>
             <select id="sDim">
               <option value="0">visible</option><option value="0.5">atténué</option><option value="0.8">très atténué</option><option value="1">caché</option>
@@ -747,16 +758,17 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           </div>
           <div class="row"><span class="hint">Couleur du repère</span><input type="color" id="cBand" class="swatch" aria-label="Couleur du repère de ligne"></div>
           <label class="chk"><input type="checkbox" id="sCount"> Décompte 3-2-1 avant le départ</label>
-          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer sur le texte les erreurs marquées</label>
+          <label class="chk"><input type="checkbox" id="sShowErr"> Montrer les erreurs marquées sur le texte : à réserver à un écran caché aux élèves</label>
           <p class="sub">La durée de lecture est mesurée toute seule, du départ à « Terminer », sans rien afficher. Une erreur marquée ne laisse aucune trace à l’écran, sauf si vous cochez la case ci-dessus (à réserver à un écran que les élèves ne voient pas).</p>
+          </details>
         </div>
       </details>
 
-      <!-- 6. Voix et sauvegarde -->
+
+      <!-- 5. Voix -->
       <details class="sec">
-        <summary>Voix et sauvegarde <span class="sum-hint"></span></summary>
+        <summary>Voix <span class="sum-hint"></span></summary>
         <div class="sec-b">
-          <h3>Voix</h3>
           <div class="fld"><label for="sVoice">Voix</label><select id="sVoice"></select></div>
           <div class="fld"><label for="sRate">Débit</label><input type="range" id="sRate" min="0.5" max="1.3" step="0.05"><output id="oRate"></output></div>
           <div class="row"><button class="btn sm" id="bTestVoice">Tester</button><span class="sub" id="voiceNote"></span></div>
@@ -771,7 +783,13 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
             <p class="sub">La qualité dépend des voix installées sur l’appareil, pas de l’outil. Cherchez les voix françaises « Premium », « Amélioré » ou « Natural ».</p>
             <p class="sub"><b>iPad</b> : Réglages → Accessibilité → Contenu énoncé → Voix → Français, puis une voix « Premium » ou « Amélioré ».<br><b>Mac</b> : Réglages Système → Accessibilité → Contenu énoncé → Voix du système → Gérer les voix.<br><b>Windows</b> : Réglages → Heure et langue → Voix. Dans Edge, les voix « Online (Natural) » sont les plus naturelles mais demandent du réseau.</p>
           </details>
-          <h3>Sauvegarde</h3>
+        </div>
+      </details>
+
+      <!-- 6. Sauvegarde -->
+      <details class="sec">
+        <summary>Sauvegarde <span class="sum-hint"></span></summary>
+        <div class="sec-b">
           <div class="row">
             <button class="btn sm" id="bBackup">Sauvegarder tout (.json)</button>
             <label class="btn sm" for="fRestore">Restaurer…</label>
@@ -864,12 +882,11 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h10M4 12h16M4 17h7"/><circle cx="17" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span>Régler l'affichage et le codage</h3>
         <p>Le panneau <b>Réglages</b>, à droite (sur tablette ou téléphone : bouton « Réglages » dans la barre du bas, qui ouvre les réglages en feuille sous l’aperçu ; « Fermer » les referme), s’applique tout de suite à l’aperçu et au pupitre. Il se replie section par section ; cliquez sur un titre pour l’ouvrir ou le refermer.</p>
         <ul>
-          <li><b>Réglage rapide</b> : « Choisir un réglage », la liste des réglages (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis taille et espacement entre les lettres. Sous « Fond et codage du texte… » : le fond et le préréglage du codage (Aucun, Syllabes, Sons ciblés). « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Les couleurs libres sont dans « Couleurs ». Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
-          <li><b>Typographie</b> : police, espacement entre les mots, interligne, longueur de ligne, gras.</li>
-          <li><b>Couleurs</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix ; le contraste indiqué prévient si le réglage sera difficile à lire au beamer.</li>
-          <li><b>Codage du texte</b> : trois préréglages en tête (Aucun, Syllabes, Sons ciblés), puis les syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
-          <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence, texte autour (atténué ou caché), repère de ligne, décompte 3-2-1 avant le départ.</li>
-          <li><b>Voix et sauvegarde</b> : la voix et le débit utilisés par la synthèse vocale, puis la sauvegarde complète des données. La voix « Automatique » choisit la meilleure voix française de l’appareil. Le bouton « Télécharger » ajoute une voix naturelle (environ 93 Mo, une fois par appareil) qui fonctionne ensuite hors ligne ; il n’est disponible que sur la version en ligne. Une fois téléchargée, elle passe en premier. Sur iPad, ajoutez l’outil à l’écran d’accueil pour éviter que le navigateur efface la voix. Une rubrique explique aussi comment installer une voix plus naturelle sur l’appareil. Le bouton « Écouter » de la préparation lance l’écoute : la voix lit le texte phrase par phrase et le texte défile en continu avec elle ; rien n’est mesuré ni enregistré.</li>
+          <li><b>Réglage rapide</b> : « Choisir un réglage », la liste des réglages (quatre points de départ, <b>Standard</b>, <b>Dyslexie</b>, <b>Allophonie</b>, <b>Décrochage</b>, plus les vôtres), puis la taille. « Enregistrer ces réglages… » n’apparaît qu’après un ajustement. Quand vous vous écartez d’un point de départ, le titre de chaque section indique « modifié », et « Rétablir » revient au réglage de départ. Les points de départ sont des suggestions : modifiez-les selon l’élève. Le menu « Réglage » du bloc Préparer la lecture propose la même liste.</li>
+          <li><b>Typographie</b> : police, espacement entre les lettres et entre les mots, interligne, longueur de ligne, gras.</li>
+          <li><b>Couleurs et codage</b> : quatre fonds prêts à l’emploi, ou une couleur de fond et de texte au choix (le contraste indiqué prévient si le réglage sera difficile à lire au beamer) ; puis trois préréglages du codage (Aucun, Syllabes, Sons ciblés), les syllabes (couleurs alternées ou arcs), lettres muettes, liaisons, mots ou lignes alternés, et un codage son par son, à cocher un par un — mieux vaut n'en cocher que quelques-uns à la fois qu'une coloration complète.</li>
+          <li><b>Lecture</b> : façon d’avancer (ligne par ligne, défilement continu ou mot à mot), vitesse, nombre de lignes en évidence. Sous « Plus d’options de lecture… » : texte autour (atténué ou caché), position et repère de la ligne, décompte 3-2-1 avant le départ, erreurs visibles sur le texte (à réserver à un écran caché aux élèves).</li>
+          <li><b>Voix</b> : la voix et le débit utilisés par la synthèse vocale. La voix « Automatique » choisit la meilleure voix française de l’appareil. Le bouton « Télécharger » ajoute une voix naturelle (environ 93 Mo, une fois par appareil) qui fonctionne ensuite hors ligne ; il n’est disponible que sur la version en ligne. Une fois téléchargée, elle passe en premier. Sur iPad, ajoutez l’outil à l’écran d’accueil pour éviter que le navigateur efface la voix. Une rubrique explique aussi comment installer une voix plus naturelle sur l’appareil. La section <b>Sauvegarde</b> contient la sauvegarde complète des données et le retour aux réglages par défaut (demande une confirmation). Le bouton « Seulement écouter » de la préparation lance l’écoute : la voix lit le texte phrase par phrase et le texte défile en continu avec elle ; rien n’est mesuré ni enregistré.</li>
         </ul>
         <p>Une fois un réglage trouvé, <b>Enregistrer ces réglages…</b> (au bas de « Réglage rapide ») le garde sous un nom : il rejoint les points de départ dans la même liste « Choisir un réglage », pour le retrouver avec un autre texte ou un autre élève.</p>
       </div>
@@ -882,7 +899,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li><b>Pendant la lecture.</b> Le bouton vert suit la touche Espace : « Suivante » en ligne par ligne, « Pause » / « Reprendre » en défilement. Un clic sur un mot (ou <b>E</b>) marque une erreur, sans aucune trace à l’écran ; « Dernier mot » puis un mot marque l’endroit où l’élève s’est arrêté.</li>
           <li><b>La fin.</b> <b>T</b> (ou « Terminer ») arrête la mesure. L’écran n’affiche qu’une carte neutre, « Lecture terminée » : ni durée, ni résultat, ni nom. <b>Échap</b> pendant une lecture demande seulement s’il faut la terminer.</li>
           <li><b>Le résultat.</b> En quittant le pupitre, le bloc Préparer la lecture indique « Lecture enregistrée » ; « Voir le résultat » affiche alors la durée, le MCM et les erreurs. Une lecture de moins de 10 secondes n’est enregistrée que si vous le confirmez à cet endroit ; sous 2 secondes, rien n’est gardé.</li>
-          <li><b>Écoute.</b> Le bouton « Écouter » de la préparation (ou « Écoute » dans « Plus ») fait lire le texte à voix haute, phrase par phrase : le mot lu est surligné et le texte défile en continu avec la voix. Espace met en pause et reprend, ↑ ↓ passent à la phrase précédente ou suivante, <b>N</b> et <b>M</b> règlent le débit de la voix, un clic sur un mot reprend à sa phrase. Rien n’est mesuré, noté ni enregistré, et Échap quitte sans confirmation. L’écoute se fait sur un seul écran (pas avec le 2ᵉ écran), et la voix naturelle donne le suivi le plus précis.</li>
+          <li><b>Écoute.</b> Le bouton « Seulement écouter » de la préparation (ou « Écoute » dans « Plus ») fait lire le texte à voix haute, phrase par phrase : le mot lu est surligné et le texte défile en continu avec la voix. Espace met en pause et reprend, ↑ ↓ passent à la phrase précédente ou suivante, <b>N</b> et <b>M</b> règlent le débit de la voix, un clic sur un mot reprend à sa phrase. Rien n’est mesuré, noté ni enregistré, et Échap quitte sans confirmation. L’écoute se fait sur un seul écran (pas avec le 2ᵉ écran), et la voix naturelle donne le suivi le plus précis.</li>
           <li>Le bouton « Plus » ouvre, sans quitter le pupitre, la façon d’avancer, le nombre de lignes en évidence, la vitesse, « Dernier mot », « Lire la ligne » et le plein écran ; la barre reste affichée tant qu’il est ouvert. Le bouton « ? » ouvre la liste des commandes.</li>
           <li>Si le nombre de lignes en évidence ne tient pas à l’écran (très grande taille), il est réduit et un message le signale : la zone lue ne passe jamais sous la barre.</li>
           <li>Sur un texte au tableau, on peut aussi glisser le doigt vers le haut ou le bas pour changer de ligne.</li>
@@ -896,6 +913,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
           <li>« Lancer sur le 2ᵉ écran » ouvre alors sur le vôtre le <b>pilotage</b> : les mêmes commandes et les mêmes touches, le texte suivi ligne par ligne, les mots à cliquer pour marquer une erreur et le nombre d’erreurs marquées.</li>
           <li>À « Terminer », le résultat s’affiche tout de suite sur votre écran ; l’écran projeté garde le texte, puis revient à un écran d’attente quand vous quittez.</li>
           <li>Avec un écran dupliqué ou sur une tablette seule, le second écran n’apporte rien : lancez simplement au pupitre.</li>
+          <li>Si l’écran de préparation est visible de la classe (un seul écran), « Masquer les noms », en haut de la page, cache les noms d’élèves, les réglages nommés, les dernières lectures, les résultats et l’onglet Séances. Il se réactive au même endroit.</li>
         </ul>
       </div>
 
@@ -938,7 +956,7 @@ html.is-full .pw-box p,html.is-full .pw-box button{display:none}
       <div>
         <h3><span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 20h14"/></svg></span>Sauvegarde des données</h3>
         <p>Textes, réglages, élèves et séances sont gardés uniquement dans ce navigateur, sur cet ordinateur : rien n'est envoyé ailleurs, mais rien n'est partagé entre appareils non plus.</p>
-        <p>Dans Réglages → <b>Voix et sauvegarde</b>, « Sauvegarder tout (.json) » télécharge une copie complète ; « Restaurer… » la recharge, y compris sur un autre ordinateur. Une sauvegarde régulière évite de tout perdre si le navigateur efface ses données.</p>
+        <p>Dans Réglages → <b>Sauvegarde</b>, « Sauvegarder tout (.json) » télécharge une copie complète ; « Restaurer… » la recharge, y compris sur un autre ordinateur. Une sauvegarde régulière évite de tout perdre si le navigateur efface ses données.</p>
       </div>
     </div>
     <div class="guide-foot">
@@ -2680,6 +2698,15 @@ $('profiles').addEventListener('click', e => {
   if (b.dataset.prof) applyEntry('prof', b.dataset.prof); else if (b.dataset.preset) applyEntry('preset', b.dataset.preset);
 });
 const MODE_SHORT = {ligne:'ligne par ligne', continu:'continu', mot:'mot à mot'};
+/* Ce qui s'écarte du réglage de départ, section par section */
+const SEC_KEYS = {typo:['font','letter','word','line'], code:['syl','sylOral','muet','liaison','mots','lignes'], stage:['win']};
+function baseSettings(){
+  if (!BASE) return null;
+  if (BASE.kind === 'prof') { const pr = PROFILES.find(x => x.id === BASE.key); return pr ? pr.s : null; }
+  const ps = DB.presets[+BASE.key]; return ps ? ps.s : null;
+}
+function changedIn(keys){ const b = baseSettings(); if (!b) return false; const cur = S(); return keys.some(k => k in b && canon(cur[k]) !== canon(b[k])); }
+const modTag = keys => changedIn(keys) ? ' · modifié' : '';
 function updateHints(){
   const s = S();
   const act = activeEntry();
@@ -2687,14 +2714,14 @@ function updateHints(){
   if (act) BASE = {kind: act.kind, key: act.kind === 'prof' ? act.id : String(act.i), name: act.name};
   else if (BASE && BASE.kind === 'preset' && !DB.presets[+BASE.key]) BASE = null;
   $('profState').textContent = act ? 'Actif : ' + act.name : BASE ? 'Basé sur « ' + BASE.name + ' », modifié' : 'Réglages personnalisés';
-  $('hTypo').textContent = s.font;
+  $('hTypo').textContent = s.font + modTag(SEC_KEYS.typo);
+  $('hQuick').textContent = act ? act.name : BASE ? 'modifié' : 'personnalisé';
   if (!$('presetName')) $('presetWrap').innerHTML = (act && act.kind === 'prof') ? '' : (!act && BASE ? '<button class="btn sm" id="bPresetRevert" type="button">Rétablir « ' + esc(BASE.name) + ' »</button> ' : '') + '<button class="btn sm" id="bPresetSave" type="button">Enregistrer ces réglages…</button>' + (act && act.kind === 'preset' ? ` <button class="btn sm danger" id="bPresetDel" type="button" data-i="${act.i}">Retirer « ${esc(act.name)} »</button>` : '');
-  $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '');
+  $('hCode').textContent = ({none:'sans syllabes', couleurs:'syllabes en couleurs', arcs:'syllabes en arcs'})[s.syl] + (s.sons ? ' · sons' : '') + modTag(SEC_KEYS.code);
   const bgp = BG_PRESETS.find(p => p[1].toLowerCase() === s.bg.toLowerCase() && p[2].toLowerCase() === s.fg.toLowerCase());
   $('pvBg').textContent = bgp ? bgp[0].toLowerCase() : 'au choix';
-  $('hCol').textContent = (bgp ? bgp[0].toLowerCase() : 'au choix') + (contrast(s.bg, s.fg) < 7 ? ' · contraste faible' : '');
   document.querySelectorAll('[data-bgp]').forEach(b => b.setAttribute('aria-pressed', BG_PRESETS[+b.dataset.bgp] === bgp));
-  $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '');
+  $('hStage').textContent = MODE_SHORT[s.mode] + ' · ' + s.win + ' ligne' + (s.win > 1 ? 's' : '') + modTag(SEC_KEYS.stage);
   renderReg(act); renderLaunch();
 }
 
@@ -2739,7 +2766,12 @@ $('presetWrap').addEventListener('click', e => {
   }
 });
 $('presetWrap').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'presetName') $('bPresetOk').click(); });
-$('bReset').addEventListener('click', () => { const v = S().voice; DB.settings = defaults(); DB.settings.voice = v; save(); syncUI(); refreshAll(true); toast('Réglages par défaut rétablis'); });
+const rearmReset = () => { const b = $('bReset'); delete b.dataset.ask; b.textContent = 'Réglages par défaut'; b.classList.remove('danger'); };
+$('bReset').addEventListener('blur', rearmReset);
+$('bReset').addEventListener('click', () => {
+  const b = $('bReset');
+  if (!b.dataset.ask) { b.dataset.ask = '1'; b.textContent = 'Confirmer : tout remettre par défaut'; b.classList.add('danger'); return; }
+  rearmReset(); const v = S().voice; DB.settings = defaults(); DB.settings.voice = v; save(); syncUI(); refreshAll(true); toast('Réglages par défaut rétablis'); });
 
 /* ---------- Voix ---------- */
 const synth = window.speechSynthesis;
@@ -2860,8 +2892,17 @@ if (piperCan()) navigator.serviceWorker.register('./sw.js').catch(() => {});
 piperCheck();
 
 /* ---------- Élèves ---------- */
+/* Préparation sans noms : pour un écran que la classe peut voir (réglage gardé sur cet appareil) */
+let namesOff = false; try { namesOff = localStorage.getItem('pupitre.namesOff') === '1'; } catch(e){}
+const stuShown = (s, i) => namesOff ? 'Élève ' + (i + 1) : esc(s.name);
+function paintNames(){
+  document.documentElement.classList.toggle('names-off', namesOff);
+  $('bNames').setAttribute('aria-pressed', namesOff);
+  $('bNamesT').textContent = namesOff ? 'Afficher les noms' : 'Masquer les noms';
+}
+paintNames();
 function renderStudentSelect(){
-  $('selStudent').innerHTML = '<option value="">— sans élève —</option>' + DB.students.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  $('selStudent').innerHTML = '<option value="">— sans élève —</option>' + DB.students.map((s, i) => `<option value="${s.id}">${stuShown(s, i)}</option>`).join('');
   $('selStudent').value = DB.students.some(s => s.id === DB.curStudent) ? DB.curStudent : '';
 }
 $('selStudent').addEventListener('change', () => { DB.curStudent = $('selStudent').value; save(); $('recent').open = false; renderHome(); });
@@ -3454,7 +3495,7 @@ function renderReg(act){
 }
 function renderLaunch(){
   const stu = curStu(), act = activeEntry(), open = projOpen();
-  $('launchSum').textContent = [stu ? stu.name : 'Sans élève', curText().title || 'Sans titre', act ? act.name : 'Réglages personnalisés'].join(' · ');
+  $('launchSum').textContent = [stu ? (namesOff ? 'Élève masqué' : stu.name) : 'Sans élève : lecture non rattachée', curText().title || 'Sans titre', namesOff ? 'Réglage choisi' : act ? act.name : 'Réglages personnalisés'].join(' · ');
   $('bLaunchT').textContent = open ? 'Lancer sur le 2ᵉ écran' : 'Lancer au pupitre';
   $('bProj').setAttribute('aria-pressed', open);
   $('bProjT').textContent = open ? 'Fermer le 2ᵉ écran' : 'Ouvrir un 2ᵉ écran';
@@ -3467,7 +3508,7 @@ function afterHTML(s, where){
     '<div class="af-a"><button class="btn sm pri" type="button" data-af="keep">L’enregistrer</button><button class="btn sm" type="button" data-af="drop">Ne pas l’enregistrer</button></div>';
   if (!LAST.shown) return '<p class="af-t"><b>Lecture enregistrée.</b></p><div class="af-a"><button class="btn sm pri" type="button" data-af="show">Voir le résultat</button><button class="btn sm" type="button" data-af="close">Fermer</button></div>';
   return `<p class="af-t"><b>${esc(stuLabel(s))}</b> · ${esc(s.title || 'Sans titre')} · essai ${trialNo(s)}</p><p class="af-res">${resLine(s)}</p>` +
-    (mcmIndic(s) ? `<p class="af-n">${INDIC_NOTE}</p>` : '') +
+    (mcmIndic(s) ? `<p class="af-n">${INDIC_NOTE}</p>` : '') + (ctl ? '' : '<p class="af-n">MCM : mots correctement lus par minute.</p>') +
     (ctl ? '' : '<div class="af-a">' + (LAST.del ? DEL_ASK
       : '<button class="btn sm" type="button" data-af="evo">Voir l’évolution</button><button class="btn sm" type="button" data-af="del">Supprimer</button><button class="btn sm" type="button" data-af="close">Fermer</button>') + '</div>');
 }
@@ -3492,15 +3533,20 @@ $('after').addEventListener('click', e => { const b = e.target.closest('[data-af
 function renderRecent(){
   const stu = curStu(), df = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit'});
   const list = DB.sessions.filter(s => !s.pending && s.stu === (stu ? stu.id : '')).sort((a,b) => b.ts - a.ts);
-  $('recentT').textContent = stu ? 'Dernières lectures de ' + stu.name : 'Dernières lectures sans élève';
+  $('recentT').textContent = stu ? (namesOff ? 'Dernières lectures' : 'Dernières lectures de ' + stu.name) : 'Dernières lectures sans élève';
   $('recentN').textContent = list.length ? plural(list.length, 'séance') : 'aucune';
   $('recentBody').innerHTML = list.length
     ? '<ul class="rc">' + list.slice(0, 3).map(s => `<li><span class="rc-d">${df.format(new Date(s.ts))}</span><span class="rc-t">${esc(s.title || 'Sans titre')} · essai ${trialNo(s)}</span><span class="rc-r">${resLine(s)}</span></li>`).join('') + '</ul>' +
-      '<div class="af-a"><button class="btn sm" type="button" id="bEvo">Voir l’évolution</button></div>'
+      '<p class="sub">MCM : mots correctement lus par minute. Essai : numéro de la lecture de ce texte.</p><div class="af-a"><button class="btn sm" type="button" id="bEvo">Voir l’évolution</button></div>'
     : '<p class="sub">Aucune lecture enregistrée pour le moment. Lancez une lecture : elle s’ajoutera ici.</p>';
 }
 $('recentBody').addEventListener('click', e => { if (e.target.id === 'bEvo') { sessFilter = DB.curStudent || ''; setTab('sess'); } });
 function renderHome(){ $('stepHint').hidden = DB.sessions.length > 0; renderAfter(); renderRecent(); renderLaunch(); }
+$('bNames').addEventListener('click', () => {
+  namesOff = !namesOff; try { localStorage.setItem('pupitre.namesOff', namesOff ? '1' : '0'); } catch(e){}
+  paintNames(); if (namesOff && !$('viewSess').hidden) setTab('prep');
+  renderStudentSelect(); renderHome();
+});
 $('selReg').addEventListener('change', () => { const v = $('selReg').value; if (v) applyEntry(v.split(':')[0], v.split(':')[1]); });
 
 /* Petit écran : feuille de réglages sous l'aperçu (voir .settings dans la feuille de style) */
@@ -3524,7 +3570,7 @@ let askedNoStudent = false;
 const hasStudent = () => DB.students.some(x => x.id === DB.curStudent);
 function openAsk(){
   const list = DB.students;
-  $('askStudent').innerHTML = list.map(x => `<option value="${x.id}">${esc(x.name)}</option>`).join('');
+  $('askStudent').innerHTML = list.map((x, i) => `<option value="${x.id}">${stuShown(x, i)}</option>`).join('');
   $('askSel').hidden = $('askGo').hidden = !list.length;
   $('askP').textContent = list.length ? 'La lecture sera enregistrée à son nom. Sans élève, elle reste dans « Dernières lectures sans élève ».' : 'Aucun élève n’est encore enregistré. Ajoutez-en un (pseudonyme conseillé) ou continuez sans élève.';
   $('askBackdrop').hidden = false; (list.length ? $('askGo') : $('askAdd')).focus();
@@ -3957,7 +4003,7 @@ function renderEvo(){
 }
 function drawEvo(){
   const el = $('evoPlot'); if (!el || !evoList.length) return;
-  const list = evoList, n = list.length, W = Math.max(280, el.clientWidth), mL = 42, mR = 46, top = 26, hA = 150, gap = 44, hB = 54, bot = 26;
+  const list = evoList, n = list.length, W = Math.max(280, el.clientWidth), mL = 50, mR = 52, top = 30, hA = 150, gap = 44, hB = 54, bot = 26;
   const H = top + hA + gap + hB + bot, pw = W - mL - mR;
   const X = evoX = list.map((s, i) => mL + (i + 0.5) * pw / n);
   const vals = list.map(mcmOf), vmax = Math.max(10, ...vals), st = niceStep(vmax * 1.08, 3), ymax = Math.ceil(vmax * 1.08 / st) * st;
@@ -3965,8 +4011,8 @@ function drawEvo(){
   const emax = Math.max(1, ...list.map(s => s.err)), est = Math.max(1, Math.ceil(emax / 2)), eTop = top + hA + gap, eMaxT = Math.ceil(emax / est) * est;
   const yB = v => eTop + hB - v / eMaxT * hB;
   let g = '';
-  for (let v = 0; v <= ymax + 1e-9; v += st) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yA(v)}" y2="${yA(v)}"/><text class="et" x="${mL - 8}" y="${yA(v) + 4}" text-anchor="end">${Math.round(v)}</text>`;
-  for (let v = 0; v <= eMaxT; v += est) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yB(v)}" y2="${yB(v)}"/><text class="et" x="${mL - 8}" y="${yB(v) + 4}" text-anchor="end">${v}</text>`;
+  for (let v = 0; v <= ymax + 1e-9; v += st) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yA(v)}" y2="${yA(v)}"/><text class="et" x="${mL - 8}" y="${yA(v) + 5}" text-anchor="end">${Math.round(v)}</text>`;
+  for (let v = 0; v <= eMaxT; v += est) g += `<line class="eg" x1="${mL}" x2="${W - mR}" y1="${yB(v)}" y2="${yB(v)}"/><text class="et" x="${mL - 8}" y="${yB(v) + 5}" text-anchor="end">${v}</text>`;
   const pts = vals.map((v, i) => X[i].toFixed(1) + ',' + yA(v).toFixed(1));
   const area = n > 1 ? `<polygon class="ea" points="${X[0].toFixed(1)},${yA(0)} ${pts.join(' ')} ${X[n-1].toFixed(1)},${yA(0)}"/>` : '';
   const line = n > 1 ? `<polyline class="el" points="${pts.join(' ')}"/>` : '';
@@ -3980,10 +4026,10 @@ function drawEvo(){
   const dfS = new Intl.DateTimeFormat('fr-CH', {day:'2-digit', month:'2-digit'});
   let xl = '', lastX = -1e9;
   const want = [0, n - 1]; for (let k = 1; k < 4; k++) want.push(Math.round(k * (n - 1) / 4));
-  [...new Set(want)].sort((a,b) => a - b).forEach(i => { if (i !== n - 1 && X[n-1] - X[i] < 58) return; if (X[i] - lastX < 58) return; lastX = X[i]; xl += `<text class="et" x="${X[i].toFixed(1)}" y="${H - 6}" text-anchor="middle">${dfS.format(new Date(list[i].ts))}</text>`; });
-  const endLab = `<text class="ev" x="${(X[n-1] + 10).toFixed(1)}" y="${(yA(vals[n-1]) + 5).toFixed(1)}">${Math.round(vals[n-1])}</text>`;
+  [...new Set(want)].sort((a,b) => a - b).forEach(i => { if (i !== n - 1 && X[n-1] - X[i] < 64) return; if (X[i] - lastX < 64) return; lastX = X[i]; xl += `<text class="et" x="${X[i].toFixed(1)}" y="${H - 6}" text-anchor="middle">${dfS.format(new Date(list[i].ts))}</text>`; });
+  const endLab = `<text class="ev" x="${(X[n-1] + 10).toFixed(1)}" y="${(yA(vals[n-1]) + 6).toFixed(1)}">${Math.round(vals[n-1])}</text>`;
   el.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false">
-    <text class="eh" x="${mL}" y="14">${W < 440 ? 'MCM' : 'MCM (mots correctement lus par minute)'}</text><text class="eh" x="${mL}" y="${eTop - 14}">Erreurs</text>
+    <text class="eh" x="${mL}" y="17">${W < 440 ? 'MCM' : 'MCM (mots correctement lus par minute)'}</text><text class="eh" x="${mL}" y="${eTop - 14}">Erreurs</text>
     ${g}${area}${line}${bars}<line class="ex" id="evoCross" x1="0" x2="0" y1="${top}" y2="${eTop + hB}" visibility="hidden"/>${marks}${endLab}${xl}
     <circle class="ed on" id="evoDot" r="6" visibility="hidden"/></svg>`;
   el.dataset.y = JSON.stringify(vals.map(v => +yA(v).toFixed(1)));
